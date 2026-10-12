@@ -1,2 +1,84 @@
 *{box-sizing:border-box}body{margin:0;font:14px Arial,Helvetica,sans-serif;background:#f4f6f8;color:#17202a}header{height:64px;background:#18222c;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;gap:16px}.brand{display:flex;align-items:baseline;gap:10px}.brand b{font-size:22px}.brand span{font-size:16px;color:#d9e0e6}.brand small{font-size:12px;color:#aeb9c3}.toolbar{display:flex;gap:8px;align-items:center}.toolbar input{width:min(460px,48vw);padding:10px 13px;border-radius:8px;border:1px solid #475563;background:#26333f;color:#fff}.toolbar button,.viewerTools button{border:1px solid #9aa7b2;background:#fff;border-radius:7px;padding:8px 12px;cursor:pointer}.toolbar button{background:#26333f;color:#fff;border-color:#475563}main{display:flex;height:calc(100vh - 64px)}aside{width:310px;background:#fff;border-right:1px solid #d8dde2;overflow:auto;padding:12px}.sidehead,.resultHead{display:flex;justify-content:space-between;align-items:center;padding:6px 2px 10px}.miniSearch{width:100%;padding:9px;border:1px solid #cdd4db;border-radius:7px;margin-bottom:9px}.cat{padding:9px 10px;border-radius:7px;cursor:pointer;margin:2px 0}.cat:hover{background:#edf2f5}.cat.active{background:#dceaf3;font-weight:700}.cat small{display:block;color:#697680;margin-top:3px}.workspace{min-width:0;flex:1;display:flex;flex-direction:column}.crumb{padding:9px 14px;background:#fff;border-bottom:1px solid #d8dde2;font-weight:600}.viewer{position:relative;flex:1;min-height:300px;background:#68737c;overflow:hidden}.viewerTools{position:absolute;z-index:10;top:10px;right:10px;display:flex;gap:5px;align-items:center;background:#ffffffdd;padding:5px;border-radius:8px;box-shadow:0 2px 10px #0003}.viewerTools span{min-width:55px;text-align:center}.viewerTools button{padding:6px 10px}.viewerTools button:hover{background:#eef2f5}#canvasWrap{width:100%;height:100%;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:55px 30px 30px}#canvas{position:relative;display:inline-block;line-height:0;transform-origin:top left}#diagram{display:block;max-width:none;user-select:none}.hot{position:absolute;border:2px solid transparent;cursor:pointer;z-index:3}.hot:hover,.hot.sel{border-color:#ff3b30;background:#ff3b3020}.results{height:280px;background:#fff;border-top:1px solid #d8dde2;display:flex;flex-direction:column}.resultHead{padding:9px 14px;border-bottom:1px solid #e2e6ea}.tableWrap{overflow:auto}.tableWrap table{width:100%;border-collapse:collapse}.tableWrap th,.tableWrap td{padding:8px 10px;border-bottom:1px solid #edf0f2;text-align:left;white-space:nowrap}.tableWrap th{position:sticky;top:0;background:#f7f8fa}.tableWrap tbody tr:hover{background:#f3f7fa;cursor:pointer}.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;z-index:50}.modal.hidden{display:none}.modalBox{width:min(620px,92vw);max-height:80vh;overflow:auto;background:#fff;border-radius:12px;padding:22px;position:relative;box-shadow:0 15px 50px #0006}.close{position:absolute;right:12px;top:8px;border:0;background:none;font-size:28px;cursor:pointer}.kv{display:grid;grid-template-columns:150px 1fr;gap:8px;padding:7px 0;border-bottom:1px solid #edf0f2}.kv b{color:#5b6770}@media(max-width:850px){aside{width:245px}.brand span{display:none}.results{height:240px}.tableWrap{font-size:13px}}@media(max-width:650px){aside{display:none}.toolbar input{width:55vw}.brand small{display:none}}
 body.dark{background:#12171c;color:#e8edf1}body.dark aside,body.dark .crumb,body.dark .results,body.dark .modalBox{background:#1b232b;color:#e8edf1}body.dark aside{border-color:#303b45}body.dark .cat:hover{background:#26323c}body.dark .cat.active{background:#2b4353}body.dark .miniSearch{background:#202a33;color:#fff;border-color:#3a4752}body.dark .tableWrap th{background:#202a33}body.dark .tableWrap td{border-color:#303940}body.dark .viewerTools{background:#202a33}body.dark .viewerTools button{background:#27333d;color:#fff;border-color:#4a5863}
+
+/* AC200-1 Android: override desktop viewport/flex sizing directly.
+   The blank space comes from main's fixed desktop height plus a flexing viewer. */
+@media (max-width: 650px) {
+  html, body { height: auto; min-height: 100%; }
+  body.catalog-ui { overflow-x: hidden; }
+  body.catalog-ui > header {
+    height: auto;
+    min-height: 64px;
+    flex-wrap: wrap;
+  }
+  body.catalog-ui > main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+  }
+  body.catalog-ui > main > #sidebar { display: none; }
+  body.catalog-ui > main > .workspace {
+    display: flex;
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+  body.catalog-ui .workspace > .crumb {
+    flex: none;
+    min-height: 42px;
+    padding: 10px 14px;
+    overflow-wrap: anywhere;
+  }
+  body.catalog-ui .workspace > .viewer {
+    display: block;
+    flex: none;
+    width: 100%;
+    height: 38dvh;
+    min-height: 220px;
+    max-height: 360px;
+    overflow: hidden;
+  }
+  body.catalog-ui .workspace > .viewer > #canvasWrap {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 48px 8px 8px;
+    overflow: auto;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  body.catalog-ui .workspace > .viewer > #canvasWrap > #canvas {
+    flex: none;
+    margin: 0 auto;
+  }
+  body.catalog-ui .workspace > .results {
+    display: flex;
+    flex: none;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: 48dvh;
+    overflow: hidden;
+  }
+  body.catalog-ui .workspace > .results > .tableWrap {
+    min-height: 0;
+    max-height: 42dvh;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body.catalog-ui .diagram-message {
+    width: 100%;
+    padding: 18px;
+    color: #536170;
+    font: 14px/1.5 Arial, sans-serif;
+    text-align: center;
+  }
+}
