@@ -31,9 +31,12 @@ function selectCatalog(id){
 }
 function renderDiagram(){
  const src=current.image; const img=$("diagram");
- if(!src){img.removeAttribute("src"); $("hotspots").innerHTML=""; return}
- img.src="images/"+encodeURIComponent(src);
+ img.onload=null; img.onerror=null;
+ if(!src){img.removeAttribute("src"); $("hotspots").innerHTML=""; $("canvas").style.width="0"; $("canvas").style.height="0"; return}
+ $("hotspots").innerHTML="";
  img.onload=()=>{fitDiagram();renderHotspots();};
+ img.onerror=()=>{ $("hotspots").innerHTML=""; $("crumb").textContent=current ? `AC200-1 › ${current.title} [${current.id}] — Diagram failed to load` : "Diagram failed to load"; };
+ img.src="images/"+encodeURIComponent(src);
 }
 function renderHotspots(){
  const layer=$("hotspots"); layer.innerHTML="";
@@ -71,8 +74,17 @@ function showPart(cat,pos,hot){
  ].map(x=>`<div class="kv"><b>${esc(x[0])}</b><span>${esc(x[1]||"—")}</span></div>`).join("");
  $("modal").classList.remove("hidden");
 }
-function fitDiagram(){const img=$("diagram"),wrap=$("canvasWrap");if(!img?.naturalWidth||!wrap)return;const availableW=Math.max(120,wrap.clientWidth-20),availableH=Math.max(120,wrap.clientHeight-20);zoom=Math.max(.05,Math.min(availableW/img.naturalWidth,availableH/img.naturalHeight,1));applyZoom()}function applyZoom(){
- $("canvas").style.transform=`scale(${zoom})`;
+function fitDiagram(){
+ const img=$("diagram"),wrap=$("canvasWrap"); if(!img?.naturalWidth||!wrap)return;
+ const availableW=Math.max(120,wrap.clientWidth-16), availableH=Math.max(120,wrap.clientHeight-62);
+ zoom=Math.max(.05,Math.min(availableW/img.naturalWidth,availableH/img.naturalHeight,1));
+ applyZoom();
+}
+function applyZoom(){
+ const canvas=$("canvas"),img=$("diagram");
+ canvas.style.width=(img.naturalWidth||img.width)+"px";
+ canvas.style.height=(img.naturalHeight||img.height)+"px";
+ canvas.style.transform=`scale(${zoom})`;
  $("zoomLabel").textContent=Math.round(zoom*100)+"%";
 }
 $("zoomIn").onclick=()=>{zoom=Math.min(3,zoom*1.2);applyZoom()};
