@@ -54,3 +54,16 @@ git push -u origin main
 The eight additional catalogues add approximately 512 MiB of files. All individual files are below GitHub's 100 MB normal-file limit, so Git LFS is not required for these packages.
 
 Check GitHub Pages' current site-size limits before adding substantially more catalogues.
+
+
+## Validate catalogue metadata
+
+A read-only Node.js script checks the JSON metadata across the root catalogue and model folders. It reports malformed JSON, duplicate IDs, unknown catalogue references, invalid hotspot bounds, and unresolved hotspot links where the data schema allows those checks. It does not modify data or infer OEM part numbers.
+
+Run from the repository root with Node.js installed:
+
+```bash
+node scripts/validate-partbook-data.js
+```
+
+The report is printed as JSON. Some checks are schema-dependent; review warnings against the original OEM catalogue before changing any part mapping.
