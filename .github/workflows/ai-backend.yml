@@ -1,0 +1,37 @@
+name: AI backend checks
+
+on:
+  pull_request:
+    paths:
+      - "ai-backend/**"
+      - ".github/workflows/ai-backend.yml"
+      - "data/**"
+      - "catalogs/terex-ac80-2/data/**"
+      - "catalogs/franna-at15/data/**"
+      - "catalogs/franna-mac25/data/**"
+  push:
+    branches: [main]
+    paths:
+      - "ai-backend/**"
+      - ".github/workflows/ai-backend.yml"
+      - "data/**"
+      - "catalogs/terex-ac80-2/data/**"
+      - "catalogs/franna-at15/data/**"
+      - "catalogs/franna-mac25/data/**"
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install backend dependencies
+        run: npm --prefix ai-backend install
+      - name: Check JavaScript syntax
+        run: npm --prefix ai-backend run check
+      - name: Run API smoke tests
+        run: npm --prefix ai-backend test
