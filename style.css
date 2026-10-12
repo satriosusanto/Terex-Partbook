@@ -83,3 +83,26 @@ button.treeGroupOpen.active{color:var(--accent2)}
 .catGroupItems[hidden]{display:none}
 .catGroupItems .cat{padding:8px 8px}
 .dark .treeToggle{background:var(--card);color:var(--muted)}
+
+
+/* Mobile layout polish: reduce wasted space while keeping the diagram and parts list usable. */
+@media (max-width: 700px) {
+  html, body { overflow-x: hidden; }
+  .workspace { padding: 6px; gap: 8px; }
+  .diagramCard, .partsCard { border-radius: 8px; }
+  .diagramHead { gap: 6px; }
+  .viewer { height: min(48dvh, 520px); min-height: 240px; max-height: 520px; padding: 6px; }
+  .viewerTools { flex-wrap: wrap; gap: 4px; }
+  .viewerTools button { min-width: 38px; min-height: 38px; }
+  .partsCard { min-height: 0; }
+  #partsPanel { max-height: 48dvh; }
+  .tabs button { min-height: 42px; }
+  .modalbox { padding: 18px; }
+}
+@media (max-width: 380px) {
+  .workspace { padding: 5px; gap: 7px; }
+  .diagramHead { align-items: flex-start; }
+  .diagramHead > div:first-child { max-width: 100%; }
+  .viewer { height: 44dvh; min-height: 220px; }
+  .viewerTools button { min-width: 34px; min-height: 36px; padding: 5px 7px; }
+}
