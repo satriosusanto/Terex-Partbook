@@ -660,117 +660,70 @@
   });
 
   function installDiagramGestures() {
-    if (page.classList.contains("ui-ac40")) return;
+    // AC80-2 already owns a complete pointer gesture controller.
+    // AT15 uses transformed coordinates and is handled by its own app.js.
+    if (page.classList.contains("ui-ac40") ||
+        page.classList.contains("ui-model-terex-ac80-2") ||
+        page.classList.contains("ui-at15")) return;
+
     const viewport = document.querySelector(
-      "#diagramStage, #stage, #canvasWrap, #viewer, .ui-at15 .viewer #canvas"
+      "#diagramStage, #stage, #canvasWrap, #viewer"
     );
-    const zoomIn = document.querySelector("#zoomIn, #plus, #zin");
-    const zoomOut = document.querySelector("#zoomOut, #minus, #zout");
-    if (!viewport || !zoomIn || !zoomOut) return;
+    if (!viewport) return;
 
-    const getDiagram = () => document.querySelector("#diagram, #diagramCanvas") || document.querySelector("#canvas");
+    const diagramSelector = "#diagram, #diagramCanvas, #canvas";
+    const hasDiagram = () => {
+      const diagram = viewport.querySelector(diagramSelector) || document.querySelector(diagramSelector);
+      if (!diagram) return false;
+      if (diagram instanceof HTMLImageElement) return Boolean(diagram.naturalWidth);
+      return Boolean(diagram.width || diagram.getBoundingClientRect().width);
+    };
 
-    const pointers = new Map();
-    let pinch = null;
+    // Prevent Android's native touch scrolling from cancelling pointer events.
+    // We implement one-finger panning here; model-specific code remains responsible
+    // for pinch zoom so the diagram and its hotspots keep the same scale.
+    viewport.style.touchAction = "none";
     let drag = null;
     let suppressHotspotClick = false;
-    let suppressTimer;
+    let suppressTimer = null;
+
     viewport.addEventListener("pointerdown", event => {
-      if (event.pointerType !== "touch" || !getDiagram()) return;
-      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-      if (pointers.size === 2) {
-        const [first, second] = pointers.values();
-        const distance = Math.hypot(first.x - second.x, first.y - second.y);
-        if (!distance) return;
-        pinch = { distance, startScale: currentScale() };
-        drag = null;
-        for (const pointerId of pointers.keys()) {
-          if (viewport.hasPointerCapture(pointerId)) continue;
-          viewport.setPointerCapture(pointerId);
-        }
-      } else if (pointers.size === 1) {
-        drag = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, moved: false };
-      }
+      if (event.pointerType !== "touch" || !hasDiagram()) return;
+      drag = {
+        pointerId: event.pointerId,
+        x: event.clientX,
+        y: event.clientY,
+        lastX: event.clientX,
+        lastY: event.clientY,
+        moved: false
+      };
     });
 
-    function intrinsicWidth() {
-      const diagram = getDiagram();
-      if (!diagram) return 0;
-      return diagram instanceof HTMLImageElement
-        ? diagram.naturalWidth
-        : diagram.width || diagram.getBoundingClientRect().width;
-    }
-
-    function currentScale() {
-      const width = intrinsicWidth();
-      const diagram = getDiagram();
-      return width && diagram ? diagram.getBoundingClientRect().width / width : 1;
-    }
-
     viewport.addEventListener("pointermove", event => {
-      if (!pointers.has(event.pointerId)) return;
-      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-      if (pointers.size >= 2 && pinch) {
-        event.preventDefault();
-        const diagram = getDiagram();
-        if (!diagram) return;
-        const [first, second] = pointers.values();
-        const midpointX = (first.x + second.x) / 2;
-        const midpointY = (first.y + second.y) / 2;
-        const stageRect = viewport.getBoundingClientRect();
-        const imageRect = diagram.getBoundingClientRect();
-        const scaleBefore = currentScale();
-        const localX = midpointX - stageRect.left - viewport.clientLeft;
-        const localY = midpointY - stageRect.top - viewport.clientTop;
-        const originX = viewport.scrollLeft + imageRect.left - stageRect.left - viewport.clientLeft;
-        const originY = viewport.scrollTop + imageRect.top - stageRect.top - viewport.clientTop;
-        const anchorX = (viewport.scrollLeft + localX - originX) / scaleBefore;
-        const anchorY = (viewport.scrollTop + localY - originY) / scaleBefore;
-        const requestedScale = pinch.startScale * Math.hypot(first.x - second.x, first.y - second.y) / pinch.distance;
-        let scale = scaleBefore;
-        for (let step = 0; step < 12 && requestedScale > scale * 1.08; step++) {
-          zoomIn.click();
-          const nextScale = currentScale();
-          if (nextScale <= scale) break;
-          scale = nextScale;
-        }
-        for (let step = 0; step < 12 && requestedScale < scale / 1.08; step++) {
-          zoomOut.click();
-          const nextScale = currentScale();
-          if (nextScale >= scale) break;
-          scale = nextScale;
-        }
-        viewport.scrollLeft = originX + anchorX * scale - localX;
-        viewport.scrollTop = originY + anchorY * scale - localY;
-        return;
-      }
       if (!drag || drag.pointerId !== event.pointerId) return;
-      const deltaX = event.clientX - drag.x;
-      const deltaY = event.clientY - drag.y;
-      if (Math.abs(deltaX) + Math.abs(deltaY) < 1) return;
-      if (!drag.moved && Math.hypot(deltaX, deltaY) > 7) {
+      const dx = event.clientX - drag.lastX;
+      const dy = event.clientY - drag.lastY;
+      if (!drag.moved && Math.hypot(event.clientX - drag.x, event.clientY - drag.y) > 6) {
         drag.moved = true;
-        viewport.setPointerCapture(event.pointerId);
+        try { viewport.setPointerCapture(event.pointerId); } catch (_) {}
       }
       if (drag.moved) {
         event.preventDefault();
-        viewport.scrollLeft -= deltaX;
-        viewport.scrollTop -= deltaY;
+        viewport.scrollLeft -= dx;
+        viewport.scrollTop -= dy;
         suppressHotspotClick = true;
         clearTimeout(suppressTimer);
-        suppressTimer = setTimeout(() => { suppressHotspotClick = false; }, 500);
+        suppressTimer = setTimeout(() => { suppressHotspotClick = false; }, 450);
       }
-      drag.x = event.clientX;
-      drag.y = event.clientY;
+      drag.lastX = event.clientX;
+      drag.lastY = event.clientY;
     });
 
-    function finishPointer(event) {
-      pointers.delete(event.pointerId);
-      if (pointers.size < 2) pinch = null;
-      if (!pointers.size) drag = null;
+    function finish(event) {
+      if (drag && drag.pointerId === event.pointerId) drag = null;
     }
-    viewport.addEventListener("pointerup", finishPointer);
-    viewport.addEventListener("pointercancel", finishPointer);
+    viewport.addEventListener("pointerup", finish);
+    viewport.addEventListener("pointercancel", finish);
     viewport.addEventListener("click", event => {
       if (!suppressHotspotClick || !event.target.closest(".hotspot, .hot, .hs")) return;
       event.preventDefault();
