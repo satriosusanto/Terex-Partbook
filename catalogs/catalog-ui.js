@@ -12,6 +12,7 @@
   const lastSegment = segments[segments.length - 1] || "";
   const slug = (lastSegment.toLowerCase() === "index.html" ? segments[segments.length - 2] : lastSegment) || "";
   const modelCode = slug.replace(/^(?:terex|franna)-/i, "").toUpperCase();
+  page.classList.add("ui-model-" + slug.toLowerCase().replace(/[^a-z0-9]+/g, "-"));
   const model = `${slug.toLowerCase().startsWith("franna-") ? "FRANNA" : "TEREX"} ${modelCode}`;
   const first = header.firstElementChild;
   let brand = first?.classList.contains("brand") ? first : header.querySelector(".brand");
