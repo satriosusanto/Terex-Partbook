@@ -52,7 +52,14 @@ function renderCats(){
  });
 }
 function rowsFor(id){return S.parts.filter(p=>p.catalogId===id)}
-function fitZoom(){return Math.max(.1,Math.min(3,($('viewer').clientWidth-20)/1600))}
+function fitZoom(){
+ const image=S.current?S.imgs[S.current.id]:null;
+ const meta=image?(S.meta[image]||{width:3500,height:2500}):{width:3500,height:2500};
+ const widthScale=($('viewer').clientWidth-20)/1600;
+ const imageHeight=1600*(Number(meta.height)||2500)/(Number(meta.width)||3500);
+ const heightScale=($('viewer').clientHeight-20)/imageHeight;
+ return Math.max(.1,Math.min(3,widthScale,heightScale));
+}
 function setCatalogMenu(open){
  document.body.classList.toggle('catalogs-open',open);
  $('catalogToggle').setAttribute('aria-expanded',String(open));
@@ -117,7 +124,10 @@ function filterCats(v){
 }
 function reset(){setCatalogMenu(false);S.current=null;history.pushState({},'',location.pathname+location.search);$('q').value='';$('catFilter').value='';S.filteredCats=S.cats;renderCats();$('title').textContent='Select a catalog';$('crumb').textContent='All Catalogs';$('stats').textContent='';$('parts').innerHTML='';$('partCount').textContent='';$('imgName').textContent='';$('viewer').innerHTML='<div class="empty"><div class="emptyIcon">▧</div><b>Select a catalog</b><span>Choose a catalog from the left panel to view its exploded diagram.</span></div>'}
 
-$('catalogToggle').onclick=()=>setCatalogMenu(!document.body.classList.contains('catalogs-open'));$('sidebarBackdrop').onclick=()=>setCatalogMenu(false);document.addEventListener('keydown',e=>{if(e.key==='Escape')setCatalogMenu(false)});window.addEventListener('resize',()=>{if(window.innerWidth>700)setCatalogMenu(false)});
+$('catalogToggle').onclick=()=>setCatalogMenu(!document.body.classList.contains('catalogs-open'));$('sidebarBackdrop').onclick=()=>setCatalogMenu(false);document.addEventListener('keydown',e=>{if(e.key==='Escape')setCatalogMenu(false)});window.addEventListener('resize',()=>{
+ if(window.innerWidth>700)setCatalogMenu(false);
+ if(S.current&&window.innerWidth<=700)setZoom(fitZoom());
+});
 const viewerPointers=new Map();let pinchGesture=null,panPointer=null;
 $('viewer').addEventListener('pointerdown',e=>{
  if(e.pointerType!=='touch')return;
