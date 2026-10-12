@@ -16,7 +16,24 @@ For the easiest setup, use Render with the repository's root-level `render.yaml`
 
 **Free-plan note:** Render's free web services sleep after 15 minutes without traffic and can take about a minute to wake up. Use this tier for trial/testing, not for a production experience that needs consistently fast responses. See [Render free instance limitations](https://render.com/docs/free) and [Docker deployment instructions](https://render.com/docs/docker).
 
-## 1. Build the container locally (optional)
+## 1. Verify a deployed service
+
+Once Render has assigned a URL, run this from the repository root with Node.js 20 or newer:
+
+```bash
+npm --prefix ai-backend run check:deployment -- https://YOUR-SERVICE.onrender.com
+```
+
+Replace the example origin with the exact HTTPS origin shown in Render. Pass only the origin (no `/api/health`, `/api/search`, credentials, or trailing path). The checker:
+
+- requests `GET /api/health` and reports loaded datasets;
+- sends a harmless `POST /api/search` query and checks the response shape;
+- verifies that the GitHub Pages origin receives the expected CORS header;
+- verifies that an unapproved origin receives HTTP 403.
+
+The checker does not need or read `OPENAI_API_KEY`. A successful API smoke check confirms that the service responds; separately confirm `aiConfigured: true` in the health output before expecting AI explanations. It warns if only some datasets load.
+
+## 2. Build the container locally (optional)
 
 Run these commands from the repository root (the folder containing `Dockerfile`):
 
@@ -36,7 +53,7 @@ curl http://localhost:8787/api/health
 
 Without `OPENAI_API_KEY`, the backend should still return deterministic search results from its indexed JSON data; AI explanations will be unavailable. To enable explanations, set `OPENAI_API_KEY` as a secret environment variable at runtime. Never put the key in the Dockerfile, frontend, or repository.
 
-## 2. Manual provider configuration (alternative)
+## 3. Manual provider configuration (alternative)
 
 If deploying without the Blueprint, configure the following in the hosting provider dashboard:
 
@@ -48,14 +65,13 @@ If deploying without the Blueprint, configure the following in the hosting provi
 - `OPENAI_MODEL=gpt-4.1-mini`: optional
 - Let the host provide `PORT` if it requires one.
 
-## 3. Validate before public use
+## 4. Validate before public use
 
 1. Open `GET /api/health` and verify the expected datasets report as loaded.
-2. Send a `POST /api/search` request with a known part number.
-3. Test the frontend from the GitHub Pages origin.
-4. Confirm an unrelated web origin is rejected.
-5. Confirm searches still work without an OpenAI key and that AI explanations work when the key is configured.
-6. Configure provider-side request limits, monitoring, and abuse protection before public use.
+2. Run the deployment checker above and resolve failures.
+3. Test the frontend from the GitHub Pages origin after configuring `AI_API_BASE` in a separate pull request.
+4. Confirm searches still work without an OpenAI key and that AI explanations work when the key is configured.
+5. Configure provider-side request limits, monitoring, and abuse protection before public use.
 
 CORS is not authentication. The current in-memory rate limiter is per process and is not a substitute for provider-side protections. Never use AI output alone as approval to order a part; verify part number and application against the OEM catalogue.
 
