@@ -1028,3 +1028,56 @@ body.catalog-ui button, body.catalog-ui input { font: inherit; }
     min-height: 200px;
   }
 }
+
+
+/* Shared Android viewport and parts-table sizing correction.
+   Keep each model's existing viewer controls and diagram scaling logic intact. */
+@media (max-width: 700px) {
+  .catalog-ui.ui-model-terex-ac80-2 #viewer,
+  .catalog-ui.ui-model-terex-ac100-4 #stage,
+  .catalog-ui.ui-model-terex-ac140c #stage,
+  .catalog-ui.ui-model-terex-ac200-1 #canvasWrap,
+  .catalog-ui.ui-model-terex-ac250-1 #diagramStage,
+  .catalog-ui.ui-model-terex-ac350-6 #diagramStage,
+  .catalog-ui.ui-model-franna-at15 #canvas,
+  .catalog-ui.ui-model-franna-mac25 #viewer {
+    height: min(46dvh, 480px);
+    min-height: 210px;
+    max-height: 480px;
+  }
+
+  .catalog-ui.ui-model-terex-ac80-2 #results,
+  .catalog-ui.ui-model-terex-ac100-4 .parts-panel,
+  .catalog-ui.ui-model-terex-ac140c .parts-panel,
+  .catalog-ui.ui-model-terex-ac200-1 .parts-panel,
+  .catalog-ui.ui-model-terex-ac250-1 .parts-panel,
+  .catalog-ui.ui-model-terex-ac350-6 .parts-panel,
+  .catalog-ui.ui-model-franna-at15 .parts,
+  .catalog-ui.ui-model-franna-mac25 #results {
+    min-height: 0;
+    max-height: 44dvh;
+    flex: 0 1 auto;
+  }
+
+  .catalog-ui.ui-model-terex-ac80-2 .layout,
+  .catalog-ui.ui-model-terex-ac100-4 .layout,
+  .catalog-ui.ui-model-terex-ac140c .layout,
+  .catalog-ui.ui-model-terex-ac200-1 main,
+  .catalog-ui.ui-model-terex-ac250-1 .layout,
+  .catalog-ui.ui-model-terex-ac350-6 .layout {
+    min-height: 0;
+  }
+
+  .catalog-ui.ui-model-terex-ac80-2 #viewer,
+  .catalog-ui.ui-model-terex-ac100-4 #stage,
+  .catalog-ui.ui-model-terex-ac140c #stage,
+  .catalog-ui.ui-model-terex-ac200-1 #canvasWrap,
+  .catalog-ui.ui-model-terex-ac250-1 #diagramStage,
+  .catalog-ui.ui-model-terex-ac350-6 #diagramStage,
+  .catalog-ui.ui-model-franna-at15 #canvas,
+  .catalog-ui.ui-model-franna-mac25 #viewer {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
