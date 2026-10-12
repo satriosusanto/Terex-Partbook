@@ -112,6 +112,7 @@ function applyZoom(){
 $("zoomIn").onclick=()=>{zoom=Math.min(3,zoom*1.2);applyZoom()};
 $("zoomOut").onclick=()=>{zoom=Math.max(.05,zoom/1.2);applyZoom()};
 $("fitBtn").onclick=fitDiagram;const diagramWrap=$("canvasWrap");if("ResizeObserver" in window&&diagramWrap)new ResizeObserver(()=>{if(current?.image&&$("diagram")?.naturalWidth)fitDiagram()}).observe(diagramWrap);window.addEventListener("resize",()=>{if(current?.image)fitDiagram()});
+function installTouchZoom(){const viewport=$("canvasWrap");if(!viewport)return;let startDistance=0,startZoom=1;const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);viewport.addEventListener("touchstart",e=>{if(e.touches.length!==2||!$("canvas")||!$("diagram")?.naturalWidth)return;startDistance=distance(e.touches);startZoom=zoom},{passive:true});viewport.addEventListener("touchmove",e=>{if(e.touches.length!==2||!startDistance||!$("canvas")||!$("diagram")?.naturalWidth)return;e.preventDefault();zoom=Math.max(.05,Math.min(3,startZoom*distance(e.touches)/startDistance));applyZoom()},{passive:false});viewport.addEventListener("touchend",e=>{if(e.touches.length<2)startDistance=0},{passive:true});viewport.addEventListener("touchcancel",()=>{startDistance=0},{passive:true})}installTouchZoom();
 $("close").onclick=()=>$("modal").classList.add("hidden");
 $("modal").onclick=e=>{if(e.target.id==="modal")$("modal").classList.add("hidden")};
 $("catalogFilter").oninput=()=>renderCatalogs(catalogs);
