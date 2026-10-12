@@ -9,7 +9,7 @@
 <style>
 :root{color-scheme:dark;--bg:#0d1319;--panel:#151e27;--line:#293746;--text:#edf3f8;--muted:#9aabba;--accent:#f0a500;--blue:#79c6ff}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
-a{color:var(--blue)}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(16px,4vw,48px);border-bottom:1px solid var(--line);background:#111820}.brand{font-weight:800;font-size:17px;color:var(--text);text-decoration:none}.brand span{display:inline-grid;place-items:center;background:var(--accent);color:#111820;border-radius:9px;padding:6px 9px;margin-right:10px}.wrap{max-width:1180px;margin:auto;padding:clamp(18px,4vw,44px)}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.15em}h1{font-size:clamp(28px,4vw,42px);line-height:1.12;margin:8px 0 12px}p{color:var(--muted);margin:0 0 22px}.searchbox{display:flex;gap:10px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:16px}.searchbox input{min-width:0;flex:1;background:transparent;color:var(--text);border:0;outline:0;padding:9px;font:inherit}.searchbox button,.clear{border:0;border-radius:10px;padding:10px 16px;background:var(--accent);color:#15191d;font-weight:800;cursor:pointer}.status{color:var(--muted);font-size:13px;margin:14px 2px 18px}.results{display:grid;gap:10px}.result{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}.pn{font-weight:850;font-size:17px;overflow-wrap:anywhere}.desc{margin-top:3px;color:var(--text)}.meta{color:var(--muted);font-size:13px;margin-top:8px}.model{align-self:start;border:1px solid #405366;border-radius:999px;padding:4px 9px;font-size:12px;white-space:nowrap}.empty{padding:28px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}.ai-panel{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:14px;padding:16px;background:#101c25;border:1px solid #31516a;border-radius:14px}.ai-help{font-size:13px;color:var(--muted);margin-top:3px}.ai-panel button{flex-shrink:0;border:1px solid #79c6ff;border-radius:10px;padding:10px 16px;background:#183a50;color:#e8f6ff;font-weight:800;cursor:pointer}.ai-panel button:disabled{opacity:.6;cursor:wait}.ai-answer{margin-top:10px;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:13px;white-space:pre-wrap}.foot{margin-top:28px;color:var(--muted);font-size:12px}@media(max-width:600px){.ai-panel{align-items:stretch;flex-direction:column}.ai-panel button{width:100%}.searchbox{flex-wrap:wrap}.searchbox input{flex-basis:100%}.searchbox button{flex:1}.result{grid-template-columns:1fr}.model{justify-self:start}}
+a{color:var(--blue)}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(16px,4vw,48px);border-bottom:1px solid var(--line);background:#111820}.brand{font-weight:800;font-size:17px;color:var(--text);text-decoration:none}.brand span{display:inline-grid;place-items:center;background:var(--accent);color:#111820;border-radius:9px;padding:6px 9px;margin-right:10px}.wrap{max-width:1180px;margin:auto;padding:clamp(18px,4vw,44px)}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.15em}h1{font-size:clamp(28px,4vw,42px);line-height:1.12;margin:8px 0 12px}p{color:var(--muted);margin:0 0 22px}.searchbox{display:flex;gap:10px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:16px}.searchbox input{min-width:0;flex:1;background:transparent;color:var(--text);border:0;outline:0;padding:9px;font:inherit}.searchbox button,.clear{border:0;border-radius:10px;padding:10px 16px;background:var(--accent);color:#15191d;font-weight:800;cursor:pointer}.status{color:var(--muted);font-size:13px;margin:14px 2px 18px}.results{display:grid;gap:10px}.result{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}.pn{font-weight:850;font-size:17px;overflow-wrap:anywhere}.desc{margin-top:3px;color:var(--text)}.meta{color:var(--muted);font-size:13px;margin-top:8px}.model{align-self:start;border:1px solid #405366;border-radius:999px;padding:4px 9px;font-size:12px;white-space:nowrap}.empty{padding:28px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}.foot{margin-top:28px;color:var(--muted);font-size:12px}@media(max-width:600px){.searchbox{flex-wrap:wrap}.searchbox input{flex-basis:100%}.searchbox button{flex:1}.result{grid-template-columns:1fr}.model{justify-self:start}}
 </style>
 </head>
 <body>
@@ -19,15 +19,11 @@ a{color:var(--blue)}.top{display:flex;align-items:center;justify-content:space-b
 <h1>Global Part Search</h1>
 <p>Cari nomor part, deskripsi, posisi, atau kode katalog dari beberapa model dalam satu pencarian.</p>
 <form class="searchbox" id="searchForm"><input id="query" type="search" placeholder="Contoh: T177667, SCREW, atau 01F-0030…" autocomplete="off" aria-label="Cari nomor part, deskripsi, posisi, atau katalog"><button type="submit">Cari Part</button><button class="clear" id="clear" type="button">Reset</button></form>
-<div class="ai-panel"><div><strong>AI Part Finder</strong><div class="ai-help">Minta AI menjelaskan kandidat berdasarkan catatan part yang ditemukan. Pencarian lokal tetap tersedia tanpa backend AI.</div></div><button id="askAi" type="button">Tanya AI</button></div>
-<div class="status" id="aiStatus" role="status" aria-live="polite"></div><section id="aiAnswer" class="ai-answer" hidden></section>
 <div class="status" id="status" role="status">Memuat indeks part…</div>
 <section class="results" id="results" aria-live="polite"><div class="empty">Data sedang dimuat.</div></section>
 <div class="foot">Indeks pencarian memuat data JSON yang tersedia di repository. Selalu cocokkan nomor part dan katalog dengan dokumen OEM sebelum melakukan pemesanan.</div>
 </main>
 <script>
-// Set this to the deployed backend origin (for example, https://your-service.example.com). Leave blank until backend deployment is complete.
-const AI_API_BASE = '';
 const SOURCES=[
  {model:'TEREX AC40',base:'',parts:'data/parts.json',catalogs:'data/catalogs.json',href:'index.html'},
  {model:'TEREX AC80-2',base:'catalogs/terex-ac80-2/',parts:'catalogs/terex-ac80-2/data/parts.json',catalogs:'catalogs/terex-ac80-2/data/catalogs.json',href:'catalogs/terex-ac80-2/index.html'},
@@ -82,47 +78,6 @@ function render(raw){
  if(!hits.length){$('results').innerHTML='<div class="empty">Tidak ada part yang cocok. Coba nomor part atau kata kunci lain.</div>';return}
  $('results').innerHTML=hits.map(item=>'<article class="result"><div><div class="pn">'+esc(item.part||'Nomor part tidak tersedia')+'</div><div class="desc">'+esc(item.desc||'Deskripsi tidak tersedia dalam data sumber')+'</div><div class="meta">Posisi: '+esc(item.pos||'—')+' · Qty: '+esc(item.qty||'—')+'<br>Katalog: '+esc(item.catalog||'—')+' ('+esc(item.catalogId||'—')+')</div><div class="meta"><a href="'+esc(item.href+(item.catalogId?'#'+encodeURIComponent(item.catalogId):''))+'">Buka katalog '+esc(item.model)+' →</a></div></div><span class="model">'+esc(item.model)+'</span></article>').join('');
 }
-async function askAi(){
- const query=$('query').value.trim();
- if(query.length<2){$('aiStatus').textContent='Masukkan kata kunci minimal 2 karakter terlebih dahulu.';return}
- if(!AI_API_BASE){$('aiStatus').textContent='Backend AI belum dikonfigurasi. Deploy ai-backend terlebih dahulu, lalu isi AI_API_BASE di part-search.html. Pencarian lokal tetap bisa digunakan.';return}
- const button=$('askAi');
- button.disabled=true;
- $('aiStatus').textContent='Meminta penjelasan AI berdasarkan kandidat part…';
- $('aiAnswer').hidden=true;
- try{
-  const apiBase=AI_API_BASE.endsWith('/')?AI_API_BASE.slice(0,-1):AI_API_BASE;
-  const response=await fetch(apiBase+'/api/search',{
-   method:'POST',
-   headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({query})
-  });
-  const payload=await response.json().catch(()=>({}));
-  if(!response.ok)throw new Error(payload.error||('HTTP '+response.status));
-  const results=Array.isArray(payload.results)?payload.results:[];
-  $('aiStatus').textContent='AI status: '+String(payload.aiStatus||'unknown')+' · '+results.length+' kandidat dari data katalog.';
-  $('aiAnswer').textContent=payload.explanation||'Tidak ada penjelasan AI. '+(payload.aiStatus==='not_configured'?'API key belum dikonfigurasi di backend.':results.length?'Gunakan kandidat di bawah dan verifikasi katalog OEM.':'Tidak ditemukan kandidat pada dataset yang tersedia.');
-  $('aiAnswer').hidden=false;
-  if(results.length){
-   const existing=results.map(item=>({
-    model:item.model||'Model tidak diketahui',
-    part:String(item.partNumber||''),
-    desc:String(item.description||''),
-    pos:String(item.position||''),
-    qty:String(item.quantity||''),
-    catalog:String(item.catalogTitle||item.catalogId||''),
-    catalogId:String(item.catalogId||''),
-    href:String(item.catalogHref||'#')
-   }));
-   $('results').innerHTML=existing.map(item=>'<article class="result"><div><div class="pn">'+esc(item.part||'Nomor part tidak tersedia')+'</div><div class="desc">'+esc(item.desc||'Deskripsi tidak tersedia dalam data sumber')+'</div><div class="meta">Posisi: '+esc(item.pos||'—')+' · Qty: '+esc(item.qty||'—')+'<br>Katalog: '+esc(item.catalog||'—')+' ('+esc(item.catalogId||'—')+')</div><div class="meta"><a href="'+esc(item.href)+'">Buka katalog '+esc(item.model)+' →</a></div></div><span class="model">'+esc(item.model)+'</span></article>').join('');
-  }else{
-   $('results').innerHTML='<div class="empty">Tidak ditemukan kandidat pada dataset yang tersedia. Periksa model dan katalog OEM secara manual.</div>';
-  }
- }catch(error){
-  $('aiStatus').textContent='AI Part Finder tidak dapat dihubungi: '+error.message;
- }finally{button.disabled=false}
-}
-$('askAi').addEventListener('click',askAi);
 $('searchForm').addEventListener('submit',e=>{e.preventDefault();render($('query').value)});
 $('query').addEventListener('input',()=>render($('query').value));
 $('clear').addEventListener('click',()=>{$('query').value='';render('');$('query').focus()});
