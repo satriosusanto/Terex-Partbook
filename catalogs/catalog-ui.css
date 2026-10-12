@@ -1031,53 +1031,39 @@ body.catalog-ui button, body.catalog-ui input { font: inherit; }
 
 
 /* Shared Android viewport and parts-table sizing correction.
-   Keep each model's existing viewer controls and diagram scaling logic intact. */
+   Use real DOM selectors shared by the catalog pages rather than runtime-only model classes. */
 @media (max-width: 700px) {
-  .catalog-ui.ui-model-terex-ac80-2 #viewer,
-  .catalog-ui.ui-model-terex-ac100-4 #stage,
-  .catalog-ui.ui-model-terex-ac140c #stage,
-  .catalog-ui.ui-model-terex-ac200-1 #canvasWrap,
-  .catalog-ui.ui-model-terex-ac250-1 #diagramStage,
-  .catalog-ui.ui-model-terex-ac350-6 #diagramStage,
-  .catalog-ui.ui-model-franna-at15 #canvas,
-  .catalog-ui.ui-model-franna-mac25 #viewer {
+  .catalog-ui #viewer,
+  .catalog-ui #stage,
+  .catalog-ui #canvasWrap,
+  .catalog-ui #diagramStage,
+  .catalog-ui #canvas {
     height: min(46dvh, 480px);
     min-height: 210px;
     max-height: 480px;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
-  .catalog-ui.ui-model-terex-ac80-2 #results,
-  .catalog-ui.ui-model-terex-ac100-4 .parts-panel,
-  .catalog-ui.ui-model-terex-ac140c .parts-panel,
-  .catalog-ui.ui-model-terex-ac200-1 .parts-panel,
-  .catalog-ui.ui-model-terex-ac250-1 .parts-panel,
-  .catalog-ui.ui-model-terex-ac350-6 .parts-panel,
-  .catalog-ui.ui-model-franna-at15 .parts,
-  .catalog-ui.ui-model-franna-mac25 #results {
+  .catalog-ui .parts,
+  .catalog-ui #results,
+  .catalog-ui .parts-panel,
+  .catalog-ui .partsCard,
+  .catalog-ui .tableWrap {
     min-height: 0;
     max-height: 44dvh;
     flex: 0 1 auto;
   }
 
-  .catalog-ui.ui-model-terex-ac80-2 .layout,
-  .catalog-ui.ui-model-terex-ac100-4 .layout,
-  .catalog-ui.ui-model-terex-ac140c .layout,
-  .catalog-ui.ui-model-terex-ac200-1 main,
-  .catalog-ui.ui-model-terex-ac250-1 .layout,
-  .catalog-ui.ui-model-terex-ac350-6 .layout {
-    min-height: 0;
+  .catalog-ui #canvas {
+    overflow: hidden;
   }
 
-  .catalog-ui.ui-model-terex-ac80-2 #viewer,
-  .catalog-ui.ui-model-terex-ac100-4 #stage,
-  .catalog-ui.ui-model-terex-ac140c #stage,
-  .catalog-ui.ui-model-terex-ac200-1 #canvasWrap,
-  .catalog-ui.ui-model-terex-ac250-1 #diagramStage,
-  .catalog-ui.ui-model-terex-ac350-6 #diagramStage,
-  .catalog-ui.ui-model-franna-at15 #canvas,
-  .catalog-ui.ui-model-franna-mac25 #viewer {
+  .catalog-ui .scroll,
+  .catalog-ui .tableWrap,
+  .catalog-ui #results {
+    overflow: auto;
     min-width: 0;
-    max-width: 100%;
-    box-sizing: border-box;
   }
 }
