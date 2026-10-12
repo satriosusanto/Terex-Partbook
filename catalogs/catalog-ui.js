@@ -240,6 +240,48 @@
     }, true);
   }
 
+  function installHotspotSelectionHighlight() {
+    const hotspotSelector = ".hotspot, #hotspots .hs, .hot";
+    const rowSelector = "#partsBody tr[data-pos], #parts tr[data-i], #parts tr[data-pos]";
+    const positionForHotspot = hotspot => {
+      if (!hotspot) return "";
+      if (hotspot.dataset.pos != null) return String(hotspot.dataset.pos).trim();
+      if (hotspot.dataset.text != null) return String(hotspot.dataset.text).trim();
+      if (hotspot.dataset.position != null) return String(hotspot.dataset.position).trim();
+      const match = hotspot.title?.match(/^Pos\s+(.+?)\s+(.+)$/);
+      return String(match?.[1] ?? "").trim();
+    };
+    const positionForRow = row => String(row?.dataset.pos ?? row?.cells?.[0]?.textContent ?? "").trim();
+
+    function selectPosition(position, selectedHotspot = null, selectedRow = null) {
+      if (!position) return;
+      document.querySelectorAll(".catalog-hotspot-selected")
+        .forEach(item => item.classList.remove("catalog-hotspot-selected"));
+      document.querySelectorAll(".catalog-part-selected")
+        .forEach(item => item.classList.remove("catalog-part-selected"));
+
+      const matchingHotspot = selectedHotspot || [...document.querySelectorAll(hotspotSelector)]
+        .find(item => positionForHotspot(item) === position);
+      const matchingRow = selectedRow || [...document.querySelectorAll(rowSelector)]
+        .find(item => positionForRow(item) === position);
+
+      matchingHotspot?.classList.add("catalog-hotspot-selected");
+      matchingRow?.classList.add("catalog-part-selected");
+    }
+
+    document.addEventListener("click", event => {
+      const hotspot = event.target.closest?.(hotspotSelector);
+      if (hotspot) {
+        selectPosition(positionForHotspot(hotspot), hotspot);
+        return;
+      }
+      const row = event.target.closest?.(rowSelector);
+      if (row) selectPosition(positionForRow(row), null, row);
+    }, true);
+  }
+
+  installHotspotSelectionHighlight();
+
   installHotspotPartPopup();
 
   document.addEventListener("error", event => {

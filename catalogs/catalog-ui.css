@@ -910,3 +910,30 @@ body.catalog-ui button, body.catalog-ui input { font: inherit; }
     border-radius: 16px;
   }
 }
+
+
+/* Keep the selected exploded-view position linked to its parts-list row. */
+.catalog-ui .catalog-hotspot-selected,
+.catalog-ui .hotspot.catalog-hotspot-selected,
+.catalog-ui #hotspots .hs.catalog-hotspot-selected,
+.catalog-ui .hot.catalog-hotspot-selected {
+  outline: 2px solid var(--accent, #e87511) !important;
+  outline-offset: 1px;
+  background-color: color-mix(in srgb, var(--accent, #e87511) 24%, transparent) !important;
+  z-index: 4;
+}
+.catalog-ui .catalog-part-selected > td {
+  background: color-mix(in srgb, var(--accent, #e87511) 14%, var(--panel, #fff));
+}
+.catalog-ui .catalog-part-selected > td:first-child {
+  box-shadow: inset 3px 0 0 var(--accent, #e87511);
+  font-weight: 800;
+}
+.catalog-ui .catalog-part-selected {
+  scroll-margin-block: 8px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .catalog-ui .catalog-hotspot-selected {
+    transition: background-color 120ms ease, outline-color 120ms ease;
+  }
+}
