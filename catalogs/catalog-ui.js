@@ -255,9 +255,9 @@
 
     function selectPosition(position, selectedHotspot = null, selectedRow = null) {
       if (!position) return;
-      document.querySelectorAll(`${hotspotSelector}.catalog-hotspot-selected`)
+      document.querySelectorAll(".catalog-hotspot-selected")
         .forEach(item => item.classList.remove("catalog-hotspot-selected"));
-      document.querySelectorAll(`${rowSelector}.catalog-part-selected`)
+      document.querySelectorAll(".catalog-part-selected")
         .forEach(item => item.classList.remove("catalog-part-selected"));
 
       const matchingHotspot = selectedHotspot || [...document.querySelectorAll(hotspotSelector)]
