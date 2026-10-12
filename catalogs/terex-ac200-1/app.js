@@ -123,20 +123,22 @@ function installTouchZoom(){
   if(e.touches.length!==2||!$("canvas")||!$("diagram")?.naturalWidth)return;
   e.preventDefault();
   const rect=viewport.getBoundingClientRect(),mid=localPoint(midpoint(e.touches),rect);
+  const style=getComputedStyle(viewport),padX=parseFloat(style.paddingLeft)||0,padY=parseFloat(style.paddingTop)||0;
   startDistance=Math.max(1,distance(e.touches));startZoom=zoom;
   // Lock the diagram point under the fingers at the start of the gesture.
-  anchorX=(viewport.scrollLeft+mid.x)/startZoom;
-  anchorY=(viewport.scrollTop+mid.y)/startZoom;
+  anchorX=(viewport.scrollLeft+mid.x-padX)/startZoom;
+  anchorY=(viewport.scrollTop+mid.y-padY)/startZoom;
  },{passive:false});
  viewport.addEventListener("touchmove",e=>{
   if(e.touches.length!==2||!startDistance||!$("canvas")||!$("diagram")?.naturalWidth)return;
   e.preventDefault();
   const rect=viewport.getBoundingClientRect(),mid=localPoint(midpoint(e.touches),rect);
+  const style=getComputedStyle(viewport),padX=parseFloat(style.paddingLeft)||0,padY=parseFloat(style.paddingTop)||0;
   zoom=Math.max(.05,Math.min(3,startZoom*distance(e.touches)/startDistance));
   applyZoom();
   // Keep the same diagram point beneath the moving midpoint.
-  viewport.scrollLeft=Math.max(0,anchorX*zoom-mid.x);
-  viewport.scrollTop=Math.max(0,anchorY*zoom-mid.y);
+  viewport.scrollLeft=Math.max(0,anchorX*zoom-mid.x+padX);
+  viewport.scrollTop=Math.max(0,anchorY*zoom-mid.y+padY);
  },{passive:false});
  viewport.addEventListener("touchend",e=>{if(e.touches.length<2)startDistance=0},{passive:true});
  viewport.addEventListener("touchcancel",()=>{startDistance=0},{passive:true});
