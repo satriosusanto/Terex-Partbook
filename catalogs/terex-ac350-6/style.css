@@ -79,3 +79,17 @@
     overflow: auto !important;
   }
 }
+
+
+/* Final Android override: the page body uses only .catalog-ui (not model-specific ui-* classes). */
+@media (max-width: 720px) {
+  body.catalog-ui .layout { display: block !important; grid-template-columns: minmax(0,1fr) !important; min-height: 0 !important; height: auto !important; }
+  body.catalog-ui .layout > aside { position: relative !important; top: auto !important; height: auto !important; min-height: 0 !important; max-height: 118px !important; overflow: auto !important; }
+  body.catalog-ui .layout > main { display: block !important; width: 100% !important; height: auto !important; min-height: 0 !important; max-height: none !important; padding: 8px !important; overflow: visible !important; }
+  body.catalog-ui .main-head { min-height: 0 !important; margin: 0 0 8px !important; padding: 8px !important; }
+  body.catalog-ui .workspace { display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 8px !important; width: 100% !important; height: auto !important; min-height: 0 !important; }
+  body.catalog-ui .diagram-panel { flex: none !important; width: 100% !important; min-height: 0 !important; }
+  body.catalog-ui #diagramStage { display: block !important; width: 100% !important; height: 36dvh !important; min-height: 190px !important; max-height: 310px !important; overflow: auto !important; }
+  body.catalog-ui .parts-panel { display: flex !important; flex: none !important; width: 100% !important; height: auto !important; min-height: 0 !important; max-height: 44dvh !important; }
+  body.catalog-ui .table-wrap { flex: 1 1 auto !important; min-height: 0 !important; max-height: 38dvh !important; overflow: auto !important; }
+}
