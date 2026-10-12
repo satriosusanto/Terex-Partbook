@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111820">
+<meta name="description" content="Cari nomor part lintas katalog TEREX dan Franna PartBook.">
+<title>Global Part Search | Crane PartBook</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1319;--panel:#151e27;--line:#293746;--text:#edf3f8;--muted:#9aabba;--accent:#f0a500;--blue:#79c6ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--blue)}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(16px,4vw,48px);border-bottom:1px solid var(--line);background:#111820}.brand{font-weight:800;font-size:17px;color:var(--text);text-decoration:none}.brand span{display:inline-grid;place-items:center;background:var(--accent);color:#111820;border-radius:9px;padding:6px 9px;margin-right:10px}.wrap{max-width:1180px;margin:auto;padding:clamp(18px,4vw,44px)}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.15em}h1{font-size:clamp(28px,4vw,42px);line-height:1.12;margin:8px 0 12px}p{color:var(--muted);margin:0 0 22px}.searchbox{display:flex;gap:10px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:16px}.searchbox input{min-width:0;flex:1;background:transparent;color:var(--text);border:0;outline:0;padding:9px;font:inherit}.searchbox button,.clear{border:0;border-radius:10px;padding:10px 16px;background:var(--accent);color:#15191d;font-weight:800;cursor:pointer}.status{color:var(--muted);font-size:13px;margin:14px 2px 18px}.results{display:grid;gap:10px}.result{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}.pn{font-weight:850;font-size:17px;overflow-wrap:anywhere}.desc{margin-top:3px;color:var(--text)}.meta{color:var(--muted);font-size:13px;margin-top:8px}.model{align-self:start;border:1px solid #405366;border-radius:999px;padding:4px 9px;font-size:12px;white-space:nowrap}.empty{padding:28px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}.foot{margin-top:28px;color:var(--muted);font-size:12px}@media(max-width:600px){.searchbox{flex-wrap:wrap}.searchbox input{flex-basis:100%}.searchbox button{flex:1}.result{grid-template-columns:1fr}.model{justify-self:start}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="models.html"><span>T</span>Crane PartBook</a><a href="models.html">Pilih model unit →</a></header>
+<main class="wrap">
+<div class="eyebrow">PART FINDER</div>
+<h1>Global Part Search</h1>
+<p>Cari nomor part, deskripsi, posisi, atau kode katalog dari beberapa model dalam satu pencarian.</p>
+<form class="searchbox" id="searchForm"><input id="query" type="search" placeholder="Contoh: T177667, SCREW, atau 01F-0030…" autocomplete="off" aria-label="Cari nomor part, deskripsi, posisi, atau katalog"><button type="submit">Cari Part</button><button class="clear" id="clear" type="button">Reset</button></form>
+<div class="status" id="status" role="status">Memuat indeks part…</div>
+<section class="results" id="results" aria-live="polite"><div class="empty">Data sedang dimuat.</div></section>
+<div class="foot">Indeks pencarian memuat data JSON yang tersedia di repository. Selalu cocokkan nomor part dan katalog dengan dokumen OEM sebelum melakukan pemesanan.</div>
+</main>
+<script>
+const SOURCES=[
+ {model:'TEREX AC40',base:'',parts:'data/parts.json',catalogs:'data/catalogs.json',href:'index.html'},
+ {model:'TEREX AC80-2',base:'catalogs/terex-ac80-2/',parts:'catalogs/terex-ac80-2/data/parts.json',catalogs:'catalogs/terex-ac80-2/data/catalogs.json',href:'catalogs/terex-ac80-2/index.html'},
+ {model:'Franna MAC25',base:'catalogs/franna-mac25/',parts:'catalogs/franna-mac25/data/parts.json',catalogs:'catalogs/franna-mac25/data/catalogs.json',href:'catalogs/franna-mac25/index.html'}
+];
+const $=id=>document.getElementById(id);
+const norm=v=>String(v??'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').trim();
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let index=[],loaded=false;
+function normalizePart(p,model,cats,href){
+ const catId=p.catalogId??p.catalog??'';
+ const cat=cats.get(String(catId));
+ return {model,href,part:String(p.partNumber??p.part_number??''),desc:String(p.description??''),pos:String(p.pos??p.position??''),qty:String(p.qty??''),catalog:String(cat?.title??cat?.name??catId),catalogId:String(catId)};
+}
+async function loadIndex(){
+ const all=await Promise.all(SOURCES.map(async source=>{
+  const [pr,cr]=await Promise.all([fetch(source.parts),fetch(source.catalogs)]);
+  if(!pr.ok||!cr.ok)throw Error('Data '+source.model+' tidak dapat dimuat');
+  const [parts,catalogs]=await Promise.all([pr.json(),cr.json()]);
+  const map=new Map();
+  const addCatalog=c=>{if(c?.id!=null)map.set(String(c.id),c);(c?.children??[]).forEach(addCatalog)};
+  catalogs.forEach(addCatalog);
+  return parts.map(p=>normalizePart(p,source.model,map,source.href));
+ }));
+ index=all.flat();
+ loaded=true;
+ $('status').textContent='Siap — '+index.length.toLocaleString('id-ID')+' baris part dari '+SOURCES.length+' model.';
+ render('');
+}
+function render(raw){
+ const q=norm(raw);
+ if(!loaded)return;
+ if(q.length<2){$('results').innerHTML='<div class="empty">Ketik minimal 2 karakter untuk mulai mencari.</div>';return}
+ const hits=index.map(item=>({...item,_search:norm([item.part,item.desc,item.pos,item.catalog,item.catalogId].join(' ')),_exact:norm(item.part)===q}))
+  .filter(item=>item._search.includes(q))
+  .sort((a,b)=>Number(b._exact)-Number(a._exact)||a.part.localeCompare(b.part))
+  .slice(0,200);
+ $('status').textContent=hits.length+' hasil ditampilkan'+(hits.length===200?' (maksimum 200).':'.');
+ if(!hits.length){$('results').innerHTML='<div class="empty">Tidak ada part yang cocok. Coba nomor part atau kata kunci lain.</div>';return}
+ $('results').innerHTML=hits.map(item=>'<article class="result"><div><div class="pn">'+esc(item.part||'Nomor part tidak tersedia')+'</div><div class="desc">'+esc(item.desc||'Deskripsi tidak tersedia dalam data sumber')+'</div><div class="meta">Posisi: '+esc(item.pos||'—')+' · Qty: '+esc(item.qty||'—')+'<br>Katalog: '+esc(item.catalog||'—')+' ('+esc(item.catalogId||'—')+')</div><div class="meta"><a href="'+esc(item.href)+'">Buka '+esc(item.model)+' →</a></div></div><span class="model">'+esc(item.model)+'</span></article>').join('');
+}
+$('searchForm').addEventListener('submit',e=>{e.preventDefault();render($('query').value)});
+$('query').addEventListener('input',()=>render($('query').value));
+$('clear').addEventListener('click',()=>{$('query').value='';render('');$('query').focus()});
+loadIndex().catch(error=>{$('status').textContent='Gagal memuat indeks: '+error.message;$('results').innerHTML='<div class="empty">Periksa apakah file data model tersedia di repository.</div>';});
+</script>
+</body>
+</html>
