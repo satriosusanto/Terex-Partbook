@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js",
-    "test": "node smoke-test.js"
+    "check": "node --check server.js && node --check smoke-test.js && node --check check-deployment.js",
+    "test": "node smoke-test.js",
+    "check:deployment": "node check-deployment.js"
   },
   "engines": {
     "node": ">=20"
