@@ -248,7 +248,7 @@
       if (hotspot.dataset.pos != null) return String(hotspot.dataset.pos).trim();
       if (hotspot.dataset.text != null) return String(hotspot.dataset.text).trim();
       if (hotspot.dataset.position != null) return String(hotspot.dataset.position).trim();
-      const match = hotspot.title?.match(/^Pos\\s+(.+?)\\s+(.+)$/);
+      const match = hotspot.title?.match(/^Pos\s+(.+?)\s+(.+)$/);
       return String(match?.[1] ?? "").trim();
     };
     const positionForRow = row => String(row?.dataset.pos ?? row?.cells?.[0]?.textContent ?? "").trim();
