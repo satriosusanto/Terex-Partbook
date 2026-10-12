@@ -1,0 +1,17 @@
+{
+  "name": "terex-partbook-ai-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Secure API backend for grounded TEREX and Franna PartBook search",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "openai": "^5.20.0"
+  }
+}
