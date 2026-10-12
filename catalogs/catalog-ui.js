@@ -668,7 +668,7 @@
     const zoomOut = document.querySelector("#zoomOut, #minus, #zout");
     if (!viewport || !zoomIn || !zoomOut) return;
 
-    const getDiagram = () => document.querySelector("#diagram, #diagramCanvas, #canvas");
+    const getDiagram = () => document.querySelector("#diagram, #diagramCanvas") || document.querySelector("#canvas");
 
     const pointers = new Map();
     let pinch = null;
