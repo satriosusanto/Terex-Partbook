@@ -126,7 +126,7 @@ function reset(){setCatalogMenu(false);S.current=null;history.pushState({},'',lo
 
 $('catalogToggle').onclick=()=>setCatalogMenu(!document.body.classList.contains('catalogs-open'));$('sidebarBackdrop').onclick=()=>setCatalogMenu(false);document.addEventListener('keydown',e=>{if(e.key==='Escape')setCatalogMenu(false)});window.addEventListener('resize',()=>{
  if(window.innerWidth>700)setCatalogMenu(false);
- if(S.current&&window.innerWidth<=700)setZoom(fitZoom());
+ if(S.current)setZoom(window.innerWidth<=700?fitZoom():1);
 });
 const viewerPointers=new Map();let pinchGesture=null,panPointer=null;
 $('viewer').addEventListener('pointerdown',e=>{
