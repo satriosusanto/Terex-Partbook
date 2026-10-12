@@ -36,3 +36,8 @@ coverage/
 # Keep the actual PartBook assets tracked:
 # data/*.json
 # images/*.jpg
+
+# Secrets / local environment configuration
+.env
+.env.*
+!.env.example
