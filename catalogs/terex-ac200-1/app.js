@@ -1,5 +1,5 @@
 const $=id=>document.getElementById(id);
-let catalogs=[],parts=[],hotspots=[],imageMeta=[],current=null,zoom=1, dark=false;
+let catalogs=[],parts=[],hotspots=[],imageMeta=[],current=null,zoom=1,dark=false,diagramRequest=0;
 const imgByName=new Map(), metaByName=new Map();
 Promise.all([
  fetch("data/catalogs.json").then(r=>r.json()),
@@ -30,7 +30,9 @@ function selectCatalog(id){
  renderDiagram(); renderParts(parts.filter(p=>p.catalog===id));
 }
 function renderDiagram(){
- const src=current.image; const img=$("diagram");
+ const request=++diagramRequest;
+ const selectedId=current.id, selectedImage=current.image;
+ const src=selectedImage; const img=$("diagram");
  const wrap=$("canvasWrap");
  $("hotspots").innerHTML="";
  if(!src){
@@ -43,8 +45,8 @@ function renderDiagram(){
  const image=$("diagram");
  wrap.setAttribute("aria-busy","true");
  image.alt="Diagram for "+current.title;
- image.onload=()=>{wrap.setAttribute("aria-busy","false");zoom=1;fitDiagram();renderHotspots();};
- image.onerror=()=>{wrap.setAttribute("aria-busy","false");wrap.innerHTML='<div class="diagram-message">Diagram could not be loaded. Please check the connection or report the catalog ID: '+esc(current.id)+'.</div>';};
+ image.onload=()=>{if(request!==diagramRequest||current?.id!==selectedId||current?.image!==selectedImage)return;wrap.setAttribute("aria-busy","false");zoom=1;fitDiagram();renderHotspots();};
+ image.onerror=()=>{if(request!==diagramRequest||current?.id!==selectedId||current?.image!==selectedImage)return;wrap.setAttribute("aria-busy","false");wrap.innerHTML='<div class="diagram-message">Diagram could not be loaded. Please check the connection or report the catalog ID: '+esc(selectedId)+'.</div>';};
  image.src="images/"+encodeURIComponent(src);
 }
 function renderHotspots(){
