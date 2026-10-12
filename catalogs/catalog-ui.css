@@ -968,3 +968,63 @@ body.catalog-ui button, body.catalog-ui input { font: inherit; }
   .catalog-ui .viewer, .catalog-ui .stage, .catalog-ui .diagram-stage, .catalog-ui #viewer { height: 44dvh; min-height: 220px; }
   .catalog-ui .viewerTools button, .catalog-ui .zoom button, .catalog-ui .bar button { min-width: 34px; min-height: 36px; padding: 5px 7px; }
 }
+
+
+/* Model-specific diagram viewports: apply the same mobile behavior to every catalog. */
+@media (max-width: 700px) {
+  .catalog-ui.ui-model-terex-ac80-2 #viewer,
+  .catalog-ui.ui-model-terex-ac100-4 #stage,
+  .catalog-ui.ui-model-terex-ac140c #stage,
+  .catalog-ui.ui-model-terex-ac200-1 #canvasWrap,
+  .catalog-ui.ui-model-terex-ac250-1 #diagramStage,
+  .catalog-ui.ui-model-terex-ac350-6 #diagramStage,
+  .catalog-ui.ui-model-franna-at15 #canvas,
+  .catalog-ui.ui-model-franna-mac25 #viewer {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .catalog-ui.ui-model-terex-ac80-2 #viewer,
+  .catalog-ui.ui-model-terex-ac100-4 #stage,
+  .catalog-ui.ui-model-terex-ac140c #stage,
+  .catalog-ui.ui-model-terex-ac200-1 #canvasWrap,
+  .catalog-ui.ui-model-terex-ac250-1 #diagramStage,
+  .catalog-ui.ui-model-terex-ac350-6 #diagramStage,
+  .catalog-ui.ui-model-franna-at15 #canvas,
+  .catalog-ui.ui-model-franna-mac25 #viewer {
+    height: min(48dvh, 520px);
+    min-height: 220px;
+    max-height: 520px;
+    overflow: auto;
+  }
+  .catalog-ui.ui-model-franna-at15 #canvas {
+    height: min(48dvh, 520px);
+    min-height: 220px;
+    overflow: hidden;
+  }
+  .catalog-ui.ui-model-terex-ac80-2 #viewer img,
+  .catalog-ui.ui-model-terex-ac100-4 #stage img,
+  .catalog-ui.ui-model-terex-ac140c #stage img,
+  .catalog-ui.ui-model-terex-ac200-1 #canvasWrap img,
+  .catalog-ui.ui-model-terex-ac250-1 #diagramStage img,
+  .catalog-ui.ui-model-terex-ac350-6 #diagramStage img {
+    max-width: none;
+  }
+  .catalog-ui .parts, .catalog-ui .scroll, .catalog-ui #results {
+    min-height: 0;
+    max-width: 100%;
+  }
+}
+@media (max-width: 380px) {
+  .catalog-ui.ui-model-terex-ac80-2 #viewer,
+  .catalog-ui.ui-model-terex-ac100-4 #stage,
+  .catalog-ui.ui-model-terex-ac140c #stage,
+  .catalog-ui.ui-model-terex-ac200-1 #canvasWrap,
+  .catalog-ui.ui-model-terex-ac250-1 #diagramStage,
+  .catalog-ui.ui-model-terex-ac350-6 #diagramStage,
+  .catalog-ui.ui-model-franna-at15 #canvas,
+  .catalog-ui.ui-model-franna-mac25 #viewer {
+    height: 44dvh;
+    min-height: 200px;
+  }
+}
