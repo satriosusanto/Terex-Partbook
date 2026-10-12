@@ -814,3 +814,99 @@ body.catalog-ui button, body.catalog-ui input { font: inherit; }
     overflow-wrap: anywhere;
   }
 }
+
+
+/* Mobile-first exploded-view refinement: isolated on feature/mobile-exploded-view */
+.catalog-ui {
+  --tap-size: 42px;
+  -webkit-tap-highlight-color: transparent;
+}
+.catalog-ui button,
+.catalog-ui a,
+.catalog-ui input,
+.catalog-ui .catalog-tree-label {
+  touch-action: manipulation;
+}
+.catalog-ui .viewerTools,
+.catalog-ui .zoom {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.catalog-ui .viewerTools button,
+.catalog-ui .zoom button,
+.catalog-ui .bar button {
+  min-width: var(--tap-size);
+  min-height: var(--tap-size);
+  display: inline-grid;
+  place-items: center;
+  font-weight: 700;
+}
+.catalog-ui .viewer img,
+.catalog-ui #viewer img,
+.catalog-ui .stage img,
+.catalog-ui .diagram-stage img,
+.catalog-ui #canvas img {
+  max-width: none;
+  -webkit-user-drag: none;
+}
+.catalog-ui .catalog-hotspot-dialog {
+  padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+}
+.catalog-ui .catalog-hotspot-card {
+  max-height: min(88dvh, 680px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.catalog-ui .catalog-hotspot-close,
+.catalog-ui .catalog-hotspot-copy {
+  min-height: 44px;
+}
+.catalog-ui .catalog-hotspot-copy {
+  padding: 12px 16px;
+}
+.catalog-ui .catalog-tree-label {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+}
+.catalog-ui .search input {
+  font-size: 16px;
+}
+.catalog-ui .viewer,
+.catalog-ui .stage,
+.catalog-ui .diagram-stage,
+.catalog-ui #viewer,
+.catalog-ui #canvas {
+  overscroll-behavior: contain;
+}
+@media (max-width: 700px) {
+  .catalog-ui .diagramHead {
+    position: relative;
+    z-index: 2;
+    gap: 8px;
+  }
+  .catalog-ui .diagramHead > div,
+  .catalog-ui .diagramHead .viewerTools {
+    max-width: 100%;
+  }
+  .catalog-ui .viewerTools button,
+  .catalog-ui .zoom button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+  .catalog-ui .partsCard table,
+  .catalog-ui .parts-panel table,
+  .catalog-ui table {
+    font-size: 12px;
+  }
+  .catalog-ui th,
+  .catalog-ui td {
+    padding: 8px 7px;
+  }
+  .catalog-ui .catalog-hotspot-card {
+    width: min(100%, 420px);
+    padding: 22px 18px 18px;
+    border-radius: 16px;
+  }
+}
