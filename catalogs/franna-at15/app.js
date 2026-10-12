@@ -10,7 +10,38 @@ function showPart(id){const p=state.parts.find(x=>x.id===id);if(!p)return;$('mpo
 function fit(){if(!diagram?.naturalWidth||!diagram.naturalHeight||!canvas)return;const w=canvas.clientWidth,h=canvas.clientHeight;if(w<40||h<40)return;const aw=Math.max(40,w-24),ah=Math.max(40,h-24);state.scale=Math.min(aw/diagram.naturalWidth,ah/diagram.naturalHeight,1);state.x=(w-diagram.naturalWidth*state.scale)/2;state.y=(h-diagram.naturalHeight*state.scale)/2;apply();}
 function apply(){diagram.style.transform=`translate(${state.x}px,${state.y}px) scale(${state.scale})`;const hs=$('hotspots');hs.style.transform=`translate(${state.x}px,${state.y}px) scale(${state.scale})`;hs.style.transformOrigin='0 0';}
 
-function installPinchZoom(){const viewport=$('canvas');if(!viewport)return;let startDistance=0,startScale=1,startX=0,startY=0,midX=0,midY=0,worldX=0,worldY=0;const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});viewport.addEventListener('touchstart',e=>{if(e.touches.length!==2)return;e.preventDefault();const rect=viewport.getBoundingClientRect(),mid=midpoint(e.touches);startDistance=distance(e.touches);startScale=state.scale;midX=mid.x-rect.left;midY=mid.y-rect.top;worldX=(midX-state.x)/state.scale;worldY=(midY-state.y)/state.scale;startX=state.x;startY=state.y},{passive:false});viewport.addEventListener('touchmove',e=>{if(e.touches.length!==2||!startDistance)return;e.preventDefault();const next=Math.max(.05,Math.min(8,startScale*distance(e.touches)/startDistance));const rect=viewport.getBoundingClientRect(),mid=midpoint(e.touches),x=mid.x-rect.left,y=mid.y-rect.top;state.scale=next;state.x=x-worldX*next;state.y=y-worldY*next;apply()},{passive:false});const end=()=>{startDistance=0};viewport.addEventListener('touchend',end,{passive:true});viewport.addEventListener('touchcancel',end,{passive:true});}
+function installPinchZoom(){
+ const viewport=$('canvas');if(!viewport)return;
+ viewport.style.touchAction='none';
+ let startDistance=0,startScale=1,worldX=0,worldY=0,midX=0,midY=0,pan=null,suppressClick=false,suppressTimer=null;
+ const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+ const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
+ viewport.addEventListener('touchstart',e=>{
+  if(e.touches.length===1){pan={x:e.touches[0].clientX,y:e.touches[0].clientY,startX:e.touches[0].clientX,startY:e.touches[0].clientY,moved:false};startDistance=0;return}
+  if(e.touches.length!==2)return;
+  e.preventDefault();pan=null;
+  const rect=viewport.getBoundingClientRect(),mid=midpoint(e.touches);
+  startDistance=distance(e.touches);startScale=state.scale;
+  midX=mid.x-rect.left;midY=mid.y-rect.top;
+  worldX=(midX-state.x)/state.scale;worldY=(midY-state.y)/state.scale;
+ },{passive:false});
+ viewport.addEventListener('touchmove',e=>{
+  if(e.touches.length===1&&pan){
+   const t=e.touches[0],dx=t.clientX-pan.x,dy=t.clientY-pan.y;
+   if(Math.hypot(t.clientX-pan.startX,t.clientY-pan.startY)>6)pan.moved=true;
+   if(pan.moved){e.preventDefault();state.x+=dx;state.y+=dy;apply();suppressClick=true;clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>suppressClick=false,450)}
+   pan.x=t.clientX;pan.y=t.clientY;return;
+  }
+  if(e.touches.length!==2||!startDistance)return;
+  e.preventDefault();
+  const next=Math.max(.05,Math.min(8,startScale*distance(e.touches)/startDistance));
+  const rect=viewport.getBoundingClientRect(),mid=midpoint(e.touches),x=mid.x-rect.left,y=mid.y-rect.top;
+  state.scale=next;state.x=x-worldX*next;state.y=y-worldY*next;apply();
+ },{passive:false});
+ const end=()=>{startDistance=0;pan=null};
+ viewport.addEventListener('touchend',end,{passive:true});viewport.addEventListener('touchcancel',end,{passive:true});
+ viewport.addEventListener('click',e=>{if(!suppressClick||!e.target.closest('.hot'))return;e.preventDefault();e.stopImmediatePropagation();suppressClick=false;clearTimeout(suppressTimer)},true);
+}
 installPinchZoom();
 $('zin').onclick=()=>{state.scale=Math.min(state.scale*1.25,8);apply()};$('zout').onclick=()=>{state.scale=Math.max(state.scale/1.25,.05);apply()};$('fit').onclick=fit;$('reset').onclick=fit;$('filter').oninput=()=>renderCatalogs(state.catalogs);$('search').oninput=e=>{const q=e.target.value.toLowerCase();if(!q)return renderCatalogs(state.catalogs);const ps=state.parts.filter(p=>(p.partNumber+' '+p.description+' '+p.position+' '+p.catalog).toLowerCase().includes(q));const ids=[...new Set(ps.map(p=>p.catalog))];renderCatalogs(state.catalogs.filter(c=>ids.includes(c.id)));};$('theme').onclick=()=>document.body.classList.toggle('dark');$('close').onclick=()=>$('modal').classList.remove('show');$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').classList.remove('show')};window.addEventListener('resize',()=>{if(state.current&&diagram.naturalWidth)requestAnimationFrame(fit)},{passive:true});if('ResizeObserver'in window)new ResizeObserver(()=>{if(state.current&&diagram.naturalWidth)requestAnimationFrame(fit)}).observe(canvas);
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
