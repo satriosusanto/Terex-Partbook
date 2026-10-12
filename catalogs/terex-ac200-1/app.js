@@ -31,9 +31,21 @@ function selectCatalog(id){
 }
 function renderDiagram(){
  const src=current.image; const img=$("diagram");
- if(!src){img.removeAttribute("src"); $("hotspots").innerHTML=""; return}
- img.src="images/"+encodeURIComponent(src);
- img.onload=()=>{fitDiagram();renderHotspots();};
+ const wrap=$("canvasWrap");
+ $("hotspots").innerHTML="";
+ if(!src){
+   img.removeAttribute("src");
+   wrap.innerHTML='<div class="diagram-message">No diagram is available for this catalog.</div>';
+   return;
+ }
+ // Rebuild the viewer after a catalog without an image so the canvas exists.
+ if(!$("canvas")) wrap.innerHTML='<div id="canvas"><img id="diagram" alt="Exploded parts diagram"><div id="hotspots"></div></div>';
+ const image=$("diagram");
+ wrap.setAttribute("aria-busy","true");
+ image.alt="Diagram for "+current.title;
+ image.onload=()=>{wrap.setAttribute("aria-busy","false");fitDiagram();renderHotspots();};
+ image.onerror=()=>{wrap.setAttribute("aria-busy","false");wrap.innerHTML='<div class="diagram-message">Diagram could not be loaded. Please check the connection or report the catalog ID: '+esc(current.id)+'.</div>';};
+ image.src="images/"+encodeURIComponent(src);
 }
 function renderHotspots(){
  const layer=$("hotspots"); layer.innerHTML="";
