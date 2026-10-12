@@ -6,7 +6,7 @@ This guide prepares the backend for deployment as a separate container service. 
 
 For the easiest setup, use Render with the repository's root-level `render.yaml`. It configures a Docker Web Service, Singapore region, health check, allowed frontend origin, model name, and a secret variable prompt for the OpenAI key.
 
-1. Review and merge the deployment configuration PR into `main).
+1. Review and merge the deployment configuration PR into `main`.
 2. Sign in to Render and choose **New → Blueprint**.
 3. Connect the `satriosusanto/Terex-Partbook` repository and select branch `main`.
 4. Review the service settings from `render.yaml`. Choose the Free plan for a trial, or a paid plan if the service must remain responsive without idle sleep.
