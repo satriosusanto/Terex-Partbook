@@ -684,11 +684,19 @@
     // for pinch zoom so the diagram and its hotspots keep the same scale.
     viewport.style.touchAction = "none";
     let drag = null;
+    const activeTouchPointers = new Set();
     let suppressHotspotClick = false;
     let suppressTimer = null;
 
     viewport.addEventListener("pointerdown", event => {
-      if (event.pointerType !== "touch" || !hasDiagram()) return;
+      if (event.pointerType !== "touch") return;
+      activeTouchPointers.add(event.pointerId);
+      // Never pan the viewport with one finger while a second finger is pinching.
+      if (activeTouchPointers.size > 1) {
+        drag = null;
+        return;
+      }
+      if (!hasDiagram()) return;
       drag = {
         pointerId: event.pointerId,
         x: event.clientX,
@@ -700,7 +708,7 @@
     });
 
     viewport.addEventListener("pointermove", event => {
-      if (!drag || drag.pointerId !== event.pointerId) return;
+      if (activeTouchPointers.size > 1 || !drag || drag.pointerId !== event.pointerId) return;
       const dx = event.clientX - drag.lastX;
       const dy = event.clientY - drag.lastY;
       if (!drag.moved && Math.hypot(event.clientX - drag.x, event.clientY - drag.y) > 6) {
@@ -720,6 +728,7 @@
     });
 
     function finish(event) {
+      activeTouchPointers.delete(event.pointerId);
       if (drag && drag.pointerId === event.pointerId) drag = null;
     }
     viewport.addEventListener("pointerup", finish);
