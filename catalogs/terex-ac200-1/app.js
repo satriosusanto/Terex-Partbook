@@ -43,7 +43,7 @@ function renderDiagram(){
  const image=$("diagram");
  wrap.setAttribute("aria-busy","true");
  image.alt="Diagram for "+current.title;
- image.onload=()=>{wrap.setAttribute("aria-busy","false");fitDiagram();renderHotspots();};
+ image.onload=()=>{wrap.setAttribute("aria-busy","false");zoom=1;fitDiagram();renderHotspots();};
  image.onerror=()=>{wrap.setAttribute("aria-busy","false");wrap.innerHTML='<div class="diagram-message">Diagram could not be loaded. Please check the connection or report the catalog ID: '+esc(current.id)+'.</div>';};
  image.src="images/"+encodeURIComponent(src);
 }
@@ -91,9 +91,20 @@ function fitDiagram(){
 }
 function applyZoom(){
  const canvas=$("canvas"),img=$("diagram");
- canvas.style.width=(img.naturalWidth||img.width)+"px";
- canvas.style.height=(img.naturalHeight||img.height)+"px";
- canvas.style.transform=`scale(${zoom})`;
+ if(!canvas||!img)return;
+ const naturalW=img.naturalWidth||img.width;
+ const naturalH=img.naturalHeight||img.height;
+ if(!naturalW||!naturalH)return;
+ const displayW=Math.max(1,Math.round(naturalW*zoom));
+ const displayH=Math.max(1,Math.round(naturalH*zoom));
+ // Size the image and its hotspot layer together instead of CSS-transforming
+ // an intrinsic-size canvas. Transforms leave the original layout box behind,
+ // which can make the diagram appear clipped or stranded in a corner on mobile.
+ canvas.style.width=displayW+"px";
+ canvas.style.height=displayH+"px";
+ canvas.style.transform="none";
+ img.style.width=displayW+"px";
+ img.style.height=displayH+"px";
  $("zoomLabel").textContent=Math.round(zoom*100)+"%";
 }
 $("zoomIn").onclick=()=>{zoom=Math.min(3,zoom*1.2);applyZoom()};
