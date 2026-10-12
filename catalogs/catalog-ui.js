@@ -780,5 +780,20 @@
     }, true);
   }
 
+  // Refit the active diagram when a phone rotates between portrait and landscape.
+  // Only react to orientation changes so normal browser-toolbar resizes do not reset zoom.
+  let lastLandscape = window.innerWidth > window.innerHeight;
+  let orientationRefitTimer = null;
+  window.addEventListener("resize", () => {
+    const landscape = window.innerWidth > window.innerHeight;
+    if (landscape === lastLandscape) return;
+    lastLandscape = landscape;
+    clearTimeout(orientationRefitTimer);
+    orientationRefitTimer = setTimeout(() => {
+      const fitButton = document.querySelector("#zoomFit, #fit, #reset");
+      if (fitButton && !fitButton.disabled) fitButton.click();
+    }, 180);
+  }, { passive: true });
+
   installDiagramGestures();
 })();
