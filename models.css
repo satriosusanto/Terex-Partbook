@@ -10,6 +10,9 @@ a{color:inherit;text-decoration:none}
 .brand small{font-size:11px;color:#aeb8c4}
 .back-link{border:1px solid #37414d;border-radius:8px;padding:8px 12px;color:#fff;font-size:13px}
 .back-link:hover{border-color:var(--accent);color:var(--accent)}
+.global-search-link{border:1px solid #45515e;border-radius:9px;padding:9px 13px;color:#fff;font-size:13px;font-weight:700;white-space:nowrap}
+.global-search-link:hover,.global-search-link:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+@media(max-width:520px){.topbar{align-items:flex-start;flex-wrap:wrap}.global-search-link{width:100%;text-align:center}}
 .page{width:min(1040px,100%);margin:0 auto;padding:clamp(28px,7vw,72px) clamp(16px,4vw,36px) 48px}
 .intro{margin-bottom:26px}
 .eyebrow{font-size:11px;font-weight:800;letter-spacing:1.6px;color:#b77800}
