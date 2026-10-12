@@ -17,7 +17,7 @@ function installPinchZoom(){
  const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
  const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
  viewport.addEventListener('touchstart',e=>{
-  if(e.touches.length===1){pan={x:e.touches[0].clientX,y:e.touches[0].clientY,moved:false};startDistance=0;return}
+  if(e.touches.length===1){pan={x:e.touches[0].clientX,y:e.touches[0].clientY,startX:e.touches[0].clientX,startY:e.touches[0].clientY,moved:false};startDistance=0;return}
   if(e.touches.length!==2)return;
   e.preventDefault();pan=null;
   const rect=viewport.getBoundingClientRect(),mid=midpoint(e.touches);
@@ -28,8 +28,6 @@ function installPinchZoom(){
  viewport.addEventListener('touchmove',e=>{
   if(e.touches.length===1&&pan){
    const t=e.touches[0],dx=t.clientX-pan.x,dy=t.clientY-pan.y;
-   if(!pan.moved&&Math.hypot(t.clientX-pan.startX,t.clientY-pan.startY)>6)pan.moved=true;
-   if(!pan.startX&&!pan.startY){pan.startX=pan.x;pan.startY=pan.y}
    if(Math.hypot(t.clientX-pan.startX,t.clientY-pan.startY)>6)pan.moved=true;
    if(pan.moved){e.preventDefault();state.x+=dx;state.y+=dy;apply();suppressClick=true;clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>suppressClick=false,450)}
    pan.x=t.clientX;pan.y=t.clientY;return;
