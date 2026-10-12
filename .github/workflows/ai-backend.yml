@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - "ai-backend/**"
+      - "Dockerfile"
+      - ".dockerignore"
       - ".github/workflows/ai-backend.yml"
       - "data/**"
       - "catalogs/terex-ac80-2/data/**"
@@ -35,3 +37,11 @@ jobs:
         run: npm --prefix ai-backend run check
       - name: Run API smoke tests
         run: npm --prefix ai-backend test
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Build backend container image
+        run: docker build --tag terex-partbook-ai:ci --file Dockerfile .
