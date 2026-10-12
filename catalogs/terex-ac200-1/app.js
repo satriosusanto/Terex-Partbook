@@ -111,7 +111,7 @@ function applyZoom(){
 }
 $("zoomIn").onclick=()=>{zoom=Math.min(3,zoom*1.2);applyZoom()};
 $("zoomOut").onclick=()=>{zoom=Math.max(.05,zoom/1.2);applyZoom()};
-$("fitBtn").onclick=fitDiagram;window.addEventListener("resize",()=>{if(current?.image)fitDiagram()});
+$("fitBtn").onclick=fitDiagram;const diagramWrap=$("canvasWrap");if("ResizeObserver" in window&&diagramWrap)new ResizeObserver(()=>{if(current?.image&&$("diagram")?.naturalWidth)fitDiagram()}).observe(diagramWrap);window.addEventListener("resize",()=>{if(current?.image)fitDiagram()});
 $("close").onclick=()=>$("modal").classList.add("hidden");
 $("modal").onclick=e=>{if(e.target.id==="modal")$("modal").classList.add("hidden")};
 $("catalogFilter").oninput=()=>renderCatalogs(catalogs);
