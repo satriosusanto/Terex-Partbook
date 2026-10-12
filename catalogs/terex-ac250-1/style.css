@@ -19,3 +19,63 @@
   .parts-panel { width: 100%; min-height: 0 !important; height: auto !important; max-height: 46dvh !important; }
   .table-wrap { min-height: 0; max-height: 40dvh; overflow: auto; overscroll-behavior: contain; }
 }
+
+
+/* Android fix: these model-specific desktop selectors otherwise override the shared compact viewport rules. */
+@media (max-width: 700px) {
+  .catalog-ui.ui-ac250 .layout,
+  .catalog-ui.ui-ac350 .layout {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+  .catalog-ui.ui-ac250 .layout > aside,
+  .catalog-ui.ui-ac350 .layout > aside {
+    position: relative !important;
+    top: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 150px !important;
+    min-height: 0 !important;
+    overflow: auto !important;
+  }
+  .catalog-ui.ui-ac250 .layout > main,
+  .catalog-ui.ui-ac350 .layout > main {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 8px !important;
+  }
+  .catalog-ui.ui-ac250 .workspace,
+  .catalog-ui.ui-ac350 .workspace {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+  .catalog-ui.ui-ac250 .diagram-stage,
+  .catalog-ui.ui-ac350 .diagram-stage {
+    height: min(42dvh, 380px) !important;
+    min-height: 200px !important;
+    max-height: 380px !important;
+    padding: 6px !important;
+  }
+  .catalog-ui.ui-ac250 .parts-panel,
+  .catalog-ui.ui-ac350 .parts-panel {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: 48dvh !important;
+  }
+  .catalog-ui.ui-ac250 .table-wrap,
+  .catalog-ui.ui-ac350 .table-wrap {
+    min-height: 0 !important;
+    max-height: 42dvh !important;
+    overflow: auto !important;
+  }
+}
