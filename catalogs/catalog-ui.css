@@ -1067,3 +1067,106 @@ body.catalog-ui button, body.catalog-ui input { font: inherit; }
     min-width: 0;
   }
 }
+
+
+/* Android layout correction for TEREX AC100-4, AC140C and AC200-1.
+   These pages use their own DOM structure and do not carry ui-model-* classes. */
+@media (max-width: 700px) {
+  /* AC100-4 / AC140C: keep the catalog list compact and stack diagram above parts. */
+  .catalog-ui .layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: auto;
+  }
+  .catalog-ui .layout > aside {
+    position: relative;
+    top: auto;
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    min-height: 0;
+    overflow: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .catalog-ui .layout > main {
+    width: 100%;
+    min-width: 0;
+    padding: 8px;
+  }
+  .catalog-ui .layout .content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    padding: 0;
+  }
+  .catalog-ui .layout .panel {
+    width: 100%;
+    min-width: 0;
+  }
+  .catalog-ui .layout .stage {
+    height: min(42dvh, 380px);
+    min-height: 200px;
+    max-height: 380px;
+    padding: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  .catalog-ui .layout .imagewrap {
+    margin: 8px;
+  }
+  .catalog-ui .layout .parts {
+    min-height: 0;
+    max-height: 48dvh;
+  }
+  .catalog-ui .layout .tablewrap {
+    min-height: 0;
+    max-height: 42dvh;
+    overflow: auto;
+  }
+
+  /* AC200-1: prevent the desktop flex workspace from expanding the viewer
+     to nearly the full phone viewport. Keep the diagram and parts usable. */
+  .catalog-ui main:has(> .workspace) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+  .catalog-ui .workspace {
+    width: 100%;
+    min-width: 0;
+    flex: none;
+  }
+  .catalog-ui .workspace .viewer {
+    height: min(42dvh, 380px);
+    min-height: 200px;
+    max-height: 380px;
+    flex: none;
+    overflow: hidden;
+  }
+  .catalog-ui .workspace #canvasWrap {
+    height: 100%;
+    min-height: 0;
+    padding: 42px 8px 8px;
+    align-items: flex-start;
+    overflow: auto;
+  }
+  .catalog-ui .workspace #canvas {
+    flex: none;
+    margin: 0;
+  }
+  .catalog-ui .workspace .results {
+    height: auto;
+    min-height: 0;
+    max-height: 48dvh;
+    flex: none;
+  }
+  .catalog-ui .workspace .tableWrap {
+    min-height: 0;
+    max-height: 42dvh;
+    overflow: auto;
+  }
+}
