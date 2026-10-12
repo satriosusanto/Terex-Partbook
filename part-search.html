@@ -27,6 +27,7 @@ a{color:var(--blue)}.top{display:flex;align-items:center;justify-content:space-b
 const SOURCES=[
  {model:'TEREX AC40',base:'',parts:'data/parts.json',catalogs:'data/catalogs.json',href:'index.html'},
  {model:'TEREX AC80-2',base:'catalogs/terex-ac80-2/',parts:'catalogs/terex-ac80-2/data/parts.json',catalogs:'catalogs/terex-ac80-2/data/catalogs.json',href:'catalogs/terex-ac80-2/index.html'},
+ {model:'Franna AT15',base:'catalogs/franna-at15/',parts:'catalogs/franna-at15/data/parts.json',catalogs:'catalogs/franna-at15/data/catalogs.json',href:'catalogs/franna-at15/index.html'},
  {model:'Franna MAC25',base:'catalogs/franna-mac25/',parts:'catalogs/franna-mac25/data/parts.json',catalogs:'catalogs/franna-mac25/data/catalogs.json',href:'catalogs/franna-mac25/index.html'}
 ];
 const $=id=>document.getElementById(id);
@@ -34,9 +35,9 @@ const norm=v=>String(v??'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u0
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let index=[],loaded=false;
 function normalizePart(p,model,cats,href){
- const catId=p.catalogId??p.catalog??'';
+ const catId=p.catalogId??p.catalog??p.catalog_id??'';
  const cat=cats.get(String(catId));
- return {model,href,part:String(p.partNumber??p.part_number??''),desc:String(p.description??''),pos:String(p.pos??p.position??''),qty:String(p.qty??''),catalog:String(cat?.title??cat?.name??catId),catalogId:String(catId)};
+ return {model,href,part:String(p.partNumber??p.part_number??p.partNo??''),desc:String(p.description??p.desc??''),pos:String(p.pos??p.position??p.itemLoc??''),qty:String(p.qty??p.quantity??''),catalog:String(cat?.title??cat?.name??catId),catalogId:String(catId)};
 }
 async function loadIndex(){
  const all=await Promise.all(SOURCES.map(async source=>{
