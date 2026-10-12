@@ -40,19 +40,31 @@ function normalizePart(p,model,cats,href){
  return {model,href,part:String(p.partNumber??p.part_number??p.partNo??''),desc:String(p.description??p.desc??''),pos:String(p.pos??p.position??p.itemLoc??''),qty:String(p.qty??p.quantity??''),catalog:String(cat?.title??cat?.name??catId),catalogId:String(catId)};
 }
 async function loadIndex(){
- const all=await Promise.all(SOURCES.map(async source=>{
-  const [pr,cr]=await Promise.all([fetch(source.parts),fetch(source.catalogs)]);
-  if(!pr.ok||!cr.ok)throw Error('Data '+source.model+' tidak dapat dimuat');
-  const [parts,catalogs]=await Promise.all([pr.json(),cr.json()]);
-  const map=new Map();
-  const addCatalog=c=>{if(c?.id!=null)map.set(String(c.id),c);(c?.children??[]).forEach(addCatalog)};
-  catalogs.forEach(addCatalog);
-  return parts.map(p=>normalizePart(p,source.model,map,source.href));
+ const outcomes=await Promise.all(SOURCES.map(async source=>{
+  try{
+   const [pr,cr]=await Promise.all([fetch(source.parts),fetch(source.catalogs)]);
+   if(!pr.ok||!cr.ok)throw Error('HTTP '+(!pr.ok?pr.status:cr.status));
+   const [parts,catalogs]=await Promise.all([pr.json(),cr.json()]);
+   if(!Array.isArray(parts)||!Array.isArray(catalogs))throw Error('Format JSON bukan array');
+   const map=new Map();
+   const addCatalog=c=>{if(c?.id!=null)map.set(String(c.id),c);(Array.isArray(c?.children)?c.children:[]).forEach(addCatalog)};
+   catalogs.forEach(addCatalog);
+   return {source,items:parts.map(p=>normalizePart(p,source.model,map,source.href)),error:null};
+  }catch(error){
+   return {source,items:[],error:error?.message||'Gagal memuat data'};
+  }
  }));
- index=all.flat();
+ const successful=outcomes.filter(x=>!x.error);
+ const failed=outcomes.filter(x=>x.error);
+ index=successful.flatMap(x=>x.items);
  loaded=true;
- $('status').textContent='Siap — '+index.length.toLocaleString('id-ID')+' baris part dari '+SOURCES.length+' model.';
- render('');
+ if(successful.length){
+  $('status').textContent='Siap — '+index.length.toLocaleString('id-ID')+' baris part dari '+successful.length+'/'+SOURCES.length+' model'+(failed.length?'. Gagal dimuat: '+failed.map(x=>x.source.model).join(', ')+'.':' (semua model tersedia).');
+  render('');
+ }else{
+  $('status').textContent='Tidak ada indeks part yang berhasil dimuat.';
+  $('results').innerHTML='<div class="empty">Data pencarian belum tersedia. Periksa file JSON dan jalankan ulang halaman.</div>';
+ }
 }
 function render(raw){
  const q=norm(raw);
