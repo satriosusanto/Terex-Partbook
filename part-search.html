@@ -76,7 +76,7 @@ function render(raw){
   .slice(0,200);
  $('status').textContent=hits.length+' hasil ditampilkan'+(hits.length===200?' (maksimum 200).':'.');
  if(!hits.length){$('results').innerHTML='<div class="empty">Tidak ada part yang cocok. Coba nomor part atau kata kunci lain.</div>';return}
- $('results').innerHTML=hits.map(item=>'<article class="result"><div><div class="pn">'+esc(item.part||'Nomor part tidak tersedia')+'</div><div class="desc">'+esc(item.desc||'Deskripsi tidak tersedia dalam data sumber')+'</div><div class="meta">Posisi: '+esc(item.pos||'—')+' · Qty: '+esc(item.qty||'—')+'<br>Katalog: '+esc(item.catalog||'—')+' ('+esc(item.catalogId||'—')+')</div><div class="meta"><a href="'+esc(item.href)+'">Buka '+esc(item.model)+' →</a></div></div><span class="model">'+esc(item.model)+'</span></article>').join('');
+ $('results').innerHTML=hits.map(item=>'<article class="result"><div><div class="pn">'+esc(item.part||'Nomor part tidak tersedia')+'</div><div class="desc">'+esc(item.desc||'Deskripsi tidak tersedia dalam data sumber')+'</div><div class="meta">Posisi: '+esc(item.pos||'—')+' · Qty: '+esc(item.qty||'—')+'<br>Katalog: '+esc(item.catalog||'—')+' ('+esc(item.catalogId||'—')+')</div><div class="meta"><a href="'+esc(item.href+(item.catalogId?'#'+encodeURIComponent(item.catalogId):''))+'">Buka katalog '+esc(item.model)+' →</a></div></div><span class="model">'+esc(item.model)+'</span></article>').join('');
 }
 $('searchForm').addEventListener('submit',e=>{e.preventDefault();render($('query').value)});
 $('query').addEventListener('input',()=>render($('query').value));
