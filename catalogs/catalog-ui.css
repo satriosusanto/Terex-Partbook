@@ -937,3 +937,34 @@ body.catalog-ui button, body.catalog-ui input { font: inherit; }
     transition: background-color 120ms ease, outline-color 120ms ease;
   }
 }
+
+
+/* Mobile refinement: tighter vertical rhythm and less unused viewer space. */
+@media (max-width: 700px) {
+  .catalog-ui, .catalog-ui body { overflow-x: hidden; }
+  .catalog-ui .workspace, .catalog-ui .content { padding: 6px; gap: 8px; }
+  .catalog-ui .diagramCard, .catalog-ui .partsCard,
+  .catalog-ui .panel, .catalog-ui .diagram-panel, .catalog-ui .parts-panel { border-radius: 8px; }
+  .catalog-ui .viewer, .catalog-ui .stage, .catalog-ui .diagram-stage,
+  .catalog-ui #viewer:not(.ui-at15 .viewer) {
+    height: min(48dvh, 520px);
+    min-height: 240px;
+    max-height: 520px;
+    padding: 6px;
+  }
+  .catalog-ui .partsCard, .catalog-ui .parts-panel { min-height: 0; max-height: 48dvh; }
+  .catalog-ui .tabs button { min-height: 42px; }
+  .catalog-ui .toolbar, .catalog-ui .bar, .catalog-ui .diagramHead { gap: 5px; }
+  .catalog-ui .viewerTools { gap: 4px; }
+  .catalog-ui .viewerTools button, .catalog-ui .zoom button, .catalog-ui .bar button { min-width: 38px; min-height: 38px; }
+  .catalog-ui .partsCard table, .catalog-ui .parts-panel table, .catalog-ui table { font-size: 11px; }
+  .catalog-ui th, .catalog-ui td { padding: 7px 6px; }
+  .catalog-ui.ui-at15 .viewer { height: auto; min-height: 0; padding: 6px; gap: 7px; }
+  .catalog-ui.ui-at15 .viewer #canvas { height: min(48dvh, 520px); min-height: 240px; }
+  .catalog-ui.ui-mac25 #viewer { height: min(48dvh, 520px); min-height: 240px; }
+}
+@media (max-width: 380px) {
+  .catalog-ui .workspace, .catalog-ui .content { padding: 5px; gap: 7px; }
+  .catalog-ui .viewer, .catalog-ui .stage, .catalog-ui .diagram-stage, .catalog-ui #viewer { height: 44dvh; min-height: 220px; }
+  .catalog-ui .viewerTools button, .catalog-ui .zoom button, .catalog-ui .bar button { min-width: 34px; min-height: 36px; padding: 5px 7px; }
+}
