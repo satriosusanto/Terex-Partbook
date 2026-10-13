@@ -70,7 +70,7 @@ function getCatalogTitle(c){
  const description=String(row?.description??"").trim();
  if(!description)return c?.title||id;
  const version=String(row?.partVersion??"").trim();
- const identity=[id,version&&version!=="_"?version:""].filter(Boolean).join(" ");
+ const identity=[id,version&&version!==""?version:""].filter(Boolean).join(" ");
  return `${description} (${identity})`;
 }
 function renderCatalogs(list){
