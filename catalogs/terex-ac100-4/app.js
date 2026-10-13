@@ -28,7 +28,7 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
  }
 
  const curatedRoot=resolveKey("10213.1");
- const curatedBranches={"40777812":["40789812","40778012","40746112","40805312","40805512","48392412","40671012"],"40788912":["40832912","40786512","40680312","40790612","40680412","40835512","40783312","40783512","40833312","19527612"],"40789112":["40790412","40662012","40681412","40840312","40680812","40789912","40779112","40783612","40834312","28079912"],"10213.1":["40788912","40789112","40777812"]};
+ const curatedBranches={"40777812":["40789812","40778012","40741612","40805312","40805512","48392412","40671012"],"40788912":["40832912","40786512","40680312","40790612","40680412","40835512","40783312","40783512","40833312","19527612"],"40789112":["40790412","40662012","40681412","40840312","40680812","40789912","40779112","40783612","40834312","28079912"],"10213.1":["40788912","40789112","40777812"]};
  const curatedParentByChild=new Map();
  const controlledParentIds=new Set();
  for(const [parentRaw,childRaws] of Object.entries(curatedBranches)){
@@ -103,7 +103,10 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
  for(const [child,parent] of parentById){
   if(children.has(parent)&&children.has(child)&&parent!==child&&!children.get(parent).includes(child))children.get(parent).push(child);
  }
+ const curatedTreeLabels={"40835512":{title:"Mounting Cabin",version:"B"}};
  const treeLabel=(id,c)=>{
+  const override=curatedTreeLabels[id];
+  if(override)return `${override.title} (${id}${override.version?" "+override.version:""})`;
   const parentId=parentById.get(id);
   let row=null;
   if(parentId)row=(byId.get(parentId)?.parts||[]).find(p=>resolveKey(p.partNo)===id&&String(p.description||"").trim());
@@ -114,7 +117,7 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
   }
   const description=String(row?.description||c.title||id).trim();
   const version=String(row?.version||"").trim();
-  return `${description} (${id}${version&&version!=="_"?" "+version:""})`;
+  return `${description} (${id}${version&&version!==""?" "+version:""})`;
  };
  for(const [parentRaw,childRaws] of Object.entries(curatedBranches)){
   const parent=resolveKey(parentRaw);
