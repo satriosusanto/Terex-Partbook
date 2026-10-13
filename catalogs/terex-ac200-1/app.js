@@ -16,8 +16,8 @@ Promise.all([
 });
 function renderCatalogs(list){
 const all=catalogs||[],byId=new Map(all.map(c=>[String(c.id),c])),children=new Map(),parent=catalogHierarchy?.parent||{};
-const aliases=new Map();for(const c of all)for(const k of [c.id,c.variant,c.catalogId,c.catalog,c.key])if(k!==undefined&&k!==null&&String(k).trim())aliases.set(String(k).trim().toLowerCase(),String(c.id));
-const resolveKey=v=>{const raw=String(v??"").trim();return byId.has(raw)?raw:(aliases.get(raw.toLowerCase())||null)};
+const aliases=new Map();const addAlias=(k,id)=>{if(k===undefined||k===null)return;const raw=String(k).trim();if(!raw)return;aliases.set(raw.toLowerCase(),String(id));aliases.set(raw.toLowerCase().replace(/[\\s_-]+/g,""),String(id));};for(const c of all)for(const k of [c.id,c.variant,c.catalogId,c.catalog,c.key,c.title])addAlias(k,c.id);
+const resolveKey=v=>{const raw=String(v??"").trim();if(byId.has(raw))return raw;return aliases.get(raw.toLowerCase())||aliases.get(raw.toLowerCase().replace(/[\\s_-]+/g,""))||null};
 for(const [childRaw,parRaw] of Object.entries(parent)){const child=resolveKey(childRaw),par=resolveKey(parRaw);if(!child||!par||child===par)continue;if(!children.has(par))children.set(par,[]);if(!children.get(par).includes(child))children.get(par).push(child)}
 const q=$("catalogFilter").value.toLowerCase().trim();
 const matches=c=>!q||(String(c.id)+" "+String(c.title)).toLowerCase().includes(q);
