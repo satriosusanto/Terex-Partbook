@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s);let catalogs=[],parts=[],hotspots=[],images=[],active=null,scale=1,loadToken=0,searchToken=0;let byImg={},byCat={};
-Promise.all(['catalogs','parts','hotspots','images'].map(x=>fetch(`data/${x}.json`).then(r=>r.json()))).then(([c,p,h,i])=>{catalogs=c;parts=p;hotspots=h;images=i;images.forEach(x=>byImg[x.catalog]=x);parts.forEach(x=>(byCat[x.catalog]??=[]).push(x));renderCats();if(window.matchMedia('(max-width:700px)').matches){document.body.classList.add('catalogs-open');const menu=document.querySelector('#catalogToggle');if(menu)menu.setAttribute('aria-expanded','true');const backdrop=document.querySelector('.sidebarBackdrop');if(backdrop)backdrop.hidden=false;}const hash=decodeURIComponent(location.hash.slice(1));if(hash)openCat(hash);});
+Promise.all(['catalogs','parts','hotspots','images'].map(x=>fetch(`data/${x}.json`).then(r=>{if(!r.ok)throw Error(x+' data HTTP '+r.status);return r.json()}))).then(([c,p,h,i])=>{catalogs=c;parts=p;hotspots=h;images=i;images.forEach(x=>byImg[x.catalog]=x);parts.forEach(x=>(byCat[x.catalog]??=[]).push(x));renderCats();if(window.matchMedia('(max-width:700px)').matches){document.body.classList.add('catalogs-open');const menu=document.querySelector('#catalogToggle');if(menu)menu.setAttribute('aria-expanded','true');const backdrop=document.querySelector('.sidebarBackdrop');if(backdrop)backdrop.hidden=false;}const hash=decodeURIComponent(location.hash.slice(1));if(hash)openCat(hash);}).catch(error=>{console.error('MAC25 catalog initialization failed',error);const box=document.querySelector('#cats');if(box)box.innerHTML='<div class="tree-empty">Catalog data could not be loaded. Refresh the page and try again.</div>';});
 const MAC25_ASSEMBLY_NAMES={T177667:'ASSY FRONT BODY MAC25',T177668:'ASSY REAR BODY MAC25',PLMXA3035:'BOOM ASSEMBLY FULL POWER',T177670:'ASSY POWERTRAIN MAC25',T191850:'ASSY PNEUMATIC MAC25',T177672:'ASSY HYDRAULIC MAC25',T177673:'ASSY ELECTRICAL MAC25',T167887:'ASSY OPTIONS MAC25',PLMXA9001:'SERVICE KITS MAC25'};
 const expandedCatalogIds=new Set();
 function renderCats(){
@@ -35,7 +35,7 @@ function renderCats(){
   if(hasChildren)html+='<div class="tree-children" data-tree-children="'+esc(path)+'" '+(expanded?'':'hidden')+'>'+relevant.map((child,i)=>render(child,level+1,path+'.'+i,false)).join('')+'</div>';
   return html;
  }
- container.innerHTML=tree?render(tree,0,'r',true):'<div class="tree-empty">No catalogs found</div>';
+ container.innerHTML=tree?render(tree,0,'r',true):'<div class="tree-empty">No catalogs found</div>';if(!container.querySelector('.tree-row'))container.innerHTML='<div class="tree-empty">No hierarchy rows generated. Check catalog data.</div>';
  container.querySelectorAll('.tree-toggle').forEach(btn=>btn.addEventListener('click',event=>{
   event.preventDefault();event.stopPropagation();
   const branch=Array.from(container.querySelectorAll('[data-tree-children]')).find(el=>el.dataset.treeChildren===btn.dataset.treePath);
