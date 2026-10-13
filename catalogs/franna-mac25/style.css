@@ -32,3 +32,6 @@ body.dark .tree-root{background:#202b39;border-color:var(--line);color:#d9e8fb}
 .tree-node .tree-label{font-weight:400}
 .tree-root .tree-label{font-weight:700}
 @media(max-width:800px){.tree-row{padding-top:4px;padding-bottom:4px;line-height:16px}.tree-children{border-left:1px solid #d8e2ef;margin-left:10px}body.dark .tree-children{border-left-color:#303641}}
+
+/* Descriptive labels for nested Franna MAC25 catalog tree */
+.tree-label{min-width:0;overflow-wrap:anywhere}.tree-row{align-items:flex-start}.tree-children[hidden]{display:none!important}.tree-spacer{display:inline-block;flex:0 0 13px;width:13px;text-align:center;color:#d58b00;font-size:11px;line-height:14px}@media(max-width:800px){.tree-row{padding-right:7px}.tree-label{font-size:12px;line-height:16px}}
