@@ -21,24 +21,28 @@ async function loadHierarchy(){
   return {root:"33340.1",parent:{}};
  }
 }
+async function loadOptionalJson(path,fallback){
+ try{return await getJson(path)}
+ catch(error){console.error("AC200 optional data failed:",path,error);return fallback}
+}
 Promise.all([
  getJson("data/catalogs.json"),
- getJson("data/parts.json"),
- getJson("data/hotspots.json"),
- getJson("data/image-meta.json"),
+ loadOptionalJson("data/parts.json",[]),
+ loadOptionalJson("data/hotspots.json",[]),
+ loadOptionalJson("data/image-meta.json",[]),
  loadHierarchy()
 ]).then(([c,p,h,m,tree])=>{
- catalogs=c.items||c; parts=p; hotspots=h; imageMeta=m; catalogHierarchy=tree;
+ catalogs=c.items||c; parts=Array.isArray(p)?p:(p.items||[]); hotspots=Array.isArray(h)?h:(h.items||[]); imageMeta=Array.isArray(m)?m:(m.items||[]); catalogHierarchy=tree;
  imageMeta.forEach(x=>metaByName.set(x.name,x));
  renderCatalogs(catalogs);
  const root=catalogs.find(x=>String(x.id)==="33340.1")||catalogs.find(x=>String(x.title||"").toUpperCase().includes("AC 200-1"));
  if(root)selectCatalog(root.id);
  else throw new Error("AC200 root catalog 33340.1 is missing from data/catalogs.json");
 }).catch(error=>{
- console.error("AC200 PartBook initialization failed:",error);
+ console.error("AC200 required catalog initialization failed:",error);
  const crumb=$("crumb"),wrap=$("canvasWrap");
- if(crumb)crumb.textContent="Catalog data could not be loaded";
- if(wrap)wrap.innerHTML='<div class="diagram-message">Catalog data failed to load. Please refresh the page. If the problem continues, check data/catalogs.json, data/parts.json, data/hotspots.json and data/image-meta.json.</div>';
+ if(crumb)crumb.textContent="Catalog index failed to load";
+ if(wrap)wrap.innerHTML='<div class="diagram-message">The AC200 catalog index could not be loaded. Check the browser connection and open the catalog again. Technical detail: '+esc(error.message||error)+'</div>';
 });
 function renderCatalogs(list){
 const all=catalogs||[],byId=new Map(all.map(c=>[String(c.id),c])),children=new Map(),parent={...(catalogHierarchy?.parent||{})};
