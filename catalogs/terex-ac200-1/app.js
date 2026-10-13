@@ -113,9 +113,20 @@ function renderDiagram(){
  const image=$("diagram");
  wrap.setAttribute("aria-busy","true");
  image.alt="Diagram for "+current.title;
+ delete image.dataset.rawFallback;
  image.onload=()=>{if(request!==diagramRequest||current?.id!==selectedId||current?.image!==selectedImage)return;wrap.setAttribute("aria-busy","false");zoom=1;fitDiagram();renderHotspots();};
- image.onerror=()=>{if(request!==diagramRequest||current?.id!==selectedId||current?.image!==selectedImage)return;wrap.setAttribute("aria-busy","false");wrap.innerHTML='<div class="diagram-message">Diagram could not be loaded. Please check the connection or report the catalog ID: '+esc(selectedId)+'.</div>';};
- image.src="images/"+encodeURIComponent(src);
+ image.onerror=()=>{
+  if(request!==diagramRequest||current?.id!==selectedId||current?.image!==selectedImage)return;
+  // Retry the verified repository image directly if the GitHub Pages asset fails.
+  if(!image.dataset.rawFallback){
+   image.dataset.rawFallback="1";
+   image.src="https://raw.githubusercontent.com/satriosusanto/Terex-Partbook/main/catalogs/terex-ac200-1/images/"+encodeURIComponent(selectedImage);
+   return;
+  }
+  wrap.setAttribute("aria-busy","false");
+  wrap.innerHTML='<div class="diagram-message">Diagram could not be loaded from GitHub Pages or the repository image source. Catalog ID: '+esc(selectedId)+' · File: '+esc(selectedImage)+'. Please check the connection.</div>';
+ };
+ image.src=new URL("images/"+encodeURIComponent(src),document.baseURI).href;
 }
 function renderHotspots(){
  const layer=$("hotspots"); layer.innerHTML="";
