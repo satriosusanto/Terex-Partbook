@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TEREX AC200-1 Electronic PartBook</title>
-<link rel="stylesheet" href="style.css?v=android-pan-zoom-4">
+<link rel="stylesheet" href="style.css?v=ac200-filter-loader-fix-1">
 <link rel="stylesheet" href="../catalog-ui.css?v=mobile-layout-4"></head>
 <body class="catalog-ui">
 <header>
@@ -15,8 +15,8 @@
 </header>
 <main>
   <aside id="sidebar" class="catalog-sidebar">
-    <div class="sidehead"><b>Catalog</b><span id="catalogCount"></span></div>
-    <input id="catalogFilter" class="miniSearch" placeholder="Filter catalog...">
+    <div class="sidehead"><b>Catalog</b><span id="catalogCount"></span><button id="filterToggle" class="filterToggle" type="button" aria-expanded="false" aria-controls="catalogFilter">Filter</button></div>
+    <input id="catalogFilter" class="miniSearch" placeholder="Filter catalog..." hidden>
     <div id="catalogs"></div>
   </aside>
   <section class="workspace">
@@ -38,5 +38,5 @@
   </section>
 </main>
 <div id="modal" class="modal hidden"><div class="modalBox"><button class="close" id="close">×</button><h2 id="mTitle"></h2><div id="mBody"></div></div></div>
-<script src="app.js?v=touch-pan-zoom-2"></script>
+<script src="app.js?v=ac200-filter-loader-fix-1"></script>
 <script src="../catalog-ui.js?v=catalog-mobile-pan-1"></script></body></html>
