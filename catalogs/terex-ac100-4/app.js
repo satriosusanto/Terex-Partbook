@@ -63,10 +63,59 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
   }
  }
 
+ const sourceParentsByChild=new Map(),sourceMetaByChild=new Map();
+ for(const sourceCatalog of all){
+  const sourceParent=String(sourceCatalog.variant);
+  for(const part of sourceCatalog.parts||[]){
+   const child=resolveKey(part.partNo);
+   if(!child||child===sourceParent||!byId.has(child))continue;
+   if(!sourceParentsByChild.has(child))sourceParentsByChild.set(child,new Map());
+   const options=sourceParentsByChild.get(child);
+   const version=String(part.version??"").trim();
+   const metadata={description:String(part.description??"").trim(),version,position:String(part.position??"").trim()};
+   if(!options.has(sourceParent)||(!options.get(sourceParent).description&&metadata.description))options.set(sourceParent,metadata);
+   if(!sourceMetaByChild.has(child))sourceMetaByChild.set(child,[]);
+   sourceMetaByChild.get(child).push({parent:sourceParent,...metadata});
+  }
+ }
+ for(const [child,options] of sourceParentsByChild){
+  const curated=curatedParentByChild.get(child);
+  if(curated&&byId.has(curated)){parentById.set(child,curated);continue;}
+  const currentParent=parentById.get(child);
+  if(currentParent&&options.has(currentParent))continue;
+  const candidates=[...options.keys()].filter(id=>id!==child);
+  if(candidates.length)parentById.set(child,candidates[0]);
+ }
+ // Remove malformed cycles after repairing links from actual catalog part rows.
+ for(const start of ids){
+  const path=[],seenAt=new Map();let node=start;
+  while(node&&parentById.has(node)){
+   if(seenAt.has(node)){
+    const cycle=path.slice(seenAt.get(node));
+    const victim=cycle.find(id=>!curatedParentByChild.has(id)&&id!==curatedRoot)||cycle.find(id=>id!==curatedRoot)||cycle[0];
+    if(victim)parentById.delete(victim);
+    break;
+   }
+   seenAt.set(node,path.length);path.push(node);node=parentById.get(node);
+  }
+ }
  const children=new Map(ids.map(id=>[id,[]]));
  for(const [child,parent] of parentById){
-  if(children.has(parent)&&children.has(child)&&!children.get(parent).includes(child))children.get(parent).push(child);
+  if(children.has(parent)&&children.has(child)&&parent!==child&&!children.get(parent).includes(child))children.get(parent).push(child);
  }
+ const treeLabel=(id,c)=>{
+  const parentId=parentById.get(id);
+  let row=null;
+  if(parentId)row=(byId.get(parentId)?.parts||[]).find(p=>resolveKey(p.partNo)===id&&String(p.description||"").trim());
+  if(!row)row=(byId.get("0")?.parts||[]).find(p=>resolveKey(p.partNo)===id&&String(p.description||"").trim());
+  if(!row)for(const sourceCatalog of all){
+   row=(sourceCatalog.parts||[]).find(p=>resolveKey(p.partNo)===id&&String(sourceCatalog.variant)!==id&&String(p.description||"").trim());
+   if(row)break;
+  }
+  const description=String(row?.description||c.title||id).trim();
+  const version=String(row?.version||"").trim();
+  return `${description} (${id}${version&&version!=="_"?" "+version:""})`;
+ };
  for(const [parentRaw,childRaws] of Object.entries(curatedBranches)){
   const parent=resolveKey(parentRaw);
   if(!parent||!children.has(parent))continue;
@@ -100,7 +149,7 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
   markReachable(id);
  }
 
- const matches=c=>!q||[c.variant,c.title,...(c.parts||[]).map(p=>[p.partNo,p.description,p.position].join(" "))].join(" ").toLowerCase().includes(q);
+ const matches=c=>!q||[c.variant,c.title,treeLabel(c.variant,c),...(c.parts||[]).map(p=>[p.partNo,p.description,p.position].join(" "))].join(" ").toLowerCase().includes(q);
  const memo=new Map();
  function subtreeMatch(id,path=new Set()){
   if(memo.has(id))return memo.get(id);
@@ -114,7 +163,7 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
   const c=byId.get(id);if(!c||path.has(id)||hiddenRootIds.has(id)||(q&&!subtreeMatch(id)))return "";
   const next=new Set(path);next.add(id);
   const nested=(children.get(id)||[]).filter(ch=>!hiddenRootIds.has(ch)).map(ch=>draw(ch,next)).join("");
-  return `<div class="cat-tree-node"><button class="cat ${c.variant===cur?"active":""}" data-v="${esc(c.variant)}">${esc(c.title)}<small>${esc(c.variant)} · ${c.partsCount} parts · ${(c.images||[]).length} diagrams</small></button>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`;
+  return `<div class="cat-tree-node"><button class="cat ${c.variant===cur?"active":""}" data-v="${esc(c.variant)}">${esc(treeLabel(c.variant,c))}<small>${esc(c.variant)} · ${c.partsCount} parts · ${(c.images||[]).length} diagrams</small></button>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`;
  }
  $("catalogs").innerHTML=roots.map(id=>draw(id)).join("")||'<div class="empty">No matching catalogs.</div>';
 }
