@@ -24,6 +24,15 @@ body.dark{background:#12171c;color:#e8edf1}body.dark aside,body.dark .crumb,body
    the entire AC200-1 catalog tree inaccessible on phones. */
   body.catalog-ui > main > #sidebar {
     display: flex;
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    z-index: auto;
+    transform: none;
+    transition: none;
+    box-shadow: none;
     flex: none;
     width: 100%;
     height: 150px;
