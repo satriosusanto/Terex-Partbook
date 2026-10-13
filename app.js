@@ -99,7 +99,7 @@ function setTreeExpanded(expanded){
  catalogGroups.forEach(g=>{
   S.openGroups[expanded?'add':'delete'](g.name);
   S.cats.filter(c=>catalogGroup(c,rootId)===g.name&&!(rootId&&c.id===rootId+g.suffix)).forEach(c=>{
-   const m=String(c.id).match(/^(\\d{2}[FTP])-(\\d{4})-/);
+   const m=String(c.id).match(/^(\d{2}[FTP])-(\d{4})-/);
    const family=m?m[1]:'Other catalogs',subgroup=m?m[2]:'';
    S.openGroups[expanded?'add':'delete'](`${g.name}|family|${family}`);
    S.openGroups[expanded?'add':'delete'](`${g.name}|sub|${family}|${subgroup}`);
