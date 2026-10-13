@@ -14,15 +14,19 @@ Promise.all([
  if(root) selectCatalog(root.id);
 });
 function renderCatalogs(list){
- const q=$("catalogFilter").value.toLowerCase();
- const el=$("catalogs"); el.innerHTML="";
- let shown=0;
- list.filter(x=>(x.id+" "+x.title).toLowerCase().includes(q)).forEach(c=>{
-   shown++; const d=document.createElement("div"); d.className="cat"+(current?.id===c.id?" active":"");
-   d.innerHTML=`<div>${esc(c.title)}</div><small>${esc(c.id)} · ${c.partCount} parts${c.hasDiagram?"":" · no diagram"}</small>`;
-   d.onclick=()=>selectCatalog(c.id); el.appendChild(d);
- });
- $("catalogCount").textContent=shown+" / "+list.length;
+const all=catalogs||[],byId=new Map(all.map(c=>[String(c.id),c])),partsByCatalog=new Map(),children=new Map(),hasParent=new Set();
+for(const p of(parts||[])){const key=String(p.catalog);if(!partsByCatalog.has(key))partsByCatalog.set(key,[]);partsByCatalog.get(key).push(p)}
+for(const c of all){for(const p of(partsByCatalog.get(String(c.id))||[])){const id=String(p.partNumber??"").trim();if(id&&id!==String(c.id)&&byId.has(id)){if(!children.has(String(c.id)))children.set(String(c.id),[]);const a=children.get(String(c.id));if(!a.includes(id))a.push(id);hasParent.add(id)}}}
+const q=$("catalogFilter").value.toLowerCase().trim();
+const matches=c=>!q||(String(c.id)+" "+String(c.title)).toLowerCase().includes(q);
+const memo=new Map();
+function subtreeMatch(id,path=new Set()){if(memo.has(id))return memo.get(id);if(path.has(id))return false;const c=byId.get(id);if(!c)return false;const next=new Set(path);next.add(id);const yes=matches(c)||(children.get(id)||[]).some(ch=>subtreeMatch(ch,next));memo.set(id,yes);return yes}
+const roots=byId.has("0")?(children.get("0")||[]):all.filter(c=>!hasParent.has(String(c.id))).map(c=>String(c.id)).filter(id=>id!=="0");
+let shown=0;
+function draw(id,path=new Set()){const c=byId.get(id);if(!c||path.has(id)||id==="0"||(q&&!subtreeMatch(id)))return "";const next=new Set(path);next.add(id);if(matches(c))shown++;const nested=(children.get(id)||[]).map(ch=>draw(ch,next)).join("");return `<div class="cat-tree-node"><div class="cat ${current?.id===c.id?"active":""}" data-v="${esc(c.id)}"><div>${esc(c.title)}</div><small>${esc(c.id)} · ${c.partCount} parts${c.hasDiagram?"":" · no diagram"}</small></div>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`}
+const el=$("catalogs");el.innerHTML=roots.map(id=>draw(id)).join("")||'<div class="diagram-message">No matching catalogs.</div>';
+el.querySelectorAll("[data-v]").forEach(node=>node.onclick=()=>selectCatalog(node.dataset.v));
+$("catalogCount").textContent=(q?shown:all.length)+" / "+all.length;
 }
 function selectCatalog(id){
  current=catalogs.find(x=>x.id===id); if(!current)return;
