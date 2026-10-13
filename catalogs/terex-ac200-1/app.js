@@ -1,18 +1,44 @@
 const $=id=>document.getElementById(id);
 let catalogs=[],parts=[],hotspots=[],imageMeta=[],catalogHierarchy=null,current=null,zoom=1,dark=false,diagramRequest=0;
 const imgByName=new Map(), metaByName=new Map();
+async function getJson(path){
+ const response=await fetch(path,{cache:"no-cache"});
+ if(!response.ok)throw new Error(path+" returned HTTP "+response.status);
+ return response.json();
+}
+async function loadHierarchy(){
+ try{
+  const packed=await getJson("data/catalog-hierarchy.json");
+  if(packed.encoding!=="gzip-base64")return packed;
+  if(!("DecompressionStream" in window))throw new Error("GZIP decompression is unavailable in this browser");
+  const bytes=Uint8Array.from(atob(packed.data),c=>c.charCodeAt(0));
+  const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+  return JSON.parse(await new Response(stream).text());
+ }catch(error){
+  // The catalog and diagram viewer must still start if the optional hierarchy index
+  // cannot be decoded. Verified OEM parent links below will remain available.
+  console.warn("AC200 hierarchy index unavailable; using verified hierarchy anchors.",error);
+  return {root:"33340.1",parent:{}};
+ }
+}
 Promise.all([
- fetch("data/catalogs.json").then(r=>r.json()),
- fetch("data/parts.json").then(r=>r.json()),
- fetch("data/hotspots.json").then(r=>r.json()),
- fetch("data/image-meta.json").then(r=>r.json()),
- fetch("data/catalog-hierarchy.json").then(async r=>{const packed=await r.json();if(packed.encoding==="gzip-base64"&&"DecompressionStream"in window){const bytes=Uint8Array.from(atob(packed.data),c=>c.charCodeAt(0));const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));return JSON.parse(await new Response(stream).text())}return packed})
+ getJson("data/catalogs.json"),
+ getJson("data/parts.json"),
+ getJson("data/hotspots.json"),
+ getJson("data/image-meta.json"),
+ loadHierarchy()
 ]).then(([c,p,h,m,tree])=>{
  catalogs=c.items||c; parts=p; hotspots=h; imageMeta=m; catalogHierarchy=tree;
  imageMeta.forEach(x=>metaByName.set(x.name,x));
  renderCatalogs(catalogs);
- const root=catalogs.find(x=>x.id==="33340.1")||catalogs.find(x=>x.title.toUpperCase().includes("AC 200-1"));
- if(root) selectCatalog(root.id);
+ const root=catalogs.find(x=>String(x.id)==="33340.1")||catalogs.find(x=>String(x.title||"").toUpperCase().includes("AC 200-1"));
+ if(root)selectCatalog(root.id);
+ else throw new Error("AC200 root catalog 33340.1 is missing from data/catalogs.json");
+}).catch(error=>{
+ console.error("AC200 PartBook initialization failed:",error);
+ const crumb=$("crumb"),wrap=$("canvasWrap");
+ if(crumb)crumb.textContent="Catalog data could not be loaded";
+ if(wrap)wrap.innerHTML='<div class="diagram-message">Catalog data failed to load. Please refresh the page. If the problem continues, check data/catalogs.json, data/parts.json, data/hotspots.json and data/image-meta.json.</div>';
 });
 function renderCatalogs(list){
 const all=catalogs||[],byId=new Map(all.map(c=>[String(c.id),c])),children=new Map(),parent={...(catalogHierarchy?.parent||{})};
@@ -184,7 +210,15 @@ function installTouchZoom(){
 installTouchZoom();
 $("close").onclick=()=>$("modal").classList.add("hidden");
 $("modal").onclick=e=>{if(e.target.id==="modal")$("modal").classList.add("hidden")};
-$("catalogFilter").oninput=()=>renderCatalogs(catalogs);
+const filterToggle=$("filterToggle"),catalogFilter=$("catalogFilter");
+if(filterToggle&&catalogFilter)filterToggle.onclick=()=>{
+ const opening=catalogFilter.hidden;
+ catalogFilter.hidden=!opening;
+ filterToggle.setAttribute("aria-expanded",String(opening));
+ if(opening)catalogFilter.focus();
+ else{catalogFilter.value="";renderCatalogs(catalogs)}
+};
+catalogFilter.oninput=()=>renderCatalogs(catalogs);
 $("search").oninput=e=>{
  const q=e.target.value.trim().toLowerCase();
  if(!q){renderParts(parts.filter(p=>p.catalog===current?.id));return}
