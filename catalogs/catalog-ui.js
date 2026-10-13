@@ -458,7 +458,7 @@
     };
     const curatedCatalogTree = curatedCatalogTrees[modelCode] ?? null;
     const curatedRootId = curatedCatalogTree ? resolveCatalogId(curatedCatalogTree.root) : null;
-    const curatedParentPriority = new Set();
+    const curatedParentPriority = new Map();
     if (curatedCatalogTree) {
       const curatedParents = {};
       const controlledParentIds = new Set(
@@ -473,7 +473,7 @@
           const childId = resolveCatalogId(childRaw);
           if (childId && childId !== parentId) {
             curatedParents[childId] = parentId;
-            curatedParentPriority.add(childId);
+            curatedParentPriority.set(childId, parentId);
           }
         });
       }
@@ -493,7 +493,6 @@
       const childId = resolveCatalogId(childRaw);
       const parentId = resolveCatalogId(parentRaw);
       if (!childId || !parentId || childId === parentId || parentById.has(childId)) continue;
-      childIds.get(parentId)?.push(childId);
       parentById.set(childId, parentId);
     }
     const diagramIds = new Set();
@@ -522,6 +521,8 @@
       }
     }
     const partCatalogKeys = ["partNumber", "partNo", "material", "part_number", "textNumber", "variant", "catalogId"];
+    const sourceParentsByChild = new Map();
+    const sourceMetaByChild = new Map();
     relations.forEach(([parentRaw, part]) => {
       const parentId = resolveCatalogId(parentRaw) ?? (childIds.has(parentRaw) ? parentRaw : null);
       if (!parentId) return;
@@ -529,14 +530,63 @@
         .map(key => part[key])
         .find(value => value != null && resolveCatalogId(value));
       const childKey = resolveCatalogId(childRaw);
-      if (!childKey || childKey === parentId || !childIds.has(parentId) || parentById.has(childKey)) return;
-      childIds.get(parentId).push(childKey);
-      parentById.set(childKey, parentId);
-      positionById.set(childKey, String(part.position ?? part.pos ?? ""));
-      if (part.description) descriptionById.set(childKey, String(part.description));
-      const version = part.version ?? part.partVersion ?? part.catalogVersion;
-      if (version && version !== "_") versionById.set(childKey, String(version));
+      if (!childKey || childKey === parentId || !childIds.has(parentId)) return;
+
+      // Source catalog rows carry the actual description and version for each
+      // subcatalog. Collect them even when the hierarchy index already has an edge.
+      if (!sourceParentsByChild.has(childKey)) sourceParentsByChild.set(childKey, new Map());
+      const parentOptions = sourceParentsByChild.get(childKey);
+      const version = part.version ?? part.partVersion ?? part.catalogVersion ?? "";
+      const metadata = {
+        description: String(part.description ?? "").trim(),
+        version: String(version ?? "").trim(),
+        position: String(part.position ?? part.pos ?? "").trim()
+      };
+      if (!parentOptions.has(parentId) ||
+          (!parentOptions.get(parentId).description && metadata.description)) {
+        parentOptions.set(parentId, metadata);
+      }
+      if (!sourceMetaByChild.has(childKey)) sourceMetaByChild.set(childKey, []);
+      sourceMetaByChild.get(childKey).push({ parentId, ...metadata });
     });
+
+    // Preserve an OEM parent only when that parent actually lists the child catalog.
+    // Repair stale or incomplete links from the source part data, without overriding
+    // the explicitly verified main assembly relationships above.
+    for (const [childId, parentOptions] of sourceParentsByChild) {
+      const curatedParent = curatedParentPriority.get(childId);
+      if (curatedParent && childIds.has(curatedParent)) {
+        parentById.set(childId, curatedParent);
+        continue;
+      }
+      const currentParent = parentById.get(childId);
+      if (currentParent && parentOptions.has(currentParent)) continue;
+      const candidates = [...parentOptions.keys()].filter(id => id !== childId);
+      if (candidates.length) parentById.set(childId, candidates[0]);
+    }
+
+    // Always resolve labels from the matching parent row. Previously these assignments
+    // were skipped when parentById already contained a child, leaving misleading titles
+    // such as "CENTRAL LUBE ARR." or raw part numbers in the visible tree.
+    for (const [childId, options] of sourceMetaByChild) {
+      const currentParent = parentById.get(childId);
+      const selected = options.find(option => option.parentId === currentParent && option.description)
+        ?? options.find(option => option.description)
+        ?? options.find(option => option.parentId === currentParent)
+        ?? options[0];
+      if (!selected) continue;
+      if (selected.description) descriptionById.set(childId, selected.description);
+      if (selected.version && selected.version !== "_") versionById.set(childId, selected.version);
+      if (selected.position) positionById.set(childId, selected.position);
+    }
+
+    // Recreate the child graph from the finalized single-parent map.
+    childIds.forEach(children => children.splice(0, children.length));
+    for (const [childId, parentId] of parentById) {
+      if (childIds.has(parentId) && childIds.has(childId) && parentId !== childId) {
+        childIds.get(parentId).push(childId);
+      }
+    }
     // Normalize the graph and break bad parent cycles. The old source renderer could
     // silently omit catalogs when a cycle or disconnected branch had no root.
     const allCatalogIds = catalogs.map(getId);
