@@ -25,14 +25,36 @@ function renderCats(){
 }
 function catRow(c,level=1,label=''){const title=label||c.title||c.id;return `<div class="tree-row tree-node ${active===c.id?'active':''}" data-catalog="${esc(c.id)}" style="--tree-level:${level}"><span class="tree-spacer"></span><span class="tree-label">${esc(title)}</span></div>`}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-async function openCat(id){const token=++loadToken;active=id;if(location.hash!=='#'+encodeURIComponent(id))history.replaceState(null,'','#'+encodeURIComponent(id));renderCats();let im=byImg[id];$('#crumb').textContent=(id+' — '+(catalogs.find(c=>c.id===id)?.title||''));let cv=$('#canvas'),ctx=cv.getContext('2d');$('#empty').style.display='none';$('#hotspots').innerHTML='';if(!im){cv.width=800;cv.height=500;ctx.clearRect(0,0,800,500);ctx.fillStyle='#888';ctx.fillText('No diagram for this assembly',30,40);renderResults(byCat[id]||[]);return}try{let resp=await fetch('images-web/'+encodeURIComponent(im.webImage));if(token!==loadToken)return;if(!resp.ok)throw Error(`Diagram ${im.webImage} ${resp.status}`);let image=new Image();image.src=URL.createObjectURL(await resp.blob());try{await image.decode();if(token!==loadToken)return;const sourceWidth=image.naturalWidth||Number(im.width)||800;const sourceHeight=image.naturalHeight||Number(im.height)||500;const maxCanvasDimension=6000;const renderScale=Math.min(1,maxCanvasDimension/Math.max(sourceWidth,sourceHeight));cv.width=Math.max(1,Math.round(sourceWidth*renderScale));cv.height=Math.max(1,Math.round(sourceHeight*renderScale));ctx.drawImage(image,0,0,cv.width,cv.height);$('#hotspots').style.width=cv.width+'px';$('#hotspots').style.height=cv.height+'px';scale=1;fit();drawHotspots(im.image,Number(im.width)||sourceWidth,Number(im.height)||sourceHeight)}finally{URL.revokeObjectURL(image.src)}}catch(e){if(token!==loadToken)return;console.error(e);cv.width=800;cv.height=500;ctx.clearRect(0,0,800,500);ctx.fillStyle='#f66';ctx.fillText('Diagram could not be loaded: '+e,20,30)}renderResults(byCat[id]||[])}
-function drawHotspots(img,w,h){let hs=hotspots.filter(x=>x.image===img);let layer=$('#hotspots');hs.forEach(x=>{let d=document.createElement('div');d.className='hs';d.dataset.partNumber=x.part_number;d.dataset.position=x.position;d.setAttribute('role','button');d.setAttribute('aria-label',`Part ${x.part_number}, position ${x.position}`);d.tabIndex=0;d.style.left=(x.left/w*100)+'%';d.style.top=(x.top/h*100)+'%';d.style.width=((x.right-x.left)/w*100)+'%';d.style.height=((x.bottom-x.top)/h*100)+'%';d.title=`Pos ${x.position} ${x.part_number}`;d.onclick=()=>{let p=x.part_id?parts.find(y=>y.id===x.part_id):null;if(p){alert(`${p.part_number||'Part number unavailable'}\\n${p.description||''}\\nQty: ${p.qty??''}\\nPosition: ${p.position??x.position}`)}else{$('#crumb').textContent=`Position ${x.position}: no linked part record in extracted data`}};layer.appendChild(d)})}
-function partDescription(p){
- const sourceDescription=String(p.description||'').trim();
- if(sourceDescription)return sourceDescription;
- const catalogTitle=byCatalogTitle.get(String(p.part_number||''));
- if(catalogTitle&&catalogTitle!==String(p.part_number||''))return catalogTitle;
- return '';
+async function openCat(id){const token=++loadToken;active=id;if(location.hash!=='#'+encodeURIComponent(id))history.replaceState(null,'','#'+encodeURIComponent(id));renderCats();let im=byImg[id];$('#crumb').textContent=(id+' — '+(catalogs.find(c=>c.id===id)?.title||''));let cv=$('#canvas'),ctx=cv.getContext('2d');$('#empty').style.display='none';$('#hotspots').innerHTML='';if(!im){cv.width=800;cv.height=500;ctx.clearRect(0,0,800,500);ctx.fillStyle='#888';ctx.fillText('No diagram for this assembly',30,40);renderResults(byCat[id]||[]);return}try{let resp=await fetch('images-web/'+encodeURIComponent(im.webImage));if(token!==loadToken)return;if(!resp.ok)throw Error(`Diagram ${im.webImage} ${resp.status}`);let image=new Image();image.src=URL.createObjectURL(await resp.blob());try{await image.decode();if(token!==loadToken)return;const sourceWidth=image.naturalWidth||Number(im.width)||800;const sourceHeight=image.naturalHeight||Number(im.height)||500;const maxCanvasDimension=6000;const renderScale=Math.min(1,maxCanvasDimension/Math.max(sourceWidth,sourceHeight));cv.width=Math.max(1,Math.round(sourceWidth*renderScale));cv.height=Math.max(1,Math.round(sourceHeight*renderScale));ctx.drawImage(image,0,0,cv.width,cv.height);$('#hotspots').style.width=cv.width+'px';$('#hotspots').style.height=cv.height+'px';scale=1;fit();drawHotspots(id,im.image,Number(im.width)||sourceWidth,Number(im.height)||sourceHeight)}finally{URL.revokeObjectURL(image.src)}}catch(e){if(token!==loadToken)return;console.error(e);cv.width=800;cv.height=500;ctx.clearRect(0,0,800,500);ctx.fillStyle='#f66';ctx.fillText('Diagram could not be loaded: '+e,20,30)}renderResults(byCat[id]||[])}
+function drawHotspots(catalogId,img,w,h){
+ const hs=hotspots.filter(x=>String(x.catalog)===String(catalogId)&&x.image===img);
+ const layer=$('#hotspots');
+ hs.forEach(x=>{
+  const d=document.createElement('div');d.className='hs';d.dataset.partNumber=x.part_number||'';d.dataset.position=x.position;
+  d.setAttribute('role','button');d.setAttribute('aria-label',`Position ${x.position}, part ${x.part_number||'not linked'}`);d.tabIndex=0;
+  d.style.left=(x.left/w*100)+'%';d.style.top=(x.top/h*100)+'%';d.style.width=((x.right-x.left)/w*100)+'%';d.style.height=((x.bottom-x.top)/h*100)+'%';
+  d.title=`Pos ${x.position}${x.part_number?' · '+x.part_number:''}`;
+  const activate=()=>{
+   const p=x.part_id?parts.find(y=>String(y.id)===String(x.part_id)&&String(y.catalog)===String(x.catalog)):null;
+   if(p){
+    const description=partDescription(p)||String(x.description||'').trim()||'Description not available in source data';
+    alert('Position: '+(x.position||'—')+'\\nPart Number: '+(p.part_number||x.part_number||'—')+'\\nDescription: '+description+'\\nQty: '+(p.qty??'—'));
+    return;
+   }
+   if(String(x.part_number||'').trim()){
+    const basePosition=String(x.position||'').split('.')[0];
+    const matches=parts.filter(y=>String(y.catalog)===String(x.catalog)&&String(y.position)===basePosition&&String(y.part_number)===String(x.part_number));
+    const quantities=[...new Set(matches.map(y=>String(y.qty??'').trim()).filter(Boolean))];
+    const qtyLabel=quantities.length===1&&matches.length===1?quantities[0]:'Not uniquely linked to one BOM row';
+    alert('Position: '+(x.position||'—')+'\\nPart Number: '+x.part_number+'\\nDescription: '+(String(x.description||'').trim()||'Description not available in source data')+'\\nQty: '+qtyLabel);
+    return;
+   }
+   alert('Position: '+(x.position||'—')+'\\nNo matching part record was found for this callout in the extracted MAC25 BOM data.');
+  };
+  d.onclick=activate;
+  d.onkeydown=event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}};
+  layer.appendChild(d);
+ });
 }
 function renderResults(list){
  $('#count').textContent=list.length+' parts';
