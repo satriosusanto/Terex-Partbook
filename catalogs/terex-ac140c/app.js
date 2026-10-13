@@ -28,7 +28,7 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
  }
 
  const curatedRoot=resolveKey("76625.1");
- const curatedBranches={"40651812":["40651912","40652012","40741312","40728912","70728412","40642812","40652112"],"40654112":["40632612","40636812","40631912","40654212","40637012","40637112","40639612","40633512","40633212","28075812"],"40716012":["40519812","40611412","40622912","40715912","40559812","40695312","40530612","40546912","40546812","40535712","31429712"],"76625.1":["40716012","40654112","40651812"]};
+ const curatedBranches={"40651812":["40651912","40652012","40741312","40728912","40728412","40642812","40652112"],"40654112":["40632612","40636812","40631912","40654212","40637012","40637112","40639612","40633512","40633212","28075812"],"40716012":["40519812","40611412","40622912","40715912","40559812","40695312","40530612","40546912","40546812","40535712","31429712"],"76625.1":["40716012","40654112","40651812"]};
  const curatedParentByChild=new Map();
  const controlledParentIds=new Set();
  for(const [parentRaw,childRaws] of Object.entries(curatedBranches)){
@@ -114,7 +114,7 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
   }
   const description=String(row?.description||c.title||id).trim();
   const version=String(row?.version||"").trim();
-  return `${description} (${id}${version&&version!=="_"?" "+version:""})`;
+  return `${description} (${id}${version&&version!==""?" "+version:""})`;
  };
  for(const [parentRaw,childRaws] of Object.entries(curatedBranches)){
   const parent=resolveKey(parentRaw);
