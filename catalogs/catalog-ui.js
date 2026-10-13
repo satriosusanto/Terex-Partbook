@@ -429,11 +429,14 @@
     const curatedCatalogTrees = {
       "AC100-4": {
         root: "10213.1",
+        labels: {
+          "40835512": { title: "Mounting Cabin", version: "B" }
+        },
         branches: {
           "10213.1": ["40788912", "40789112", "40777812"],
           "40788912": ["40832912", "40786512", "40680312", "40790612", "40680412", "40835512", "40783312", "40783512", "40833312", "19527612"],
           "40789112": ["40790412", "40662012", "40681412", "40840312", "40680812", "40789912", "40779112", "40783612", "40834312", "28079912"],
-          "40777812": ["40789812", "40778012", "40746112", "40805312", "40805512", "48392412", "40671012"]
+          "40777812": ["40789812", "40778012", "40741612", "40805312", "40805512", "48392412", "40671012"]
         }
       },
       "AC140C": {
@@ -442,7 +445,7 @@
           "76625.1": ["40716012", "40654112", "40651812"],
           "40716012": ["40519812", "40611412", "40622912", "40715912", "40559812", "40695312", "40530612", "40546912", "40546812", "40535712", "31429712"],
           "40654112": ["40632612", "40636812", "40631912", "40654212", "40637012", "40637112", "40639612", "40633512", "40633212", "28075812"],
-          "40651812": ["40651912", "40652012", "40741312", "40728912", "70728412", "40642812", "40652112"]
+          "40651812": ["40651912", "40652012", "40741312", "40728912", "40728412", "40642812", "40652112"]
         }
       },
       "AC200-1": {
@@ -733,14 +736,16 @@
       if (modelCode === "AC200-1" && typeof getCatalogTitle === "function") {
         return getCatalogTitle(catalog);
       }
-      const description = modelCode === "AC250-1" && id === "85198.1"
-        ? "AC 250-1"
-        : descriptionById.get(id) || catalog.title || id;
+      const labelOverride = curatedCatalogTree?.labels?.[id];
+      const description = labelOverride?.title
+        || (modelCode === "AC250-1" && id === "85198.1" ? "AC 250-1" : descriptionById.get(id) || catalog.title || id);
       const title = /^(under ?carriage|superstructure|attachment|chassis)$/i.test(description)
         ? description.toUpperCase()
         : description;
-      const version = versionById.get(id) ?? catalog.version;
-      const identity = [id, version && version !== "_" ? version : ""].filter(Boolean).join(" ");
+      const version = labelOverride?.version ?? versionById.get(id) ?? catalog.version;
+      // The catalog source uses "_" as an explicit unknown-version marker; retain it
+      // when a source or reference label provides it.
+      const identity = [id, version != null && String(version) !== "" ? String(version) : ""].filter(Boolean).join(" ");
       return `${title} (${identity})`;
     }
 
