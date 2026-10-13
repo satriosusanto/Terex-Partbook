@@ -4,6 +4,8 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&
 const norm=s=>String(s??'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'');
 const debounce=(fn,ms)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}};
 const catalogGroups=[{name:'BOOM',suffix:'_F'},{name:'UPPERSTRUCTURE',suffix:'_T'},{name:'CARRIER',suffix:'_P'},{name:'OPTIONS',suffix:'_O'}];
+const catalogFamilyLabels={'01F':'JIB & BOOM COMPONENTS'};
+const catalogSubgroupLabels={'01F|0000':'JIB + PULLEY BLOCK','01F|0030':'ELECTRICAL EQUIPMENT','01F|0200':'JIB SECTIONS','01F|0220':'ROOSTER SHEAVE OPTION','01F|0300':'LUFFING CYLINDER','01F|0400':'TELESCOPIC CYLINDERS & ACCESSORIES','01F|0500':'CABLE WINDER & ROLLERS','01F|0800':'PULLEY BLOCK'};
 function catalogGroup(c,rootId){
  const variant=catalogGroups.find(g=>rootId&&c.id===rootId+g.suffix);
  if(variant)return variant.name;
@@ -72,14 +74,14 @@ function renderCats(){
    const subHtml=[...subs.entries()].sort((a,b)=>a[0].localeCompare(b[0],undefined,{numeric:true})).map(([subgroup,items])=>{
     const subKey=`${g.name}|sub|${family}|${subgroup}`;
     const subOpen=S.openGroups.has(subKey);
-    const heading=subgroup?subgroup:'Other';
     const descriptions=items.map(c=>String(c.title||'').replace(String(c.id),'').trim()).filter(Boolean);
     const counts=new Map();descriptions.forEach(name=>counts.set(name,(counts.get(name)||0)+1));
     const ranked=[...counts.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
     const labelNames=ranked.length===1?ranked[0][0]:ranked.slice(0,2).map(x=>x[0]).join(' · ')+(ranked.length>2?` · +${ranked.length-2} more`:'');
-    return `<section class="catTreeSub"><div class="catGroupHead catTreeSubHead"><span class="treeSubLabel"><b>${esc(heading)}</b>${labelNames?`<small class="treeSubDescription" title="${esc([...counts.keys()].join(' · '))}">${esc(labelNames)}</small>`:''}</span><span class="treeGroupCount">${items.length}</span><button class="treeToggle" data-tree-toggle="${esc(subKey)}" aria-label="${subOpen?'Collapse':'Expand'} ${esc(family)} ${esc(heading)}" aria-expanded="${subOpen}">${subOpen?'−':'+'}</button></div><div class="catGroupItems catTreeLeaves" ${subOpen?'':'hidden'}>${items.map(c=>{const name=String(c.title||"").replace(String(c.id),"").trim()||String(c.title||c.id);return `<button class="cat" data-id="${esc(c.id)}"><b>${esc(name)} (${esc(c.id)})</b></button>`}).join('')}</div></section>`;
+    const subgroupLabel=catalogSubgroupLabels[`${family}|${subgroup}`]||labelNames||'Other catalogs';
+    return `<section class="catTreeSub"><div class="catGroupHead catTreeSubHead"><span class="treeSubLabel" title="${esc([...counts.keys()].join(' · '))}"><b>${esc(subgroupLabel)}</b></span><span class="treeGroupCount">${items.length}</span><button class="treeToggle" data-tree-toggle="${esc(subKey)}" aria-label="${subOpen?'Collapse':'Expand'} ${esc(catalogFamilyLabels[family]||family)} ${esc(subgroupLabel)}" aria-expanded="${subOpen}">${subOpen?'−':'+'}</button></div><div class="catGroupItems catTreeLeaves" ${subOpen?'':'hidden'}>${items.map(c=>{const name=String(c.title||"").replace(String(c.id),"").trim()||String(c.title||c.id);return `<button class="cat" data-id="${esc(c.id)}"><b>${esc(name)} (${esc(c.id)})</b></button>`}).join('')}</div></section>`;
    }).join('');
-   return `<section class="catTreeFamily"><div class="catGroupHead catTreeFamilyHead"><span class="treeSubLabel">${esc(family)}</span><span class="treeGroupCount">${[...subs.values()].reduce((n,items)=>n+items.length,0)}</span><button class="treeToggle" data-tree-toggle="${esc(familyKey)}" aria-label="${familyOpen?'Collapse':'Expand'} ${esc(family)}" aria-expanded="${familyOpen}">${familyOpen?'−':'+'}</button></div><div class="catTreeFamilyItems" ${familyOpen?'':'hidden'}>${subHtml}</div></section>`;
+   return `<section class="catTreeFamily"><div class="catGroupHead catTreeFamilyHead"><span class="treeSubLabel">${esc(catalogFamilyLabels[family]||family)}</span><span class="treeGroupCount">${[...subs.values()].reduce((n,items)=>n+items.length,0)}</span><button class="treeToggle" data-tree-toggle="${esc(familyKey)}" aria-label="${familyOpen?'Collapse':'Expand'} ${esc(catalogFamilyLabels[family]||family)}" aria-expanded="${familyOpen}">${familyOpen?'−':'+'}</button></div><div class="catTreeFamilyItems" ${familyOpen?'':'hidden'}>${subHtml}</div></section>`;
   }).join('');
   return `<section class="catGroup"><div class="catGroupHead">${overviewButton}<span class="treeGroupCount">${children.length}</span><button class="treeToggle" data-group="${esc(g.name)}" aria-label="${expanded?'Collapse':'Expand'} ${esc(g.name)}" aria-expanded="${expanded}">${expanded?'−':'+'}</button></div><div class="catGroupItems catTreeGroups" ${expanded?'':'hidden'}>${familyHtml}</div></section>`;
  }).join('');
