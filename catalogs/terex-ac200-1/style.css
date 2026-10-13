@@ -112,3 +112,13 @@ body.dark{background:#12171c;color:#e8edf1}body.dark aside,body.dark .crumb,body
 .filterToggle{border:1px solid #cdd4db;background:#f7f9fb;color:#273746;border-radius:6px;padding:6px 9px;font-size:12px;font-weight:600;cursor:pointer}
 .filterToggle[aria-expanded="true"]{background:#e7f1f8;border-color:#8aa9bf}
 #catalogFilter[hidden]{display:none}
+
+/* Native AC200 hierarchy controls (also used if the shared tree cannot initialize). */
+#catalogs .ac200-native-row{display:flex;align-items:flex-start;gap:3px;min-width:0}
+#catalogs .ac200-native-toggle{flex:0 0 18px;width:18px;height:20px;margin-top:8px;padding:0;border:1px solid #9ba7b2;border-radius:4px;background:#fff;color:#26333f;font-size:14px;line-height:16px;text-align:center;cursor:pointer}
+#catalogs .ac200-native-toggle:hover{background:#edf2f5}
+#catalogs .ac200-native-toggle:focus-visible{outline:2px solid #2674c7;outline-offset:1px}
+#catalogs .ac200-native-spacer{flex:0 0 18px;width:18px}
+#catalogs .ac200-native-row>.cat{flex:1;min-width:0}
+#catalogs .ac200-native-children{min-width:0}
+body.dark #catalogs .ac200-native-toggle{background:#27333d;color:#e8edf1;border-color:#4a5863}
