@@ -2,12 +2,10 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
 const all=D.catalogs||[],byId=new Map(all.map(c=>[String(c.variant),c])),children=new Map(),hasParent=new Set();
 const addEdge=(parentId,childId)=>{parentId=String(parentId??"").trim();childId=String(childId??"").trim();if(!parentId||!childId||parentId===childId||parentId==="0"||childId==="0"||!byId.has(parentId)||!byId.has(childId))return false;if(!children.has(parentId))children.set(parentId,[]);const list=children.get(parentId);if(list.includes(childId))return false;list.push(childId);hasParent.add(childId);return true};
 let sourceEdges=0;
-for(const c of all)for(const p of(c.parts||[])){const id=String(p.partNo??"").trim();if(addEdge(c.variant,id))sourceEdges++}
-if(!sourceEdges){
- const tree=D.hierarchy||{};
- if(tree.children&&typeof tree.children==="object"){for(const [p,kids] of Object.entries(tree.children))for(const child of(Array.isArray(kids)?kids:[]))addEdge(p,child)}
- else for(const [child,parent] of Object.entries(tree.parent||{}))addEdge(parent,child);
-}
+const tree=D.hierarchy||{};
+if(tree.children&&typeof tree.children==="object"){for(const [p,kids] of Object.entries(tree.children))for(const child of(Array.isArray(kids)?kids:[]))if(addEdge(p,child))sourceEdges++}
+else for(const [child,parent] of Object.entries(tree.parent||{}))if(addEdge(parent,child))sourceEdges++;
+if(!sourceEdges)for(const c of all)for(const p of(c.parts||[])){const id=String(p.partNo??"").trim();if(addEdge(c.variant,id))sourceEdges++}
 const matches=c=>!q||[c.variant,c.title,...(c.parts||[]).map(p=>[p.partNo,p.description,p.position].join(" "))].join(" ").toLowerCase().includes(q);
 const memo=new Map();
 function subtreeMatch(id,path=new Set()){if(memo.has(id))return memo.get(id);if(path.has(id))return false;const c=byId.get(id);if(!c)return false;const next=new Set(path);next.add(id);const yes=matches(c)||(children.get(id)||[]).some(ch=>subtreeMatch(ch,next));memo.set(id,yes);return yes}
