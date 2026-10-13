@@ -78,7 +78,13 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
  }
 
  const rootId=curatedRoot||resolveKey(D.hierarchy?.root);
- const roots=[...new Set([...(rootId?[rootId]:[]),...ids.filter(id=>!parentById.has(id))])];
+ let roots=[...new Set([...(rootId?[rootId]:[]),...ids.filter(id=>!parentById.has(id))])];
+ const hiddenRootIds=new Set();
+ if(roots.includes("0")){
+  hiddenRootIds.add("0");
+  roots=roots.filter(id=>id!=="0");
+  roots=[...new Set([...(children.get("0")||[]),...roots])];
+ }
  // Some OEM indexes contain disconnected subtrees orphans and cycles. Add a root for every
  // still-unreachable catalog instead of silently omitting it from the source list.
  const reachable=new Set();
@@ -89,7 +95,7 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
  };
  roots.forEach(markReachable);
  for(const id of ids){
-  if(reachable.has(id))continue;
+  if(hiddenRootIds.has(id)||reachable.has(id))continue;
   roots.push(id);
   markReachable(id);
  }
@@ -105,9 +111,9 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
   memo.set(id,yes);return yes;
  }
  function draw(id,path=new Set()){
-  const c=byId.get(id);if(!c||path.has(id)||(q&&!subtreeMatch(id)))return "";
+  const c=byId.get(id);if(!c||path.has(id)||hiddenRootIds.has(id)||(q&&!subtreeMatch(id)))return "";
   const next=new Set(path);next.add(id);
-  const nested=(children.get(id)||[]).map(ch=>draw(ch,next)).join("");
+  const nested=(children.get(id)||[]).filter(ch=>!hiddenRootIds.has(ch)).map(ch=>draw(ch,next)).join("");
   return `<div class="cat-tree-node"><button class="cat ${c.variant===cur?"active":""}" data-v="${esc(c.variant)}">${esc(c.title)}<small>${esc(c.variant)} · ${c.partsCount} parts · ${(c.images||[]).length} diagrams</small></button>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`;
  }
  $("catalogs").innerHTML=roots.map(id=>draw(id)).join("")||'<div class="empty">No matching catalogs.</div>';
