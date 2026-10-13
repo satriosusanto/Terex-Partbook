@@ -16,13 +16,16 @@ Promise.all([
 });
 function renderCatalogs(list){
 const all=catalogs||[],byId=new Map(all.map(c=>[String(c.id),c])),children=new Map(),parent=catalogHierarchy?.parent||{};
-for(const [child,par] of Object.entries(parent)){if(!byId.has(child)||!byId.has(String(par)))continue;if(!children.has(String(par)))children.set(String(par),[]);children.get(String(par)).push(String(child))}
+const aliases=new Map();for(const c of all)for(const k of [c.id,c.variant,c.catalogId,c.catalog,c.key])if(k!==undefined&&k!==null&&String(k).trim())aliases.set(String(k).trim().toLowerCase(),String(c.id));
+const resolveKey=v=>{const raw=String(v??"").trim();return byId.has(raw)?raw:(aliases.get(raw.toLowerCase())||null)};
+for(const [childRaw,parRaw] of Object.entries(parent)){const child=resolveKey(childRaw),par=resolveKey(parRaw);if(!child||!par||child===par)continue;if(!children.has(par))children.set(par,[]);if(!children.get(par).includes(child))children.get(par).push(child)}
 const q=$("catalogFilter").value.toLowerCase().trim();
 const matches=c=>!q||(String(c.id)+" "+String(c.title)).toLowerCase().includes(q);
 const memo=new Map();
 function subtreeMatch(id,path=new Set()){if(memo.has(id))return memo.get(id);if(path.has(id))return false;const c=byId.get(id);if(!c)return false;const next=new Set(path);next.add(id);const yes=matches(c)||(children.get(id)||[]).some(ch=>subtreeMatch(ch,next));memo.set(id,yes);return yes}
-const rootId=catalogHierarchy?.root;
-const roots=rootId&&byId.has(String(rootId))?[String(rootId)]:all.filter(c=>!parent[String(c.id)]).map(c=>String(c.id));
+const rootId=resolveKey(catalogHierarchy?.root);
+const childIds=new Set([...children.values()].flat());
+const roots=rootId?[rootId]:all.map(c=>String(c.id)).filter(id=>!childIds.has(id));
 let shown=0;
 function draw(id,path=new Set()){const c=byId.get(id);if(!c||path.has(id)||id==="0"||(q&&!subtreeMatch(id)))return "";const next=new Set(path);next.add(id);if(matches(c))shown++;const nested=(children.get(id)||[]).map(ch=>draw(ch,next)).join("");return `<div class="cat-tree-node"><div class="cat ${current?.id===c.id?"active":""}" data-v="${esc(c.id)}"><div>${esc(c.title)}</div><small>${esc(c.id)} · ${c.partCount} parts${c.hasDiagram?"":" · no diagram"}</small></div>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`}
 const el=$("catalogs");el.innerHTML=roots.map(id=>draw(id)).join("")||'<div class="diagram-message">No matching catalogs.</div>';
