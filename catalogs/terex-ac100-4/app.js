@@ -168,7 +168,7 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
   const c=byId.get(id);if(!c||path.has(id)||hiddenRootIds.has(id)||(q&&!subtreeMatch(id)))return "";
   const next=new Set(path);next.add(id);
   const nested=(children.get(id)||[]).filter(ch=>!hiddenRootIds.has(ch)).map(ch=>draw(ch,next)).join("");
-  return `<div class="cat-tree-node"><button class="cat ${c.variant===cur?"active":""}" data-v="${esc(c.variant)}">${esc(treeLabel(c.variant,c))}<small>${esc(c.variant)} · ${c.partsCount} parts · ${(c.images||[]).length} diagrams</small></button>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`;
+  return `<div class="cat-tree-node"><button class="cat ${c.variant===cur?"active":""}" data-v="${esc(c.variant)}">${esc(D.treeLabels?.[id]||treeLabel(id,c))}<small>${esc(c.variant)} · ${c.partsCount} parts · ${(c.images||[]).length} diagrams</small></button>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`;
  }
  $("catalogs").innerHTML=roots.map(id=>draw(id)).join("")||'<div class="empty">No matching catalogs.</div>';
 }
