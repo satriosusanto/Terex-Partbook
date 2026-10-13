@@ -1207,3 +1207,47 @@ body.catalog-ui button, body.catalog-ui input { font: inherit; }
     overflow: auto !important;
   }
 }
+
+
+/* Android sidebar recovery: AC100-4, AC140C and AC200-1.
+   Legacy model CSS hides the AC100/AC140 sidebar and can override the shared
+   drawer rules. Reassert the drawer state with model-specific specificity. */
+@media (max-width: 700px) {
+  body.catalog-ui.ui-ac100 > .layout > aside.catalog-sidebar,
+  body.catalog-ui.ui-ac200 > main > aside.catalog-sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+    position: fixed !important;
+    top: 0 !important;
+    right: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 81 !important;
+    width: min(86vw, 340px) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: 100vh !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    transform: translateX(-105%) !important;
+    transition: transform .2s ease !important;
+    background: var(--panel) !important;
+    border-right: 1px solid var(--line) !important;
+    border-bottom: 0 !important;
+    box-shadow: 8px 0 28px #0004 !important;
+  }
+  body.catalog-ui.ui-ac100.catalogs-open > .layout > aside.catalog-sidebar,
+  body.catalog-ui.ui-ac200.catalogs-open > main > aside.catalog-sidebar {
+    transform: translateX(0) !important;
+  }
+  body.catalog-ui.ui-ac100 > .layout > aside.catalog-sidebar #catalogs,
+  body.catalog-ui.ui-ac200 > main > aside.catalog-sidebar #catalogs {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+}
