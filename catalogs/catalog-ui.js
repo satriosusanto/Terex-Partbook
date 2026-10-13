@@ -429,11 +429,14 @@
     const curatedCatalogTrees = {
       "AC100-4": {
         root: "10213.1",
+        labels: {
+          "40835512": { title: "Mounting Cabin", version: "B" }
+        },
         branches: {
           "10213.1": ["40788912", "40789112", "40777812"],
           "40788912": ["40832912", "40786512", "40680312", "40790612", "40680412", "40835512", "40783312", "40783512", "40833312", "19527612"],
           "40789112": ["40790412", "40662012", "40681412", "40840312", "40680812", "40789912", "40779112", "40783612", "40834312", "28079912"],
-          "40777812": ["40789812", "40778012", "40746112", "40805312", "40805512", "48392412", "40671012"]
+          "40777812": ["40789812", "40778012", "40741612", "40805312", "40805512", "48392412", "40671012"]
         }
       },
       "AC140C": {
@@ -442,7 +445,7 @@
           "76625.1": ["40716012", "40654112", "40651812"],
           "40716012": ["40519812", "40611412", "40622912", "40715912", "40559812", "40695312", "40530612", "40546912", "40546812", "40535712", "31429712"],
           "40654112": ["40632612", "40636812", "40631912", "40654212", "40637012", "40637112", "40639612", "40633512", "40633212", "28075812"],
-          "40651812": ["40651912", "40652012", "40741312", "40728912", "70728412", "40642812", "40652112"]
+          "40651812": ["40651912", "40652012", "40741312", "40728912", "40728412", "40642812", "40652112"]
         }
       },
       "AC200-1": {
@@ -458,7 +461,7 @@
     };
     const curatedCatalogTree = curatedCatalogTrees[modelCode] ?? null;
     const curatedRootId = curatedCatalogTree ? resolveCatalogId(curatedCatalogTree.root) : null;
-    const curatedParentPriority = new Set();
+    const curatedParentPriority = new Map();
     if (curatedCatalogTree) {
       const curatedParents = {};
       const controlledParentIds = new Set(
@@ -473,7 +476,7 @@
           const childId = resolveCatalogId(childRaw);
           if (childId && childId !== parentId) {
             curatedParents[childId] = parentId;
-            curatedParentPriority.add(childId);
+            curatedParentPriority.set(childId, parentId);
           }
         });
       }
@@ -493,7 +496,6 @@
       const childId = resolveCatalogId(childRaw);
       const parentId = resolveCatalogId(parentRaw);
       if (!childId || !parentId || childId === parentId || parentById.has(childId)) continue;
-      childIds.get(parentId)?.push(childId);
       parentById.set(childId, parentId);
     }
     const diagramIds = new Set();
@@ -522,6 +524,8 @@
       }
     }
     const partCatalogKeys = ["partNumber", "partNo", "material", "part_number", "textNumber", "variant", "catalogId"];
+    const sourceParentsByChild = new Map();
+    const sourceMetaByChild = new Map();
     relations.forEach(([parentRaw, part]) => {
       const parentId = resolveCatalogId(parentRaw) ?? (childIds.has(parentRaw) ? parentRaw : null);
       if (!parentId) return;
@@ -529,14 +533,63 @@
         .map(key => part[key])
         .find(value => value != null && resolveCatalogId(value));
       const childKey = resolveCatalogId(childRaw);
-      if (!childKey || childKey === parentId || !childIds.has(parentId) || parentById.has(childKey)) return;
-      childIds.get(parentId).push(childKey);
-      parentById.set(childKey, parentId);
-      positionById.set(childKey, String(part.position ?? part.pos ?? ""));
-      if (part.description) descriptionById.set(childKey, String(part.description));
-      const version = part.version ?? part.partVersion ?? part.catalogVersion;
-      if (version && version !== "_") versionById.set(childKey, String(version));
+      if (!childKey || childKey === parentId || !childIds.has(parentId)) return;
+
+      // Source catalog rows carry the actual description and version for each
+      // subcatalog. Collect them even when the hierarchy index already has an edge.
+      if (!sourceParentsByChild.has(childKey)) sourceParentsByChild.set(childKey, new Map());
+      const parentOptions = sourceParentsByChild.get(childKey);
+      const version = part.version ?? part.partVersion ?? part.catalogVersion ?? "";
+      const metadata = {
+        description: String(part.description ?? "").trim(),
+        version: String(version ?? "").trim(),
+        position: String(part.position ?? part.pos ?? "").trim()
+      };
+      if (!parentOptions.has(parentId) ||
+          (!parentOptions.get(parentId).description && metadata.description)) {
+        parentOptions.set(parentId, metadata);
+      }
+      if (!sourceMetaByChild.has(childKey)) sourceMetaByChild.set(childKey, []);
+      sourceMetaByChild.get(childKey).push({ parentId, ...metadata });
     });
+
+    // Preserve an OEM parent only when that parent actually lists the child catalog.
+    // Repair stale or incomplete links from the source part data, without overriding
+    // the explicitly verified main assembly relationships above.
+    for (const [childId, parentOptions] of sourceParentsByChild) {
+      const curatedParent = curatedParentPriority.get(childId);
+      if (curatedParent && childIds.has(curatedParent)) {
+        parentById.set(childId, curatedParent);
+        continue;
+      }
+      const currentParent = parentById.get(childId);
+      if (currentParent && parentOptions.has(currentParent)) continue;
+      const candidates = [...parentOptions.keys()].filter(id => id !== childId);
+      if (candidates.length) parentById.set(childId, candidates[0]);
+    }
+
+    // Always resolve labels from the matching parent row. Previously these assignments
+    // were skipped when parentById already contained a child, leaving misleading titles
+    // such as "CENTRAL LUBE ARR." or raw part numbers in the visible tree.
+    for (const [childId, options] of sourceMetaByChild) {
+      const currentParent = parentById.get(childId);
+      const selected = options.find(option => option.parentId === currentParent && option.description)
+        ?? options.find(option => option.description)
+        ?? options.find(option => option.parentId === currentParent)
+        ?? options[0];
+      if (!selected) continue;
+      if (selected.description) descriptionById.set(childId, selected.description);
+      if (selected.version) versionById.set(childId, selected.version);
+      if (selected.position) positionById.set(childId, selected.position);
+    }
+
+    // Recreate the child graph from the finalized single-parent map.
+    childIds.forEach(children => children.splice(0, children.length));
+    for (const [childId, parentId] of parentById) {
+      if (childIds.has(parentId) && childIds.has(childId) && parentId !== childId) {
+        childIds.get(parentId).push(childId);
+      }
+    }
     // Normalize the graph and break bad parent cycles. The old source renderer could
     // silently omit catalogs when a cycle or disconnected branch had no root.
     const allCatalogIds = catalogs.map(getId);
@@ -683,14 +736,16 @@
       if (modelCode === "AC200-1" && typeof getCatalogTitle === "function") {
         return getCatalogTitle(catalog);
       }
-      const description = modelCode === "AC250-1" && id === "85198.1"
-        ? "AC 250-1"
-        : descriptionById.get(id) || catalog.title || id;
+      const labelOverride = curatedCatalogTree?.labels?.[id];
+      const description = labelOverride?.title
+        || (modelCode === "AC250-1" && id === "85198.1" ? "AC 250-1" : descriptionById.get(id) || catalog.title || id);
       const title = /^(under ?carriage|superstructure|attachment|chassis)$/i.test(description)
         ? description.toUpperCase()
         : description;
-      const version = versionById.get(id) ?? catalog.version;
-      const identity = [id, version && version !== "_" ? version : ""].filter(Boolean).join(" ");
+      const version = labelOverride?.version ?? versionById.get(id) ?? catalog.version;
+      // The catalog source uses "_" as an explicit unknown-version marker; retain it
+      // when a source or reference label provides it.
+      const identity = [id, version != null && String(version) !== "" ? String(version) : ""].filter(Boolean).join(" ");
       return `${title} (${identity})`;
     }
 

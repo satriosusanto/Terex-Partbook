@@ -60,7 +60,19 @@ const catalogLabels={
   "29020912":"HEAD SHEAVE (29020912 B)","17524012":"HD ATTACHMENT (17524012 B)",
   "45079312":"HOOK BLOCKS / SINGLE LINE HOOKS (45079312 _)","45338312":"ADD. MOUNTING PARTS (45338312 A)"
 };
-function getCatalogTitle(c){return catalogLabels[String(c?.id)]||c?.title||"";}
+function getCatalogTitle(c){
+ const id=String(c?.id??"");
+ const known=catalogLabels[id];
+ if(known)return known;
+ const rows=parts.filter(p=>String(p.partNumber??"")===id&&String(p.catalog??"")!==id&&String(p.description??"").trim());
+ const hierarchyParent=String(catalogHierarchy?.parent?.[id]??"");
+ const row=rows.find(p=>String(p.catalog??"")===hierarchyParent)||rows[0];
+ const description=String(row?.description??"").trim();
+ if(!description)return c?.title||id;
+ const version=String(row?.partVersion??"").trim();
+ const identity=[id,version&&version!==""?version:""].filter(Boolean).join(" ");
+ return `${description} (${identity})`;
+}
 function renderCatalogs(list){
  const all=catalogs||[];
  const ids=all.map(c=>String(c.id));
@@ -161,7 +173,7 @@ function renderCatalogs(list){
   roots.push(id);markReachable(id);
  }
  const q=$("catalogFilter")?.value.toLowerCase().trim()||"";
- const matches=c=>!q||[c.id,c.title].join(" ").toLowerCase().includes(q);
+ const matches=c=>!q||[c.id,c.title,getCatalogTitle(c)].join(" ").toLowerCase().includes(q);
  const memo=new Map();
  function subtreeMatch(id,path=new Set()){
   if(memo.has(id))return memo.get(id);
