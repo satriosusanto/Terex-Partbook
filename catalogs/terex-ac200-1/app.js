@@ -25,7 +25,7 @@ const memo=new Map();
 function subtreeMatch(id,path=new Set()){if(memo.has(id))return memo.get(id);if(path.has(id))return false;const c=byId.get(id);if(!c)return false;const next=new Set(path);next.add(id);const yes=matches(c)||(children.get(id)||[]).some(ch=>subtreeMatch(ch,next));memo.set(id,yes);return yes}
 const rootId=resolveKey(catalogHierarchy?.root);
 const childIds=new Set([...children.values()].flat());
-const roots=rootId?[rootId]:all.map(c=>String(c.id)).filter(id=>!childIds.has(id));
+const roots=[...new Set([...(rootId?[rootId]:[]),...all.map(c=>String(c.id)).filter(id=>!childIds.has(id))])];
 let shown=0;
 function draw(id,path=new Set()){const c=byId.get(id);if(!c||path.has(id)||id==="0"||(q&&!subtreeMatch(id)))return "";const next=new Set(path);next.add(id);if(matches(c))shown++;const nested=(children.get(id)||[]).map(ch=>draw(ch,next)).join("");return `<div class="cat-tree-node"><div class="cat ${current?.id===c.id?"active":""}" data-v="${esc(c.id)}"><div>${esc(c.title)}</div><small>${esc(c.id)} · ${c.partCount} parts${c.hasDiagram?"":" · no diagram"}</small></div>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`}
 const el=$("catalogs");el.innerHTML=roots.map(id=>draw(id)).join("")||'<div class="diagram-message">No matching catalogs.</div>';
