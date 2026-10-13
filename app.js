@@ -39,15 +39,43 @@ function renderCats(){
   const children=matches.filter(c=>!overview||c.id!==overview.id);
   const expanded=S.openGroups.has(g.name);
   const overviewButton=overview?`<button class="treeGroupOpen ${S.current?.id===overview.id?'active':''}" data-id="${esc(overview.id)}" title="Open ${esc(g.name)} overview diagram">${esc(g.name)}</button>`:`<span class="treeGroupOpen">${esc(g.name)}</span>`;
-  return `<section class="catGroup"><div class="catGroupHead">${overviewButton}<span class="treeGroupCount">${children.length}</span><button class="treeToggle" data-group="${esc(g.name)}" aria-label="${expanded?'Collapse':'Expand'} ${esc(g.name)}" aria-expanded="${expanded}">${expanded?'−':'+'}</button></div><div class="catGroupItems" ${expanded?'':'hidden'}>${children.map(c=>`<button class="cat" data-id="${esc(c.id)}"><b>${esc(c.id)}</b><small>${esc(c.title.replace(c.id,'').replace(/^\s+/,''))}</small></button>`).join('')}</div></section>`;
+  // Catalog IDs encode a family (e.g. 01F) and a subgroup (e.g. 0000).
+  // Preserve every catalog as a leaf; do not infer parent/child links from part rows.
+  const families=new Map();
+  children.forEach(c=>{
+   const m=String(c.id).match(/^(\d{2}[FTP])-(\d{4})-/);
+   const family=m?m[1]:'Other catalogs';
+   const subgroup=m?m[2]:'';
+   if(!families.has(family))families.set(family,new Map());
+   const subs=families.get(family);
+   if(!subs.has(subgroup))subs.set(subgroup,[]);
+   subs.get(subgroup).push(c);
+  });
+  const familyHtml=[...families.entries()].sort((a,b)=>a[0].localeCompare(b[0],undefined,{numeric:true})).map(([family,subs])=>{
+   const familyKey=`${g.name}|family|${family}`;
+   const familyOpen=S.openGroups.has(familyKey)||expanded;
+   const subHtml=[...subs.entries()].sort((a,b)=>a[0].localeCompare(b[0],undefined,{numeric:true})).map(([subgroup,items])=>{
+    const subKey=`${g.name}|sub|${family}|${subgroup}`;
+    const subOpen=S.openGroups.has(subKey);
+    const heading=subgroup?subgroup:'Other';
+    return `<section class="catTreeSub"><div class="catGroupHead catTreeSubHead"><span class="treeSubLabel">${esc(heading)}</span><span class="treeGroupCount">${items.length}</span><button class="treeToggle" data-tree-toggle="${esc(subKey)}" aria-label="${subOpen?'Collapse':'Expand'} ${esc(family)} ${esc(heading)}" aria-expanded="${subOpen}">${subOpen?'−':'+'}</button></div><div class="catGroupItems catTreeLeaves" ${subOpen?'':'hidden'}>${items.map(c=>`<button class="cat" data-id="${esc(c.id)}"><b>${esc(c.id)}</b><small>${esc(c.title.replace(c.id,'').replace(/^\s+/,''))}</small></button>`).join('')}</div></section>`;
+   }).join('');
+   return `<section class="catTreeFamily"><div class="catGroupHead catTreeFamilyHead"><span class="treeSubLabel">${esc(family)}</span><span class="treeGroupCount">${[...subs.values()].reduce((n,items)=>n+items.length,0)}</span><button class="treeToggle" data-tree-toggle="${esc(familyKey)}" aria-label="${familyOpen?'Collapse':'Expand'} ${esc(family)}" aria-expanded="${familyOpen}">${familyOpen?'−':'+'}</button></div><div class="catTreeFamilyItems" ${familyOpen?'':'hidden'}>${subHtml}</div></section>`;
+  }).join('');
+  return `<section class="catGroup"><div class="catGroupHead">${overviewButton}<span class="treeGroupCount">${children.length}</span><button class="treeToggle" data-group="${esc(g.name)}" aria-label="${expanded?'Collapse':'Expand'} ${esc(g.name)}" aria-expanded="${expanded}">${expanded?'−':'+'}</button></div><div class="catGroupItems catTreeGroups" ${expanded?'':'hidden'}>${familyHtml}</div></section>`;
  }).join('');
  const other=S.filteredCats.filter(c=>catalogGroup(c,rootId)==='OTHER');
  const otherGroup=other.length?`<section class="catGroup"><div class="catGroupHead"><span class="treeGroupOpen">OTHER CATALOGS</span><span class="treeGroupCount">${other.length}</span></div><div class="catGroupItems">${other.map(c=>`<button class="cat" data-id="${esc(c.id)}"><b>${esc(c.id)}</b><small>${esc(c.title.replace(c.id,'').replace(/^\s+/,''))}</small></button>`).join('')}</div></section>`:'';
  $('catalogs').innerHTML=rootButton+groups+otherGroup;
  document.querySelectorAll('#catalogs [data-id]').forEach(x=>x.onclick=()=>openCat(x.dataset.id));
- document.querySelectorAll('.treeToggle').forEach(x=>x.onclick=()=>{
+ document.querySelectorAll('.treeToggle[data-group]').forEach(x=>x.onclick=()=>{
   const group=x.dataset.group;
   if(S.openGroups.has(group))S.openGroups.delete(group);else S.openGroups.add(group);
+  renderCats();
+ });
+ document.querySelectorAll('.treeToggle[data-tree-toggle]').forEach(x=>x.onclick=()=>{
+  const key=x.dataset.treeToggle;
+  if(S.openGroups.has(key))S.openGroups.delete(key);else S.openGroups.add(key);
   renderCats();
  });
 }
