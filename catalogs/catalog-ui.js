@@ -579,7 +579,7 @@
         ?? options[0];
       if (!selected) continue;
       if (selected.description) descriptionById.set(childId, selected.description);
-      if (selected.version && selected.version !== "_") versionById.set(childId, selected.version);
+      if (selected.version) versionById.set(childId, selected.version);
       if (selected.position) positionById.set(childId, selected.position);
     }
 
