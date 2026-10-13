@@ -15,7 +15,37 @@ Promise.all([
  if(root) selectCatalog(root.id);
 });
 function renderCatalogs(list){
-const all=catalogs||[],byId=new Map(all.map(c=>[String(c.id),c])),children=new Map(),parent=catalogHierarchy?.parent||{};
+const all=catalogs||[],byId=new Map(all.map(c=>[String(c.id),c])),children=new Map(),parent={...(catalogHierarchy?.parent||{})};
+// OEM hierarchy anchors verified against the AC 200-1 reference tree.
+// Override incorrect parent links for the three main assemblies and their visible subassemblies.
+const verifiedParent={
+  "45314212":"33340.1","45338212":"33340.1","45337812":"33340.1",
+  "45142412":"45314212","45265312":"45314212","45095812":"45314212","45328312":"45314212",
+  "45294012":"45314212","45287512":"45314212","45142512":"45314212","45081512":"45314212",
+  "45218012":"45314212","12666612":"45314212",
+  "45078112":"45338212","45291212":"45338212","45267012":"45338212","45206812":"45338212",
+  "45318812":"45338212","45206212":"45338212","45203512":"45338212","45202012":"45338212",
+  "45176912":"45338212","45079012":"45338212",
+  "45337612":"45337812","45337412":"45337812","45337312":"45337812","45338412":"45337812",
+  "29020912":"45337812","17524012":"45337812","45079312":"45337812","45338312":"45337812"
+};
+Object.assign(parent,verifiedParent);
+const catalogLabels={
+  "33340.1":"AC 200-1 (33340.1)",
+  "45314212":"UNDERCARRIAGE (45314212 G)","45338212":"SUPERSTRUCTURE (45338212 B)","45337812":"ATTACHMENT (45337812 B)",
+  "45142412":"MOUNTING PARTS (45142412 C)","45265312":"DRIVE (45265312 A)","45095812":"OUTRIGGERS (45095812 D)",
+  "45328312":"TRAVELLING MECHANISM (45328312 _)","45294012":"TIRES (45294012 B)","45287512":"MOUNTING CABIN (45287512 D)",
+  "45142512":"PNEUMATIC (45142512 B)","45081512":"HYDRAULIC (45081512 E)","45218012":"ELECTRIC (45218012 G)",
+  "12666612":"CENTRAL LUBRICATION (12666612 C)","45078112":"MOUNTING PARTS (45078112 C)",
+  "45291212":"SLEW GEAR / SLEW RING (45291212 _)","45267012":"DRIVE (45267012 A)",
+  "45206812":"WINCHES / HOIST GEARS (45206812 D)","45318812":"COUNTERWEIGHTS (45318812 _)","45206212":"LUFFING CYLINDER (45206212 A)",
+  "45203512":"MOUNTING CABIN (45203512 A)","45202012":"HYDRAULIC (45202012 F)","45176912":"ELECTRIC (45176912 E)",
+  "45079012":"CENTRAL LUBE ARR. (45079012 A)","45337612":"BOOM (45337612 B)","45337412":"MAIN BOOM EXTENSION (45337412 B)",
+  "45337312":"MAIN BOOM EXTENSION (45337312 A)","45338412":"MOUNTING RUNNER (45338412 A)",
+  "29020912":"HEAD SHEAVE (29020912 B)","17524012":"HD ATTACHMENT (17524012 B)",
+  "45079312":"HOOK BLOCKS / SINGLE LINE HOOKS (45079312 _)","45338312":"ADD. MOUNTING PARTS (45338312 A)"
+};
+const catalogTitle=c=>catalogLabels[String(c?.id)]||c?.title||"";
 const aliases=new Map();const addAlias=(k,id)=>{if(k===undefined||k===null)return;const raw=String(k).trim();if(!raw)return;aliases.set(raw.toLowerCase(),String(id));aliases.set(raw.toLowerCase().replace(/[\s_-]+/g,""),String(id));};for(const c of all)for(const k of [c.id,c.variant,c.catalogId,c.catalog,c.key,c.title])addAlias(k,c.id);
 const resolveKey=v=>{const raw=String(v??"").trim();if(byId.has(raw))return raw;return aliases.get(raw.toLowerCase())||aliases.get(raw.toLowerCase().replace(/[\s_-]+/g,""))||null};
 for(const [childRaw,parRaw] of Object.entries(parent)){const child=resolveKey(childRaw),par=resolveKey(parRaw);if(!child||!par||child===par)continue;if(!children.has(par))children.set(par,[]);if(!children.get(par).includes(child))children.get(par).push(child)}
@@ -27,14 +57,14 @@ const rootId=resolveKey(catalogHierarchy?.root);
 const childIds=new Set([...children.values()].flat());
 const roots=[...new Set([...(rootId?[rootId]:[]),...all.map(c=>String(c.id)).filter(id=>!childIds.has(id))])];
 let shown=0;
-function draw(id,path=new Set()){const c=byId.get(id);if(!c||path.has(id)||id==="0"||(q&&!subtreeMatch(id)))return "";const next=new Set(path);next.add(id);if(matches(c))shown++;const nested=(children.get(id)||[]).map(ch=>draw(ch,next)).join("");return `<div class="cat-tree-node"><div class="cat ${current?.id===c.id?"active":""}" data-v="${esc(c.id)}"><div>${esc(c.title)}</div><small>${esc(c.id)} · ${c.partCount} parts${c.hasDiagram?"":" · no diagram"}</small></div>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`}
+function draw(id,path=new Set()){const c=byId.get(id);if(!c||path.has(id)||id==="0"||(q&&!subtreeMatch(id)))return "";const next=new Set(path);next.add(id);if(matches(c))shown++;const nested=(children.get(id)||[]).map(ch=>draw(ch,next)).join("");return `<div class="cat-tree-node"><div class="cat ${current?.id===c.id?"active":""}" data-v="${esc(c.id)}"><div>${esc(catalogTitle(c))}</div><small>${esc(c.id)} · ${c.partCount} parts${c.hasDiagram?"":" · no diagram"}</small></div>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`}
 const el=$("catalogs");el.innerHTML=roots.map(id=>draw(id)).join("")||'<div class="diagram-message">No matching catalogs.</div>';
 el.querySelectorAll("[data-v]").forEach(node=>node.onclick=()=>selectCatalog(node.dataset.v));
 $("catalogCount").textContent=(q?shown:all.length)+" / "+all.length;
 }
 function selectCatalog(id){
  current=catalogs.find(x=>x.id===id); if(!current)return;
- renderCatalogs(catalogs); $("crumb").textContent=`AC200-1 › ${current.title} [${current.id}]`;
+ renderCatalogs(catalogs); $("crumb").textContent=`AC200-1 › ${catalogTitle(current)} [${current.id}]`;
  renderDiagram(); renderParts(parts.filter(p=>p.catalog===id));
 }
 function renderDiagram(){
