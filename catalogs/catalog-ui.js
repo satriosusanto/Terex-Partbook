@@ -712,10 +712,10 @@
         catalogs.forEach(catalog => visibleIds.add(getId(catalog)));
       }
 
-      const visibleChildren = id => (childIds.get(id) ?? []).filter(childId => visibleIds.has(childId));
+      const visibleChildren = id => (childIds.get(id) ?? []).filter(childId => visibleIds.has(childId) && !hiddenRootIds.has(childId));
       const renderedIds = new Set();
       function createNode(id, depth) {
-        if (renderedIds.has(id)) return null;
+        if (hiddenRootIds.has(id) || renderedIds.has(id)) return null;
         renderedIds.add(id);
         const catalog = catalogById.get(id);
         if (!catalog) return null;
