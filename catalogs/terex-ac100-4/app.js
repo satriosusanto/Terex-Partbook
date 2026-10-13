@@ -1,15 +1,115 @@
 const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageRequest=0;const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));function toast(s){$("toast").textContent=s;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),1700)}async function init(){for(const f of ["catalogs","hotspots","manifest"])D[f]=await(await fetch("data/"+f+".json")).json();try{const hr=await fetch("data/catalog-hierarchy.json");if(hr.ok){const packed=await hr.json();if(packed.encoding==="gzip-base64"&&"DecompressionStream"in window){const bytes=Uint8Array.from(atob(packed.data),c=>c.charCodeAt(0));const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));D.hierarchy=JSON.parse(await new Response(stream).text())}else D.hierarchy=packed}}catch(e){console.warn("Catalog hierarchy unavailable",e)}$("title").textContent="TEREX "+D.manifest.model+" PartBook";$("count").textContent=D.catalogs.length;$("search").oninput=e=>{q=e.target.value.toLowerCase().trim();renderCats();if(q)searchParts();else renderParts()};$("catalogs").onclick=e=>{let b=e.target.closest("[data-v]");if(b)select(b.dataset.v)};$("dark").onclick=()=>{document.body.classList.toggle("dark");localStorage.setItem("terex-dark",document.body.classList.contains("dark")?"1":"0")};if(localStorage.getItem("terex-dark")==="1")document.body.classList.add("dark");$("plus").onclick=()=>setZoom(zoom*1.2);$("minus").onclick=()=>setZoom(zoom/1.2);$("reset").onclick=()=>setZoom(1);$("fit").onclick=fit;const diagramStage=$("stage");if("ResizeObserver" in window&&diagramStage)new ResizeObserver(()=>{if(cur&&$("diagram")?.width)fit()}).observe(diagramStage);window.addEventListener("resize",()=>{if(cur)fit()});$("copy").onclick=()=>{if(!cur)return;let u=new URL(location.href);u.hash=encodeURIComponent(cur);navigator.clipboard?.writeText(u.href).then(()=>toast("Link copied")).catch(()=>toast("Catalog selected"))};renderCats();let hash=decodeURIComponent(location.hash.slice(1));select(D.catalogs.some(c=>c.variant===hash)?hash:D.catalogs[0]?.variant)}function renderCats(){
-const all=D.catalogs||[],byId=new Map(all.map(c=>[String(c.variant),c])),children=new Map(),parent=D.hierarchy?.parent||{};
-const aliases=new Map();const addAlias=(k,id)=>{if(k===undefined||k===null)return;const raw=String(k).trim();if(!raw)return;aliases.set(raw.toLowerCase(),String(id));aliases.set(raw.toLowerCase().replace(/[\s_-]+/g,""),String(id));};for(const c of all)for(const k of [c.variant,c.id,c.catalogId,c.catalog,c.key,c.title])addAlias(k,c.variant);
-const resolveKey=v=>{const raw=String(v??"").trim();if(byId.has(raw))return raw;return aliases.get(raw.toLowerCase())||aliases.get(raw.toLowerCase().replace(/[\s_-]+/g,""))||null};
-const curatedRoot="10213.1",curatedBranches={"40777812":["40789812","40778012","40746112","40805312","40805512","48392412","40671012"],"40788912":["40832912","40786512","40680312","40790612","40680412","40835512","40783312","40783512","40833312","19527612"],"40789112":["40790412","40662012","40681412","40840312","40680812","40789912","40779112","40783612","40834312","28079912"],"10213.1":["40788912","40789112","40777812"]};const curatedParent=Object.fromEntries(Object.entries(curatedBranches).flatMap(([par,kids])=>kids.map(child=>[child,par])));const curatedParents=new Set(Object.keys(curatedBranches)),curatedChildren=new Set([curatedRoot,...Object.keys(curatedParent)]);for(const [childRaw,parRaw] of Object.entries(parent)){if(curatedParents.has(resolveKey(parRaw))||curatedChildren.has(resolveKey(childRaw)))delete parent[childRaw]}Object.assign(parent,curatedParent);if(!D.hierarchy)D.hierarchy={root:curatedRoot,parent};else{D.hierarchy.root=curatedRoot;D.hierarchy.parent=parent}
-for(const [childRaw,parRaw] of Object.entries(parent)){const child=resolveKey(childRaw),par=resolveKey(parRaw);if(!child||!par||child===par)continue;if(!children.has(par))children.set(par,[]);if(!children.get(par).includes(child))children.get(par).push(child)}
-const rootId=resolveKey(D.hierarchy?.root),childIds=new Set([...children.values()].flat());
-const roots=[...new Set([...(rootId?[rootId]:[]),...all.map(c=>String(c.variant)).filter(id=>!childIds.has(id))])];
-const matches=c=>!q||[c.variant,c.title,...(c.parts||[]).map(p=>[p.partNo,p.description,p.position].join(" "))].join(" ").toLowerCase().includes(q);
-const memo=new Map();
-function subtreeMatch(id,path=new Set()){if(memo.has(id))return memo.get(id);if(path.has(id))return false;const c=byId.get(id);if(!c)return false;const next=new Set(path);next.add(id);const yes=matches(c)||(children.get(id)||[]).some(ch=>subtreeMatch(ch,next));memo.set(id,yes);return yes}
-function draw(id,path=new Set()){const c=byId.get(id);if(!c||path.has(id)||(q&&!subtreeMatch(id)))return "";const next=new Set(path);next.add(id);const nested=(children.get(id)||[]).map(ch=>draw(ch,next)).join("");return `<div class="cat-tree-node"><button class="cat ${c.variant===cur?"active":""}" data-v="${esc(c.variant)}">${esc(c.title)}<small>${esc(c.variant)} · ${c.partsCount} parts · ${c.images.length} diagrams</small></button>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`}
-$("catalogs").innerHTML=roots.map(id=>draw(id)).join("")||'<div class="empty">No matching catalogs.</div>';
+ const all=D.catalogs||[];
+ const ids=all.map(c=>String(c.variant));
+ const byId=new Map(all.map(c=>[String(c.variant),c]));
+ const aliases=new Map();
+ const addAlias=(value,id)=>{
+  if(value===undefined||value===null)return;
+  const raw=String(value).trim();
+  if(!raw)return;
+  const normal=raw.toLowerCase(),compact=normal.replace(/[\\s_-]+/g,"");
+  if(!aliases.has(normal))aliases.set(normal,String(id));
+  if(!aliases.has(compact))aliases.set(compact,String(id));
+ };
+ for(const c of all)for(const key of [c.variant,c.id,c.catalogId,c.catalog,c.key])addAlias(key,c.variant);
+ const resolveKey=value=>{
+  const raw=String(value??"").trim();
+  if(byId.has(raw))return raw;
+  return aliases.get(raw.toLowerCase())||aliases.get(raw.toLowerCase().replace(/[\\s_-]+/g,""))||null;
+ };
+
+ // Normalize the OEM parent index to a single parent per catalog ID.
+ const parentById=new Map();
+ const rawParent=D.hierarchy?.parent&&typeof D.hierarchy.parent==="object"?D.hierarchy.parent:{};
+ for(const [childRaw,parentRaw] of Object.entries(rawParent)){
+  const child=resolveKey(childRaw),parent=resolveKey(parentRaw);
+  if(!child||!parent||child===parent||!byId.has(child)||!byId.has(parent))continue;
+  if(!parentById.has(child))parentById.set(child,parent);
+ }
+
+ const curatedRoot=resolveKey("10213.1");
+ const curatedBranches={"40777812":["40789812","40778012","40746112","40805312","40805512","48392412","40671012"],"40788912":["40832912","40786512","40680312","40790612","40680412","40835512","40783312","40783512","40833312","19527612"],"40789112":["40790412","40662012","40681412","40840312","40680812","40789912","40779112","40783612","40834312","28079912"],"10213.1":["40788912","40789112","40777812"]};
+ const curatedParentByChild=new Map();
+ const controlledParentIds=new Set();
+ for(const [parentRaw,childRaws] of Object.entries(curatedBranches)){
+  const parent=resolveKey(parentRaw);
+  if(!parent)continue;
+  controlledParentIds.add(parent);
+  for(const childRaw of childRaws){
+   const child=resolveKey(childRaw);
+   if(child&&child!==parent)curatedParentByChild.set(child,parent);
+  }
+ }
+ // Replace only the relationships controlled by the reference tree; leave deeper OEM links intact.
+ for(const [child,parent] of [...parentById.entries()]){
+  if(controlledParentIds.has(parent)||curatedParentByChild.has(child))parentById.delete(child);
+ }
+ for(const [child,parent] of curatedParentByChild)parentById.set(child,parent);
+ if(curatedRoot)parentById.delete(curatedRoot);
+
+ // Break malformed parent cycles so they cannot hide whole catalog branches.
+ for(const start of ids){
+  const path=[],seenAt=new Map();
+  let node=start;
+  while(node&&parentById.has(node)){
+   if(seenAt.has(node)){
+    const cycle=path.slice(seenAt.get(node));
+    const victim=cycle.find(id=>!curatedParentByChild.has(id))||cycle.find(id=>id!==curatedRoot)||cycle[0];
+    if(victim)parentById.delete(victim);
+    break;
+   }
+   seenAt.set(node,path.length);path.push(node);
+   node=parentById.get(node);
+  }
+ }
+
+ const children=new Map(ids.map(id=>[id,[]]));
+ for(const [child,parent] of parentById){
+  if(children.has(parent)&&children.has(child)&&!children.get(parent).includes(child))children.get(parent).push(child);
+ }
+ for(const [parentRaw,childRaws] of Object.entries(curatedBranches)){
+  const parent=resolveKey(parentRaw);
+  if(!parent||!children.has(parent))continue;
+  const rank=new Map(childRaws.map((raw,index)=>[resolveKey(raw),index]).filter(x=>x[0]));
+  children.get(parent).sort((left,right)=>{
+   const a=rank.get(left),b=rank.get(right);
+   return a!==undefined||b!==undefined?(a??Number.MAX_SAFE_INTEGER)-(b??Number.MAX_SAFE_INTEGER):0;
+  });
+ }
+
+ const rootId=curatedRoot||resolveKey(D.hierarchy?.root);
+ const roots=[...new Set([...(rootId?[rootId]:[]),...ids.filter(id=>!parentById.has(id))])];
+ // Some OEM indexes contain disconnected subtrees orphans and cycles. Add a root for every
+ // still-unreachable catalog instead of silently omitting it from the source list.
+ const reachable=new Set();
+ const markReachable=id=>{
+  if(reachable.has(id))return;
+  reachable.add(id);
+  (children.get(id)||[]).forEach(markReachable);
+ };
+ roots.forEach(markReachable);
+ for(const id of ids){
+  if(reachable.has(id))continue;
+  roots.push(id);
+  markReachable(id);
+ }
+
+ const matches=c=>!q||[c.variant,c.title,...(c.parts||[]).map(p=>[p.partNo,p.description,p.position].join(" "))].join(" ").toLowerCase().includes(q);
+ const memo=new Map();
+ function subtreeMatch(id,path=new Set()){
+  if(memo.has(id))return memo.get(id);
+  if(path.has(id))return false;
+  const c=byId.get(id);if(!c)return false;
+  const next=new Set(path);next.add(id);
+  const yes=matches(c)||(children.get(id)||[]).some(ch=>subtreeMatch(ch,next));
+  memo.set(id,yes);return yes;
+ }
+ function draw(id,path=new Set()){
+  const c=byId.get(id);if(!c||path.has(id)||(q&&!subtreeMatch(id)))return "";
+  const next=new Set(path);next.add(id);
+  const nested=(children.get(id)||[]).map(ch=>draw(ch,next)).join("");
+  return `<div class="cat-tree-node"><button class="cat ${c.variant===cur?"active":""}" data-v="${esc(c.variant)}">${esc(c.title)}<small>${esc(c.variant)} · ${c.partsCount} parts · ${(c.images||[]).length} diagrams</small></button>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`;
+ }
+ $("catalogs").innerHTML=roots.map(id=>draw(id)).join("")||'<div class="empty">No matching catalogs.</div>';
 }
 function select(v){cur=v;let c=D.catalogs.find(x=>x.variant===v);if(!c)return;history.replaceState(null,"","#"+encodeURIComponent(v));$("selected").textContent=c.title;$("subtitle").textContent=`Catalog ${v} · ${c.partsCount} part rows · ${c.images.length} diagrams`;renderCats();renderParts();if(c.images.length)showImage(c.images[0].filename);else{$("stage").innerHTML='<div class="empty">No diagram available for this catalog.</div>';$("tabs").innerHTML=""}}function renderParts(a){if(!a)a=D.catalogs.find(c=>c.variant===cur)?.parts||[];$("partsCount").textContent=a.length+" parts";$("partRows").innerHTML=a.length?a.slice(0,600).map(p=>`<tr data-pos="${esc(p.position)}" data-no="${esc(p.partNo)}"><td>${esc(p.position||"—")}</td><td>${esc(p.partNo||"—")}</td><td>${esc(p.description||"Description unavailable")}</td><td>${esc(p.qty||"—")}</td></tr>`).join(""):'<tr><td colspan="4" class="empty">No parts found.</td></tr>';$("partRows").querySelectorAll("tr[data-pos]").forEach(r=>r.onclick=()=>highlight(r.dataset.pos,r.dataset.no))}function searchParts(){let a=[];for(let c of D.catalogs)for(let p of c.parts)if([c.variant,c.title,p.partNo,p.description,p.position].join(" ").toLowerCase().includes(q))a.push({...p,variant:c.variant});$("partsCount").textContent=a.length+" matches";renderParts(a)}async function showImage(fn){const request=++imageRequest;const selectedVariant=cur;let c=D.catalogs.find(x=>x.variant===selectedVariant);$("tabs").innerHTML=c.images.map(i=>`<button class="${i.filename===fn?"active":""}" data-fn="${esc(i.filename)}">${esc(i.label)}</button>`).join("");$("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>showImage(b.dataset.fn));$("stage").innerHTML=`<div class="imagewrap" id="wrap"><canvas id="diagram"></canvas><div id="hotspots" style="position:absolute;inset:0"></div></div>`;let cvs=$("diagram");$("stage").setAttribute("aria-busy","true");try{let resp=await fetch("images/"+encodeURIComponent(fn));if(!resp.ok)throw new Error("Image request failed: HTTP "+resp.status);let buf=await resp.arrayBuffer();if(request!==imageRequest||selectedVariant!==cur)return;let ifds=UTIF.decode(buf);if(!ifds||!ifds.length)throw new Error("No TIFF image data found");UTIF.decodeImage(buf,ifds[0]);let rgba=UTIF.toRGBA8(ifds[0]);if(!ifds[0].width||!ifds[0].height||!rgba?.length)throw new Error("Decoded diagram is empty");if(request!==imageRequest||selectedVariant!==cur)return;cvs.width=ifds[0].width;cvs.height=ifds[0].height;cvs.getContext("2d").putImageData(new ImageData(new Uint8ClampedArray(rgba),cvs.width,cvs.height),0,0);$("hotspots").innerHTML=(D.hotspots[fn]||[]).map(h=>`<button class="hotspot" title="Position ${esc(h.position)}" data-pos="${esc(h.position)}" style="left:${h.x}%;top:${h.y}%;width:${Math.max(.25,h.w)}%;height:${Math.max(.25,h.h)}%"></button>`).join("");$("hotspots").querySelectorAll("button").forEach(b=>b.onclick=()=>highlight(b.dataset.pos,""));fit()}catch(e){if(request===imageRequest&&selectedVariant===cur){console.error("Diagram load error:",fn,e);$("stage").innerHTML='<div class="empty">Diagram could not be displayed. Check the connection and TIFF decoder, then retry this catalog.</div>'}}finally{if(request===imageRequest&&selectedVariant===cur)$("stage").setAttribute("aria-busy","false")}}function highlight(pos,no){let rows=[...$("partRows").querySelectorAll("tr[data-pos]")];rows.forEach(r=>r.classList.toggle("selected",(pos&&r.dataset.pos===pos)||(!pos&&no&&r.dataset.no===no)));let t=rows.find(r=>(pos&&r.dataset.pos===pos)||(!pos&&no&&r.dataset.no===no));if(t)t.scrollIntoView({block:"nearest"});toast(t?`Position ${pos||"—"}`:`No matching part for position ${pos}`)}function setZoom(z){zoom=Math.max(.05,Math.min(4,z));let w=$("wrap"),im=$("diagram");if(w&&im){const nw=im.naturalWidth||im.width,nh=im.naturalHeight||im.height;if(nw&&nh){w.style.width=nw*zoom+"px";w.style.height=nh*zoom+"px";im.style.width=nw*zoom+"px";im.style.height=nh*zoom+"px"}}$("reset").textContent=Math.round(zoom*100)+"%"}function fit(){let im=$("diagram"),stage=$("stage");if(!im||!stage)return;const nw=im.naturalWidth||im.width,nh=im.naturalHeight||im.height;if(nw&&nh)setZoom(Math.min(Math.max(120,stage.clientWidth-20)/nw,Math.max(120,stage.clientHeight-20)/nh,1))}function installTouchZoom(){const stage=$("stage");if(!stage)return;let startDistance=0,startZoom=1;const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);stage.addEventListener("touchstart",e=>{if(e.touches.length!==2)return;const wrap=$("wrap"),img=$("diagram");if(!wrap||!img)return;startDistance=distance(e.touches);startZoom=zoom},{passive:true});stage.addEventListener("touchmove",e=>{if(e.touches.length!==2||!startDistance||!$("wrap")||!$("diagram"))return;e.preventDefault();setZoom(startZoom*distance(e.touches)/startDistance)},{passive:false});stage.addEventListener("touchend",e=>{if(e.touches.length<2)startDistance=0},{passive:true});stage.addEventListener("touchcancel",()=>{startDistance=0},{passive:true})}installTouchZoom();init().catch(e=>{console.error(e);$("selected").textContent="Failed to load";$("subtitle").textContent="Open through GitHub Pages or a local server."});
