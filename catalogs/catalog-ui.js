@@ -424,6 +424,67 @@
     const hierarchyParents = hierarchy?.parent && typeof hierarchy.parent === "object"
       ? hierarchy.parent
       : {};
+    // Canonical OEM assembly relationships captured from the supplied AC100/AC140/AC200 reference trees.
+    // Rebuild direct children of the root and the three main assemblies rather than retaining stale or inferred parents.
+    const curatedCatalogTrees = {
+      "AC100-4": {
+        root: "10213.1",
+        branches: {
+          "10213.1": ["40788912", "40789112", "40777812"],
+          "40788912": ["40832912", "40786512", "40680312", "40790612", "40680412", "40835512", "40783312", "40783512", "40833312", "19527612"],
+          "40789112": ["40790412", "40662012", "40681412", "40840312", "40680812", "40789912", "40779112", "40783612", "40834312", "28079912"],
+          "40777812": ["40789812", "40778012", "40746112", "40805312", "40805512", "48392412", "40671012"]
+        }
+      },
+      "AC140C": {
+        root: "76625.1",
+        branches: {
+          "76625.1": ["40716012", "40654112", "40651812"],
+          "40716012": ["40519812", "40611412", "40622912", "40715912", "40559812", "40695312", "40530612", "40546912", "40546812", "40535712", "31429712"],
+          "40654112": ["40632612", "40636812", "40631912", "40654212", "40637012", "40637112", "40639612", "40633512", "40633212", "28075812"],
+          "40651812": ["40651912", "40652012", "40741312", "40728912", "70728412", "40642812", "40652112"]
+        }
+      },
+      "AC200-1": {
+        root: "33340.1",
+        branches: {
+          "33340.1": ["45314212", "45338212", "45337812"],
+          "45314212": ["45142412", "45265312", "45095812", "45328312", "45294012", "45287512", "45142512", "45081512", "45218012", "12666612"],
+          "45338212": ["45078112", "45212912", "45267012", "45206812", "45318812", "45206212", "45203512", "45202012", "45176912", "45079012"],
+          "45337812": ["45337612", "45337412", "45337312", "45338412", "29020912", "45079312", "45338312"],
+          "29020912": ["17524012"]
+        }
+      }
+    };
+    const curatedCatalogTree = curatedCatalogTrees[modelCode] ?? null;
+    const curatedRootId = curatedCatalogTree ? resolveCatalogId(curatedCatalogTree.root) : null;
+    if (curatedCatalogTree) {
+      const curatedParents = {};
+      const controlledParentIds = new Set(
+        Object.keys(curatedCatalogTree.branches)
+          .map(resolveCatalogId)
+          .filter(Boolean)
+      );
+      for (const [parentRaw, childRaws] of Object.entries(curatedCatalogTree.branches)) {
+        const parentId = resolveCatalogId(parentRaw);
+        if (!parentId) continue;
+        childRaws.forEach(childRaw => {
+          const childId = resolveCatalogId(childRaw);
+          if (childId && childId !== parentId) curatedParents[childId] = parentId;
+        });
+      }
+      const curatedChildren = new Set([curatedRootId, ...Object.keys(curatedParents)].filter(Boolean));
+      for (const [childRaw, parentRaw] of Object.entries(hierarchyParents)) {
+        const childId = resolveCatalogId(childRaw);
+        const parentId = resolveCatalogId(parentRaw);
+        if (controlledParentIds.has(parentId) || curatedChildren.has(childId)) delete hierarchyParents[childRaw];
+      }
+      Object.assign(hierarchyParents, curatedParents);
+      if (hierarchy && typeof hierarchy === "object") {
+        hierarchy.root = curatedRootId ?? curatedCatalogTree.root;
+        hierarchy.parent = hierarchyParents;
+      }
+    }
     for (const [childRaw, parentRaw] of Object.entries(hierarchyParents)) {
       const childId = resolveCatalogId(childRaw);
       const parentId = resolveCatalogId(parentRaw);
@@ -472,13 +533,28 @@
       const version = part.version ?? part.partVersion ?? part.catalogVersion;
       if (version && version !== "_") versionById.set(childKey, String(version));
     });
-    childIds.forEach(children => {
-      children.sort((left, right) =>
-        (positionById.get(left) ?? "").localeCompare(positionById.get(right) ?? "", undefined, { numeric: true })
-      );
+    childIds.forEach((children, parentId) => {
+      const preferredChildren = curatedCatalogTree?.branches?.[parentId]
+        ?.map(resolveCatalogId)
+        .filter(Boolean);
+      if (preferredChildren?.length) {
+        const rank = new Map(preferredChildren.map((id, index) => [id, index]));
+        children.sort((left, right) => {
+          const leftRank = rank.get(left), rightRank = rank.get(right);
+          if (leftRank !== undefined || rightRank !== undefined) {
+            return (leftRank ?? Number.MAX_SAFE_INTEGER) - (rightRank ?? Number.MAX_SAFE_INTEGER);
+          }
+          return (positionById.get(left) ?? "").localeCompare(positionById.get(right) ?? "", undefined, { numeric: true });
+        });
+      } else {
+        children.sort((left, right) =>
+          (positionById.get(left) ?? "").localeCompare(positionById.get(right) ?? "", undefined, { numeric: true })
+        );
+      }
     });
 
     let roots = catalogs.map(getId).filter(id => !parentById.has(id));
+    if (curatedRootId) roots = [curatedRootId, ...roots.filter(id => id !== curatedRootId)];
     const hiddenRootIds = new Set();
     if (!roots.length) roots = catalogs.map(getId);
     const placeholderIndex = roots.indexOf("0");
