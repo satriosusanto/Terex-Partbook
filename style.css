@@ -106,3 +106,16 @@ button.treeGroupOpen.active{color:var(--accent2)}
   .viewer { height: 44dvh; min-height: 220px; }
   .viewerTools button { min-width: 34px; min-height: 36px; padding: 5px 7px; }
 }
+
+/* Nested catalog hierarchy: system family > subgroup > catalog leaf. */
+.catTreeGroups{margin-left:8px;padding-left:7px}
+.catTreeFamily{margin:2px 0 5px 3px;border-left:1px solid var(--line)}
+.catTreeFamilyHead{min-height:34px;padding-left:5px}
+.catTreeFamilyItems{margin:0 0 2px 10px;padding:2px 0 3px 8px;border-left:1px dashed var(--line)}
+.catTreeFamilyItems[hidden],.catTreeLeaves[hidden]{display:none}
+.catTreeSub{margin:1px 0 4px 0;border-left:1px solid var(--line)}
+.catTreeSubHead{min-height:31px;padding-left:5px}
+.treeSubLabel{flex:1;min-width:0;color:var(--muted);font-size:11px;font-weight:750;overflow-wrap:anywhere}
+.catTreeLeaves{margin-left:7px;padding-left:7px}
+.catTreeLeaves .cat{margin:2px 0}
+.catTreeFamilyHead .treeToggle,.catTreeSubHead .treeToggle{width:24px;height:24px;flex:0 0 24px}
