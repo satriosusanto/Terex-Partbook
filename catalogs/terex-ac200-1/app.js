@@ -113,18 +113,25 @@ function renderDiagram(){
  const image=$("diagram");
  wrap.setAttribute("aria-busy","true");
  image.alt="Diagram for "+current.title;
- delete image.dataset.rawFallback;
+ image.dataset.fallbackStage="0";
  image.onload=()=>{if(request!==diagramRequest||current?.id!==selectedId||current?.image!==selectedImage)return;wrap.setAttribute("aria-busy","false");zoom=1;fitDiagram();renderHotspots();};
  image.onerror=()=>{
   if(request!==diagramRequest||current?.id!==selectedId||current?.image!==selectedImage)return;
-  // Retry the verified repository image directly if the GitHub Pages asset fails.
-  if(!image.dataset.rawFallback){
-   image.dataset.rawFallback="1";
-   image.src="https://raw.githubusercontent.com/satriosusanto/Terex-Partbook/main/catalogs/terex-ac200-1/images/"+encodeURIComponent(selectedImage);
+  const stage=Number(image.dataset.fallbackStage||"0");
+  const file=encodeURIComponent(selectedImage);
+  // Try independent public asset hosts in case a browser/network blocks one source.
+  if(stage===0){
+   image.dataset.fallbackStage="1";
+   image.src="https://raw.githubusercontent.com/satriosusanto/Terex-Partbook/main/catalogs/terex-ac200-1/images/"+file;
+   return;
+  }
+  if(stage===1){
+   image.dataset.fallbackStage="2";
+   image.src="https://cdn.jsdelivr.net/gh/satriosusanto/Terex-Partbook@main/catalogs/terex-ac200-1/images/"+file;
    return;
   }
   wrap.setAttribute("aria-busy","false");
-  wrap.innerHTML='<div class="diagram-message">Diagram could not be loaded from GitHub Pages or the repository image source. Catalog ID: '+esc(selectedId)+' · File: '+esc(selectedImage)+'. Please check the connection.</div>';
+  wrap.innerHTML='<div class="diagram-message">Diagram could not be loaded from three image sources. Catalog ID: '+esc(selectedId)+' · File: '+esc(selectedImage)+'. Check the browser Network tab for the failed image requests.</div>';
  };
  image.src=new URL("images/"+encodeURIComponent(src),document.baseURI).href;
 }
