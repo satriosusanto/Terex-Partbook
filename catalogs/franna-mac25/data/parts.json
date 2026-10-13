@@ -25852,9 +25852,9 @@
   {
     "id": "PP1602126:00001",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "1",
     "part_number": "FMUS06C012L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 12 ZP",
     "qty": "8",
     "type": "1",
     "level": ""
@@ -25862,9 +25862,9 @@
   {
     "id": "PP1602126:00002",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "2",
     "part_number": "FMUS06C020L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 20 ZP",
     "qty": "4",
     "type": "1",
     "level": ""
@@ -25872,9 +25872,9 @@
   {
     "id": "PP1602126:00003",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "3",
     "part_number": "FMUS06C020L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 20 ZP",
     "qty": "4",
     "type": "1",
     "level": ""
@@ -25882,9 +25882,9 @@
   {
     "id": "PP1602126:00004",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "4",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "8",
     "type": "1",
     "level": ""
@@ -25892,9 +25892,9 @@
   {
     "id": "PP1602126:00005",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "5",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "8",
     "type": "1",
     "level": ""
@@ -25902,7 +25902,7 @@
   {
     "id": "PP1602126:00006",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "6",
     "part_number": "PP0509500",
     "description": "FLASHER CLEAR",
     "qty": "2",
@@ -25912,7 +25912,7 @@
   {
     "id": "PP1602126:00007",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "7",
     "part_number": "PP0509600",
     "description": "FLASHER AMBER",
     "qty": "2",
@@ -25922,7 +25922,7 @@
   {
     "id": "PP1602126:00008",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "8",
     "part_number": "PP1300400",
     "description": "FESTOON 24V 21W 15 X 42.5MM",
     "qty": "2",
@@ -25932,7 +25932,7 @@
   {
     "id": "PP1602126:00009",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "9",
     "part_number": "PP1602136",
     "description": "INSERT H/LIGHT HIGH/LOW BEAM",
     "qty": "2",
@@ -25942,7 +25942,7 @@
   {
     "id": "PP1602126:00010",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "10",
     "part_number": "PP1602146",
     "description": "HEADLIGHT INSERT HIGHBEAM",
     "qty": "2",
@@ -25952,7 +25952,7 @@
   {
     "id": "PP1602126:00011",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "11",
     "part_number": "PP1712900",
     "description": "GLOBE 24V 70W QUARTZ H1",
     "qty": "2",
@@ -25962,7 +25962,7 @@
   {
     "id": "PP1602126:00012",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "12",
     "part_number": "PP1713100",
     "description": "GLOBE 24V 70-75W QUARTZ H4",
     "qty": "2",
@@ -25972,7 +25972,7 @@
   {
     "id": "PP1602126:00013",
     "catalog": "PP1602126",
-    "position": "",
+    "position": "13",
     "part_number": "PP2367200",
     "description": "FESTOON 24V 5W 11 X 41MM (BOX)",
     "qty": "2",
