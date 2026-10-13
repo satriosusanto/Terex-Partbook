@@ -94,6 +94,21 @@ function renderCats(){
   renderCats();
  });
 }
+function setTreeExpanded(expanded){
+ const root=S.cats.find(c=>/ BASE$/.test(c.id));const rootId=root?.id;
+ catalogGroups.forEach(g=>{
+  S.openGroups[expanded?'add':'delete'](g.name);
+  S.cats.filter(c=>catalogGroup(c,rootId)===g.name&&!(rootId&&c.id===rootId+g.suffix)).forEach(c=>{
+   const m=String(c.id).match(/^(\\d{2}[FTP])-(\\d{4})-/);
+   const family=m?m[1]:'Other catalogs',subgroup=m?m[2]:'';
+   S.openGroups[expanded?'add':'delete'](`${g.name}|family|${family}`);
+   S.openGroups[expanded?'add':'delete'](`${g.name}|sub|${family}|${subgroup}`);
+  });
+ });
+ const button=$('treeExpandToggle');
+ if(button){button.dataset.expanded=String(expanded);button.setAttribute('aria-expanded',String(expanded));button.textContent=expanded?'Collapse tree':'Expand tree';}
+ renderCats();
+}
 function rowsFor(id){return S.parts.filter(p=>p.catalogId===id)}
 function fitZoom(){
  const image=S.current?S.imgs[S.current.id]:null;
@@ -224,7 +239,7 @@ function finishViewerPointer(e){
 $('viewer').addEventListener('pointerup',finishViewerPointer);
 $('viewer').addEventListener('pointercancel',finishViewerPointer);
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('partsPanel').hidden=b.dataset.tab!=='parts';$('searchPanel').hidden=b.dataset.tab!=='search'});
-$('searchBtn').onclick=doSearch;$('q').onkeydown=e=>{if(e.key==='Enter')doSearch()};$('q').addEventListener('input',debounce(doSearch,220));$('clearSearch').onclick=()=>{$('q').value='';$('results').innerHTML='<div class="searchHint">Enter a part number, description, position, or catalog code.</div>';$('resultCount').textContent='';document.querySelector('[data-tab="parts"]').click()};$('catFilter').addEventListener('input',debounce(e=>filterCats(e.target.value),150));$('resetBtn').onclick=reset;$('back').onclick=()=>{const id=decodeURIComponent(location.hash.slice(1));if(id)history.back();else reset()};
+$('searchBtn').onclick=doSearch;$('q').onkeydown=e=>{if(e.key==='Enter')doSearch()};$('q').addEventListener('input',debounce(doSearch,220));$('clearSearch').onclick=()=>{$('q').value='';$('results').innerHTML='<div class="searchHint">Enter a part number, description, position, or catalog code.</div>';$('resultCount').textContent='';document.querySelector('[data-tab="parts"]').click()};$('catFilter').addEventListener('input',debounce(e=>filterCats(e.target.value),150));$('treeExpandToggle').onclick=()=>setTreeExpanded($('treeExpandToggle').dataset.expanded!=='true');$('resetBtn').onclick=reset;$('back').onclick=()=>{const id=decodeURIComponent(location.hash.slice(1));if(id)history.back();else reset()};
 $('zoomIn').onclick=()=>setZoom(S.zoom+.1);$('zoomOut').onclick=()=>setZoom(S.zoom-.1);$('zoomFit').onclick=()=>setZoom(fitZoom());
 $('themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('pb-dark',document.body.classList.contains('dark')?'1':'0')};if(localStorage.getItem('pb-dark')==='1')document.body.classList.add('dark');
 $('close').onclick=()=>$('modal').hidden=true;$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').hidden=true};$('aboutBtn').onclick=()=>$('about').hidden=false;$('aboutClose').onclick=()=>$('about').hidden=true;$('about').onclick=e=>{if(e.target.id==='about')$('about').hidden=true};
