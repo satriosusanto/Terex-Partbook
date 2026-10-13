@@ -23,7 +23,7 @@ body.dark{background:#12171c;color:#e8edf1}body.dark aside,body.dark .crumb,body
   /* Keep the catalog hierarchy visible on Android. Hiding #sidebar here made
    the entire AC200-1 catalog tree inaccessible on phones. */
   body.catalog-ui > main > #sidebar {
-    display: flex;
+    display: block;
     position: relative;
     top: auto;
     right: auto;
@@ -44,10 +44,7 @@ body.dark{background:#12171c;color:#e8edf1}body.dark aside,body.dark .crumb,body
     border-bottom: 1px solid #d8dde2;
   }
   body.catalog-ui > main > #sidebar #catalogs {
-    min-height: 0;
-    flex: 1 1 auto;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: visible;
   }
   body.catalog-ui > main > .workspace {
     display: flex;
