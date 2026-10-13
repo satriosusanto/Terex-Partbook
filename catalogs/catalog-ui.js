@@ -458,6 +458,7 @@
     };
     const curatedCatalogTree = curatedCatalogTrees[modelCode] ?? null;
     const curatedRootId = curatedCatalogTree ? resolveCatalogId(curatedCatalogTree.root) : null;
+    const curatedParentPriority = new Set();
     if (curatedCatalogTree) {
       const curatedParents = {};
       const controlledParentIds = new Set(
@@ -470,7 +471,10 @@
         if (!parentId) continue;
         childRaws.forEach(childRaw => {
           const childId = resolveCatalogId(childRaw);
-          if (childId && childId !== parentId) curatedParents[childId] = parentId;
+          if (childId && childId !== parentId) {
+            curatedParents[childId] = parentId;
+            curatedParentPriority.add(childId);
+          }
         });
       }
       const curatedChildren = new Set([curatedRootId, ...Object.keys(curatedParents)].filter(Boolean));
@@ -533,6 +537,34 @@
       const version = part.version ?? part.partVersion ?? part.catalogVersion;
       if (version && version !== "_") versionById.set(childKey, String(version));
     });
+    // Normalize the graph and break bad parent cycles. The old source renderer could
+    // silently omit catalogs when a cycle or disconnected branch had no root.
+    const allCatalogIds = catalogs.map(getId);
+    const completedParentWalks = new Set();
+    for (const startId of allCatalogIds) {
+      const walk = [];
+      const seenAt = new Map();
+      let nodeId = startId;
+      while (nodeId && parentById.has(nodeId) && !completedParentWalks.has(nodeId)) {
+        if (seenAt.has(nodeId)) {
+          const cycle = walk.slice(seenAt.get(nodeId));
+          const victim = cycle.find(id => !curatedParentPriority.has(id) && id !== curatedRootId)
+            ?? cycle.find(id => id !== curatedRootId)
+            ?? cycle[0];
+          if (victim) parentById.delete(victim);
+          break;
+        }
+        seenAt.set(nodeId, walk.length);
+        walk.push(nodeId);
+        nodeId = parentById.get(nodeId);
+      }
+      walk.forEach(id => completedParentWalks.add(id));
+    }
+    childIds.forEach(children => children.splice(0, children.length));
+    for (const [childId, parentId] of parentById) {
+      if (childIds.has(parentId) && childIds.has(childId)) childIds.get(parentId).push(childId);
+    }
+
     childIds.forEach((children, parentId) => {
       const preferredChildren = curatedCatalogTree?.branches?.[parentId]
         ?.map(resolveCatalogId)
@@ -578,15 +610,16 @@
       markReachable(id);
     });
 
+    const expectedSourceIds = catalogs.map(getId).filter(id => id !== "0");
     let entries = [];
     const renderDeadline = Date.now() + 30000;
     while (Date.now() < renderDeadline) {
       entries = [...source.querySelectorAll(".cat, .catalog-item")];
-      if (entries.length >= catalogs.length) break;
+      if (entries.length >= expectedSourceIds.length) break;
       await new Promise(resolve => setTimeout(resolve, 50));
     }
-    if (entries.length < catalogs.length) {
-      throw new Error(`Expected ${catalogs.length} catalog entries, found ${entries.length}.`);
+    if (entries.length < expectedSourceIds.length) {
+      throw new Error(`Expected at least ${expectedSourceIds.length} visible catalog source entries (excluding placeholder 0), found ${entries.length}.`);
     }
 
     const sourceNodeById = new Map();
@@ -607,7 +640,7 @@
         .find(candidate => catalogIdForEntry(candidate) === id);
       if (entry) entry.click();
     };
-    const missingNodes = catalogs.map(getId).filter(id => !sourceNodeById.has(id));
+    const missingNodes = expectedSourceIds.filter(id => !sourceNodeById.has(id));
     if (missingNodes.length) {
       throw new Error(`Catalog selectors are missing for: ${missingNodes.slice(0, 5).join(", ")}`);
     }
@@ -751,7 +784,10 @@
       if (seen.has(id)) return;
       seen.add(id);
       const children = childIds.get(id) ?? [];
-      if (children.length && depth < 4) expanded.add(id);
+      // AC200 starts with the top-level assemblies visible and each assembly
+      // independently expandable/collapsible. Other models retain their existing
+      // initial expansion depth.
+      if (children.length && (modelCode === "AC200-1" ? depth === 0 : depth < 4)) expanded.add(id);
       children.forEach(childId => expandInitialBranches(childId, depth + 1, seen));
     };
     roots.forEach(id => expandInitialBranches(id, 0));
