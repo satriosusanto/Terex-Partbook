@@ -4,7 +4,7 @@ const aliases=new Map();for(const c of all)for(const k of [c.variant,c.id,c.cata
 const resolveKey=v=>{const raw=String(v??"").trim();return byId.has(raw)?raw:(aliases.get(raw.toLowerCase())||null)};
 for(const [childRaw,parRaw] of Object.entries(parent)){const child=resolveKey(childRaw),par=resolveKey(parRaw);if(!child||!par||child===par)continue;if(!children.has(par))children.set(par,[]);if(!children.get(par).includes(child))children.get(par).push(child)}
 const rootId=resolveKey(D.hierarchy?.root),childIds=new Set([...children.values()].flat());
-const roots=rootId?[rootId]:all.map(c=>String(c.variant)).filter(id=>!childIds.has(id));
+const roots=[...new Set([...(rootId?[rootId]:[]),...all.map(c=>String(c.variant)).filter(id=>!childIds.has(id))])];
 const matches=c=>!q||[c.variant,c.title,...(c.parts||[]).map(p=>[p.partNo,p.description,p.position].join(" "))].join(" ").toLowerCase().includes(q);
 const memo=new Map();
 function subtreeMatch(id,path=new Set()){if(memo.has(id))return memo.get(id);if(path.has(id))return false;const c=byId.get(id);if(!c)return false;const next=new Set(path);next.add(id);const yes=matches(c)||(children.get(id)||[]).some(ch=>subtreeMatch(ch,next));memo.set(id,yes);return yes}
