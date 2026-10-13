@@ -23,10 +23,25 @@ async function load(){
    getJSON('data/catalogs.json'),getJSON('data/parts.json'),getJSON('data/hotspots.json'),getJSON('data/images.json'),getJSON('data/image-meta.json')
   ]);
   $('catCount').textContent=S.cats.length; $('partTotal').textContent=S.parts.length.toLocaleString();
+  initCatalogTreeExpansion();
   S.filteredCats=S.cats; renderCats();
   const hash=decodeURIComponent(location.hash.slice(1)); if(hash) openCat(hash,false);
   setStatus('Ready','ok');
  }catch(e){console.error(e);setStatus('Failed to load data','error');$('viewer').innerHTML='<div class="empty"><div class="emptyIcon">⚠</div><b>PartBook data could not be loaded</b><span>Upload the complete repository, including the <code>data</code> and <code>images</code> folders.</span></div>';}
+}
+function initCatalogTreeExpansion(){
+ const root=S.cats.find(c=>/ BASE$/.test(c.id)); const rootId=root?.id;
+ catalogGroups.forEach(g=>{
+  const matches=S.cats.filter(c=>catalogGroup(c,rootId)===g.name);
+  const overview=matches.find(c=>rootId&&c.id===rootId+g.suffix);
+  matches.filter(c=>!overview||c.id!==overview.id).forEach(c=>{
+   const m=String(c.id).match(/^(\d{2}[FTP])-(\d{4})-/);
+   const family=m?m[1]:'Other catalogs';
+   const subgroup=m?m[2]:'';
+   S.openGroups.add(`${g.name}|family|${family}`);
+   S.openGroups.add(`${g.name}|sub|${family}|${subgroup}`);
+  });
+ });
 }
 function renderCats(){
  const root=S.cats.find(c=>/ BASE$/.test(c.id)); const rootId=root?.id;
@@ -53,7 +68,7 @@ function renderCats(){
   });
   const familyHtml=[...families.entries()].sort((a,b)=>a[0].localeCompare(b[0],undefined,{numeric:true})).map(([family,subs])=>{
    const familyKey=`${g.name}|family|${family}`;
-   const familyOpen=S.openGroups.has(familyKey)||expanded;
+   const familyOpen=S.openGroups.has(familyKey);
    const subHtml=[...subs.entries()].sort((a,b)=>a[0].localeCompare(b[0],undefined,{numeric:true})).map(([subgroup,items])=>{
     const subKey=`${g.name}|sub|${family}|${subgroup}`;
     const subOpen=S.openGroups.has(subKey);
