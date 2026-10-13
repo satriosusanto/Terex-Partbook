@@ -12,3 +12,14 @@ body.dark{--bg:#101318;--panel:#181c22;--text:#e8edf3;--muted:#9aa4b2;--line:#30
 .tree-empty{padding:10px;color:var(--muted)}
 body.dark .tree-root{background:#202b39;border-color:var(--line);color:#d9e8fb}
 @media(max-width:800px){.tree-row{padding-top:4px;padding-bottom:4px;line-height:16px}.tree-root{padding-left:4px}}
+
+/* Recursive catalog hierarchy: indent each level and distinguish expandable catalogs. */
+.tree-children{display:block;margin:0;padding:0}
+.tree-row{position:relative;min-height:19px;padding:3px 5px 3px calc(5px + var(--tree-level,0)*15px);gap:4px;align-items:flex-start}
+.tree-row[data-catalog]:focus-within{outline:1px solid #8bb8ef;outline-offset:-1px}
+.tree-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 13px;width:13px;height:15px;margin:0;padding:0;font-size:13px;line-height:13px}
+.tree-branch{display:inline-block;flex:0 0 13px;width:13px;text-align:center;line-height:14px}
+.tree-leaf{color:#9aa4b2;font-size:10px}
+.tree-node .tree-label{font-weight:400}
+.tree-root .tree-label{font-weight:700}
+@media(max-width:800px){.tree-row{padding-top:4px;padding-bottom:4px;line-height:16px}.tree-children{border-left:1px solid #d8e2ef;margin-left:10px}body.dark .tree-children{border-left-color:#303641}}
