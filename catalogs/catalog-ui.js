@@ -406,7 +406,7 @@
     // Load that source first so the shared tree behaves consistently for every model.
     let hierarchy = null;
     try {
-      const hierarchyResponse = await fetch("data/catalog-hierarchy.json");
+      const hierarchyResponse = await fetch("data/catalog-hierarchy.json?v=etk-source-parent-map-1");
       if (hierarchyResponse.ok) {
         const packed = await hierarchyResponse.json();
         if (packed?.encoding === "gzip-base64" && packed.data && "DecompressionStream" in window) {
