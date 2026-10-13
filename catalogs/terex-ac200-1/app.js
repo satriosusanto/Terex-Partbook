@@ -1,27 +1,28 @@
 const $=id=>document.getElementById(id);
-let catalogs=[],parts=[],hotspots=[],imageMeta=[],current=null,zoom=1,dark=false,diagramRequest=0;
+let catalogs=[],parts=[],hotspots=[],imageMeta=[],catalogHierarchy=null,current=null,zoom=1,dark=false,diagramRequest=0;
 const imgByName=new Map(), metaByName=new Map();
 Promise.all([
  fetch("data/catalogs.json").then(r=>r.json()),
  fetch("data/parts.json").then(r=>r.json()),
  fetch("data/hotspots.json").then(r=>r.json()),
- fetch("data/image-meta.json").then(r=>r.json())
-]).then(([c,p,h,m])=>{
- catalogs=c.items||c; parts=p; hotspots=h; imageMeta=m;
+ fetch("data/image-meta.json").then(r=>r.json()),
+ fetch("data/catalog-hierarchy.json").then(async r=>{const packed=await r.json();if(packed.encoding==="gzip-base64"&&"DecompressionStream"in window){const bytes=Uint8Array.from(atob(packed.data),c=>c.charCodeAt(0));const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));return JSON.parse(await new Response(stream).text())}return packed})
+]).then(([c,p,h,m,tree])=>{
+ catalogs=c.items||c; parts=p; hotspots=h; imageMeta=m; catalogHierarchy=tree;
  imageMeta.forEach(x=>metaByName.set(x.name,x));
  renderCatalogs(catalogs);
  const root=catalogs.find(x=>x.id==="33340.1")||catalogs.find(x=>x.title.toUpperCase().includes("AC 200-1"));
  if(root) selectCatalog(root.id);
 });
 function renderCatalogs(list){
-const all=catalogs||[],byId=new Map(all.map(c=>[String(c.id),c])),partsByCatalog=new Map(),children=new Map(),hasParent=new Set();
-for(const p of(parts||[])){const key=String(p.catalog);if(!partsByCatalog.has(key))partsByCatalog.set(key,[]);partsByCatalog.get(key).push(p)}
-for(const c of all){for(const p of(partsByCatalog.get(String(c.id))||[])){const id=String(p.partNumber??"").trim();if(id&&id!==String(c.id)&&byId.has(id)){if(!children.has(String(c.id)))children.set(String(c.id),[]);const a=children.get(String(c.id));if(!a.includes(id))a.push(id);hasParent.add(id)}}}
+const all=catalogs||[],byId=new Map(all.map(c=>[String(c.id),c])),children=new Map(),parent=catalogHierarchy?.parent||{};
+for(const [child,par] of Object.entries(parent)){if(!byId.has(child)||!byId.has(String(par)))continue;if(!children.has(String(par)))children.set(String(par),[]);children.get(String(par)).push(String(child))}
 const q=$("catalogFilter").value.toLowerCase().trim();
 const matches=c=>!q||(String(c.id)+" "+String(c.title)).toLowerCase().includes(q);
 const memo=new Map();
 function subtreeMatch(id,path=new Set()){if(memo.has(id))return memo.get(id);if(path.has(id))return false;const c=byId.get(id);if(!c)return false;const next=new Set(path);next.add(id);const yes=matches(c)||(children.get(id)||[]).some(ch=>subtreeMatch(ch,next));memo.set(id,yes);return yes}
-const sentinelRoots=children.get("0")||[];const roots=sentinelRoots.length?sentinelRoots:all.filter(c=>!hasParent.has(String(c.id))).map(c=>String(c.id)).filter(id=>id!=="0");
+const rootId=catalogHierarchy?.root;
+const roots=rootId&&byId.has(String(rootId))?[String(rootId)]:all.filter(c=>!parent[String(c.id)]).map(c=>String(c.id));
 let shown=0;
 function draw(id,path=new Set()){const c=byId.get(id);if(!c||path.has(id)||id==="0"||(q&&!subtreeMatch(id)))return "";const next=new Set(path);next.add(id);if(matches(c))shown++;const nested=(children.get(id)||[]).map(ch=>draw(ch,next)).join("");return `<div class="cat-tree-node"><div class="cat ${current?.id===c.id?"active":""}" data-v="${esc(c.id)}"><div>${esc(c.title)}</div><small>${esc(c.id)} · ${c.partCount} parts${c.hasDiagram?"":" · no diagram"}</small></div>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`}
 const el=$("catalogs");el.innerHTML=roots.map(id=>draw(id)).join("")||'<div class="diagram-message">No matching catalogs.</div>';
