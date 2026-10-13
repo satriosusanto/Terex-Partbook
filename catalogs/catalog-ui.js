@@ -591,10 +591,12 @@
     if (!roots.length) roots = catalogs.map(getId);
     const placeholderIndex = roots.indexOf("0");
     const placeholderChildren = childIds.get("0") ?? [];
-    if (placeholderIndex >= 0 && placeholderChildren.length === 1) {
+    if (placeholderIndex >= 0) {
+      // "0" is a synthetic import placeholder, not a user-facing catalog.
+      // Promote all of its children so a multi-root placeholder cannot hide them.
       hiddenRootIds.add("0");
       roots.splice(placeholderIndex, 1);
-      roots.unshift(placeholderChildren[0]);
+      roots = [...new Set([...placeholderChildren, ...roots])];
     }
     const reachableIds = new Set();
     const markReachable = id => {
