@@ -675,6 +675,12 @@
     let query = "";
 
     function catalogLabel(catalog, id) {
+      // AC200 has source-verified human-readable assembly labels in its model app.
+      // Reuse those labels instead of replacing them with numeric catalog titles
+      // when the shared expandable tree takes over the native list.
+      if (modelCode === "AC200-1" && typeof getCatalogTitle === "function") {
+        return getCatalogTitle(catalog);
+      }
       const description = modelCode === "AC250-1" && id === "85198.1"
         ? "AC 250-1"
         : descriptionById.get(id) || catalog.title || id;
