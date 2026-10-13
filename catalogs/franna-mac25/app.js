@@ -14,6 +14,66 @@ function renderCats(){
  $('#cats').innerHTML=renderNode(tree,0,true,'r')||'<div class="tree-empty">No matching assemblies</div>';
  $('#cats').querySelectorAll('.tree-toggle').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();const box=Array.from($('#cats').querySelectorAll('[data-children]')).find(x=>x.dataset.children===btn.dataset.toggle);if(!box)return;box.hidden=!box.hidden;btn.textContent=box.hidden?'⊕':'⊖';btn.setAttribute('aria-expanded',String(!box.hidden))}));
  $('#cats').querySelectorAll('[data-catalog]').forEach(row=>row.addEventListener('click',e=>{if(e.target.closest('.tree-toggle'))return;openCat(row.dataset.catalog)}));
+  const q=$('#catfilter').value.trim().toLowerCase();
+  const root=catalogs.find(c=>c.id==='MAC25*69557884')||catalogs.find(c=>Array.isArray(c.children)&&c.id.startsWith('MAC25*'));
+  if(!root){$('#cats').innerHTML='<div class="tree-empty">Root catalog not found</div>';return}
+  const assemblyNames={
+    T177667:'ASSY FRONT BODY MAC25',T177668:'ASSY REAR BODY MAC25',
+    PLMXA3035:'BOOM ASSEMBLY FULL POWER',T177670:'ASSY POWERTRAIN MAC25',
+    T191850:'ASSY PNEUMATIC MAC25',T177672:'ASSY HYDRAULIC MAC25',
+    T177673:'ASSY ELECTRICAL MAC25',T167887:'ASSY OPTIONS MAC25',
+    PLMXA9001:'SERVICE KITS MAC25'
+  };
+  const catalogById=new Map(catalogs.map(c=>[c.id,c]));
+  const childCatalogs=c=>{
+    const seen=new Set();
+    return (c.children||[]).map(row=>catalogById.get(row.part_number||row.id)).filter(child=>{
+      if(!child||child.id===c.id||seen.has(child.id))return false;
+      seen.add(child.id);return true;
+    });
+  };
+  const labelFor=c=>assemblyNames[c.id]||c.title||c.id;
+  const matches=(c)=>{
+    const text=[c.id,c.title,labelFor(c),...(c.children||[]).flatMap(p=>[p.part_number,p.description,p.position])].join(' ').toLowerCase();
+    return !q||text.includes(q)||childCatalogs(c).some(matches);
+  };
+  const expanded=new Set([root.id]);
+  const renderNode=(c,level,ancestry)=>{
+    const children=childCatalogs(c).filter(matches);
+    const isExpanded=expanded.has(c.id);
+    const hasChildren=children.length>0;
+    const label=labelFor(c)+(assemblyNames[c.id]?' ('+c.id+')':'');
+    let html='<div class="tree-row '+(level===0?'tree-root':'tree-node')+' '+(active===c.id?'active':'')+'" data-catalog="'+esc(c.id)+'" style="--tree-level:'+level+'">';
+    if(hasChildren){html+='<button class="tree-toggle" type="button" data-toggle="'+esc(c.id)+'" aria-label="Expand/collapse '+esc(label)+'" aria-expanded="'+isExpanded+'">'+(isExpanded?'⊖':'⊕')+'</button>'}
+    else{html+='<span class="tree-branch tree-leaf" aria-hidden="true">•</span>'}
+    html+='<span class="tree-label">'+(level===0?'<b>'+esc(label)+'</b>':esc(label))+'</span></div>';
+    if(hasChildren&&isExpanded){
+      html+='<div class="tree-children">';
+      for(const child of children){if(ancestry.has(child.id))continue;const next=new Set(ancestry);next.add(child.id);html+=renderNode(child,level+1,next)}
+      html+='</div>';
+    }
+    return html;
+  };
+  $('#cats').innerHTML=matches(root)?renderNode(root,0,new Set([root.id])):'<div class="tree-empty">No matching catalogs</div>';
+  $('#cats').querySelectorAll('[data-catalog]').forEach(row=>row.addEventListener('click',e=>{
+    if(e.target.closest('.tree-toggle'))return;
+    openCat(row.dataset.catalog);
+  }));
+  $('#cats').querySelectorAll('[data-toggle]').forEach(button=>button.addEventListener('click',e=>{
+    e.stopPropagation();const id=button.dataset.toggle;const node=button.closest('.tree-row');const nextExpanded=button.getAttribute('aria-expanded')!=='true';
+    if(nextExpanded)expanded.add(id);else expanded.delete(id);
+    const childrenBox=node.nextElementSibling;if(childrenBox&&childrenBox.classList.contains('tree-children'))childrenBox.remove();
+    button.setAttribute('aria-expanded',String(nextExpanded));button.textContent=nextExpanded?'⊖':'⊕';
+    if(nextExpanded){const catalog=catalogById.get(id);const kids=childCatalogs(catalog).filter(matches);const container=document.createElement('div');container.className='tree-children';const ancestry=new Set();let parent=node;while(parent){if(parent.dataset?.catalog)ancestry.add(parent.dataset.catalog);parent=parent.parentElement?.closest('.tree-row')||null;}for(const child of kids){if(ancestry.has(child.id))continue;const next=new Set(ancestry);next.add(child.id);container.insertAdjacentHTML('beforeend',renderNode(child,(Number(node.style.getPropertyValue('--tree-level'))||0)+1,next));}node.insertAdjacentElement('afterend',container);wireTree(container);}
+  }));
+  function wireTree(container){
+    container.querySelectorAll('[data-catalog]').forEach(row=>row.addEventListener('click',e=>{if(e.target.closest('.tree-toggle'))return;openCat(row.dataset.catalog)}));
+    container.querySelectorAll('[data-toggle]').forEach(button=>button.addEventListener('click',e=>{
+      e.stopPropagation();const id=button.dataset.toggle;const row=button.closest('.tree-row');const nextExpanded=button.getAttribute('aria-expanded')!=='true';
+      if(nextExpanded)expanded.add(id);else expanded.delete(id);const old=row.nextElementSibling;if(old&&old.classList.contains('tree-children'))old.remove();button.setAttribute('aria-expanded',String(nextExpanded));button.textContent=nextExpanded?'⊖':'⊕';
+      if(nextExpanded){const c=catalogById.get(id);const kids=childCatalogs(c).filter(matches);const box=document.createElement('div');box.className='tree-children';const ancestry=new Set([id]);let parent=row.parentElement?.closest('.tree-row');while(parent){ancestry.add(parent.dataset.catalog);parent=parent.parentElement?.closest('.tree-row')}const level=(Number(row.style.getPropertyValue('--tree-level'))||0)+1;for(const child of kids){if(ancestry.has(child.id))continue;const next=new Set(ancestry);next.add(child.id);box.insertAdjacentHTML('beforeend',renderNode(child,level,next));}row.insertAdjacentElement('afterend',box);wireTree(box);}
+    }));
+  }
 }
 function catRow(c,level=1,label=''){const title=label||c.title||c.id;return `<div class="tree-row tree-node ${active===c.id?'active':''}" data-catalog="${esc(c.id)}" style="--tree-level:${level}"><span class="tree-spacer"></span><span class="tree-label">${esc(title)}</span></div>`}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
