@@ -75,7 +75,7 @@ const verifiedParent={
   "45337612":"45337812","45337412":"45337812","45337312":"45337812","45338412":"45337812",
   "29020912":"45337812","17524012":"29020912","45079312":"45337812","45338312":"45337812"
 };
-Object.assign(parent,verifiedParent);
+const fixedParentIds=new Set(["33340.1","45314212","45338212","45337812","29020912"]),fixedChildIds=new Set(["33340.1",...Object.keys(verifiedParent)]);for(const [childRaw,parRaw] of Object.entries(parent)){if(fixedParentIds.has(String(parRaw))||fixedChildIds.has(String(childRaw)))delete parent[childRaw]}Object.assign(parent,verifiedParent);catalogHierarchy={...(catalogHierarchy||{}),root:"33340.1",parent};
 
 const aliases=new Map();const addAlias=(k,id)=>{if(k===undefined||k===null)return;const raw=String(k).trim();if(!raw)return;aliases.set(raw.toLowerCase(),String(id));aliases.set(raw.toLowerCase().replace(/[\s_-]+/g,""),String(id));};for(const c of all)for(const k of [c.id,c.variant,c.catalogId,c.catalog,c.key,c.title])addAlias(k,c.id);
 const resolveKey=v=>{const raw=String(v??"").trim();if(byId.has(raw))return raw;return aliases.get(raw.toLowerCase())||aliases.get(raw.toLowerCase().replace(/[\s_-]+/g,""))||null};
