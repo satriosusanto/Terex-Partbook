@@ -1,6 +1,7 @@
 const $=id=>document.getElementById(id);
 let catalogs=[],parts=[],hotspots=[],imageMeta=[],catalogHierarchy=null,current=null,zoom=1,dark=false,diagramRequest=0;
 const imgByName=new Map(), metaByName=new Map();
+const ac200ExpandedCatalogs=new Set(["33340.1"]);
 async function getJson(path){
  const response=await fetch(path,{cache:"no-cache"});
  if(!response.ok)throw new Error(path+" returned HTTP "+response.status);
@@ -61,10 +62,24 @@ const catalogLabels={
 };
 function getCatalogTitle(c){return catalogLabels[String(c?.id)]||c?.title||"";}
 function renderCatalogs(list){
-const all=catalogs||[],byId=new Map(all.map(c=>[String(c.id),c])),children=new Map(),parent={...(catalogHierarchy?.parent||{})};
-// OEM hierarchy anchors verified against the AC 200-1 reference tree.
-// Override incorrect parent links for the three main assemblies and their visible subassemblies.
-const verifiedParent={
+ const all=catalogs||[];
+ const ids=all.map(c=>String(c.id));
+ const byId=new Map(all.map(c=>[String(c.id),c]));
+ const aliases=new Map();
+ const addAlias=(value,id)=>{
+  if(value===undefined||value===null)return;
+  const raw=String(value).trim();if(!raw)return;
+  const normal=raw.toLowerCase(),compact=normal.replace(/[\\s_-]+/g,"");
+  if(!aliases.has(normal))aliases.set(normal,String(id));
+  if(!aliases.has(compact))aliases.set(compact,String(id));
+ };
+ for(const c of all)for(const key of [c.id,c.variant,c.catalogId,c.catalog,c.key])addAlias(key,c.id);
+ const resolveKey=value=>{
+  const raw=String(value??"").trim();
+  if(byId.has(raw))return raw;
+  return aliases.get(raw.toLowerCase())||aliases.get(raw.toLowerCase().replace(/[\\s_-]+/g,""))||null;
+ };
+ const verifiedParent={
   "45314212":"33340.1","45338212":"33340.1","45337812":"33340.1",
   "45142412":"45314212","45265312":"45314212","45095812":"45314212","45328312":"45314212",
   "45294012":"45314212","45287512":"45314212","45142512":"45314212","45081512":"45314212",
@@ -74,24 +89,115 @@ const verifiedParent={
   "45176912":"45338212","45079012":"45338212",
   "45337612":"45337812","45337412":"45337812","45337312":"45337812","45338412":"45337812",
   "29020912":"45337812","17524012":"29020912","45079312":"45337812","45338312":"45337812"
-};
-const fixedParentIds=new Set(["33340.1","45314212","45338212","45337812","29020912"]),fixedChildIds=new Set(["33340.1",...Object.keys(verifiedParent)]);for(const [childRaw,parRaw] of Object.entries(parent)){if(fixedParentIds.has(String(parRaw))||fixedChildIds.has(String(childRaw)))delete parent[childRaw]}Object.assign(parent,verifiedParent);catalogHierarchy={...(catalogHierarchy||{}),root:"33340.1",parent};
-
-const aliases=new Map();const addAlias=(k,id)=>{if(k===undefined||k===null)return;const raw=String(k).trim();if(!raw)return;aliases.set(raw.toLowerCase(),String(id));aliases.set(raw.toLowerCase().replace(/[\s_-]+/g,""),String(id));};for(const c of all)for(const k of [c.id,c.variant,c.catalogId,c.catalog,c.key,c.title])addAlias(k,c.id);
-const resolveKey=v=>{const raw=String(v??"").trim();if(byId.has(raw))return raw;return aliases.get(raw.toLowerCase())||aliases.get(raw.toLowerCase().replace(/[\s_-]+/g,""))||null};
-for(const [childRaw,parRaw] of Object.entries(parent)){const child=resolveKey(childRaw),par=resolveKey(parRaw);if(!child||!par||child===par)continue;if(!children.has(par))children.set(par,[]);if(!children.get(par).includes(child))children.get(par).push(child)}
-const q=$("catalogFilter").value.toLowerCase().trim();
-const matches=c=>!q||(String(c.id)+" "+String(c.title)).toLowerCase().includes(q);
-const memo=new Map();
-function subtreeMatch(id,path=new Set()){if(memo.has(id))return memo.get(id);if(path.has(id))return false;const c=byId.get(id);if(!c)return false;const next=new Set(path);next.add(id);const yes=matches(c)||(children.get(id)||[]).some(ch=>subtreeMatch(ch,next));memo.set(id,yes);return yes}
-const rootId=resolveKey(catalogHierarchy?.root);
-const childIds=new Set([...children.values()].flat());
-const roots=[...new Set([...(rootId?[rootId]:[]),...all.map(c=>String(c.id)).filter(id=>!childIds.has(id))])];
-let shown=0;
-function draw(id,path=new Set()){const c=byId.get(id);if(!c||path.has(id)||id==="0"||(q&&!subtreeMatch(id)))return "";const next=new Set(path);next.add(id);if(matches(c))shown++;const nested=(children.get(id)||[]).map(ch=>draw(ch,next)).join("");return `<div class="cat-tree-node"><div class="cat ${current?.id===c.id?"active":""}" data-v="${esc(c.id)}"><div>${esc(getCatalogTitle(c))}</div><small>${esc(c.id)} · ${c.partCount} parts${c.hasDiagram?"":" · no diagram"}</small></div>${nested?`<div class="cat-tree-children" style="margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`}
-const el=$("catalogs");el.innerHTML=roots.map(id=>draw(id)).join("")||'<div class="diagram-message">No matching catalogs.</div>';
-el.querySelectorAll("[data-v]").forEach(node=>node.onclick=()=>selectCatalog(node.dataset.v));
-$("catalogCount").textContent=(q?shown:all.length)+" / "+all.length;
+ };
+ const fixedRoot=resolveKey("33340.1");
+ const controlledParents=new Set(["33340.1","45314212","45338212","45337812","29020912"].map(resolveKey).filter(Boolean));
+ const verifiedByChild=new Map();
+ for(const [childRaw,parentRaw] of Object.entries(verifiedParent)){
+  const child=resolveKey(childRaw),parent=resolveKey(parentRaw);
+  if(child&&parent&&child!==parent)verifiedByChild.set(child,parent);
+ }
+ const parentById=new Map();
+ for(const [childRaw,parentRaw] of Object.entries(catalogHierarchy?.parent||{})){
+  const child=resolveKey(childRaw),parent=resolveKey(parentRaw);
+  if(!child||!parent||child===parent||!byId.has(child)||!byId.has(parent))continue;
+  if(!parentById.has(child))parentById.set(child,parent);
+ }
+ for(const [child,parent] of [...parentById.entries()]){
+  if(controlledParents.has(parent)||verifiedByChild.has(child))parentById.delete(child);
+ }
+ for(const [child,parent] of verifiedByChild)parentById.set(child,parent);
+ if(fixedRoot)parentById.delete(fixedRoot);
+ for(const start of ids){
+  const path=[],seenAt=new Map();let node=start;
+  while(node&&parentById.has(node)){
+   if(seenAt.has(node)){
+    const cycle=path.slice(seenAt.get(node));
+    const victim=cycle.find(id=>!verifiedByChild.has(id)&&id!==fixedRoot)
+      ??cycle.find(id=>id!==fixedRoot)??cycle[0];
+    if(victim)parentById.delete(victim);
+    break;
+   }
+   seenAt.set(node,path.length);path.push(node);node=parentById.get(node);
+  }
+ }
+ const children=new Map(ids.map(id=>[id,[]]));
+ for(const [child,parent] of parentById){
+  if(children.has(parent)&&children.has(child)&&!children.get(parent).includes(child))children.get(parent).push(child);
+ }
+ const verifiedOrder=new Map();
+ for(const [childRaw,parentRaw] of Object.entries(verifiedParent)){
+  const child=resolveKey(childRaw),parent=resolveKey(parentRaw);
+  if(!child||!parent)continue;
+  if(!verifiedOrder.has(parent))verifiedOrder.set(parent,[]);
+  verifiedOrder.get(parent).push(child);
+ }
+ children.forEach((childList,parent)=>{
+  const preferred=verifiedOrder.get(parent);
+  if(!preferred)return;
+  const rank=new Map(preferred.map((id,index)=>[id,index]));
+  childList.sort((left,right)=>{
+   const a=rank.get(left),b=rank.get(right);
+   return a!==undefined||b!==undefined?(a??Number.MAX_SAFE_INTEGER)-(b??Number.MAX_SAFE_INTEGER):0;
+  });
+ });
+ const rootId=fixedRoot||resolveKey(catalogHierarchy?.root);
+ let roots=[...new Set([...(rootId?[rootId]:[]),...ids.filter(id=>!parentById.has(id))])];
+ const hiddenRootIds=new Set();
+ const placeholderChildren=children.get("0")||[];
+ if(roots.includes("0")){
+  hiddenRootIds.add("0");
+  roots=roots.filter(id=>id!=="0");
+  roots=[...new Set([...placeholderChildren,...roots])];
+ }
+ const reachable=new Set();
+ const markReachable=id=>{
+  if(reachable.has(id))return;
+  reachable.add(id);(children.get(id)||[]).forEach(markReachable);
+ };
+ roots.forEach(markReachable);
+ for(const id of ids){
+  if(hiddenRootIds.has(id)||reachable.has(id))continue;
+  roots.push(id);markReachable(id);
+ }
+ const q=$("catalogFilter")?.value.toLowerCase().trim()||"";
+ const matches=c=>!q||[c.id,c.title].join(" ").toLowerCase().includes(q);
+ const memo=new Map();
+ function subtreeMatch(id,path=new Set()){
+  if(memo.has(id))return memo.get(id);
+  if(path.has(id))return false;
+  const c=byId.get(id);if(!c)return false;
+  const next=new Set(path);next.add(id);
+  const yes=matches(c)||(children.get(id)||[]).some(ch=>subtreeMatch(ch,next));
+  memo.set(id,yes);return yes;
+ }
+ const renderedIds=new Set();
+ function draw(id,path=new Set()){
+  const c=byId.get(id);
+  if(!c||path.has(id)||renderedIds.has(id)||hiddenRootIds.has(id)||(q&&!subtreeMatch(id)))return "";
+  renderedIds.add(id);
+  const next=new Set(path);next.add(id);
+  const childIds=(children.get(id)||[]).filter(ch=>!hiddenRootIds.has(ch));
+  const hasChildren=childIds.length>0;
+  const expanded=ac200ExpandedCatalogs.has(id);
+  const nested=childIds.map(ch=>draw(ch,next)).join("");
+  return `<div class="cat-tree-node" data-node-id="${esc(id)}"><div class="ac200-native-row">${hasChildren?`<button type="button" class="ac200-native-toggle" data-toggle="${esc(id)}" aria-label="${expanded?"Collapse":"Expand"} ${esc(getCatalogTitle(c))}" aria-expanded="${expanded}">${expanded?"−":"+"}</button>`:'<span class="ac200-native-spacer"></span>'}<div class="cat ${current?.id===c.id?"active":""}" data-v="${esc(c.id)}"><div>${esc(getCatalogTitle(c))}</div><small>${esc(c.id)} · ${c.partCount} parts${c.hasDiagram?"":" · no diagram"}</small></div></div>${hasChildren?`<div class="ac200-native-children" data-parent="${esc(id)}" style="display:${expanded?"block":"none"};margin-left:12px;padding-left:10px;border-left:1px solid var(--border, #d1d5db)">${nested}</div>`:""}</div>`;
+ }
+ const el=$("catalogs");
+ el.innerHTML=roots.map(id=>draw(id)).join("")||'<div class="diagram-message">No matching catalogs.</div>';
+ el.querySelectorAll(".cat[data-v]").forEach(node=>node.onclick=()=>selectCatalog(node.dataset.v));
+ el.querySelectorAll("[data-toggle]").forEach(button=>button.onclick=event=>{
+  event.preventDefault();event.stopPropagation();
+  const id=button.dataset.toggle;
+  if(ac200ExpandedCatalogs.has(id))ac200ExpandedCatalogs.delete(id);else ac200ExpandedCatalogs.add(id);
+  const branch=[...el.querySelectorAll(".ac200-native-children")].find(node=>node.dataset.parent===id);
+  const expanded=ac200ExpandedCatalogs.has(id);
+  if(branch)branch.style.display=expanded?"block":"none";
+  button.textContent=expanded?"−":"+";
+  button.setAttribute("aria-expanded",String(expanded));
+  button.setAttribute("aria-label",`${expanded?"Collapse":"Expand"} ${byId.get(id)?.title||id}`);
+ });
+ $("catalogCount").textContent=(q?all.filter(c=>matches(c)).length:all.length)+" / "+all.length;
 }
 function selectCatalog(id){
  current=catalogs.find(x=>x.id===id); if(!current)return;
