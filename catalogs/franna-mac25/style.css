@@ -44,3 +44,19 @@ body.dark .tree-root{background:#202b39;border-color:var(--line);color:#d9e8fb}
 
 /* Static hierarchy fallback visibility */
 @media(max-width:800px){body.catalog-ui #cats{display:block!important;overflow-y:auto!important;min-height:140px!important}body.catalog-ui #cats>.tree-children{display:block!important;visibility:visible!important}body.catalog-ui #cats>.tree-children>.tree-row{display:flex!important;visibility:visible!important}}
+
+
+/* MAC25 part table: explicit, sticky column labels and dedicated description column */
+#results{max-height:210px;overflow:auto;background:var(--panel)}
+#results .row{grid-template-columns:70px minmax(145px,210px) minmax(180px,1fr) 60px;gap:10px;align-items:start}
+#results .table-head{position:sticky;top:0;z-index:3;background:var(--panel);color:var(--muted);font-weight:700;cursor:default;border-bottom:1px solid var(--line)}
+#results .table-head>div{font-size:12px}
+#results .table-head:hover{background:var(--panel)}
+#results .part-row .part-number{min-width:0;overflow-wrap:anywhere}
+#results .part-row .part-description{min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.35}
+#results .part-row .qty,#results .table-head>div:last-child{text-align:right}
+@media(max-width:800px){
+ #results{max-height:24dvh;overflow:auto}
+ #results .row{grid-template-columns:46px minmax(90px,.85fr) minmax(115px,1.4fr) 38px;gap:6px;padding:8px 7px;font-size:12px}
+ #results .table-head{font-size:11px;padding-top:10px;padding-bottom:10px}
+}
