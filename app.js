@@ -35,7 +35,7 @@ function initCatalogTreeExpansion(){
   const matches=S.cats.filter(c=>catalogGroup(c,rootId)===g.name);
   const overview=matches.find(c=>rootId&&c.id===rootId+g.suffix);
   matches.filter(c=>!overview||c.id!==overview.id).forEach(c=>{
-   const m=String(c.id).match(/^(\\d{2}[FTP])-(\\d{4})-/);
+   const m=String(c.id).match(/^(\d{2}[FTP])-(\d{4})-/);
    const family=m?m[1]:'Other catalogs';
    const subgroup=m?m[2]:'';
    S.openGroups.add(`${g.name}|family|${family}`);
