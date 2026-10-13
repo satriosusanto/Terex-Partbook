@@ -73,7 +73,11 @@ function renderCats(){
     const subKey=`${g.name}|sub|${family}|${subgroup}`;
     const subOpen=S.openGroups.has(subKey);
     const heading=subgroup?subgroup:'Other';
-    return `<section class="catTreeSub"><div class="catGroupHead catTreeSubHead"><span class="treeSubLabel">${esc(heading)}</span><span class="treeGroupCount">${items.length}</span><button class="treeToggle" data-tree-toggle="${esc(subKey)}" aria-label="${subOpen?'Collapse':'Expand'} ${esc(family)} ${esc(heading)}" aria-expanded="${subOpen}">${subOpen?'−':'+'}</button></div><div class="catGroupItems catTreeLeaves" ${subOpen?'':'hidden'}>${items.map(c=>`<button class="cat" data-id="${esc(c.id)}"><b>${esc(c.id)}</b><small>${esc(c.title.replace(c.id,'').replace(/^\s+/,''))}</small></button>`).join('')}</div></section>`;
+    const descriptions=items.map(c=>String(c.title||'').replace(String(c.id),'').trim()).filter(Boolean);
+    const counts=new Map();descriptions.forEach(name=>counts.set(name,(counts.get(name)||0)+1));
+    const ranked=[...counts.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
+    const labelNames=ranked.length===1?ranked[0][0]:ranked.slice(0,2).map(x=>x[0]).join(' · ')+(ranked.length>2?` · +${ranked.length-2} more`:'');
+    return `<section class="catTreeSub"><div class="catGroupHead catTreeSubHead"><span class="treeSubLabel"><b>${esc(heading)}</b>${labelNames?`<small class="treeSubDescription" title="${esc([...counts.keys()].join(' · '))}">${esc(labelNames)}</small>`:''}</span><span class="treeGroupCount">${items.length}</span><button class="treeToggle" data-tree-toggle="${esc(subKey)}" aria-label="${subOpen?'Collapse':'Expand'} ${esc(family)} ${esc(heading)}" aria-expanded="${subOpen}">${subOpen?'−':'+'}</button></div><div class="catGroupItems catTreeLeaves" ${subOpen?'':'hidden'}>${items.map(c=>`<button class="cat" data-id="${esc(c.id)}"><b>${esc(c.id)}</b><small>${esc(c.title.replace(c.id,'').replace(/^\s+/,''))}</small></button>`).join('')}</div></section>`;
    }).join('');
    return `<section class="catTreeFamily"><div class="catGroupHead catTreeFamilyHead"><span class="treeSubLabel">${esc(family)}</span><span class="treeGroupCount">${[...subs.values()].reduce((n,items)=>n+items.length,0)}</span><button class="treeToggle" data-tree-toggle="${esc(familyKey)}" aria-label="${familyOpen?'Collapse':'Expand'} ${esc(family)}" aria-expanded="${familyOpen}">${familyOpen?'−':'+'}</button></div><div class="catTreeFamilyItems" ${familyOpen?'':'hidden'}>${subHtml}</div></section>`;
   }).join('');
