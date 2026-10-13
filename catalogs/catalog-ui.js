@@ -322,6 +322,10 @@
   }
 
   async function initializeCatalogTree() {
+    // AC200-1 already renders its curated hierarchy in its model-specific app.js.
+    // Skip only the shared duplicate tree on this model; keep shared mobile/viewer behavior enabled.
+    if (modelCode === "AC200-1") return;
+
     const source = sidebar.querySelector("#catalogs, #cats");
     if (!source) return;
 
