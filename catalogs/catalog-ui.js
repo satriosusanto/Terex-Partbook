@@ -343,25 +343,56 @@
     const catalogs = Array.isArray(catalogData) ? catalogData : catalogData.items;
     if (!Array.isArray(catalogs)) throw new Error("Catalog data must be an array.");
 
-    const getId = catalog => String(catalog.id ?? catalog.variant ?? "");
+    const getId = catalog => String(catalog.id ?? catalog.variant ?? catalog.catalogId ?? catalog.catalog ?? "");
     const catalogById = new Map(catalogs.map(catalog => [getId(catalog), catalog]));
+    const idAliases = new Map();
+    const addAlias = (value, id) => {
+      if (value == null || String(value).trim() === "") return;
+      const raw = String(value).trim();
+      idAliases.set(raw.toLowerCase(), id);
+      idAliases.set(raw.toLowerCase().replace(/[\\s_-]+/g, ""), id);
+    };
+    catalogs.forEach(catalog => {
+      const id = getId(catalog);
+      for (const key of [id, catalog.id, catalog.variant, catalog.catalogId, catalog.catalog, catalog.key]) {
+        addAlias(key, id);
+      }
+    });
+    const resolveCatalogId = value => {
+      if (value == null) return null;
+      const raw = String(value).trim();
+      if (catalogById.has(raw)) return raw;
+      return idAliases.get(raw.toLowerCase())
+        ?? idAliases.get(raw.toLowerCase().replace(/[\\s_-]+/g, ""))
+        ?? null;
+    };
+
     const relations = [];
     const embeddedParts = catalogs.some(catalog =>
       Array.isArray(catalog.parts) || Array.isArray(catalog.children)
     );
-
     if (embeddedParts) {
       catalogs.forEach(catalog => {
         const parentId = getId(catalog);
         (catalog.parts ?? catalog.children ?? []).forEach(part => relations.push([parentId, part]));
       });
     } else {
-      const partsResponse = await fetch("data/parts.json");
-      if (!partsResponse.ok) throw new Error(`data/parts.json ${partsResponse.status}`);
-      const partsData = await partsResponse.json();
-      const parts = Array.isArray(partsData) ? partsData : partsData.items ?? partsData.parts;
-      if (!Array.isArray(parts)) throw new Error("Parts data must be an array.");
-      parts.forEach(part => relations.push([String(part.catalogId ?? part.catalog ?? ""), part]));
+      try {
+        const partsResponse = await fetch("data/parts.json");
+        if (partsResponse.ok) {
+          const partsData = await partsResponse.json();
+          const parts = Array.isArray(partsData) ? partsData : partsData.items ?? partsData.parts;
+          if (Array.isArray(parts)) {
+            parts.forEach(part => relations.push([String(part.catalogId ?? part.catalog ?? ""), part]));
+          } else {
+            console.warn("Catalog tree: data/parts.json has an unsupported structure.");
+          }
+        } else {
+          console.info("Catalog tree: data/parts.json is not available; checking the OEM hierarchy index.");
+        }
+      } catch (error) {
+        console.info("Catalog tree: parts index unavailable; checking the OEM hierarchy index.", error);
+      }
     }
 
     const childIds = new Map(catalogs.map(catalog => [getId(catalog), []]));
@@ -369,6 +400,37 @@
     const positionById = new Map();
     const descriptionById = new Map();
     const versionById = new Map();
+
+    // Some TEREX models store verified catalog-to-catalog relationships in a
+    // gzip/base64 hierarchy index instead of exposing them in parts.json.
+    // Load that source first so the shared tree behaves consistently for every model.
+    let hierarchy = null;
+    try {
+      const hierarchyResponse = await fetch("data/catalog-hierarchy.json");
+      if (hierarchyResponse.ok) {
+        const packed = await hierarchyResponse.json();
+        if (packed?.encoding === "gzip-base64" && packed.data && "DecompressionStream" in window) {
+          const bytes = Uint8Array.from(atob(packed.data), character => character.charCodeAt(0));
+          const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+          hierarchy = JSON.parse(await new Response(stream).text());
+        } else if (packed && packed.parent && typeof packed.parent === "object") {
+          hierarchy = packed;
+        }
+      }
+    } catch (error) {
+      console.warn("Catalog tree: OEM hierarchy index could not be decoded; using part relationships where available.", error);
+    }
+
+    const hierarchyParents = hierarchy?.parent && typeof hierarchy.parent === "object"
+      ? hierarchy.parent
+      : {};
+    for (const [childRaw, parentRaw] of Object.entries(hierarchyParents)) {
+      const childId = resolveCatalogId(childRaw);
+      const parentId = resolveCatalogId(parentRaw);
+      if (!childId || !parentId || childId === parentId || parentById.has(childId)) continue;
+      childIds.get(parentId)?.push(childId);
+      parentById.set(childId, parentId);
+    }
     const diagramIds = new Set();
     catalogs.forEach(catalog => {
       const id = getId(catalog);
@@ -394,15 +456,15 @@
         });
       }
     }
-    const partCatalogKeys = ["partNumber", "partNo", "material", "part_number", "textNumber"];
-    relations.forEach(([parentId, part]) => {
-      const childId = partCatalogKeys
+    const partCatalogKeys = ["partNumber", "partNo", "material", "part_number", "textNumber", "variant", "catalogId"];
+    relations.forEach(([parentRaw, part]) => {
+      const parentId = resolveCatalogId(parentRaw) ?? (childIds.has(parentRaw) ? parentRaw : null);
+      if (!parentId) return;
+      const childRaw = partCatalogKeys
         .map(key => part[key])
-        .find(value => value != null && catalogById.has(String(value)));
-      if (childId == null) return;
-
-      const childKey = String(childId);
-      if (childKey === parentId || !childIds.has(parentId) || parentById.has(childKey)) return;
+        .find(value => value != null && resolveCatalogId(value));
+      const childKey = resolveCatalogId(childRaw);
+      if (!childKey || childKey === parentId || !childIds.has(parentId) || parentById.has(childKey)) return;
       childIds.get(parentId).push(childKey);
       parentById.set(childKey, parentId);
       positionById.set(childKey, String(part.position ?? part.pos ?? ""));
