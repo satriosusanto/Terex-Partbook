@@ -1,6 +1,45 @@
 const $=s=>document.querySelector(s);let catalogs=[],parts=[],hotspots=[],images=[],active=null,scale=1,loadToken=0,searchToken=0;let byImg={},byCat={};
 Promise.all(['catalogs','parts','hotspots','images'].map(x=>fetch(`data/${x}.json`).then(r=>r.json()))).then(([c,p,h,i])=>{catalogs=c;parts=p;hotspots=h;images=i;images.forEach(x=>byImg[x.catalog]=x);parts.forEach(x=>(byCat[x.catalog]??=[]).push(x));renderCats();const hash=decodeURIComponent(location.hash.slice(1));if(hash)openCat(hash);});
-function renderCats(){let q=$('#catfilter').value.toLowerCase();$('#cats').innerHTML=catalogs.filter(c=>(c.id+' '+c.title).toLowerCase().includes(q)).map(c=>`<div class="cat ${active===c.id?'active':''}" onclick="openCat('${esc(c.id)}')"><b>${esc(c.id)}</b><small>${esc(c.title||'')}</small></div>`).join('')}
+function renderCats(){
+  const q=$('#catfilter').value.trim().toLowerCase();
+  const root=catalogs.find(c=>Array.isArray(c.children)&&c.id.startsWith('MAC25*'));
+  if(!root){$('#cats').innerHTML=catalogs.filter(c=>(c.id+' '+c.title).toLowerCase().includes(q)).map(c=>catRow(c,0)).join('');return}
+  const assemblyNames={
+    T177667:'ASSY FRONT BODY MAC25',
+    T177668:'ASSY REAR BODY MAC25',
+    PLMXA3035:'BOOM ASSEMBLY FULL POWER',
+    T177670:'ASSY POWERTRAIN MAC25',
+    T191850:'ASSY PNEUMATIC MAC25',
+    T177672:'ASSY HYDRAULIC MAC25',
+    T177673:'ASSY ELECTRICAL MAC25',
+    T167887:'ASSY OPTIONS MAC25',
+    PLMXA9001:'SERVICE KITS MAC25'
+  };
+  const children=(root.children||[]).map(row=>{
+    const id=row.part_number||row.id;
+    const c=catalogs.find(item=>item.id===id);
+    return c?{...c,displayTitle:assemblyNames[id]||c.title,partNumber:id}:null;
+  }).filter(Boolean);
+  const rootMatches=(root.id+' '+root.title).toLowerCase().includes(q);
+  const visible=children.filter(c=>(c.id+' '+c.displayTitle+' '+c.partNumber).toLowerCase().includes(q));
+  const showRoot=!q||rootMatches||visible.length>0;
+  let html='';
+  if(showRoot){
+    html+=`<div class="tree-row tree-root ${active===root.id?'active':''}" data-catalog="${esc(root.id)}"><button class="tree-toggle" type="button" aria-label="Expand/collapse assemblies" aria-expanded="true">⊖</button><span class="tree-label"><b>${esc(root.title)}</b></span></div>`;
+    html+=`<div class="tree-children">${visible.map(c=>catRow(c,1, c.displayTitle+' ('+c.partNumber+')')).join('')}</div>`;
+  }
+  $('#cats').innerHTML=html||'<div class="tree-empty">No matching assemblies</div>';
+  $('#cats').querySelectorAll('[data-catalog]').forEach(row=>row.addEventListener('click',e=>{
+    if(e.target.closest('.tree-toggle'))return;
+    openCat(row.dataset.catalog);
+  }));
+  const toggle=$('#cats .tree-toggle');
+  if(toggle)toggle.addEventListener('click',e=>{e.stopPropagation();const childrenBox=$('#cats .tree-children');const hidden=childrenBox.hidden;childrenBox.hidden=!hidden;toggle.textContent=hidden?'⊖':'⊕';toggle.setAttribute('aria-expanded',String(hidden));});
+}
+function catRow(c,level=1,label=''){
+  const title=label||c.title||c.id;
+  return `<div class="tree-row tree-node ${active===c.id?'active':''}" data-catalog="${esc(c.id)}" style="--tree-level:${level}"><span class="tree-branch" aria-hidden="true">⊕</span><span class="tree-label">${esc(title)}</span></div>`;
+}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 async function openCat(id){const token=++loadToken;active=id;if(location.hash!=='#'+encodeURIComponent(id))history.replaceState(null,'','#'+encodeURIComponent(id));renderCats();let im=byImg[id];$('#crumb').textContent=(id+' — '+(catalogs.find(c=>c.id===id)?.title||''));let cv=$('#canvas'),ctx=cv.getContext('2d');$('#empty').style.display='none';$('#hotspots').innerHTML='';if(!im){cv.width=800;cv.height=500;ctx.clearRect(0,0,800,500);ctx.fillStyle='#888';ctx.fillText('No diagram for this assembly',30,40);renderResults(byCat[id]||[]);return}try{let resp=await fetch('images-web/'+encodeURIComponent(im.webImage));if(token!==loadToken)return;if(!resp.ok)throw Error(`Diagram ${im.webImage} ${resp.status}`);let image=new Image();image.src=URL.createObjectURL(await resp.blob());try{await image.decode();if(token!==loadToken)return;const sourceWidth=image.naturalWidth||Number(im.width)||800;const sourceHeight=image.naturalHeight||Number(im.height)||500;const maxCanvasDimension=6000;const renderScale=Math.min(1,maxCanvasDimension/Math.max(sourceWidth,sourceHeight));cv.width=Math.max(1,Math.round(sourceWidth*renderScale));cv.height=Math.max(1,Math.round(sourceHeight*renderScale));ctx.drawImage(image,0,0,cv.width,cv.height);$('#hotspots').style.width=cv.width+'px';$('#hotspots').style.height=cv.height+'px';scale=1;fit();drawHotspots(im.image,Number(im.width)||sourceWidth,Number(im.height)||sourceHeight)}finally{URL.revokeObjectURL(image.src)}}catch(e){if(token!==loadToken)return;console.error(e);cv.width=800;cv.height=500;ctx.clearRect(0,0,800,500);ctx.fillStyle='#f66';ctx.fillText('Diagram could not be loaded: '+e,20,30)}renderResults(byCat[id]||[])}
 function drawHotspots(img,w,h){let hs=hotspots.filter(x=>x.image===img);let layer=$('#hotspots');hs.forEach(x=>{let d=document.createElement('div');d.className='hs';d.dataset.partNumber=x.part_number;d.dataset.position=x.position;d.setAttribute('role','button');d.setAttribute('aria-label',`Part ${x.part_number}, position ${x.position}`);d.tabIndex=0;d.style.left=(x.left/w*100)+'%';d.style.top=(x.top/h*100)+'%';d.style.width=((x.right-x.left)/w*100)+'%';d.style.height=((x.bottom-x.top)/h*100)+'%';d.title=`Pos ${x.position} ${x.part_number}`;d.onclick=()=>{let p=x.part_id?parts.find(y=>y.id===x.part_id):null;if(p){alert(`${p.part_number||'Part number unavailable'}\\n${p.description||''}\\nQty: ${p.qty??''}\\nPosition: ${p.position??x.position}`)}else{$('#crumb').textContent=`Position ${x.position}: no linked part record in extracted data`}};layer.appendChild(d)})}
