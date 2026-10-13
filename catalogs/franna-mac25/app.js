@@ -3,51 +3,25 @@ Promise.all(['catalogs','parts','hotspots','images'].map(x=>fetch(`data/${x}.jso
 const MAC25_ASSEMBLY_NAMES={T177667:'ASSY FRONT BODY MAC25',T177668:'ASSY REAR BODY MAC25',PLMXA3035:'BOOM ASSEMBLY FULL POWER',T177670:'ASSY POWERTRAIN MAC25',T191850:'ASSY PNEUMATIC MAC25',T177672:'ASSY HYDRAULIC MAC25',T177673:'ASSY ELECTRICAL MAC25',T167887:'ASSY OPTIONS MAC25',PLMXA9001:'SERVICE KITS MAC25'};
 const expandedCatalogIds=new Set();
 function renderCats(){
- const filter=$('#catfilter');
- const container=$('#cats');
+ const filter=$('#catfilter'),container=$('#cats');
  if(!filter||!container)return;
  const query=filter.value.trim().toLowerCase();
  const byId=new Map(catalogs.map(c=>[String(c.id),c]));
  const root=catalogs.find(c=>String(c.id)==='MAC25*69557884')||catalogs.find(c=>String(c.id).startsWith('MAC25*'));
- if(!root){container.innerHTML='<div class="tree-empty">Catalog hierarchy unavailable</div>';return}
+ if(!root){container.innerHTML='<div class="tree-empty">Catalog hierarchy unavailable</div>';return;}
  const names={T177667:'ASSY FRONT BODY MAC25',T177668:'ASSY REAR BODY MAC25',PLMXA3035:'BOOM ASSEMBLY FULL POWER',T177670:'ASSY POWERTRAIN MAC25',T191850:'ASSY PNEUMATIC MAC25',T177672:'ASSY HYDRAULIC MAC25',T177673:'ASSY ELECTRICAL MAC25',T167887:'ASSY OPTIONS MAC25',PLMXA9001:'SERVICE KITS MAC25',PLMXA1057Q:'SUNDRY ITEMS / FUEL REPTO',PLMXA1081D:'KIT HOSE GREASELINE BEKA MAX',PLMXA1082D:'CENTRAL GREASELINE ASSEMBLY',PLMXA8036C:'FIRE EXTINGUISHER 4.5KG ASSEMBLY',PLMXS1022C:'SERVICE KIT OM906 100HR FILTERS ONLY',T131354A:'ASSY SEAT ISRI 6860/870 RH WITH ARMS',T131357A:'ASSY SEAT ISRI 6860/870 RH LONG FASTENERS',T131768C:'ASSY CABIN STANDARD AC',T137316I:'ASSY PRE DELIVERY ASSEMBLY MAC 25-4',T138394F:'ASSY CABIN AUTO MAC25-4',T138459F:'ASSY COVER FRONT BODY MAC 25-4',T138764B:'ASSY CENTER PIVOT JOINING MAC 25-4',T140170B:'ASSY CABIN GLASS MAC25',T150306A:'ASSY LIGHT WORK BONNET AT40',T151027A:'ASSY LIGHT ROTARY BONNET',T151028B:'ASSY LIGHTS WORK BOOM AT40',T151029A:'ASSY LIGHTS WORK BOOM AT40'};
- function childrenOf(c){
-  const seen=new Set();
-  return (Array.isArray(c.children)?c.children:[]).map(row=>({row,child:byId.get(String(row.part_number||row.id||''))})).filter(x=>{if(!x.child||x.child.id===c.id||seen.has(x.child.id))return false;seen.add(x.child.id);return true;});
- }
- function labelOf(c,row){const d=String(row&&row.description||'').trim();if(d)return d;if(names[c.id])return names[c.id];if(c.title&&c.title!==c.id)return c.title;return c.title||c.id;}
- function makeNode(c,row,ancestry){
-  if(ancestry.has(c.id))return null;
-  const next=new Set(ancestry);next.add(c.id);
-  const children=childrenOf(c).map(x=>makeNode(x.child,x.row,next)).filter(Boolean);
-  return {id:String(c.id),title:labelOf(c,row),row,children};
- }
- const tree=makeNode(root,null,new Set());
- function matches(n){return !query||[n.id,n.title,n.row&&n.row.part_number,n.row&&n.row.description,n.row&&n.row.position].join(' ').toLowerCase().includes(query)||n.children.some(matches);}
- function render(n,level,path,isRoot){
-  const relevant=n.children.filter(matches),hasChildren=n.children.length>0;
-  const expanded=!!query||expandedCatalogIds.has(n.id)||isRoot;
-  if(!matches(n))return '';
-  if(isRoot)expandedCatalogIds.add(n.id);
-  const title=n.title+(isRoot?'':' ('+n.id+')');
-  const toggle=hasChildren?'<button type="button" class="tree-toggle" data-tree-path="'+esc(path)+'" data-tree-id="'+esc(n.id)+'" aria-expanded="'+(expanded?'true':'false')+'">'+(expanded?'⊖':'⊕')+'</button>':'<span class="tree-spacer">•</span>';
-  let html='<div class="tree-row '+(isRoot?'tree-root':'tree-node')+' '+(active===n.id?'active':'')+'" data-catalog="'+esc(n.id)+'" style="--tree-level:'+level+'">'+toggle+'<span class="tree-label">'+(isRoot?'<b>'+esc(title)+'</b>':esc(title))+'</span></div>';
-  if(hasChildren)html+='<div class="tree-children" data-tree-children="'+esc(path)+'" '+(expanded?'':'hidden')+'>'+relevant.map((child,i)=>render(child,level+1,path+'.'+i,false)).join('')+'</div>';
-  return html;
- }
- container.innerHTML=tree?render(tree,0,'r',true):'<div class="tree-empty">No catalogs found</div>';if(!container.querySelector('.tree-row'))container.innerHTML='<div class="tree-empty">No hierarchy rows generated. Check catalog data.</div>';
- container.querySelectorAll('.tree-toggle').forEach(btn=>btn.addEventListener('click',event=>{
-  event.preventDefault();event.stopPropagation();
-  const branch=Array.from(container.querySelectorAll('[data-tree-children]')).find(el=>el.dataset.treeChildren===btn.dataset.treePath);
-  if(!branch)return;
-  branch.hidden=!branch.hidden;
-  if(branch.hidden)expandedCatalogIds.delete(btn.dataset.treeId);else expandedCatalogIds.add(btn.dataset.treeId);
-  btn.textContent=branch.hidden?'⊕':'⊖';btn.setAttribute('aria-expanded',String(!branch.hidden));
- }));
- container.querySelectorAll('[data-catalog]').forEach(row=>row.addEventListener('click',event=>{
-  if(event.target.closest('.tree-toggle'))return;
-  openCat(row.dataset.catalog);
- }));
+ function label(c,row){return String((row&&row.description||'').trim()||names[c.id]||(c.title&&c.title!==c.id?c.title:'')||c.id);}
+ function getChildren(c){const seen=new Set();return (Array.isArray(c.children)?c.children:[]).map(row=>({row,child:byId.get(String(row.part_number||row.id||''))})).filter(x=>{if(!x.child||x.child.id===c.id||seen.has(x.child.id))return false;seen.add(x.child.id);return true;});}
+ function make(c,row,anc){if(anc.has(String(c.id)))return null;const next=new Set(anc);next.add(String(c.id));return {id:String(c.id),label:label(c,row),row,children:getChildren(c).map(x=>make(x.child,x.row,next)).filter(Boolean)};}
+ const tree=make(root,null,new Set());
+ function matches(n){return !query||[n.id,n.label,n.row&&n.row.part_number,n.row&&n.row.description,n.row&&n.row.position].join(' ').toLowerCase().includes(query)||n.children.some(matches);}
+ function node(n,level,path,isRoot){if(!matches(n))return '';const kids=n.children.filter(matches),has=n.children.length>0,expanded=!!query||expandedCatalogIds.has(n.id)||isRoot;if(isRoot)expandedCatalogIds.add(n.id);const title=n.label+(isRoot?'':' ('+n.id+')');const toggle=has?'<button type="button" class="tree-toggle" data-tree-path="'+esc(path)+'" data-tree-id="'+esc(n.id)+'" aria-expanded="'+(expanded?'true':'false')+'">'+(expanded?'⊖':'⊕')+'</button>':'<span class="tree-spacer">•</span>';let out='<div class="tree-row '+(isRoot?'tree-root':'tree-node')+(active===n.id?' active':'')+'" data-catalog="'+esc(n.id)+'" style="--tree-level:'+level+'">'+toggle+'<span class="tree-label">'+esc(title)+'</span></div>';if(has)out+='<div class="tree-children" data-tree-children="'+esc(path)+'" '+(expanded?'':'hidden')+'>'+kids.map((k,i)=>node(k,level+1,path+'.'+i,false)).join('')+'</div>';return out;}
+ let markup=node(tree,0,'r',true);
+ // Fail-safe: always render the root and its immediate assemblies even if recursive child mapping fails.
+ if(!markup||!markup.includes('tree-row')){const rows=(root.children||[]).map(row=>{const id=String(row.part_number||row.id||'');const c=byId.get(id);const title=c?label(c,row):(String(row.description||'').trim()||names[id]||id);return '<div class="tree-row tree-node" data-catalog="'+esc(id)+'" style="--tree-level:1"><span class="tree-spacer">•</span><span class="tree-label">'+esc(title+' ('+id+')')+'</span></div>';}).join('');markup='<div class="tree-row tree-root" data-catalog="'+esc(root.id)+'" style="--tree-level:0"><span class="tree-spacer">•</span><span class="tree-label">'+esc(root.title||root.id)+'</span></div>'+rows;}
+ container.innerHTML=markup;
+ container.querySelectorAll('.tree-toggle').forEach(btn=>btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();const branch=Array.from(container.querySelectorAll('[data-tree-children]')).find(el=>el.dataset.treeChildren===btn.dataset.treePath);if(!branch)return;branch.hidden=!branch.hidden;if(branch.hidden)expandedCatalogIds.delete(btn.dataset.treeId);else expandedCatalogIds.add(btn.dataset.treeId);btn.textContent=branch.hidden?'⊕':'⊖';btn.setAttribute('aria-expanded',String(!branch.hidden));}));
+ container.querySelectorAll('[data-catalog]').forEach(row=>row.addEventListener('click',e=>{if(e.target.closest('.tree-toggle'))return;openCat(row.dataset.catalog);}));
 }
 function catRow(c,level=1,label=''){const title=label||c.title||c.id;return `<div class="tree-row tree-node ${active===c.id?'active':''}" data-catalog="${esc(c.id)}" style="--tree-level:${level}"><span class="tree-spacer"></span><span class="tree-label">${esc(title)}</span></div>`}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
