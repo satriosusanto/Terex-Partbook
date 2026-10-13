@@ -12,3 +12,13 @@ body.dark{--bg:#101318;--panel:#181c22;--text:#e8edf3;--muted:#9aa4b2;--line:#30
 .tree-empty{padding:10px;color:var(--muted)}
 body.dark .tree-root{background:#202b39;border-color:var(--line);color:#d9e8fb}
 @media(max-width:800px){.tree-row{padding-top:4px;padding-bottom:4px;line-height:16px}.tree-root{padding-left:4px}}
+
+/* Nested parent/child catalog tree */
+#cats{padding:2px 0 8px;font:12px Arial,sans-serif;color:var(--text)}
+.tree-row{display:flex;align-items:flex-start;gap:4px;min-height:19px;padding:3px 5px 3px calc(5px + var(--tree-level,0)*16px);line-height:14px;cursor:pointer;white-space:normal;overflow-wrap:anywhere}
+.tree-row:hover,.tree-row.active{background:#eaf2ff;color:#1d4f91}
+.tree-root{padding-left:3px;font-weight:bold;background:#e9f1fb;border-bottom:1px solid #c7d7eb;color:#244d7b}
+.tree-toggle,.tree-spacer{flex:0 0 12px;width:12px;min-width:12px;height:14px;padding:0;border:0;background:transparent;color:#d58b00;font-size:13px;line-height:12px;font-weight:bold;cursor:pointer}
+.tree-spacer{display:inline-block}.tree-children[hidden]{display:none!important}.tree-label{min-width:0;flex:1}.tree-empty{padding:10px;color:var(--muted)}
+body.dark .tree-root{background:#202b39;border-color:var(--line);color:#d9e8fb}
+@media(max-width:800px){.tree-row{padding-top:4px;padding-bottom:4px;line-height:16px}.tree-root{padding-left:4px}}
