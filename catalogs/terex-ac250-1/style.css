@@ -93,3 +93,65 @@
   body.catalog-ui .parts-panel { display: flex !important; flex: none !important; width: 100% !important; height: auto !important; min-height: 0 !important; max-height: 44dvh !important; }
   body.catalog-ui .table-wrap { flex: 1 1 auto !important; min-height: 0 !important; max-height: 38dvh !important; overflow: auto !important; }
 }
+
+
+/* AC250-1 / AC350-6: remove the unexplained vertical offset seen on Android. */
+@media (max-width: 700px) {
+  body.catalog-ui > .layout {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    transform: none !important;
+  }
+  body.catalog-ui > .layout > main {
+    display: block !important;
+    position: relative !important;
+    inset: auto !important;
+    margin: 0 !important;
+    padding: 8px !important;
+    min-height: 0 !important;
+    height: auto !important;
+    transform: none !important;
+  }
+  body.catalog-ui > .layout > main > .main-head {
+    display: flex !important;
+    position: relative !important;
+    inset: auto !important;
+    margin: 0 0 8px !important;
+    padding: 8px 10px !important;
+    min-height: 0 !important;
+    height: auto !important;
+    transform: none !important;
+  }
+  body.catalog-ui > .layout > main > .workspace {
+    display: flex !important;
+    position: relative !important;
+    inset: auto !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    transform: none !important;
+  }
+  body.catalog-ui > .layout > main > .workspace > .diagram-panel { flex: none !important; }
+  body.catalog-ui #diagramStage {
+    height: min(40dvh, 330px) !important;
+    min-height: 200px !important;
+    max-height: 330px !important;
+    padding: 6px !important;
+  }
+  body.catalog-ui .parts-panel {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: 44dvh !important;
+  }
+  body.catalog-ui .table-wrap {
+    min-height: 0 !important;
+    max-height: 38dvh !important;
+    overflow: auto !important;
+  }
+}
