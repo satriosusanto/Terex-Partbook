@@ -41,3 +41,6 @@ body.dark .tree-root{background:#202b39;border-color:var(--line);color:#d9e8fb}
 
 /* Force MAC25 hierarchy rows to remain visible in Android mobile sidebar */
 @media(max-width:800px){body.catalog-ui .catalog-sidebar #cats{display:block!important;visibility:visible!important;opacity:1!important;flex:1 1 auto!important;min-height:140px!important;max-height:none!important;height:auto!important;overflow-y:auto!important;position:relative!important;z-index:2!important}body.catalog-ui .catalog-sidebar #cats .tree-row{display:flex!important;visibility:visible!important;opacity:1!important;min-height:22px!important;color:var(--text,#17202a)!important}body.catalog-ui .catalog-sidebar #cats .tree-label{display:block!important;visibility:visible!important;color:inherit!important}body.catalog-ui .catalog-sidebar #cats .tree-children[hidden]{display:none!important}}
+
+/* Static hierarchy fallback visibility */
+@media(max-width:800px){body.catalog-ui #cats{display:block!important;overflow-y:auto!important;min-height:140px!important}body.catalog-ui #cats>.tree-children{display:block!important;visibility:visible!important}body.catalog-ui #cats>.tree-children>.tree-row{display:flex!important;visibility:visible!important}}
