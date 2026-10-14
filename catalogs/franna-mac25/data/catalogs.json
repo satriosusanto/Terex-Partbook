@@ -204,7 +204,7 @@
         "catalog": "T177667",
         "position": "10",
         "part_number": "T138394F",
-        "description": "ASSY PRE DELIVERY ASSEMBLY MAC 25-4",
+        "description": "ASSY CABIN AUTO MAC25-4",
         "qty": "1",
         "type": "",
         "level": ""
@@ -214,7 +214,7 @@
         "catalog": "T177667",
         "position": "11",
         "part_number": "T138459F",
-        "description": "ASSY CABIN AUTO MAC25-4",
+        "description": "ASSY COVER FRONT BODY MAC 25-4",
         "qty": "1",
         "type": "",
         "level": ""
@@ -224,7 +224,7 @@
         "catalog": "T177667",
         "position": "12",
         "part_number": "T138764B",
-        "description": "ASSY COVER FRONT BODY MAC 25-4",
+        "description": "ASSY CENTER PIVOT JOINING MAC 25-4",
         "qty": "1",
         "type": "",
         "level": ""
@@ -234,7 +234,7 @@
         "catalog": "T177667",
         "position": "13",
         "part_number": "T140170B",
-        "description": "ASSY CENTER PIVOT JOINING MAC 25-4",
+        "description": "ASSY CABIN GLASS MAC25",
         "qty": "1",
         "type": "",
         "level": ""
@@ -244,7 +244,7 @@
         "catalog": "T177667",
         "position": "14",
         "part_number": "T150306A",
-        "description": "ASSY CABIN GLASS MAC25",
+        "description": "ASSY LIGHT WORK BONNET AT40",
         "qty": "1",
         "type": "",
         "level": ""
@@ -254,7 +254,7 @@
         "catalog": "T177667",
         "position": "15",
         "part_number": "T151027A",
-        "description": "ASSY LIGHT WORK BONNET AT40",
+        "description": "ASSY LIGHT ROTARY BONNET",
         "qty": "1",
         "type": "",
         "level": ""
@@ -264,7 +264,7 @@
         "catalog": "T177667",
         "position": "16",
         "part_number": "T151028B",
-        "description": "ASSY LIGHT ROTARY BONNET",
+        "description": "ASSY LIGHTS WORK BOOM AT40",
         "qty": "1",
         "type": "",
         "level": ""
@@ -1880,7 +1880,7 @@
         "catalog": "T138394F",
         "position": "10",
         "part_number": "T138394F",
-        "description": "ASSY PRE DELIVERY ASSEMBLY MAC 25-4",
+        "description": "ASSY CABIN AUTO MAC25-4",
         "qty": "1",
         "type": "",
         "level": ""
@@ -3366,7 +3366,7 @@
         "catalog": "T138459F",
         "position": "11",
         "part_number": "T138459F",
-        "description": "ASSY CABIN AUTO MAC25-4",
+        "description": "ASSY COVER FRONT BODY MAC 25-4",
         "qty": "1",
         "type": "",
         "level": ""
@@ -4260,7 +4260,7 @@
         "catalog": "T138764B",
         "position": "12",
         "part_number": "T138764B",
-        "description": "ASSY COVER FRONT BODY MAC 25-4",
+        "description": "ASSY CENTER PIVOT JOINING MAC 25-4",
         "qty": "1",
         "type": "",
         "level": ""
@@ -4416,7 +4416,7 @@
         "catalog": "T140170B",
         "position": "13",
         "part_number": "T140170B",
-        "description": "ASSY CENTER PIVOT JOINING MAC 25-4",
+        "description": "ASSY CABIN GLASS MAC25",
         "qty": "1",
         "type": "",
         "level": ""
@@ -4562,7 +4562,7 @@
         "catalog": "T150306A",
         "position": "14",
         "part_number": "T150306A",
-        "description": "ASSY CABIN GLASS MAC25",
+        "description": "ASSY LIGHT WORK BONNET AT40",
         "qty": "1",
         "type": "",
         "level": "CATALOG_UOM"
@@ -4668,7 +4668,7 @@
         "catalog": "T151027A",
         "position": "15",
         "part_number": "T151027A",
-        "description": "ASSY LIGHT WORK BONNET AT40",
+        "description": "ASSY LIGHT ROTARY BONNET",
         "qty": "1",
         "type": "",
         "level": ""
@@ -4774,7 +4774,7 @@
         "catalog": "T151028B",
         "position": "16",
         "part_number": "T151028B",
-        "description": "ASSY LIGHT ROTARY BONNET",
+        "description": "ASSY LIGHTS WORK BOOM AT40",
         "qty": "1",
         "type": "",
         "level": ""
