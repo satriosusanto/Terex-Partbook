@@ -764,7 +764,7 @@
         "catalog": "PLMXA1081D",
         "position": "4",
         "part_number": "MXH162C",
-        "description": "",
+        "description": "HOSE BEKA MAX L/OUT CYL TOP RHS",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -814,7 +814,7 @@
         "catalog": "PLMXA1081D",
         "position": "9",
         "part_number": "MXH168C",
-        "description": "",
+        "description": "HOSE BEKA MAX L/OUT CYL TOP LHS",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -894,7 +894,7 @@
         "catalog": "PLMXA1081D",
         "position": "17",
         "part_number": "MXH190A",
-        "description": "",
+        "description": "HOSE BEKA MAX L/OUT CYL BOTT LHS",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -1728,7 +1728,7 @@
         "catalog": "T131768C",
         "position": "1",
         "part_number": "FMUB05C012L",
-        "description": "",
+        "description": "SCREW SOC BUTTON M5 X 0.8P X 12 ZP",
         "qty": "4",
         "type": "1",
         "level": ""
@@ -2450,7 +2450,7 @@
         "catalog": "T138394F",
         "position": "63",
         "part_number": "T135399A",
-        "description": "",
+        "description": "MAT FLOOR DOUBLE DOOR",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -2630,7 +2630,7 @@
         "catalog": "T138394F",
         "position": "81",
         "part_number": "UCC1073C",
-        "description": "",
+        "description": "BAR ARTICULATION LOCK",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -2640,7 +2640,7 @@
         "catalog": "T138394F",
         "position": "82",
         "part_number": "UCM1019A",
-        "description": "",
+        "description": "PIN ARTICULATION LOCK",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -3466,7 +3466,7 @@
         "catalog": "T138459F",
         "position": "16",
         "part_number": "FMUB05C012L",
-        "description": "",
+        "description": "SCREW SOC BUTTON M5 X 0.8P X 12 ZP",
         "qty": "4",
         "type": "1",
         "level": ""
@@ -3586,7 +3586,7 @@
         "catalog": "T138459F",
         "position": "28",
         "part_number": "MCP0390C",
-        "description": "",
+        "description": "COVER INSPECTION HOLE",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -3596,7 +3596,7 @@
         "catalog": "T138459F",
         "position": "29",
         "part_number": "MXC1030C",
-        "description": "",
+        "description": "GLASS QUARTER RH SIDE",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -3606,7 +3606,7 @@
         "catalog": "T138459F",
         "position": "30",
         "part_number": "MXC1034C",
-        "description": "",
+        "description": "GLASS SLIDING LH SIDE",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -3616,7 +3616,7 @@
         "catalog": "T138459F",
         "position": "31",
         "part_number": "MXC1039A",
-        "description": "",
+        "description": "PANEL INSPECTION COVER",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -3636,7 +3636,7 @@
         "catalog": "T138459F",
         "position": "33",
         "part_number": "MXC1114A",
-        "description": "",
+        "description": "GASKET INSPECT HOLE LUFF PIN",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -3646,7 +3646,7 @@
         "catalog": "T138459F",
         "position": "34",
         "part_number": "MXC1143C",
-        "description": "",
+        "description": "GLASS SLIDING REAR RH SIDE",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -3656,7 +3656,7 @@
         "catalog": "T138459F",
         "position": "35",
         "part_number": "MXC1183A",
-        "description": "",
+        "description": "MOUNT STRIKER BOLT",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -3686,7 +3686,7 @@
         "catalog": "T138459F",
         "position": "38",
         "part_number": "MXC1216B",
-        "description": "",
+        "description": "BOLTING STRIP MUDGUARD",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -3696,7 +3696,7 @@
         "catalog": "T138459F",
         "position": "39",
         "part_number": "MXC1348A",
-        "description": "",
+        "description": "MOUNT DUAL MIRROR METRIC LH SIDE",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -3756,7 +3756,7 @@
         "catalog": "T138459F",
         "position": "45",
         "part_number": "PP2092101",
-        "description": "",
+        "description": "MIRROR ARM MODIFICATION",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -3876,7 +3876,7 @@
         "catalog": "T138459F",
         "position": "57",
         "part_number": "PP2402000",
-        "description": "",
+        "description": "MIRROR 200 X 150 X R400 CONVEX",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -4512,7 +4512,7 @@
         "catalog": "T150306A",
         "position": "1",
         "part_number": "MXC1029A",
-        "description": "",
+        "description": "GLASS REAR LH SIDE",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -4522,7 +4522,7 @@
         "catalog": "T150306A",
         "position": "2",
         "part_number": "MXC1031B",
-        "description": "",
+        "description": "GLASS WINDSCREEN",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -4532,7 +4532,7 @@
         "catalog": "T150306A",
         "position": "3",
         "part_number": "MXC1032B",
-        "description": "",
+        "description": "GLASS CABIN ROOF",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -7288,7 +7288,7 @@
         "catalog": "PLMXA2028I",
         "position": "39",
         "part_number": "MXC2149B",
-        "description": "",
+        "description": "MIDCOVER REAR OM906 MD3060",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -8386,7 +8386,7 @@
         "catalog": "T163893A",
         "position": "2",
         "part_number": "MXC3059C",
-        "description": "",
+        "description": "PIN EXTENSION CHAIN END BLOCK",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -8396,7 +8396,7 @@
         "catalog": "T163893A",
         "position": "3",
         "part_number": "MXC3060C",
-        "description": "",
+        "description": "CHAIN EXTENSION END BLOCK SCREW",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -8712,7 +8712,7 @@
         "catalog": "PLMXA3037K",
         "position": "30",
         "part_number": "MXC3027B",
-        "description": "",
+        "description": "GUARD RETRACT ROPE",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -8722,7 +8722,7 @@
         "catalog": "PLMXA3037K",
         "position": "31",
         "part_number": "MXC3035C",
-        "description": "",
+        "description": "BRACKET PUSH BAR",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -8742,7 +8742,7 @@
         "catalog": "PLMXA3037K",
         "position": "33",
         "part_number": "MXC3039B",
-        "description": "",
+        "description": "PLATE WEAR PAD ADJ 1ST EXTENSION",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -8762,7 +8762,7 @@
         "catalog": "PLMXA3037K",
         "position": "35",
         "part_number": "MXC3056B",
-        "description": "",
+        "description": "RETAINER WEAR PAD SUIT TOP WEAR PADS",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -8772,7 +8772,7 @@
         "catalog": "PLMXA3037K",
         "position": "36",
         "part_number": "MXC3094A",
-        "description": "",
+        "description": "GUARD RETRACT ROPE RH SIDE",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -8782,7 +8782,7 @@
         "catalog": "PLMXA3037K",
         "position": "37",
         "part_number": "MXM3020A",
-        "description": "",
+        "description": "PIN 6\" EXTENSION CYL TRUNNION END",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -8924,7 +8924,7 @@
         "catalog": "PLMXA3040A",
         "position": "1",
         "part_number": "MXM3037B",
-        "description": "",
+        "description": "SHEAVE RETRACT ROPE (PLMXA3040)",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -9086,7 +9086,7 @@
         "catalog": "PLMXA3038J",
         "position": "5",
         "part_number": "FISC03C016B",
-        "description": "",
+        "description": "SCREW CSK 3/16\" UNC x 1\" BRASS",
         "qty": "4",
         "type": "1",
         "level": ""
@@ -9196,7 +9196,7 @@
         "catalog": "PLMXA3038J",
         "position": "16",
         "part_number": "MXC3041B",
-        "description": "",
+        "description": "PLATE WEAR PAD ADJ 2ND EXTENSION",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -9216,7 +9216,7 @@
         "catalog": "PLMXA3038J",
         "position": "18",
         "part_number": "MXC3056B",
-        "description": "",
+        "description": "RETAINER WEAR PAD SUIT TOP WEAR PADS",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -9668,7 +9668,7 @@
         "catalog": "PLMXA3039I",
         "position": "25",
         "part_number": "MXC3084B",
-        "description": "",
+        "description": "ROPE GUIDE DEFLECTOR SHEAVE LONG",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -10286,7 +10286,7 @@
         "catalog": "T172825",
         "position": "2",
         "part_number": "MXC3050A",
-        "description": "",
+        "description": "WEAR PAD 1ST EXTENSION REAR TOP",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -10754,7 +10754,7 @@
         "catalog": "T137360D",
         "position": "30",
         "part_number": "FIWF20L",
-        "description": "",
+        "description": "WASHER FLAT 1.1/4\" GR.5 ZP",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -10844,7 +10844,7 @@
         "catalog": "T137360D",
         "position": "39",
         "part_number": "FMSP32-032",
-        "description": "",
+        "description": "PIN SPLIT 3.2 X 32 STEEL ZP",
         "qty": "4",
         "type": "1",
         "level": ""
@@ -10904,7 +10904,7 @@
         "catalog": "T137360D",
         "position": "45",
         "part_number": "MXC3031A",
-        "description": "",
+        "description": "ANCHOR BLOCK EXTENSION CHAIN",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -10934,7 +10934,7 @@
         "catalog": "T137360D",
         "position": "48",
         "part_number": "MXC3037B",
-        "description": "",
+        "description": "PLATE WEAR PAD ADJ BUTT",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -10974,7 +10974,7 @@
         "catalog": "T137360D",
         "position": "52",
         "part_number": "MXC3104A",
-        "description": "",
+        "description": "SCREW EXTENSION CHAIN KEEPER PLATE",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -10984,7 +10984,7 @@
         "catalog": "T137360D",
         "position": "53",
         "part_number": "MXC3124A",
-        "description": "",
+        "description": "ROD GUIDE WINCH ROPE",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -12696,7 +12696,7 @@
         "catalog": "PLMXA4003K",
         "position": "1",
         "part_number": "C1226B",
-        "description": "",
+        "description": "WEAR PAD SPRING HANGER 287",
         "qty": "4",
         "type": "1",
         "level": ""
@@ -16620,7 +16620,7 @@
         "catalog": "T164544",
         "position": "7",
         "part_number": "PL16E153A",
-        "description": "",
+        "description": "HARNESS PATCH 2 SPEED FAN",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -16630,7 +16630,7 @@
         "catalog": "T164544",
         "position": "8",
         "part_number": "PP2284650",
-        "description": "",
+        "description": "HUB EDDY CURRENT 2 SPEED FAN",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -19272,7 +19272,7 @@
         "catalog": "PLMXA6052E",
         "position": "5",
         "part_number": "MXC1147A",
-        "description": "",
+        "description": "BRACKET HOSES",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -19282,7 +19282,7 @@
         "catalog": "PLMXA6052E",
         "position": "6",
         "part_number": "MXM1012C",
-        "description": "",
+        "description": "PIN STEERING CYL",
         "qty": "4",
         "type": "1",
         "level": ""
@@ -19302,7 +19302,7 @@
         "catalog": "PLMXA6052E",
         "position": "8",
         "part_number": "MXM1026A",
-        "description": "",
+        "description": "SPACER STEERING BEARING",
         "qty": "4",
         "type": "1",
         "level": ""
@@ -19540,7 +19540,7 @@
         "catalog": "PLMXA6064F",
         "position": "1",
         "part_number": "MXM1039B",
-        "description": "",
+        "description": "PIN SUSPENSION CYL UPPER",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -19550,7 +19550,7 @@
         "catalog": "PLMXA6064F",
         "position": "2",
         "part_number": "MXM1040B",
-        "description": "",
+        "description": "PIN SUSPENSION CYL LOWER",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -19560,7 +19560,7 @@
         "catalog": "PLMXA6064F",
         "position": "3",
         "part_number": "MXP0611A",
-        "description": "",
+        "description": "PLATE WASHER PIN RETAINER UPPER",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -19570,7 +19570,7 @@
         "catalog": "PLMXA6064F",
         "position": "4",
         "part_number": "MXP0612A",
-        "description": "",
+        "description": "PLATE WASHER PIN RETAINER LOWER",
         "qty": "2",
         "type": "1",
         "level": ""
@@ -19852,7 +19852,7 @@
         "catalog": "PLMXA6068B",
         "position": "1",
         "part_number": "MXHP025C",
-        "description": "",
+        "description": "PIPE EXTENSION SEC OUT UPPER",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -19862,7 +19862,7 @@
         "catalog": "PLMXA6068B",
         "position": "2",
         "part_number": "MXHP026C",
-        "description": "",
+        "description": "PIPE EXTENSION SEC UPPER IN",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -25572,7 +25572,7 @@
         "catalog": "T138773I",
         "position": "3",
         "part_number": "FMUB05C012L",
-        "description": "",
+        "description": "SCREW SOC BUTTON M5 X 0.8P X 12 ZP",
         "qty": "4",
         "type": "1",
         "level": ""
@@ -26568,7 +26568,7 @@
         "catalog": "T172822A",
         "position": "7",
         "part_number": "MXC1361A",
-        "description": "",
+        "description": "STICKER WASHER FLUID",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -26966,7 +26966,7 @@
       {
         "id": "PP1602126:00001",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "1",
         "part_number": "FMUS06C012L",
         "description": "SCREW SOC CAP M6 X 1P X 12 ZP",
         "qty": "8",
@@ -26976,7 +26976,7 @@
       {
         "id": "PP1602126:00002",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "2",
         "part_number": "FMUS06C020L",
         "description": "SCREW SOC CAP M6 X 1P X 20 ZP",
         "qty": "4",
@@ -26986,7 +26986,7 @@
       {
         "id": "PP1602126:00003",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "3",
         "part_number": "FMUS06C020L",
         "description": "SCREW SOC CAP M6 X 1P X 20 ZP",
         "qty": "4",
@@ -26996,7 +26996,7 @@
       {
         "id": "PP1602126:00004",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "4",
         "part_number": "FMWF06L",
         "description": "WASHER FLAT M6 GR.8.8 ZP",
         "qty": "8",
@@ -27006,7 +27006,7 @@
       {
         "id": "PP1602126:00005",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "5",
         "part_number": "FMWS06",
         "description": "WASHER SPRING M6 ZP",
         "qty": "8",
@@ -27016,7 +27016,7 @@
       {
         "id": "PP1602126:00006",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "6",
         "part_number": "PP0509500",
         "description": "FLASHER CLEAR",
         "qty": "2",
@@ -27026,7 +27026,7 @@
       {
         "id": "PP1602126:00007",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "7",
         "part_number": "PP0509600",
         "description": "FLASHER AMBER",
         "qty": "2",
@@ -27036,7 +27036,7 @@
       {
         "id": "PP1602126:00008",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "8",
         "part_number": "PP1300400",
         "description": "FESTOON 24V 21W 15 X 42.5MM",
         "qty": "2",
@@ -27046,7 +27046,7 @@
       {
         "id": "PP1602126:00009",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "9",
         "part_number": "PP1602136",
         "description": "INSERT H/LIGHT HIGH/LOW BEAM",
         "qty": "2",
@@ -27056,7 +27056,7 @@
       {
         "id": "PP1602126:00010",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "10",
         "part_number": "PP1602146",
         "description": "HEADLIGHT INSERT HIGHBEAM",
         "qty": "2",
@@ -27066,7 +27066,7 @@
       {
         "id": "PP1602126:00011",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "11",
         "part_number": "PP1712900",
         "description": "GLOBE 24V 70W QUARTZ H1",
         "qty": "2",
@@ -27076,7 +27076,7 @@
       {
         "id": "PP1602126:00012",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "12",
         "part_number": "PP1713100",
         "description": "GLOBE 24V 70-75W QUARTZ H4",
         "qty": "2",
@@ -27086,7 +27086,7 @@
       {
         "id": "PP1602126:00013",
         "catalog": "PP1602126",
-        "position": "",
+        "position": "13",
         "part_number": "PP2367200",
         "description": "FESTOON 24V 5W 11 X 41MM (BOX)",
         "qty": "2",
@@ -28090,7 +28090,7 @@
         "catalog": "T150993C",
         "position": "3",
         "part_number": "PP8158405",
-        "description": "",
+        "description": "CLAMP CABLE CPC 23 BACKSHELL",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -28186,7 +28186,7 @@
         "catalog": "T150994C",
         "position": "5",
         "part_number": "PP8158405",
-        "description": "",
+        "description": "CLAMP CABLE CPC 23 BACKSHELL",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -28272,7 +28272,7 @@
         "catalog": "T150997F",
         "position": "6",
         "part_number": "E1072A",
-        "description": "",
+        "description": "CABLE IGN SOL TO ISO SWITCH LOCKSAFE",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -28570,7 +28570,7 @@
         "catalog": "T172724C",
         "position": "5",
         "part_number": "PP1824311",
-        "description": "",
+        "description": "PLUG & CABLE FORM A 18MM 3.0M BLACK",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -29418,7 +29418,7 @@
         "catalog": "T177756B",
         "position": "43",
         "part_number": "PP8158404",
-        "description": "",
+        "description": "PLUG CPC 23-37 SOCKET",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -29428,7 +29428,7 @@
         "catalog": "T177756B",
         "position": "44",
         "part_number": "PP8158405",
-        "description": "",
+        "description": "CLAMP CABLE CPC 23 BACKSHELL",
         "qty": "3",
         "type": "1",
         "level": ""
@@ -29448,7 +29448,7 @@
         "catalog": "T177756B",
         "position": "46",
         "part_number": "PP8158606",
-        "description": "",
+        "description": "TERMINAL 4-WAY FUSE HOLDER",
         "qty": "5",
         "type": "1",
         "level": ""
@@ -30780,7 +30780,7 @@
         "catalog": "T191275A",
         "position": "10",
         "part_number": "PP2229600",
-        "description": "",
+        "description": "BULB 24V 21W",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -30810,7 +30810,7 @@
         "catalog": "T191275A",
         "position": "13",
         "part_number": "PP2402100",
-        "description": "",
+        "description": "BULB 24V 10W BAYONET",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -30820,7 +30820,7 @@
         "catalog": "T191275A",
         "position": "14",
         "part_number": "PP2402200",
-        "description": "",
+        "description": "LIGHT INTERIOR",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -31128,7 +31128,7 @@
         "catalog": "T167887",
         "position": "10",
         "part_number": "PP2399100",
-        "description": "",
+        "description": "STICKER DO NOT TALK TO OPERATOR",
         "qty": "1",
         "type": "1",
         "level": ""
@@ -32610,7 +32610,7 @@
         "catalog": "T154682A",
         "position": "4",
         "part_number": "MXC2152A",
-        "description": "",
+        "description": "STICKER MAC25-SL BLACK",
         "qty": "2",
         "type": "1",
         "level": ""

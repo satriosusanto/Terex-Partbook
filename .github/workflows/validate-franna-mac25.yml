@@ -1,0 +1,29 @@
+name: Validate Franna MAC25 data
+
+on:
+  pull_request:
+    paths:
+      - 'catalogs/franna-mac25/**'
+      - '.github/workflows/validate-franna-mac25.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'catalogs/franna-mac25/**'
+      - '.github/workflows/validate-franna-mac25.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-mac25:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate MAC25 JSON and references
+        run: node catalogs/franna-mac25/scripts/validate-data.mjs
