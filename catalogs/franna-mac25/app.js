@@ -82,7 +82,13 @@ function fit(){
  // Retry a bounded number of frames rather than leaving the diagram at scale 1.
  if(width<120){let attempts=0;const retry=()=>{if(attempts++<12&&v.getBoundingClientRect().width<120){requestAnimationFrame(retry);return;}if(v.getBoundingClientRect().width>=120)fit();};requestAnimationFrame(retry);return;}
  const usableWidth=Math.max(80,width-16);
- scale=Math.max(.01,Math.min(1,usableWidth/cv.width));
+ const compact=window.matchMedia('(max-width:800px)').matches;
+ const usableHeight=Math.max(100,v.clientHeight-16);
+ const widthScale=usableWidth/cv.width;
+ const heightScale=usableHeight/cv.height;
+ // On phones/tablets, fit the entire sheet inside the visible diagram viewport.
+ // Desktop keeps width-fit behavior so callouts remain easier to inspect.
+ scale=Math.max(.01,Math.min(1,widthScale,compact?heightScale:1));
  applyScale();
  v.scrollLeft=0;v.scrollTop=0;
 }
