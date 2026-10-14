@@ -2,7 +2,7 @@
 
 ## Summary after matching the additional H2 database
 
-- Part rows checked: 3308
+- Part rows after duplicate cleanup: 3284
 - Part rows with blank description: 12 (includes the zero/placeholder row)
 - Actual part rows with blank description: 11
 - Unique remaining blank part numbers: 10
@@ -95,11 +95,12 @@ These entries need comparison with the original diagram/callout list before assi
 
 ## Additional integrity checks — hotspot linkage
 
-- The recovered `parts.json` contains 24 repeated record IDs.
-- Three repeated IDs have conflicting row fields and need source-level cleanup: `PLMXS1022C:00000`, `T136472:00000`, and `PL16A3067A:00000`. The remaining repeated IDs were identical across the checked part fields.
+- Initial integrity scan found 24 repeated record IDs in 3308 rows. Removed 24 redundant/misattributed rows, leaving 3284 BOM rows and no repeated part IDs.
+- Three conflicting self-rows were removed from their own subcatalogs because their matching parent assembly rows are already represented correctly in the parent BOM: `PLMXS1022C` at position 5 under `T177667`, `T136472` at position 2 under `T185887A`, and `PL16A3067A` at position 60 under `T137360D` / `MXC3147A`.
+- Exact duplicate child records were deduplicated in both `parts.json` and `catalogs.json`; both now contain 3284 child/part rows.
 - The MAC25 root assembly has 9 immediate assembly references; all 9 resolve to existing catalog records.
 - Hotspot click handling now resolves by catalog + callout position + part number first, and only falls back to `part_id` when that lookup is unambiguous. Conflicting ambiguous rows are not selected arbitrarily.
-- This code change reduces the risk of a hotspot opening the wrong row, but does not replace the need to clean the 3 conflicting source IDs or validate unlinked callouts against the OEM diagram.
+- These data cleanup and lookup changes reduce the risk of duplicated BOM lines or a hotspot opening the wrong row. The 39 unlinked callouts still need confirmation against the OEM diagram.
 
 ## Data integrity notes
 
