@@ -847,22 +847,8 @@
       tree.replaceChildren(rootList);
     }
 
-    const expandInitialBranches = (id, depth, seen = new Set()) => {
-      if (seen.has(id)) return;
-      seen.add(id);
-      const children = childIds.get(id) ?? [];
-      // AC200 starts with the top-level assemblies visible and each assembly
-      // independently expandable/collapsible. Other models retain their existing
-      // initial expansion depth.
-      if (children.length && (modelCode === "AC200-1" ? depth === 0 : depth < 4)) expanded.add(id);
-      children.forEach(childId => expandInitialBranches(childId, depth + 1, seen));
-    };
-    roots.forEach(id => expandInitialBranches(id, 0));
-    let ancestorId = activeId ? parentById.get(activeId) : null;
-    while (ancestorId) {
-      expanded.add(ancestorId);
-      ancestorId = parentById.get(ancestorId);
-    }
+    // Start every model with all hierarchy branches collapsed.
+    // Users expand each parent manually; searching can still reveal matching paths.
     renderTree();
 
     const sourceObserver = new MutationObserver(() => {
