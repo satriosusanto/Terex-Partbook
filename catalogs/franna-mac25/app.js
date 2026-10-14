@@ -63,7 +63,7 @@ function renderResults(list){
  const header='<div class="row table-head" role="row"><div>Position</div><div>Part Number</div><div>Description</div><div>Qty</div></div>';
  const rows=shown.map((p,index)=>{
   const description=partDescription(p);
-  return '<div class="row part-row" role="row" data-row-index="'+index+'"><div class="pos">'+esc(p.position||'—')+'</div><div class="part-number"><b>'+esc(p.part_number||'—')+'</b></div><div class="part-description">'+esc(description||'—')+'</div><div class="qty">'+esc(p.qty||'—')+'</div></div>';
+  return '<div class="row part-row" role="row" data-row-index="'+index+'"><div class="pos">'+esc(p.position||'—')+'</div><div class="part-number"><b>'+esc(p.part_number||'—')+'</b></div><div class="part-description">'+esc(description||'Description unavailable in source data')+'</div><div class="qty">'+esc(p.qty||'—')+'</div></div>';
  }).join('');
  const results=$('#results');
  results.innerHTML=header+rows;
