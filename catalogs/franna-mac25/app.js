@@ -101,7 +101,18 @@ function renderResults(list){
   alert('Part Number: '+(p.part_number||'—')+'\\nDescription: '+(partDescription(p)||'—')+'\\nQty: '+(p.qty||'—')+'\\nPosition: '+(p.position||'—'));
  }));
 }
-function applyScale(){let cv=$('#canvas'),stage=$('#diagramStage'),content=$('#diagramContent'),layer=$('#hotspots');if(!cv||!stage||!content||!layer||!cv.width||!cv.height)return;stage.style.width=`${cv.width*scale}px`;stage.style.height=`${cv.height*scale}px`;content.style.width=`${cv.width}px`;content.style.height=`${cv.height}px`;content.style.transform=`scale(${scale})`;content.style.transformOrigin='top left';cv.style.width=`${cv.width}px`;cv.style.height=`${cv.height}px`;layer.style.width=`${cv.width}px`;layer.style.height=`${cv.height}px`;layer.style.transform='none';}
+function applyScale(){
+ const cv=$('#canvas'),stage=$('#diagramStage'),content=$('#diagramContent'),layer=$('#hotspots');
+ if(!cv||!stage||!content||!layer||!cv.width||!cv.height)return;
+ const width=Math.max(1,cv.width*scale),height=Math.max(1,cv.height*scale);
+ // Scale the actual CSS dimensions instead of transforming a full-size child.
+ // Android WebView can clip transformed canvas content during flex/layout changes.
+ stage.style.width=`${width}px`;stage.style.height=`${height}px`;
+ content.style.width=`${width}px`;content.style.height=`${height}px`;
+ content.style.transform='none';content.style.transformOrigin='top left';
+ cv.style.width=`${width}px`;cv.style.height=`${height}px`;
+ layer.style.width=`${width}px`;layer.style.height=`${height}px`;layer.style.transform='none';
+}
 function fit(){
  const v=$('#viewer'),cv=$('#canvas');
  if(!v||!cv||!cv.width||!cv.height)return;
