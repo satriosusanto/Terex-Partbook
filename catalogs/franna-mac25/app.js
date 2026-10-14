@@ -113,10 +113,10 @@ function fit(){
  const compact=window.matchMedia('(max-width:800px)').matches;
  const usableHeight=Math.max(100,v.clientHeight-16);
  const widthScale=usableWidth/cv.width;
- const heightScale=usableHeight/cv.height;
- // On phones/tablets, fit the entire sheet inside the visible diagram viewport.
- // Desktop keeps width-fit behavior so callouts remain easier to inspect.
- scale=Math.max(.01,Math.min(1,widthScale,compact?heightScale:1));
+ // Fit the complete diagram width on every screen. On mobile, constraining
+ // both width and height made wide OEM sheets shrink to a narrow strip.
+ // Keep the viewer scrollable vertically for tall sheets; pinch zoom remains available.
+ scale=Math.max(.01,Math.min(1,widthScale));
  applyScale();
  v.scrollLeft=0;v.scrollTop=0;
 }
