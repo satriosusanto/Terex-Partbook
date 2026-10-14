@@ -712,6 +712,10 @@
     tree.className = "catalog-tree";
     tree.setAttribute("role", "tree");
     source.classList.add("catalog-tree-source");
+    // Keep the original list only as a hidden data/click source for the
+    // generated tree; otherwise model-specific styles can expose duplicate rows.
+    source.style.setProperty("display", "none", "important");
+    source.setAttribute("aria-hidden", "true");
     source.before(tree);
 
     const expanded = new Set();
