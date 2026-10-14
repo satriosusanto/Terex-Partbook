@@ -64,6 +64,25 @@ for (const dir of candidateDirs) {
   const imageNames = new Set();
   let duplicateCatalogIds = 0;
   let duplicatePartIds = 0;
+  let catalogsWithoutLabel = 0;
+  let partsWithoutPartNumber = 0;
+  let partsWithoutDescription = 0;
+  let partsWithoutPosition = 0;
+  let partsWithoutQuantity = 0;
+
+  // Count blank fields as review items rather than automatically calling them
+  // corruption: parent/assembly rows can legitimately omit position/quantity.
+  for (const catalog of catalogs) {
+    if (!String(first(catalog, ['title', 'name', 'description', 'label']) ?? '').trim()) {
+      catalogsWithoutLabel++;
+    }
+  }
+  for (const part of parts) {
+    if (!String(first(part, ['partNumber', 'part_number', 'partNo', 'part_no']) ?? '').trim()) partsWithoutPartNumber++;
+    if (!String(first(part, ['description', 'desc', 'name']) ?? '').trim()) partsWithoutDescription++;
+    if (!String(first(part, ['position', 'pos', 'itemLoc', 'item_loc']) ?? '').trim()) partsWithoutPosition++;
+    if (!String(first(part, ['qty', 'quantity']) ?? '').trim()) partsWithoutQuantity++;
+  }
 
   for (const catalog of catalogs) {
     const id = first(catalog, ['id', 'catalogId', 'catalog']);
@@ -126,6 +145,11 @@ for (const dir of candidateDirs) {
 
   if (duplicateCatalogIds) warnings.push(`Duplicate catalog IDs: ${duplicateCatalogIds}`);
   if (duplicatePartIds) warnings.push(`Duplicate part IDs: ${duplicatePartIds}`);
+  if (catalogsWithoutLabel) warnings.push(`Catalog records without a display label (review): ${catalogsWithoutLabel}`);
+  if (partsWithoutPartNumber) warnings.push(`Part rows without a part number (review): ${partsWithoutPartNumber}`);
+  if (partsWithoutDescription) warnings.push(`Part rows without a description (review): ${partsWithoutDescription}`);
+  if (partsWithoutPosition) warnings.push(`Part rows without a position (review; may include valid parent/header rows): ${partsWithoutPosition}`);
+  if (partsWithoutQuantity) warnings.push(`Part rows without a quantity (review; may include valid parent/header rows): ${partsWithoutQuantity}`);
   if (partsWithUnknownCatalog) warnings.push(`Parts referencing unknown catalogs: ${partsWithUnknownCatalog}`);
   if (hotspotsWithUnknownCatalog) warnings.push(`Hotspots referencing unknown catalogs: ${hotspotsWithUnknownCatalog}`);
   if (hotspotsWithInvalidBounds) warnings.push(`Hotspots with invalid bounds: ${hotspotsWithInvalidBounds}`);
@@ -141,6 +165,11 @@ for (const dir of candidateDirs) {
     hotspots: hotspots.length,
     duplicateCatalogIds,
     duplicatePartIds,
+    catalogsWithoutLabel,
+    partsWithoutPartNumber,
+    partsWithoutDescription,
+    partsWithoutPosition,
+    partsWithoutQuantity,
     partsWithUnknownCatalog,
     hotspotsWithUnknownCatalog,
     hotspotsWithInvalidBounds,
