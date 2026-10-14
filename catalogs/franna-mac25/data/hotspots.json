@@ -525,7 +525,7 @@
     "bottom": 932,
     "part_id": "PLMXA1081D:00017",
     "part_number": "MXH190A",
-    "description": ""
+    "description": "HOSE BEKA MAX L/OUT CYL BOTT LHS"
   },
   {
     "image": "PLMXA1081D.TIF",
@@ -537,7 +537,7 @@
     "bottom": 932,
     "part_id": "PLMXA1081D:00009",
     "part_number": "MXH168C",
-    "description": ""
+    "description": "HOSE BEKA MAX L/OUT CYL TOP LHS"
   },
   {
     "image": "PLMXA1081D.TIF",
@@ -561,7 +561,7 @@
     "bottom": 4995,
     "part_id": "PLMXA1081D:00004",
     "part_number": "MXH162C",
-    "description": ""
+    "description": "HOSE BEKA MAX L/OUT CYL TOP RHS"
   },
   {
     "image": "PLMXA1081D.TIF",
@@ -1761,7 +1761,7 @@
     "bottom": 5228,
     "part_id": "T131768C:00001",
     "part_number": "FMUB05C012L",
-    "description": ""
+    "description": "SCREW SOC BUTTON M5 X 0.8P X 12 ZP"
   },
   {
     "image": "T131768C.TIF",
@@ -2073,7 +2073,7 @@
     "bottom": 5756,
     "part_id": "T138394F:00063",
     "part_number": "T135399A",
-    "description": ""
+    "description": "MAT FLOOR DOUBLE DOOR"
   },
   {
     "image": "T138394F.TIF",
@@ -2193,7 +2193,7 @@
     "bottom": 10494,
     "part_id": "T138394F:00081",
     "part_number": "UCC1073C",
-    "description": ""
+    "description": "BAR ARTICULATION LOCK"
   },
   {
     "image": "T138394F.TIF",
@@ -2205,7 +2205,7 @@
     "bottom": 10494,
     "part_id": "T138394F:00082",
     "part_number": "UCM1019A",
-    "description": ""
+    "description": "PIN ARTICULATION LOCK"
   },
   {
     "image": "T138394F.TIF",
@@ -2961,7 +2961,7 @@
     "bottom": 6846,
     "part_id": "T138459F:00031",
     "part_number": "MXC1039A",
-    "description": ""
+    "description": "PANEL INSPECTION COVER"
   },
   {
     "image": "T138459F_Sheet 2.TIF",
@@ -3021,7 +3021,7 @@
     "bottom": 3255,
     "part_id": "T138459F:00028",
     "part_number": "MCP0390C",
-    "description": ""
+    "description": "COVER INSPECTION HOLE"
   },
   {
     "image": "T138459F_Sheet 2.TIF",
@@ -3093,7 +3093,7 @@
     "bottom": 5770,
     "part_id": "T138459F:00038",
     "part_number": "MXC1216B",
-    "description": ""
+    "description": "BOLTING STRIP MUDGUARD"
   },
   {
     "image": "T138459F_Sheet 2.TIF",
@@ -3261,7 +3261,7 @@
     "bottom": 1714,
     "part_id": "T138459F:00030",
     "part_number": "MXC1034C",
-    "description": ""
+    "description": "GLASS SLIDING LH SIDE"
   },
   {
     "image": "T138459F_Sheet 2.TIF",
@@ -3285,7 +3285,7 @@
     "bottom": 9140,
     "part_id": "T138459F:00028",
     "part_number": "MCP0390C",
-    "description": ""
+    "description": "COVER INSPECTION HOLE"
   },
   {
     "image": "T138459F_Sheet 2.TIF",
@@ -3297,7 +3297,7 @@
     "bottom": 9952,
     "part_id": "T138459F:00016",
     "part_number": "FMUB05C012L",
-    "description": ""
+    "description": "SCREW SOC BUTTON M5 X 0.8P X 12 ZP"
   },
   {
     "image": "T138459F_Sheet 2.TIF",
@@ -3321,7 +3321,7 @@
     "bottom": 3255,
     "part_id": "T138459F:00033",
     "part_number": "MXC1114A",
-    "description": ""
+    "description": "GASKET INSPECT HOLE LUFF PIN"
   },
   {
     "image": "T138459F_Sheet 2.TIF",
@@ -3897,7 +3897,7 @@
     "bottom": 4746,
     "part_id": "T150306A:00003",
     "part_number": "MXC1032B",
-    "description": ""
+    "description": "GLASS CABIN ROOF"
   },
   {
     "image": "T150306A.TIF",
@@ -3933,7 +3933,7 @@
     "bottom": 6706,
     "part_id": "T150306A:00002",
     "part_number": "MXC1031B",
-    "description": ""
+    "description": "GLASS WINDSCREEN"
   },
   {
     "image": "T150306A.TIF",
@@ -3945,7 +3945,7 @@
     "bottom": 7045,
     "part_id": "T150306A:00001",
     "part_number": "MXC1029A",
-    "description": ""
+    "description": "GLASS REAR LH SIDE"
   },
   {
     "image": "T150306A.TIF",
@@ -6657,7 +6657,7 @@
     "bottom": 7877,
     "part_id": "PLMXA2028I:00039",
     "part_number": "MXC2149B",
-    "description": ""
+    "description": "MIDCOVER REAR OM906 MD3060"
   },
   {
     "image": "PLMXA2028I.TIF",
@@ -7749,7 +7749,7 @@
     "bottom": 2832,
     "part_id": "T163893A:00003",
     "part_number": "MXC3060C",
-    "description": ""
+    "description": "CHAIN EXTENSION END BLOCK SCREW"
   },
   {
     "image": "T163893A.TIF",
@@ -7773,7 +7773,7 @@
     "bottom": 9552,
     "part_id": "T163893A:00002",
     "part_number": "MXC3059C",
-    "description": ""
+    "description": "PIN EXTENSION CHAIN END BLOCK"
   },
   {
     "image": "PLMXA3037K.TIF",
@@ -7821,7 +7821,7 @@
     "bottom": 2971,
     "part_id": "PLMXA3037K:00031",
     "part_number": "MXC3035C",
-    "description": ""
+    "description": "BRACKET PUSH BAR"
   },
   {
     "image": "PLMXA3037K.TIF",
@@ -8025,7 +8025,7 @@
     "bottom": 2509,
     "part_id": "PLMXA3037K:00030",
     "part_number": "MXC3027B",
-    "description": ""
+    "description": "GUARD RETRACT ROPE"
   },
   {
     "image": "PLMXA3037K.TIF",
@@ -8073,7 +8073,7 @@
     "bottom": 4266,
     "part_id": "PLMXA3037K:00035",
     "part_number": "MXC3056B",
-    "description": ""
+    "description": "RETAINER WEAR PAD SUIT TOP WEAR PADS"
   },
   {
     "image": "PLMXA3037K.TIF",
@@ -8145,7 +8145,7 @@
     "bottom": 4436,
     "part_id": "PLMXA3037K:00037",
     "part_number": "MXM3020A",
-    "description": ""
+    "description": "PIN 6\" EXTENSION CYL TRUNNION END"
   },
   {
     "image": "PLMXA3037K.TIF",
@@ -8229,7 +8229,7 @@
     "bottom": 5028,
     "part_id": "PLMXA3037K:00036",
     "part_number": "MXC3094A",
-    "description": ""
+    "description": "GUARD RETRACT ROPE RH SIDE"
   },
   {
     "image": "PLMXA3037K.TIF",
@@ -8301,7 +8301,7 @@
     "bottom": 5884,
     "part_id": "PLMXA3037K:00033",
     "part_number": "MXC3039B",
-    "description": ""
+    "description": "PLATE WEAR PAD ADJ 1ST EXTENSION"
   },
   {
     "image": "PLMXA3038J.TIF",
@@ -8373,7 +8373,7 @@
     "bottom": 7819,
     "part_id": "PLMXA3038J:00018",
     "part_number": "MXC3056B",
-    "description": ""
+    "description": "RETAINER WEAR PAD SUIT TOP WEAR PADS"
   },
   {
     "image": "PLMXA3038J.TIF",
@@ -8649,7 +8649,7 @@
     "bottom": 10787,
     "part_id": "PLMXA3038J:00016",
     "part_number": "MXC3041B",
-    "description": ""
+    "description": "PLATE WEAR PAD ADJ 2ND EXTENSION"
   },
   {
     "image": "PLMXA3038J.TIF",
@@ -8709,7 +8709,7 @@
     "bottom": 7606,
     "part_id": "PLMXA3038J:00005",
     "part_number": "FISC03C016B",
-    "description": ""
+    "description": "SCREW CSK 3/16\" UNC x 1\" BRASS"
   },
   {
     "image": "PLMXA3038J.TIF",
@@ -8829,7 +8829,7 @@
     "bottom": 1188,
     "part_id": "PLMXA3039I:00025",
     "part_number": "MXC3084B",
-    "description": ""
+    "description": "ROPE GUIDE DEFLECTOR SHEAVE LONG"
   },
   {
     "image": "PLMXA3039I.TIF",
@@ -9513,7 +9513,7 @@
     "bottom": 3812,
     "part_id": "T137360D:00048",
     "part_number": "MXC3037B",
-    "description": ""
+    "description": "PLATE WEAR PAD ADJ BUTT"
   },
   {
     "image": "T137360D.TIF",
@@ -9693,7 +9693,7 @@
     "bottom": 1442,
     "part_id": "T137360D:00030",
     "part_number": "FIWF20L",
-    "description": ""
+    "description": "WASHER FLAT 1.1/4\" GR.5 ZP"
   },
   {
     "image": "T137360D.TIF",
@@ -9813,7 +9813,7 @@
     "bottom": 8373,
     "part_id": "T137360D:00052",
     "part_number": "MXC3104A",
-    "description": ""
+    "description": "SCREW EXTENSION CHAIN KEEPER PLATE"
   },
   {
     "image": "T137360D.TIF",
@@ -9885,7 +9885,7 @@
     "bottom": 5687,
     "part_id": "T137360D:00045",
     "part_number": "MXC3031A",
-    "description": ""
+    "description": "ANCHOR BLOCK EXTENSION CHAIN"
   },
   {
     "image": "T137360D.TIF",
@@ -9933,7 +9933,7 @@
     "bottom": 11395,
     "part_id": "T137360D:00039",
     "part_number": "FMSP32-032",
-    "description": ""
+    "description": "PIN SPLIT 3.2 X 32 STEEL ZP"
   },
   {
     "image": "T137360D.TIF",
@@ -10077,7 +10077,7 @@
     "bottom": 9283,
     "part_id": "T137360D:00053",
     "part_number": "MXC3124A",
-    "description": ""
+    "description": "ROD GUIDE WINCH ROPE"
   },
   {
     "image": "T137360D.TIF",
@@ -11829,7 +11829,7 @@
     "bottom": 7431,
     "part_id": "PLMXA4003K:00001",
     "part_number": "C1226B",
-    "description": ""
+    "description": "WEAR PAD SPRING HANGER 287"
   },
   {
     "image": "PLMXA4003K.TIF",
@@ -19461,7 +19461,7 @@
     "bottom": 5472,
     "part_id": "PLMXA6052E:00008",
     "part_number": "MXM1026A",
-    "description": ""
+    "description": "SPACER STEERING BEARING"
   },
   {
     "image": "PLMXA6052E.TIF",
@@ -19485,7 +19485,7 @@
     "bottom": 5283,
     "part_id": "PLMXA6052E:00006",
     "part_number": "MXM1012C",
-    "description": ""
+    "description": "PIN STEERING CYL"
   },
   {
     "image": "PLMXA6052E.TIF",
@@ -19533,7 +19533,7 @@
     "bottom": 8896,
     "part_id": "PLMXA6052E:00005",
     "part_number": "MXC1147A",
-    "description": ""
+    "description": "BRACKET HOSES"
   },
   {
     "image": "PLMXA6052E.TIF",
@@ -19797,7 +19797,7 @@
     "bottom": 5569,
     "part_id": "PLMXA6064F:00004",
     "part_number": "MXP0612A",
-    "description": ""
+    "description": "PLATE WASHER PIN RETAINER LOWER"
   },
   {
     "image": "PLMXA6064F.TIF",
@@ -19809,7 +19809,7 @@
     "bottom": 5569,
     "part_id": "PLMXA6064F:00002",
     "part_number": "MXM1040B",
-    "description": ""
+    "description": "PIN SUSPENSION CYL LOWER"
   },
   {
     "image": "PLMXA6064F.TIF",
@@ -19821,7 +19821,7 @@
     "bottom": 1898,
     "part_id": "PLMXA6064F:00003",
     "part_number": "MXP0611A",
-    "description": ""
+    "description": "PLATE WASHER PIN RETAINER UPPER"
   },
   {
     "image": "PLMXA6064F.TIF",
@@ -19833,7 +19833,7 @@
     "bottom": 3788,
     "part_id": "PLMXA6064F:00001",
     "part_number": "MXM1039B",
-    "description": ""
+    "description": "PIN SUSPENSION CYL UPPER"
   },
   {
     "image": "PLMXA6064F.TIF",
@@ -20181,7 +20181,7 @@
     "bottom": 1813,
     "part_id": "PLMXA6068B:00002",
     "part_number": "MXHP026C",
-    "description": ""
+    "description": "PIPE EXTENSION SEC UPPER IN"
   },
   {
     "image": "PLMXA6068B.TIF",
@@ -20193,7 +20193,7 @@
     "bottom": 4385,
     "part_id": "PLMXA6068B:00001",
     "part_number": "MXHP025C",
-    "description": ""
+    "description": "PIPE EXTENSION SEC OUT UPPER"
   },
   {
     "image": "PLMXA6068B.TIF",
@@ -24513,7 +24513,7 @@
     "bottom": 12000,
     "part_id": "T138773I:00003",
     "part_number": "FMUB05C012L",
-    "description": ""
+    "description": "SCREW SOC BUTTON M5 X 0.8P X 12 ZP"
   },
   {
     "image": "T138773I.TIF",
@@ -25617,7 +25617,7 @@
     "bottom": 10117,
     "part_id": "T172822A:00007",
     "part_number": "MXC1361A",
-    "description": ""
+    "description": "STICKER WASHER FLUID"
   },
   {
     "image": "T172822A.TIF",
@@ -26853,7 +26853,7 @@
     "bottom": 9739,
     "part_id": "T191275A:00010",
     "part_number": "PP2229600",
-    "description": ""
+    "description": "BULB 24V 21W"
   },
   {
     "image": "T191275A.TIF",
@@ -26865,7 +26865,7 @@
     "bottom": 9741,
     "part_id": "T191275A:00013",
     "part_number": "PP2402100",
-    "description": ""
+    "description": "BULB 24V 10W BAYONET"
   },
   {
     "image": "T191275A.TIF",
@@ -26877,7 +26877,7 @@
     "bottom": 12393,
     "part_id": "T191275A:00014",
     "part_number": "PP2402200",
-    "description": ""
+    "description": "LIGHT INTERIOR"
   },
   {
     "image": "T191275A.TIF",
@@ -28497,7 +28497,7 @@
     "bottom": 3644,
     "part_id": "T154682A:00004",
     "part_number": "MXC2152A",
-    "description": ""
+    "description": "STICKER MAC25-SL BLACK"
   },
   {
     "image": "T159265B.TIF",
