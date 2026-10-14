@@ -1,4 +1,4 @@
-const S={cats:[],parts:[],hot:{},imgs:{},meta:{},current:null,zoom:1,filteredCats:[],openGroups:new Set(['BOOM','UPPERSTRUCTURE','CARRIER','OPTIONS'])};
+const S={cats:[],parts:[],hot:{},imgs:{},meta:{},current:null,zoom:1,filteredCats:[],openGroups:new Set()};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const norm=s=>String(s??'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'');
@@ -32,18 +32,7 @@ async function load(){
  }catch(e){console.error(e);setStatus('Failed to load data','error');$('viewer').innerHTML='<div class="empty"><div class="emptyIcon">⚠</div><b>PartBook data could not be loaded</b><span>Upload the complete repository, including the <code>data</code> and <code>images</code> folders.</span></div>';}
 }
 function initCatalogTreeExpansion(){
- const root=S.cats.find(c=>/ BASE$/.test(c.id)); const rootId=root?.id;
- catalogGroups.forEach(g=>{
-  const matches=S.cats.filter(c=>catalogGroup(c,rootId)===g.name);
-  const overview=matches.find(c=>rootId&&c.id===rootId+g.suffix);
-  matches.filter(c=>!overview||c.id!==overview.id).forEach(c=>{
-   const m=String(c.id).match(/^(\d{2}[FTP])-(\d{4})-/);
-   const family=m?m[1]:'Other catalogs';
-   const subgroup=m?m[2]:'';
-   S.openGroups.add(`${g.name}|family|${family}`);
-   S.openGroups.add(`${g.name}|sub|${family}|${subgroup}`);
-  });
- });
+ S.openGroups.clear();
 }
 function renderCats(){
  const root=S.cats.find(c=>/ BASE$/.test(c.id)); const rootId=root?.id;
