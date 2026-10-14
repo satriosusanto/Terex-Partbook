@@ -4,7 +4,7 @@
     "catalog": "MAC25*69557884",
     "position": "1",
     "part_number": "T177667",
-    "description": "",
+    "description": "ASSY FRONT BODY MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -14,7 +14,7 @@
     "catalog": "MAC25*69557884",
     "position": "2",
     "part_number": "T177668",
-    "description": "",
+    "description": "ASSY REAR BODY MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24,7 +24,7 @@
     "catalog": "MAC25*69557884",
     "position": "3",
     "part_number": "PLMXA3035",
-    "description": "",
+    "description": "BOOM ASSEMBLY FULL POWER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -34,7 +34,7 @@
     "catalog": "MAC25*69557884",
     "position": "4",
     "part_number": "T177670",
-    "description": "",
+    "description": "ASSY POWERTRAIN MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -44,7 +44,7 @@
     "catalog": "MAC25*69557884",
     "position": "5",
     "part_number": "T191850",
-    "description": "",
+    "description": "ASSY PNEUMATIC MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -54,7 +54,7 @@
     "catalog": "MAC25*69557884",
     "position": "6",
     "part_number": "T177672",
-    "description": "",
+    "description": "ASSY HYDRAULIC MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -64,7 +64,7 @@
     "catalog": "MAC25*69557884",
     "position": "7",
     "part_number": "T177673",
-    "description": "",
+    "description": "ASSY ELECTRICAL MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -74,7 +74,7 @@
     "catalog": "MAC25*69557884",
     "position": "8",
     "part_number": "T167887",
-    "description": "",
+    "description": "ASSY OPTIONS MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -84,7 +84,7 @@
     "catalog": "MAC25*69557884",
     "position": "9",
     "part_number": "PLMXA9001",
-    "description": "",
+    "description": "SERVICE KITS MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -94,7 +94,7 @@
     "catalog": "T177667",
     "position": "1",
     "part_number": "T177667",
-    "description": "",
+    "description": "ASSY FRONT BODY MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -104,7 +104,7 @@
     "catalog": "T177667",
     "position": "1",
     "part_number": "PLMXA1057Q",
-    "description": "",
+    "description": "SUNDRY ITEMS / FUEL REPTO",
     "qty": "1",
     "type": "",
     "level": ""
@@ -114,7 +114,7 @@
     "catalog": "T177667",
     "position": "2",
     "part_number": "PLMXA1081D",
-    "description": "",
+    "description": "KIT HOSE GREASELINE BEKA MAX",
     "qty": "1",
     "type": "",
     "level": ""
@@ -124,7 +124,7 @@
     "catalog": "T177667",
     "position": "3",
     "part_number": "PLMXA1082D",
-    "description": "",
+    "description": "CENTRAL GREASELINE ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -134,7 +134,7 @@
     "catalog": "T177667",
     "position": "4",
     "part_number": "PLMXA8036C",
-    "description": "",
+    "description": "FIRE EXTINGUISHER 4.5KG ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -144,7 +144,7 @@
     "catalog": "T177667",
     "position": "5",
     "part_number": "PLMXS1022C",
-    "description": "",
+    "description": "SERVICE KIT OM906 100HR FILTERS ONLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -154,7 +154,7 @@
     "catalog": "T177667",
     "position": "6",
     "part_number": "T131354A",
-    "description": "",
+    "description": "ASSY SEAT ISRI 6860/870 RH WITH ARMS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -164,7 +164,7 @@
     "catalog": "T177667",
     "position": "7",
     "part_number": "T131357A",
-    "description": "",
+    "description": "ASSY SEAT ISRI 6860/870 RH LONG FASTENERS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -174,7 +174,7 @@
     "catalog": "T177667",
     "position": "8",
     "part_number": "T131768C",
-    "description": "",
+    "description": "ASSY CABIN STANDARD AC",
     "qty": "1",
     "type": "",
     "level": ""
@@ -194,7 +194,7 @@
     "catalog": "T177667",
     "position": "10",
     "part_number": "T138394F",
-    "description": "",
+    "description": "ASSY CABIN AUTO MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -204,7 +204,7 @@
     "catalog": "T177667",
     "position": "11",
     "part_number": "T138459F",
-    "description": "",
+    "description": "ASSY COVER FRONT BODY MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -214,7 +214,7 @@
     "catalog": "T177667",
     "position": "12",
     "part_number": "T138764B",
-    "description": "",
+    "description": "ASSY CENTER PIVOT JOINING MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -224,7 +224,7 @@
     "catalog": "T177667",
     "position": "13",
     "part_number": "T140170B",
-    "description": "",
+    "description": "ASSY CABIN GLASS MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -234,7 +234,7 @@
     "catalog": "T177667",
     "position": "14",
     "part_number": "T150306A",
-    "description": "",
+    "description": "ASSY LIGHT WORK BONNET AT40",
     "qty": "1",
     "type": "",
     "level": ""
@@ -244,7 +244,7 @@
     "catalog": "T177667",
     "position": "15",
     "part_number": "T151027A",
-    "description": "",
+    "description": "ASSY LIGHT ROTARY BONNET",
     "qty": "1",
     "type": "",
     "level": ""
@@ -254,7 +254,7 @@
     "catalog": "T177667",
     "position": "16",
     "part_number": "T151028B",
-    "description": "",
+    "description": "ASSY LIGHTS WORK BOOM AT40",
     "qty": "1",
     "type": "",
     "level": ""
@@ -264,7 +264,7 @@
     "catalog": "T177667",
     "position": "17",
     "part_number": "T151029A",
-    "description": "",
+    "description": "ASSY LIGHTS WORK BOOM AT40",
     "qty": "1",
     "type": "",
     "level": ""
@@ -274,7 +274,7 @@
     "catalog": "PLMXA1057Q",
     "position": "1",
     "part_number": "PLMXA1057Q",
-    "description": "",
+    "description": "SUNDRY ITEMS / FUEL REPTO",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -434,7 +434,7 @@
     "catalog": "T139164A",
     "position": "13",
     "part_number": "T139164A",
-    "description": "",
+    "description": "MANUAL KIT MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -454,7 +454,7 @@
     "catalog": "T139164A",
     "position": "2",
     "part_number": "T171641I",
-    "description": "",
+    "description": "MANUAL OPERATORS / LOGBOOK MAC25-4 SL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -464,7 +464,7 @@
     "catalog": "T171641I",
     "position": "18",
     "part_number": "T171641I",
-    "description": "",
+    "description": "MANUAL OPERATORS / LOGBOOK MAC25-4 SL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -534,7 +534,7 @@
     "catalog": "T156410",
     "position": "14",
     "part_number": "T156410",
-    "description": "",
+    "description": "STICKER KIT BOOM STRIPE REFLECTIVE RED MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -684,7 +684,7 @@
     "catalog": "PLMXA1081D",
     "position": "2",
     "part_number": "PLMXA1081D",
-    "description": "",
+    "description": "KIT HOSE GREASELINE BEKA MAX",
     "qty": "1",
     "type": "",
     "level": ""
@@ -914,7 +914,7 @@
     "catalog": "PLMXA1082D",
     "position": "3",
     "part_number": "PLMXA1082D",
-    "description": "",
+    "description": "CENTRAL GREASELINE ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -984,7 +984,7 @@
     "catalog": "PLMXA8036C",
     "position": "4",
     "part_number": "PLMXA8036C",
-    "description": "",
+    "description": "FIRE EXTINGUISHER 4.5KG ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1044,7 +1044,7 @@
     "catalog": "PLMXA8036C",
     "position": "6",
     "part_number": "PLMXA8188C",
-    "description": "",
+    "description": "BRACKET MOD FIRE EXTINGUISHER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1064,7 +1064,7 @@
     "catalog": "PLMXA8188C",
     "position": "6",
     "part_number": "PLMXA8188C",
-    "description": "",
+    "description": "BRACKET MOD FIRE EXTINGUISHER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1104,7 +1104,7 @@
     "catalog": "PLMXA8188C",
     "position": "4",
     "part_number": "T166987",
-    "description": "",
+    "description": "FAB MOD BRACKET 4.5KG FIRE EXTINGUISHER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1114,7 +1114,7 @@
     "catalog": "T166987",
     "position": "4",
     "part_number": "T166987",
-    "description": "",
+    "description": "FAB MOD BRACKET 4.5KG FIRE EXTINGUISHER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1134,7 +1134,7 @@
     "catalog": "PLMXS1022C",
     "position": "5",
     "part_number": "PLMXS1022C",
-    "description": "",
+    "description": "SERVICE KIT OM906 100HR FILTERS ONLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1194,7 +1194,7 @@
     "catalog": "T131354A",
     "position": "6",
     "part_number": "T131354A",
-    "description": "",
+    "description": "ASSY SEAT ISRI 6860/870 RH WITH ARMS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1264,7 +1264,7 @@
     "catalog": "T131354A",
     "position": "7",
     "part_number": "T167725A",
-    "description": "",
+    "description": "SEAT RH SIDE FRANNA BRANDED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1274,7 +1274,7 @@
     "catalog": "T167725A",
     "position": "7",
     "part_number": "T167725A",
-    "description": "",
+    "description": "SEAT RH SIDE FRANNA BRANDED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1584,7 +1584,7 @@
     "catalog": "T131357A",
     "position": "7",
     "part_number": "T131357A",
-    "description": "",
+    "description": "ASSY SEAT ISRI 6860/870 RH LONG FASTENERS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1614,7 +1614,7 @@
     "catalog": "T131357A",
     "position": "3",
     "part_number": "T167725A",
-    "description": "",
+    "description": "SEAT RH SIDE FRANNA BRANDED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1624,7 +1624,7 @@
     "catalog": "T131768C",
     "position": "8",
     "part_number": "T131768C",
-    "description": "",
+    "description": "ASSY CABIN STANDARD AC",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1644,7 +1644,7 @@
     "catalog": "T131768C",
     "position": "2",
     "part_number": "PP0100700",
-    "description": "",
+    "description": "EVAPORATOR UNIT 24V",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1684,7 +1684,7 @@
     "catalog": "PP0100700",
     "position": "2",
     "part_number": "PP0100700",
-    "description": "",
+    "description": "EVAPORATOR UNIT 24V",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1714,7 +1714,7 @@
     "catalog": "T138394F",
     "position": "10",
     "part_number": "T138394F",
-    "description": "",
+    "description": "ASSY CABIN AUTO MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -1974,7 +1974,7 @@
     "catalog": "T138394F",
     "position": "26",
     "part_number": "FMUS06C012L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 12 ZP",
     "qty": "8",
     "type": "1",
     "level": ""
@@ -1984,7 +1984,7 @@
     "catalog": "T138394F",
     "position": "27",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "11",
     "type": "1",
     "level": ""
@@ -2004,7 +2004,7 @@
     "catalog": "T138394F",
     "position": "29",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "8",
     "type": "1",
     "level": ""
@@ -2054,7 +2054,7 @@
     "catalog": "T138394F",
     "position": "34",
     "part_number": "PLMXA1059P",
-    "description": "",
+    "description": "KIT STICKER PRE-DELIVERY OM906",
     "qty": "1",
     "type": "",
     "level": ""
@@ -2374,7 +2374,7 @@
     "catalog": "T138394F",
     "position": "66",
     "part_number": "T137361C",
-    "description": "",
+    "description": "ASSY SUNROOF VISOR WINDOW SHADE MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -2444,7 +2444,7 @@
     "catalog": "T138394F",
     "position": "73",
     "part_number": "T147343C",
-    "description": "",
+    "description": "ASSY RETRO FIT KIT SPEED LIMIT SIGN",
     "qty": "1",
     "type": "",
     "level": ""
@@ -2474,7 +2474,7 @@
     "catalog": "T138394F",
     "position": "76",
     "part_number": "T151030B",
-    "description": "",
+    "description": "ASSY LIGHT ROTARY BOOM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -2484,7 +2484,7 @@
     "catalog": "T138394F",
     "position": "77",
     "part_number": "T166934",
-    "description": "",
+    "description": "ASSY CARPET KIT PRE-CUT MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -2544,7 +2544,7 @@
     "catalog": "PLMXA1059P",
     "position": "34",
     "part_number": "PLMXA1059P",
-    "description": "",
+    "description": "KIT STICKER PRE-DELIVERY OM906",
     "qty": "1",
     "type": "",
     "level": ""
@@ -2754,7 +2754,7 @@
     "catalog": "T137361C",
     "position": "66",
     "part_number": "T137361C",
-    "description": "",
+    "description": "ASSY SUNROOF VISOR WINDOW SHADE MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -2824,7 +2824,7 @@
     "catalog": "T147343C",
     "position": "73",
     "part_number": "T147343C",
-    "description": "",
+    "description": "ASSY RETRO FIT KIT SPEED LIMIT SIGN",
     "qty": "1",
     "type": "",
     "level": ""
@@ -2924,7 +2924,7 @@
     "catalog": "T151030B",
     "position": "76",
     "part_number": "T151030B",
-    "description": "",
+    "description": "ASSY LIGHT ROTARY BOOM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -2994,7 +2994,7 @@
     "catalog": "T166934",
     "position": "77",
     "part_number": "T166934",
-    "description": "",
+    "description": "ASSY CARPET KIT PRE-CUT MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -3164,7 +3164,7 @@
     "catalog": "T138459F",
     "position": "11",
     "part_number": "T138459F",
-    "description": "",
+    "description": "ASSY COVER FRONT BODY MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -3384,7 +3384,7 @@
     "catalog": "T138459F",
     "position": "22",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "20",
     "type": "1",
     "level": ""
@@ -3424,7 +3424,7 @@
     "catalog": "T138459F",
     "position": "26",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "10",
     "type": "1",
     "level": ""
@@ -3744,7 +3744,7 @@
     "catalog": "T138459F",
     "position": "58",
     "part_number": "T130495A",
-    "description": "",
+    "description": "ASSY ESCAPE HATCH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -3804,7 +3804,7 @@
     "catalog": "T138459F",
     "position": "64",
     "part_number": "T139157A",
-    "description": "",
+    "description": "LOCK INTERIOR RH SIDE MODIFIED",
     "qty": "2",
     "type": "",
     "level": ""
@@ -3894,7 +3894,7 @@
     "catalog": "T130495A",
     "position": "58",
     "part_number": "T130495A",
-    "description": "",
+    "description": "ASSY ESCAPE HATCH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -3944,7 +3944,7 @@
     "catalog": "T130495A",
     "position": "5",
     "part_number": "T135970B",
-    "description": "",
+    "description": "SUB ASSEMBLY ESCAPE HATCH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -3954,7 +3954,7 @@
     "catalog": "T135970B",
     "position": "5",
     "part_number": "T135970B",
-    "description": "",
+    "description": "SUB ASSEMBLY ESCAPE HATCH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4014,7 +4014,7 @@
     "catalog": "T139157A",
     "position": "64",
     "part_number": "T139157A",
-    "description": "",
+    "description": "LOCK INTERIOR RH SIDE MODIFIED",
     "qty": "2",
     "type": "",
     "level": ""
@@ -4034,7 +4034,7 @@
     "catalog": "T138764B",
     "position": "12",
     "part_number": "T138764B",
-    "description": "",
+    "description": "ASSY CENTER PIVOT JOINING MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4184,7 +4184,7 @@
     "catalog": "T140170B",
     "position": "13",
     "part_number": "T140170B",
-    "description": "",
+    "description": "ASSY CABIN GLASS MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4324,7 +4324,7 @@
     "catalog": "T150306A",
     "position": "14",
     "part_number": "T150306A",
-    "description": "",
+    "description": "ASSY LIGHT WORK BONNET AT40",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -4424,7 +4424,7 @@
     "catalog": "T151027A",
     "position": "15",
     "part_number": "T151027A",
-    "description": "",
+    "description": "ASSY LIGHT ROTARY BONNET",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4524,7 +4524,7 @@
     "catalog": "T151028B",
     "position": "16",
     "part_number": "T151028B",
-    "description": "",
+    "description": "ASSY LIGHTS WORK BOOM AT40",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4594,7 +4594,7 @@
     "catalog": "T151029A",
     "position": "17",
     "part_number": "T151029A",
-    "description": "",
+    "description": "ASSY LIGHTS WORK BOOM AT40",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4694,7 +4694,7 @@
     "catalog": "T177668",
     "position": "2",
     "part_number": "T177668",
-    "description": "",
+    "description": "ASSY REAR BODY MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4704,7 +4704,7 @@
     "catalog": "T177668",
     "position": "1",
     "part_number": "PLMXA2021E",
-    "description": "",
+    "description": "EXHAUST ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4714,7 +4714,7 @@
     "catalog": "T177668",
     "position": "2",
     "part_number": "PLMXA2023K",
-    "description": "",
+    "description": "TANK FUEL ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4724,7 +4724,7 @@
     "catalog": "T177668",
     "position": "3",
     "part_number": "PLMXA2026V",
-    "description": "",
+    "description": "RADIATOR SUB ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4734,7 +4734,7 @@
     "catalog": "T177668",
     "position": "4",
     "part_number": "PLMXA2027O",
-    "description": "",
+    "description": "RADIATOR INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4744,7 +4744,7 @@
     "catalog": "T177668",
     "position": "5",
     "part_number": "PLMXA2028I",
-    "description": "",
+    "description": "BONNET ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4764,7 +4764,7 @@
     "catalog": "T177668",
     "position": "7",
     "part_number": "T143132A",
-    "description": "",
+    "description": "ASSY AIR CLEANER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4774,7 +4774,7 @@
     "catalog": "T177668",
     "position": "8",
     "part_number": "T154680I",
-    "description": "",
+    "description": "ASSY CAST C/WEIGHT STD 1280 KG MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -4784,7 +4784,7 @@
     "catalog": "PLMXA2021E",
     "position": "1",
     "part_number": "PLMXA2021E",
-    "description": "",
+    "description": "EXHAUST ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -5084,7 +5084,7 @@
     "catalog": "PLMXA2023K",
     "position": "2",
     "part_number": "PLMXA2023K",
-    "description": "",
+    "description": "TANK FUEL ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -5234,7 +5234,7 @@
     "catalog": "PLMXA2023K",
     "position": "15",
     "part_number": "PLMXH180A",
-    "description": "",
+    "description": "HOSE FUEL SUPPLY PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -5244,7 +5244,7 @@
     "catalog": "PLMXA2023K",
     "position": "16",
     "part_number": "PLMXH181A",
-    "description": "",
+    "description": "HOSE FUEL RETURN PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -5474,7 +5474,7 @@
     "catalog": "PLMXH180A",
     "position": "15",
     "part_number": "PLMXH180A",
-    "description": "",
+    "description": "HOSE FUEL SUPPLY PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -5504,7 +5504,7 @@
     "catalog": "PLMXH181A",
     "position": "16",
     "part_number": "PLMXH181A",
-    "description": "",
+    "description": "HOSE FUEL RETURN PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -5534,7 +5534,7 @@
     "catalog": "PLMXA2026V",
     "position": "3",
     "part_number": "PLMXA2026V",
-    "description": "",
+    "description": "RADIATOR SUB ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -5844,7 +5844,7 @@
     "catalog": "PLMXA2026V",
     "position": "31",
     "part_number": "MXC2091E",
-    "description": "",
+    "description": "FAB GRILLE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -5874,7 +5874,7 @@
     "catalog": "PLMXA2026V",
     "position": "34",
     "part_number": "MXH175C",
-    "description": "",
+    "description": "HOSE T/CASE COOLER TO CASE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -5884,7 +5884,7 @@
     "catalog": "PLMXA2026V",
     "position": "35",
     "part_number": "MXH176C",
-    "description": "",
+    "description": "HOSE PUMP TO TRANS COOLER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -5894,7 +5894,7 @@
     "catalog": "PLMXA2026V",
     "position": "36",
     "part_number": "PLMXA7036B",
-    "description": "",
+    "description": "A/C RADIATOR SUPPLY",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -6164,7 +6164,7 @@
     "catalog": "MXC2091E",
     "position": "31",
     "part_number": "MXC2091E",
-    "description": "",
+    "description": "FAB GRILLE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -6294,7 +6294,7 @@
     "catalog": "MXH175C",
     "position": "34",
     "part_number": "MXH175C",
-    "description": "",
+    "description": "HOSE T/CASE COOLER TO CASE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -6324,7 +6324,7 @@
     "catalog": "MXH176C",
     "position": "35",
     "part_number": "MXH176C",
-    "description": "",
+    "description": "HOSE PUMP TO TRANS COOLER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -6354,7 +6354,7 @@
     "catalog": "PLMXA7036B",
     "position": "36",
     "part_number": "PLMXA7036B",
-    "description": "",
+    "description": "A/C RADIATOR SUPPLY",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -6424,7 +6424,7 @@
     "catalog": "PLMXA2027O",
     "position": "4",
     "part_number": "PLMXA2027O",
-    "description": "",
+    "description": "RADIATOR INSTALLATION",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -6524,7 +6524,7 @@
     "catalog": "PLMXA2027O",
     "position": "10",
     "part_number": "PP2348000",
-    "description": "",
+    "description": "STAUFF GR6 OD 50.8MM ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -6584,7 +6584,7 @@
     "catalog": "PP2348000",
     "position": "10",
     "part_number": "PP2348000",
-    "description": "",
+    "description": "STAUFF GR6 OD 50.8MM ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -6624,7 +6624,7 @@
     "catalog": "PLMXA2028I",
     "position": "5",
     "part_number": "PLMXA2028I",
-    "description": "",
+    "description": "BONNET ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -6894,7 +6894,7 @@
     "catalog": "PLMXA2028I",
     "position": "27",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "10",
     "type": "1",
     "level": ""
@@ -6934,7 +6934,7 @@
     "catalog": "PLMXA2028I",
     "position": "31",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "8",
     "type": "1",
     "level": ""
@@ -7104,7 +7104,7 @@
     "catalog": "PLMXA2028I",
     "position": "48",
     "part_number": "T172726",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE BONNET MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7114,7 +7114,7 @@
     "catalog": "T172726",
     "position": "48",
     "part_number": "T172726",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE BONNET MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7154,7 +7154,7 @@
     "catalog": "T143132A",
     "position": "7",
     "part_number": "T143132A",
-    "description": "",
+    "description": "ASSY AIR CLEANER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7244,7 +7244,7 @@
     "catalog": "T143132A",
     "position": "9",
     "part_number": "T143129A",
-    "description": "",
+    "description": "ASSY AIR CLEANER INC FILTERS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7264,7 +7264,7 @@
     "catalog": "T143129A",
     "position": "9",
     "part_number": "T143129A",
-    "description": "",
+    "description": "ASSY AIR CLEANER INC FILTERS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7334,7 +7334,7 @@
     "catalog": "T154680I",
     "position": "8",
     "part_number": "T154680I",
-    "description": "",
+    "description": "ASSY CAST C/WEIGHT STD 1280 KG MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7374,7 +7374,7 @@
     "catalog": "T154680I",
     "position": "4",
     "part_number": "PLMXC1175A",
-    "description": "",
+    "description": "STOP RUBBER C/WEIGHT",
     "qty": "8",
     "type": "",
     "level": ""
@@ -7454,7 +7454,7 @@
     "catalog": "T154680I",
     "position": "12",
     "part_number": "T167697C",
-    "description": "",
+    "description": "COUNTER WEIGHT STD 1280kg CAST",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7464,7 +7464,7 @@
     "catalog": "PLMXC1175A",
     "position": "4",
     "part_number": "PLMXC1175A",
-    "description": "",
+    "description": "STOP RUBBER C/WEIGHT",
     "qty": "8",
     "type": "",
     "level": ""
@@ -7484,7 +7484,7 @@
     "catalog": "T167697C",
     "position": "12",
     "part_number": "T167697C",
-    "description": "",
+    "description": "COUNTER WEIGHT STD 1280kg CAST",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7544,7 +7544,7 @@
     "catalog": "PLMXA3035",
     "position": "3",
     "part_number": "PLMXA3035",
-    "description": "",
+    "description": "BOOM ASSEMBLY FULL POWER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7554,7 +7554,7 @@
     "catalog": "PLMXA3035",
     "position": "1",
     "part_number": "PLMXA3007D",
-    "description": "",
+    "description": "CYL 6\" EXTENSION ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7564,7 +7564,7 @@
     "catalog": "PLMXA3035",
     "position": "2",
     "part_number": "PLMXA3010A",
-    "description": "",
+    "description": "CYL 4.5\" EXTENSION ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7574,7 +7574,7 @@
     "catalog": "PLMXA3035",
     "position": "3",
     "part_number": "PLMXA3016F",
-    "description": "",
+    "description": "BOOM INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7584,7 +7584,7 @@
     "catalog": "PLMXA3035",
     "position": "4",
     "part_number": "PLMXA3017D",
-    "description": "",
+    "description": "CHAIN EXTENSION ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7594,7 +7594,7 @@
     "catalog": "PLMXA3035",
     "position": "5",
     "part_number": "PLMXA3037K",
-    "description": "",
+    "description": "1ST EXTENSION ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7604,7 +7604,7 @@
     "catalog": "PLMXA3035",
     "position": "6",
     "part_number": "PLMXA3038J",
-    "description": "",
+    "description": "2ND EXTENSION ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7614,7 +7614,7 @@
     "catalog": "PLMXA3035",
     "position": "7",
     "part_number": "PLMXA3039I",
-    "description": "",
+    "description": "THIRD EXTENSION ASSEMBLY OM906",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7624,7 +7624,7 @@
     "catalog": "PLMXA3035",
     "position": "8",
     "part_number": "PLMXA3042C",
-    "description": "",
+    "description": "BOOM SUNDRY ITEMS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7634,7 +7634,7 @@
     "catalog": "PLMXA3035",
     "position": "9",
     "part_number": "T132337C",
-    "description": "",
+    "description": "ASSY WEAR PAD BOOM SUPPLY LARGE RADIUS MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7644,7 +7644,7 @@
     "catalog": "PLMXA3035",
     "position": "10",
     "part_number": "T137360D",
-    "description": "",
+    "description": "ASSY BOOM MAIN MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7654,7 +7654,7 @@
     "catalog": "PLMXA3035",
     "position": "11",
     "part_number": "T156389C",
-    "description": "",
+    "description": "FALL BLOCK 4/6/7 PART 230 kg",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7664,7 +7664,7 @@
     "catalog": "PLMXA3007D",
     "position": "1",
     "part_number": "PLMXA3007D",
-    "description": "",
+    "description": "CYL 6\" EXTENSION ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7734,7 +7734,7 @@
     "catalog": "PLMXA3010A",
     "position": "2",
     "part_number": "PLMXA3010A",
-    "description": "",
+    "description": "CYL 4.5\" EXTENSION ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7794,7 +7794,7 @@
     "catalog": "PLMXA3016F",
     "position": "3",
     "part_number": "PLMXA3016F",
-    "description": "",
+    "description": "BOOM INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7894,7 +7894,7 @@
     "catalog": "PLMXA3016F",
     "position": "10",
     "part_number": "PLMXH185A",
-    "description": "",
+    "description": "HOSE WINCH CASE DRAIN PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7934,7 +7934,7 @@
     "catalog": "PLMXH185A",
     "position": "10",
     "part_number": "PLMXH185A",
-    "description": "",
+    "description": "HOSE WINCH CASE DRAIN PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7964,7 +7964,7 @@
     "catalog": "PLMXA3017D",
     "position": "4",
     "part_number": "PLMXA3017D",
-    "description": "",
+    "description": "CHAIN EXTENSION ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -7994,7 +7994,7 @@
     "catalog": "PLMXA3017D",
     "position": "3",
     "part_number": "T163893A",
-    "description": "",
+    "description": "ASSY CHAIN EXTENSION",
     "qty": "2",
     "type": "",
     "level": ""
@@ -8014,7 +8014,7 @@
     "catalog": "T163893A",
     "position": "3",
     "part_number": "T163893A",
-    "description": "",
+    "description": "ASSY CHAIN EXTENSION",
     "qty": "2",
     "type": "",
     "level": ""
@@ -8054,7 +8054,7 @@
     "catalog": "PLMXA3037K",
     "position": "5",
     "part_number": "PLMXA3037K",
-    "description": "",
+    "description": "1ST EXTENSION ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -8434,7 +8434,7 @@
     "catalog": "PLMXA3037K",
     "position": "38",
     "part_number": "PL16A3068C",
-    "description": "",
+    "description": "SHEAVE ANGLED SUB ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -8444,7 +8444,7 @@
     "catalog": "PLMXA3037K",
     "position": "39",
     "part_number": "PLMXA3040A",
-    "description": "",
+    "description": "SHEAVE RETRACT SUB ASSEMBLY",
     "qty": "2",
     "type": "",
     "level": ""
@@ -8494,7 +8494,7 @@
     "catalog": "PLMXA3037K",
     "position": "44",
     "part_number": "T135354A",
-    "description": "",
+    "description": "LMI WIRE ROLLER MODIFICATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -8504,7 +8504,7 @@
     "catalog": "PL16A3068C",
     "position": "38",
     "part_number": "PL16A3068C",
-    "description": "",
+    "description": "SHEAVE ANGLED SUB ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -8544,7 +8544,7 @@
     "catalog": "PLMXA3040A",
     "position": "39",
     "part_number": "PLMXA3040A",
-    "description": "",
+    "description": "SHEAVE RETRACT SUB ASSEMBLY",
     "qty": "2",
     "type": "",
     "level": ""
@@ -8574,7 +8574,7 @@
     "catalog": "T135354A",
     "position": "44",
     "part_number": "T135354A",
-    "description": "",
+    "description": "LMI WIRE ROLLER MODIFICATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -8654,7 +8654,7 @@
     "catalog": "PLMXA3038J",
     "position": "6",
     "part_number": "PLMXA3038J",
-    "description": "",
+    "description": "2ND EXTENSION ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -8864,7 +8864,7 @@
     "catalog": "PLMXA3038J",
     "position": "21",
     "part_number": "PL16A3069A",
-    "description": "",
+    "description": "SHEAVE REAR COMPENSATING ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -8944,7 +8944,7 @@
     "catalog": "PLMXA3038J",
     "position": "29",
     "part_number": "T135354A",
-    "description": "",
+    "description": "LMI WIRE ROLLER MODIFICATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -8994,7 +8994,7 @@
     "catalog": "PL16A3069A",
     "position": "21",
     "part_number": "PL16A3069A",
-    "description": "",
+    "description": "SHEAVE REAR COMPENSATING ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9024,7 +9024,7 @@
     "catalog": "PLMXA3039I",
     "position": "7",
     "part_number": "PLMXA3039I",
-    "description": "",
+    "description": "THIRD EXTENSION ASSEMBLY OM906",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9214,7 +9214,7 @@
     "catalog": "PLMXA3039I",
     "position": "19",
     "part_number": "FMUS06C012L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 12 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -9224,7 +9224,7 @@
     "catalog": "PLMXA3039I",
     "position": "20",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -9424,7 +9424,7 @@
     "catalog": "PLMXA3039I",
     "position": "40",
     "part_number": "PL16A3071A",
-    "description": "",
+    "description": "SHEAVE HEAD SUB ASSEMBLY",
     "qty": "4",
     "type": "",
     "level": ""
@@ -9524,7 +9524,7 @@
     "catalog": "PL16A3071A",
     "position": "40",
     "part_number": "PL16A3071A",
-    "description": "",
+    "description": "SHEAVE HEAD SUB ASSEMBLY",
     "qty": "4",
     "type": "",
     "level": ""
@@ -9564,7 +9564,7 @@
     "catalog": "PLMXA3042C",
     "position": "8",
     "part_number": "PLMXA3042C",
-    "description": "",
+    "description": "BOOM SUNDRY ITEMS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9584,7 +9584,7 @@
     "catalog": "PLMXA3042C",
     "position": "2",
     "part_number": "PLMXA8005B",
-    "description": "",
+    "description": "ADAPTOR KIT FLYJIB/MANBASKET",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9604,7 +9604,7 @@
     "catalog": "PLMXA8005B",
     "position": "2",
     "part_number": "PLMXA8005B",
-    "description": "",
+    "description": "ADAPTOR KIT FLYJIB/MANBASKET",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9624,7 +9624,7 @@
     "catalog": "PLMXA8005B",
     "position": "2",
     "part_number": "PL16C2072B",
-    "description": "",
+    "description": "NUT LOCKING FLY JIB",
     "qty": "2",
     "type": "",
     "level": ""
@@ -9634,7 +9634,7 @@
     "catalog": "PLMXA8005B",
     "position": "3",
     "part_number": "PLMXF3018D",
-    "description": "",
+    "description": "FAB ADAPTOR FLYJIB MANBASKET",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9644,7 +9644,7 @@
     "catalog": "PL16C2072B",
     "position": "2",
     "part_number": "PL16C2072B",
-    "description": "",
+    "description": "NUT LOCKING FLY JIB",
     "qty": "2",
     "type": "",
     "level": ""
@@ -9674,7 +9674,7 @@
     "catalog": "PLMXF3018D",
     "position": "3",
     "part_number": "PLMXF3018D",
-    "description": "",
+    "description": "FAB ADAPTOR FLYJIB MANBASKET",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9724,7 +9724,7 @@
     "catalog": "T132337C",
     "position": "9",
     "part_number": "T132337C",
-    "description": "",
+    "description": "ASSY WEAR PAD BOOM SUPPLY LARGE RADIUS MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9734,7 +9734,7 @@
     "catalog": "T132337C",
     "position": "1",
     "part_number": "T172824",
-    "description": "",
+    "description": "ASSY WEARPAD MAIN BOOM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9744,7 +9744,7 @@
     "catalog": "T132337C",
     "position": "2",
     "part_number": "T172825",
-    "description": "",
+    "description": "ASSY WEARPAD 1ST EXTENSION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9754,7 +9754,7 @@
     "catalog": "T132337C",
     "position": "3",
     "part_number": "T172826",
-    "description": "",
+    "description": "ASSY WEARPAD 2ND EXTENSION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9764,7 +9764,7 @@
     "catalog": "T132337C",
     "position": "4",
     "part_number": "T172827",
-    "description": "",
+    "description": "ASSY WEARPAD 3RD EXTENSION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9774,7 +9774,7 @@
     "catalog": "T172824",
     "position": "1",
     "part_number": "T172824",
-    "description": "",
+    "description": "ASSY WEARPAD MAIN BOOM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9824,7 +9824,7 @@
     "catalog": "T172825",
     "position": "2",
     "part_number": "T172825",
-    "description": "",
+    "description": "ASSY WEARPAD 1ST EXTENSION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9884,7 +9884,7 @@
     "catalog": "T172826",
     "position": "3",
     "part_number": "T172826",
-    "description": "",
+    "description": "ASSY WEARPAD 2ND EXTENSION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9944,7 +9944,7 @@
     "catalog": "T172827",
     "position": "4",
     "part_number": "T172827",
-    "description": "",
+    "description": "ASSY WEARPAD 3RD EXTENSION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9984,7 +9984,7 @@
     "catalog": "T137360D",
     "position": "81",
     "part_number": "T128702A",
-    "description": "",
+    "description": "WINCH SW45 TF 4200kg DYNAMIC OIL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -9994,7 +9994,7 @@
     "catalog": "T137360D",
     "position": "10",
     "part_number": "T137360D",
-    "description": "",
+    "description": "ASSY BOOM MAIN MAC 25-4",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -10594,7 +10594,7 @@
     "catalog": "T137360D",
     "position": "60",
     "part_number": "PL16A3067A",
-    "description": "",
+    "description": "SHEAVE DIVERTER SUB ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -10604,7 +10604,7 @@
     "catalog": "T137360D",
     "position": "61",
     "part_number": "PL16A3073D",
-    "description": "",
+    "description": "SHEAVE DEFLECTOR SUB ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -10824,7 +10824,7 @@
     "catalog": "T137360D",
     "position": "84",
     "part_number": "T135354A",
-    "description": "",
+    "description": "LMI WIRE ROLLER MODIFICATION",
     "qty": "2",
     "type": "",
     "level": ""
@@ -10864,7 +10864,7 @@
     "catalog": "T128702A",
     "position": "1",
     "part_number": "T136472",
-    "description": "",
+    "description": "SEALS KIT FOR SW35/SW45 TF WINCH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -10894,7 +10894,7 @@
     "catalog": "T128702A",
     "position": "81",
     "part_number": "T128702A",
-    "description": "",
+    "description": "WINCH SW45 TF 4200kg DYNAMIC OIL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -10904,7 +10904,7 @@
     "catalog": "T128702A",
     "position": "3",
     "part_number": "T185887A",
-    "description": "",
+    "description": "ASSY SW45 MOTOR DRUM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -10914,7 +10914,7 @@
     "catalog": "T136472",
     "position": "",
     "part_number": "T136472",
-    "description": "",
+    "description": "SEALS KIT FOR SW35/SW45 TF WINCH",
     "qty": "",
     "type": "",
     "level": ""
@@ -11234,7 +11234,7 @@
     "catalog": "T185887A",
     "position": "1",
     "part_number": "T185887A",
-    "description": "",
+    "description": "ASSY SW45 MOTOR DRUM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -11254,7 +11254,7 @@
     "catalog": "T185887A",
     "position": "2",
     "part_number": "T136472",
-    "description": "",
+    "description": "SEALS KIT FOR SW35/SW45 TF WINCH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -11704,7 +11704,7 @@
     "catalog": "T136472",
     "position": "2",
     "part_number": "T136472",
-    "description": "",
+    "description": "SEALS KIT FOR SW35/SW45 TF WINCH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -11874,7 +11874,7 @@
     "catalog": "MXC3147A",
     "position": "60",
     "part_number": "PL16A3067A",
-    "description": "",
+    "description": "SHEAVE DIVERTER SUB ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -11884,7 +11884,7 @@
     "catalog": "PL16A3067A",
     "position": "",
     "part_number": "PL16A3067A",
-    "description": "",
+    "description": "SHEAVE DIVERTER SUB ASSEMBLY",
     "qty": "",
     "type": "",
     "level": ""
@@ -11934,7 +11934,7 @@
     "catalog": "PL16A3067A",
     "position": "60",
     "part_number": "PL16A3067A",
-    "description": "",
+    "description": "SHEAVE DIVERTER SUB ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -11984,7 +11984,7 @@
     "catalog": "PL16A3073D",
     "position": "61",
     "part_number": "PL16A3073D",
-    "description": "",
+    "description": "SHEAVE DEFLECTOR SUB ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12024,7 +12024,7 @@
     "catalog": "T156389C",
     "position": "11",
     "part_number": "T156389C",
-    "description": "",
+    "description": "FALL BLOCK 4/6/7 PART 230 kg",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12174,7 +12174,7 @@
     "catalog": "T156389C",
     "position": "15",
     "part_number": "T156337B",
-    "description": "",
+    "description": "FALL BLOCK 6 TO 7 PART MOD",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12184,7 +12184,7 @@
     "catalog": "T156337B",
     "position": "15",
     "part_number": "T156337B",
-    "description": "",
+    "description": "FALL BLOCK 6 TO 7 PART MOD",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12214,7 +12214,7 @@
     "catalog": "T177670",
     "position": "4",
     "part_number": "T177670",
-    "description": "",
+    "description": "ASSY POWERTRAIN MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12224,7 +12224,7 @@
     "catalog": "T177670",
     "position": "1",
     "part_number": "PLMXA4003K",
-    "description": "",
+    "description": "FRONT AXLE INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12234,7 +12234,7 @@
     "catalog": "T177670",
     "position": "2",
     "part_number": "PLMXA4005E",
-    "description": "",
+    "description": "REAR AXLE INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12244,7 +12244,7 @@
     "catalog": "T177670",
     "position": "3",
     "part_number": "PLMXA4033F",
-    "description": "",
+    "description": "DRIVE SHAFT ASSEMBLY OM906",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12254,7 +12254,7 @@
     "catalog": "T177670",
     "position": "4",
     "part_number": "PLMXA4036G",
-    "description": "",
+    "description": "ENGINE TRANS INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12264,7 +12264,7 @@
     "catalog": "T177670",
     "position": "5",
     "part_number": "PLMXA4044F",
-    "description": "",
+    "description": "T/CASE INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12274,7 +12274,7 @@
     "catalog": "T177670",
     "position": "6",
     "part_number": "PLMXA4045C",
-    "description": "",
+    "description": "CENTRE BEARING CARRIER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12284,7 +12284,7 @@
     "catalog": "T177670",
     "position": "7",
     "part_number": "PLMXA8175D",
-    "description": "",
+    "description": "T/CASE ASSEMBLY VG750",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12294,7 +12294,7 @@
     "catalog": "T177670",
     "position": "8",
     "part_number": "T177687",
-    "description": "",
+    "description": "ASSY WHEEL MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12304,7 +12304,7 @@
     "catalog": "T177670",
     "position": "9",
     "part_number": "T185951B",
-    "description": "",
+    "description": "ASSY AXLE FRONT ABS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12314,7 +12314,7 @@
     "catalog": "T177670",
     "position": "10",
     "part_number": "T185952B",
-    "description": "",
+    "description": "ASSY AXLE REAR ABS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12324,7 +12324,7 @@
     "catalog": "T177670",
     "position": "11",
     "part_number": "T191276A",
-    "description": "",
+    "description": "ASSY ENG & TRANSMISSION SUPPLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12334,7 +12334,7 @@
     "catalog": "PLMXA4003K",
     "position": "1",
     "part_number": "PLMXA4003K",
-    "description": "",
+    "description": "FRONT AXLE INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12504,7 +12504,7 @@
     "catalog": "PLMXA4005E",
     "position": "2",
     "part_number": "PLMXA4005E",
-    "description": "",
+    "description": "REAR AXLE INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12574,7 +12574,7 @@
     "catalog": "PLMXA4033F",
     "position": "3",
     "part_number": "PLMXA4033F",
-    "description": "",
+    "description": "DRIVE SHAFT ASSEMBLY OM906",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12694,7 +12694,7 @@
     "catalog": "PLMXA4033F",
     "position": "12",
     "part_number": "MXA4032D",
-    "description": "",
+    "description": "JACKSHAFT ALLISON 3000",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12704,7 +12704,7 @@
     "catalog": "PLMXA4033F",
     "position": "13",
     "part_number": "MXA4040C",
-    "description": "",
+    "description": "DRIVESHAFT 16/1710 STEYR/KESS ARTIC",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12714,7 +12714,7 @@
     "catalog": "PLMXA4033F",
     "position": "14",
     "part_number": "MXA4041D",
-    "description": "",
+    "description": "DRIVESHAFT 1710 STEYR/KESS FRONT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12724,7 +12724,7 @@
     "catalog": "PLMXA4033F",
     "position": "15",
     "part_number": "MXA4042C",
-    "description": "",
+    "description": "DRIVESHAFT 16/1710 STEYR/KESS REAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12754,7 +12754,7 @@
     "catalog": "MXA4032D",
     "position": "12",
     "part_number": "MXA4032D",
-    "description": "",
+    "description": "JACKSHAFT ALLISON 3000",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12774,7 +12774,7 @@
     "catalog": "MXA4040C",
     "position": "13",
     "part_number": "MXA4040C",
-    "description": "",
+    "description": "DRIVESHAFT 16/1710 STEYR/KESS ARTIC",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12804,7 +12804,7 @@
     "catalog": "MXA4041D",
     "position": "",
     "part_number": "MXA4041D",
-    "description": "",
+    "description": "DRIVESHAFT 1710 STEYR/KESS FRONT",
     "qty": "",
     "type": "",
     "level": ""
@@ -12824,7 +12824,7 @@
     "catalog": "MXA4042C",
     "position": "15",
     "part_number": "MXA4042C",
-    "description": "",
+    "description": "DRIVESHAFT 16/1710 STEYR/KESS REAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -12854,7 +12854,7 @@
     "catalog": "PLMXA4036G",
     "position": "4",
     "part_number": "PLMXA4036G",
-    "description": "",
+    "description": "ENGINE TRANS INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13064,7 +13064,7 @@
     "catalog": "PLMXA4044F",
     "position": "5",
     "part_number": "PLMXA4044F",
-    "description": "",
+    "description": "T/CASE INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13184,7 +13184,7 @@
     "catalog": "PLMXA4045C",
     "position": "6",
     "part_number": "PLMXA4045C",
-    "description": "",
+    "description": "CENTRE BEARING CARRIER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13294,7 +13294,7 @@
     "catalog": "PLMXA8175D",
     "position": "7",
     "part_number": "PLMXA8175D",
-    "description": "",
+    "description": "T/CASE ASSEMBLY VG750",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13374,7 +13374,7 @@
     "catalog": "PLMXA8175D",
     "position": "8",
     "part_number": "PL16C4017C",
-    "description": "",
+    "description": "DIPSTICK MODIFIED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13434,7 +13434,7 @@
     "catalog": "PLMXA8175D",
     "position": "14",
     "part_number": "PP2150000",
-    "description": "",
+    "description": "TRANSFER CASE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13494,7 +13494,7 @@
     "catalog": "PL16C4017C",
     "position": "8",
     "part_number": "PL16C4017C",
-    "description": "",
+    "description": "DIPSTICK MODIFIED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13514,7 +13514,7 @@
     "catalog": "PP2150000",
     "position": "",
     "part_number": "PP2150000",
-    "description": "",
+    "description": "TRANSFER CASE",
     "qty": "",
     "type": "",
     "level": ""
@@ -13524,7 +13524,7 @@
     "catalog": "PP2150000",
     "position": "1",
     "part_number": "PLMXS4060-",
-    "description": "",
+    "description": "TRANSFER CASE HOUSING STEYR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13534,7 +13534,7 @@
     "catalog": "PP2150000",
     "position": "2",
     "part_number": "PLMXS4061-",
-    "description": "",
+    "description": "TRANSFER CASE INPUT SHAFT STEYR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13544,7 +13544,7 @@
     "catalog": "PP2150000",
     "position": "3",
     "part_number": "PLMXS4062-",
-    "description": "",
+    "description": "TRANSFER CASE DOUBLE GEAR STEYR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13554,7 +13554,7 @@
     "catalog": "PP2150000",
     "position": "4",
     "part_number": "PLMXS4063-",
-    "description": "",
+    "description": "TRANSFER CASE OUTPUT SHAFT STEYR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13564,7 +13564,7 @@
     "catalog": "PP2150000",
     "position": "5",
     "part_number": "PLMXS4064-",
-    "description": "",
+    "description": "TRANSFER CASE DRIVE YOKES STEYR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13574,7 +13574,7 @@
     "catalog": "PP2150000",
     "position": "6",
     "part_number": "PLMXS4065-",
-    "description": "",
+    "description": "TRANSFER CASE PNEUMATIC SHIFT STEYR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -13584,7 +13584,7 @@
     "catalog": "PLMXS4060-",
     "position": "",
     "part_number": "PLMXS4060-",
-    "description": "",
+    "description": "TRANSFER CASE HOUSING STEYR",
     "qty": "",
     "type": "",
     "level": ""
@@ -13744,7 +13744,7 @@
     "catalog": "PLMXS4061-",
     "position": "",
     "part_number": "PLMXS4061-",
-    "description": "",
+    "description": "TRANSFER CASE INPUT SHAFT STEYR",
     "qty": "",
     "type": "",
     "level": ""
@@ -13964,7 +13964,7 @@
     "catalog": "PLMXS4062-",
     "position": "",
     "part_number": "PLMXS4062-",
-    "description": "",
+    "description": "TRANSFER CASE DOUBLE GEAR STEYR",
     "qty": "",
     "type": "",
     "level": ""
@@ -14114,7 +14114,7 @@
     "catalog": "PLMXS4063-",
     "position": "",
     "part_number": "PLMXS4063-",
-    "description": "",
+    "description": "TRANSFER CASE OUTPUT SHAFT STEYR",
     "qty": "",
     "type": "",
     "level": ""
@@ -14514,7 +14514,7 @@
     "catalog": "PLMXS4064-",
     "position": "",
     "part_number": "PLMXS4064-",
-    "description": "",
+    "description": "TRANSFER CASE DRIVE YOKES STEYR",
     "qty": "",
     "type": "",
     "level": ""
@@ -14544,7 +14544,7 @@
     "catalog": "PLMXS4065-",
     "position": "",
     "part_number": "PLMXS4065-",
-    "description": "",
+    "description": "TRANSFER CASE PNEUMATIC SHIFT STEYR",
     "qty": "",
     "type": "",
     "level": ""
@@ -14824,7 +14824,7 @@
     "catalog": "T177687",
     "position": "9",
     "part_number": "T177687",
-    "description": "",
+    "description": "ASSY WHEEL MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -14874,7 +14874,7 @@
     "catalog": "T185951B",
     "position": "10",
     "part_number": "T185951B",
-    "description": "",
+    "description": "ASSY AXLE FRONT ABS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15014,7 +15014,7 @@
     "catalog": "T185952B",
     "position": "11",
     "part_number": "T185952B",
-    "description": "",
+    "description": "ASSY AXLE REAR ABS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15044,7 +15044,7 @@
     "catalog": "T185952B",
     "position": "3",
     "part_number": "PL20A4015B",
-    "description": "",
+    "description": "ROD RADIUS REAR AXLE",
     "qty": "2",
     "type": "",
     "level": ""
@@ -15114,7 +15114,7 @@
     "catalog": "PL20A4015B",
     "position": "3",
     "part_number": "PL20A4015B",
-    "description": "",
+    "description": "ROD RADIUS REAR AXLE",
     "qty": "2",
     "type": "",
     "level": ""
@@ -15154,7 +15154,7 @@
     "catalog": "T191276A",
     "position": "12",
     "part_number": "T191276A",
-    "description": "",
+    "description": "ASSY ENG & TRANSMISSION SUPPLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15174,7 +15174,7 @@
     "catalog": "T191276A",
     "position": "2",
     "part_number": "T191277A",
-    "description": "",
+    "description": "ASSY ENGINE TRANS OM906",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15434,7 +15434,7 @@
     "catalog": "T191277A",
     "position": "2",
     "part_number": "T191277A",
-    "description": "",
+    "description": "ASSY ENGINE TRANS OM906",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15614,7 +15614,7 @@
     "catalog": "T191277A",
     "position": "18",
     "part_number": "PL16C3141A",
-    "description": "",
+    "description": "PIPE BREATHER MODIFICATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15624,7 +15624,7 @@
     "catalog": "T191277A",
     "position": "19",
     "part_number": "PLMXC4049A",
-    "description": "",
+    "description": "PIPE PUMP SUCTION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15894,7 +15894,7 @@
     "catalog": "T191277A",
     "position": "46",
     "part_number": "T130565A",
-    "description": "",
+    "description": "ASSY FAN OM906 TWO SPEED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15914,7 +15914,7 @@
     "catalog": "T191277A",
     "position": "48",
     "part_number": "T141586",
-    "description": "",
+    "description": "MOD. ADAPTOR C/WEIGHT PRESSURE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15944,7 +15944,7 @@
     "catalog": "PL16C3141A",
     "position": "18",
     "part_number": "PL16C3141A",
-    "description": "",
+    "description": "PIPE BREATHER MODIFICATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15964,7 +15964,7 @@
     "catalog": "PLMXC4049A",
     "position": "19",
     "part_number": "PLMXC4049A",
-    "description": "",
+    "description": "PIPE PUMP SUCTION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -15984,7 +15984,7 @@
     "catalog": "T130565A",
     "position": "47",
     "part_number": "T130565A",
-    "description": "",
+    "description": "ASSY FAN OM906 TWO SPEED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16014,7 +16014,7 @@
     "catalog": "T130565A",
     "position": "3",
     "part_number": "T164544",
-    "description": "",
+    "description": "ASSY TWO SPEED FAN",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16024,7 +16024,7 @@
     "catalog": "T164544",
     "position": "3",
     "part_number": "T164544",
-    "description": "",
+    "description": "ASSY TWO SPEED FAN",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16064,7 +16064,7 @@
     "catalog": "T164544",
     "position": "4",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -16124,7 +16124,7 @@
     "catalog": "T141586",
     "position": "49",
     "part_number": "T141586",
-    "description": "",
+    "description": "MOD. ADAPTOR C/WEIGHT PRESSURE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16154,7 +16154,7 @@
     "catalog": "T191850",
     "position": "5",
     "part_number": "T191850",
-    "description": "",
+    "description": "ASSY PNEUMATIC MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16164,7 +16164,7 @@
     "catalog": "T191850",
     "position": "1",
     "part_number": "T191250C",
-    "description": "",
+    "description": "ASSY PNEUMATIC SUPPLY MAC 25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16174,7 +16174,7 @@
     "catalog": "T191250C",
     "position": "1",
     "part_number": "T191250C",
-    "description": "",
+    "description": "ASSY PNEUMATIC SUPPLY MAC 25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16184,7 +16184,7 @@
     "catalog": "T191250C",
     "position": "1",
     "part_number": "PLMXA5007C",
-    "description": "",
+    "description": "AIR HORN ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16194,7 +16194,7 @@
     "catalog": "T191250C",
     "position": "2",
     "part_number": "PLMXA5010C",
-    "description": "",
+    "description": "SWITCH DIFF LOCK/HOLDING BRAKE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16204,7 +16204,7 @@
     "catalog": "T191250C",
     "position": "3",
     "part_number": "PLMXA5033C",
-    "description": "",
+    "description": "AIR TANK DRAIN ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16214,7 +16214,7 @@
     "catalog": "T191250C",
     "position": "4",
     "part_number": "PLMXA5042D",
-    "description": "",
+    "description": "SOLENOID EXHAUST BRAKE ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16224,7 +16224,7 @@
     "catalog": "T191250C",
     "position": "5",
     "part_number": "PLMXA5043C",
-    "description": "",
+    "description": "VALVE SOLENOID HI/LOW AND 2WD/4WD",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16234,7 +16234,7 @@
     "catalog": "T191250C",
     "position": "6",
     "part_number": "T181744A",
-    "description": "",
+    "description": "ASSY ABS COMPONENTS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16244,7 +16244,7 @@
     "catalog": "T191250C",
     "position": "7",
     "part_number": "T191248B",
-    "description": "",
+    "description": "ASSY MANIFOLD PNEUMATIC FRONT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16254,7 +16254,7 @@
     "catalog": "T191250C",
     "position": "8",
     "part_number": "T191249A",
-    "description": "",
+    "description": "ASSY BULKHEAD PNEUMATIC REAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16264,7 +16264,7 @@
     "catalog": "T191250C",
     "position": "9",
     "part_number": "T191251B",
-    "description": "",
+    "description": "ASSY PNEUMATIC TANK FRONT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16274,7 +16274,7 @@
     "catalog": "T191250C",
     "position": "10",
     "part_number": "T191252B",
-    "description": "",
+    "description": "ASSY PNEUMATIC TANK REAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16284,7 +16284,7 @@
     "catalog": "T191250C",
     "position": "11",
     "part_number": "T191253A",
-    "description": "",
+    "description": "ASSY PNEUMATIC TANK PARK",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16294,7 +16294,7 @@
     "catalog": "T191250C",
     "position": "12",
     "part_number": "T191255A",
-    "description": "",
+    "description": "ASSY PARK BRAKE VALVE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16304,7 +16304,7 @@
     "catalog": "T191250C",
     "position": "13",
     "part_number": "T191256A",
-    "description": "",
+    "description": "ASSY BRAKE PEDAL VALVE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16314,7 +16314,7 @@
     "catalog": "T191250C",
     "position": "14",
     "part_number": "T191257A",
-    "description": "",
+    "description": "ASSY PNEUMATIC AIR PROCESSING UNIT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16324,7 +16324,7 @@
     "catalog": "T191250C",
     "position": "15",
     "part_number": "T191258C",
-    "description": "",
+    "description": "ASSY PNEUMATIC HOSE SCHEMATIC MAC 25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16334,7 +16334,7 @@
     "catalog": "T191250C",
     "position": "16",
     "part_number": "T191259C",
-    "description": "",
+    "description": "ASSY FRONT BRAKE VALVES",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16344,7 +16344,7 @@
     "catalog": "T191250C",
     "position": "17",
     "part_number": "T191260A",
-    "description": "",
+    "description": "ASSY REAR BRAKE VALVES",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16354,7 +16354,7 @@
     "catalog": "PLMXA5007C",
     "position": "1",
     "part_number": "PLMXA5007C",
-    "description": "",
+    "description": "AIR HORN ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16414,7 +16414,7 @@
     "catalog": "PLMXA5010C",
     "position": "2",
     "part_number": "PLMXA5010C",
-    "description": "",
+    "description": "SWITCH DIFF LOCK/HOLDING BRAKE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16464,7 +16464,7 @@
     "catalog": "PLMXA5033C",
     "position": "3",
     "part_number": "PLMXA5033C",
-    "description": "",
+    "description": "AIR TANK DRAIN ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16484,7 +16484,7 @@
     "catalog": "PLMXA5033C",
     "position": "2",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -16494,7 +16494,7 @@
     "catalog": "PLMXA5033C",
     "position": "3",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -16524,7 +16524,7 @@
     "catalog": "PLMXA5042D",
     "position": "15",
     "part_number": "PLMXA5042D",
-    "description": "",
+    "description": "SOLENOID EXHAUST BRAKE ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16614,7 +16614,7 @@
     "catalog": "PLMXA5043C",
     "position": "16",
     "part_number": "PLMXA5043C",
-    "description": "",
+    "description": "VALVE SOLENOID HI/LOW AND 2WD/4WD",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16734,7 +16734,7 @@
     "catalog": "T181744A",
     "position": "6",
     "part_number": "T181744A",
-    "description": "",
+    "description": "ASSY ABS COMPONENTS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16774,7 +16774,7 @@
     "catalog": "T191248B",
     "position": "7",
     "part_number": "T191248B",
-    "description": "",
+    "description": "ASSY MANIFOLD PNEUMATIC FRONT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16844,7 +16844,7 @@
     "catalog": "T191249A",
     "position": "8",
     "part_number": "T191249A",
-    "description": "",
+    "description": "ASSY BULKHEAD PNEUMATIC REAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -16884,7 +16884,7 @@
     "catalog": "T191251B",
     "position": "9",
     "part_number": "T191251B",
-    "description": "",
+    "description": "ASSY PNEUMATIC TANK FRONT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -17004,7 +17004,7 @@
     "catalog": "T191252B",
     "position": "10",
     "part_number": "T191252B",
-    "description": "",
+    "description": "ASSY PNEUMATIC TANK REAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -17114,7 +17114,7 @@
     "catalog": "T191253A",
     "position": "11",
     "part_number": "T191253A",
-    "description": "",
+    "description": "ASSY PNEUMATIC TANK PARK",
     "qty": "1",
     "type": "",
     "level": ""
@@ -17224,7 +17224,7 @@
     "catalog": "T191255A",
     "position": "12",
     "part_number": "T191255A",
-    "description": "",
+    "description": "ASSY PARK BRAKE VALVE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -17284,7 +17284,7 @@
     "catalog": "T191256A",
     "position": "13",
     "part_number": "T191256A",
-    "description": "",
+    "description": "ASSY BRAKE PEDAL VALVE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -17374,7 +17374,7 @@
     "catalog": "T191257A",
     "position": "14",
     "part_number": "T191257A",
-    "description": "",
+    "description": "ASSY PNEUMATIC AIR PROCESSING UNIT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -17454,7 +17454,7 @@
     "catalog": "T191258C",
     "position": "15",
     "part_number": "T191258C",
-    "description": "",
+    "description": "ASSY PNEUMATIC HOSE SCHEMATIC MAC 25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -17974,7 +17974,7 @@
     "catalog": "T191259C",
     "position": "16",
     "part_number": "T191259C",
-    "description": "",
+    "description": "ASSY FRONT BRAKE VALVES",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18204,7 +18204,7 @@
     "catalog": "T191260A",
     "position": "17",
     "part_number": "T191260A",
-    "description": "",
+    "description": "ASSY REAR BRAKE VALVES",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18394,7 +18394,7 @@
     "catalog": "T177672",
     "position": "6",
     "part_number": "T177672",
-    "description": "",
+    "description": "ASSY HYDRAULIC MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18404,7 +18404,7 @@
     "catalog": "T177672",
     "position": "1",
     "part_number": "PLMXA6052E",
-    "description": "",
+    "description": "STEERING CYL INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18414,7 +18414,7 @@
     "catalog": "T177672",
     "position": "2",
     "part_number": "PLMXA6053",
-    "description": "",
+    "description": "BOOM HOSES MOUNT ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18424,7 +18424,7 @@
     "catalog": "T177672",
     "position": "3",
     "part_number": "PLMXA6064F",
-    "description": "",
+    "description": "LOCKOUT CYLINDER INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18434,7 +18434,7 @@
     "catalog": "T177672",
     "position": "4",
     "part_number": "PLMXA6068B",
-    "description": "",
+    "description": "PIPE HYDRAULIC KIT BOOM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18444,7 +18444,7 @@
     "catalog": "T177672",
     "position": "5",
     "part_number": "PLMXA6069D",
-    "description": "",
+    "description": "PUMP EMERGENCY STEER ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18454,7 +18454,7 @@
     "catalog": "T177672",
     "position": "6",
     "part_number": "PLMXA6071C",
-    "description": "",
+    "description": "LUFF CYLINDER INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18464,7 +18464,7 @@
     "catalog": "T177672",
     "position": "7",
     "part_number": "PLMXA6072D",
-    "description": "",
+    "description": "LUFF CYLINDER STANDARD LENGTH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18474,7 +18474,7 @@
     "catalog": "T177672",
     "position": "8",
     "part_number": "T138308B",
-    "description": "",
+    "description": "ASSY TANK HYDRAULIC MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18484,7 +18484,7 @@
     "catalog": "T177672",
     "position": "9",
     "part_number": "T138309F",
-    "description": "",
+    "description": "ASSY C/WEIGHT CYLINDER INSTALL MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18494,7 +18494,7 @@
     "catalog": "T177672",
     "position": "10",
     "part_number": "T138741A",
-    "description": "",
+    "description": "ASSY STEERING COLUMN MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18504,7 +18504,7 @@
     "catalog": "T177672",
     "position": "11",
     "part_number": "T138747",
-    "description": "",
+    "description": "ASSY HYDRAULIC BODY FITTINGS MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18514,7 +18514,7 @@
     "catalog": "T177672",
     "position": "12",
     "part_number": "T172776",
-    "description": "",
+    "description": "ASSY HYDRAULIC BOOM FITTINGS MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18524,7 +18524,7 @@
     "catalog": "T177672",
     "position": "13",
     "part_number": "T182619B",
-    "description": "",
+    "description": "ASSY HOSE KIT MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18534,7 +18534,7 @@
     "catalog": "T177672",
     "position": "14",
     "part_number": "T182753B",
-    "description": "",
+    "description": "ASSY PILOT CONTROLS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18544,7 +18544,7 @@
     "catalog": "T177672",
     "position": "15",
     "part_number": "T182754B",
-    "description": "",
+    "description": "ASSY HYD BANK INSTALLATION MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18554,7 +18554,7 @@
     "catalog": "PLMXA6052E",
     "position": "15",
     "part_number": "T138354A",
-    "description": "",
+    "description": "CYLINDER HYD 90 411 STEERING",
     "qty": "2",
     "type": "",
     "level": ""
@@ -18564,7 +18564,7 @@
     "catalog": "PLMXA6052E",
     "position": "1",
     "part_number": "PLMXA6052E",
-    "description": "",
+    "description": "STEERING CYL INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18594,7 +18594,7 @@
     "catalog": "PLMXA6052E",
     "position": "3",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -18604,7 +18604,7 @@
     "catalog": "PLMXA6052E",
     "position": "4",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -18714,7 +18714,7 @@
     "catalog": "T138354A",
     "position": "15",
     "part_number": "T138354A",
-    "description": "",
+    "description": "CYLINDER HYD 90 411 STEERING",
     "qty": "2",
     "type": "",
     "level": ""
@@ -18734,7 +18734,7 @@
     "catalog": "PLMXA6053",
     "position": "3",
     "part_number": "PLMXA6053",
-    "description": "",
+    "description": "BOOM HOSES MOUNT ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -18854,7 +18854,7 @@
     "catalog": "PLMXA6064F",
     "position": "3",
     "part_number": "PLMXA6064F",
-    "description": "",
+    "description": "LOCKOUT CYLINDER INSTALLATION",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -18994,7 +18994,7 @@
     "catalog": "PLMXA6064F",
     "position": "14",
     "part_number": "T147373A",
-    "description": "",
+    "description": "CYLINDER HYD 105 120 SUSPENSION",
     "qty": "2",
     "type": "",
     "level": ""
@@ -19004,7 +19004,7 @@
     "catalog": "T147373A",
     "position": "14",
     "part_number": "T147373A",
-    "description": "",
+    "description": "CYLINDER HYD 105 120 SUSPENSION",
     "qty": "2",
     "type": "",
     "level": ""
@@ -19154,7 +19154,7 @@
     "catalog": "PLMXA6068B",
     "position": "5",
     "part_number": "PLMXA6068B",
-    "description": "",
+    "description": "PIPE HYDRAULIC KIT BOOM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19344,7 +19344,7 @@
     "catalog": "PLMXA6069D",
     "position": "5",
     "part_number": "PLMXA6069D",
-    "description": "",
+    "description": "PUMP EMERGENCY STEER ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -19464,7 +19464,7 @@
     "catalog": "PLMXA6069D",
     "position": "12",
     "part_number": "PLMXH183A",
-    "description": "",
+    "description": "HOSE E/STEER PUMP SUCTION PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19554,7 +19554,7 @@
     "catalog": "PLMXH183A",
     "position": "12",
     "part_number": "PLMXH183A",
-    "description": "",
+    "description": "HOSE E/STEER PUMP SUCTION PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19584,7 +19584,7 @@
     "catalog": "PLMXA6071C",
     "position": "7",
     "part_number": "PLMXA6071C",
-    "description": "",
+    "description": "LUFF CYLINDER INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19714,7 +19714,7 @@
     "catalog": "PLMXA6071C",
     "position": "13",
     "part_number": "PLMXM1028",
-    "description": "",
+    "description": "ORIFICE LUFF CYL PRESS TRANS RH SIDE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19724,7 +19724,7 @@
     "catalog": "PLMXA6071C",
     "position": "14",
     "part_number": "PLMXM1029",
-    "description": "",
+    "description": "ORIFICE LUFF CYL PRESS TRANS LH SIDE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19734,7 +19734,7 @@
     "catalog": "PLMXA6071C",
     "position": "15",
     "part_number": "PLMXM3018A",
-    "description": "",
+    "description": "PIN LUFF CYL LOWER",
     "qty": "2",
     "type": "",
     "level": ""
@@ -19744,7 +19744,7 @@
     "catalog": "PLMXA6071C",
     "position": "16",
     "part_number": "PLMXM3022",
-    "description": "",
+    "description": "PIN LUFF CYL TOP",
     "qty": "2",
     "type": "",
     "level": ""
@@ -19794,7 +19794,7 @@
     "catalog": "PLMXM1028",
     "position": "13",
     "part_number": "PLMXM1028",
-    "description": "",
+    "description": "ORIFICE LUFF CYL PRESS TRANS RH SIDE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19834,7 +19834,7 @@
     "catalog": "PLMXM1029",
     "position": "14",
     "part_number": "PLMXM1029",
-    "description": "",
+    "description": "ORIFICE LUFF CYL PRESS TRANS LH SIDE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19874,7 +19874,7 @@
     "catalog": "PLMXM3018A",
     "position": "15",
     "part_number": "PLMXM3018A",
-    "description": "",
+    "description": "PIN LUFF CYL LOWER",
     "qty": "2",
     "type": "",
     "level": ""
@@ -19904,7 +19904,7 @@
     "catalog": "PLMXM3022",
     "position": "16",
     "part_number": "PLMXM3022",
-    "description": "",
+    "description": "PIN LUFF CYL TOP",
     "qty": "2",
     "type": "",
     "level": ""
@@ -19934,7 +19934,7 @@
     "catalog": "PLMXA6072D",
     "position": "2",
     "part_number": "T138353A",
-    "description": "",
+    "description": "CYLINDER HYD 150 1765 LUFF ADJ",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19944,7 +19944,7 @@
     "catalog": "PLMXA6072D",
     "position": "1",
     "part_number": "T138352A",
-    "description": "",
+    "description": "CYLINDER HYD 150 1765 LUFF NON-ADJ",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19954,7 +19954,7 @@
     "catalog": "PLMXA6072D",
     "position": "8",
     "part_number": "PLMXA6072D",
-    "description": "",
+    "description": "LUFF CYLINDER STANDARD LENGTH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -19974,7 +19974,7 @@
     "catalog": "T138353A",
     "position": "2",
     "part_number": "T138353A",
-    "description": "",
+    "description": "CYLINDER HYD 150 1765 LUFF ADJ",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20004,7 +20004,7 @@
     "catalog": "T138352A",
     "position": "1",
     "part_number": "T138352A",
-    "description": "",
+    "description": "CYLINDER HYD 150 1765 LUFF NON-ADJ",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20034,7 +20034,7 @@
     "catalog": "T138308B",
     "position": "9",
     "part_number": "T138308B",
-    "description": "",
+    "description": "ASSY TANK HYDRAULIC MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20134,7 +20134,7 @@
     "catalog": "T138308B",
     "position": "10",
     "part_number": "PLMXH184A",
-    "description": "",
+    "description": "HOSE HYD CASE DRAIN PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20144,7 +20144,7 @@
     "catalog": "T138308B",
     "position": "11",
     "part_number": "PLMXH186A",
-    "description": "",
+    "description": "HOSE V/BANK RETURN PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20344,7 +20344,7 @@
     "catalog": "PLMXH184A",
     "position": "10",
     "part_number": "PLMXH184A",
-    "description": "",
+    "description": "HOSE HYD CASE DRAIN PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20374,7 +20374,7 @@
     "catalog": "PLMXH186A",
     "position": "11",
     "part_number": "PLMXH186A",
-    "description": "",
+    "description": "HOSE V/BANK RETURN PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20404,7 +20404,7 @@
     "catalog": "T138309F",
     "position": "10",
     "part_number": "T138309F",
-    "description": "",
+    "description": "ASSY C/WEIGHT CYLINDER INSTALL MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20474,7 +20474,7 @@
     "catalog": "T138309F",
     "position": "7",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -20494,7 +20494,7 @@
     "catalog": "T138309F",
     "position": "9",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -20524,7 +20524,7 @@
     "catalog": "T138309F",
     "position": "12",
     "part_number": "PLMXC2133A",
-    "description": "",
+    "description": "HANDLE MOD MOMTRY SWITCH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20534,7 +20534,7 @@
     "catalog": "T138309F",
     "position": "13",
     "part_number": "PLMXM2010C",
-    "description": "",
+    "description": "TEE ORIFICE C/WEIGHT CYL DOWN",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20544,7 +20544,7 @@
     "catalog": "T138309F",
     "position": "14",
     "part_number": "PLMXM2011C",
-    "description": "",
+    "description": "TEE ORIFICE C/W CYL UP",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20774,7 +20774,7 @@
     "catalog": "PLMXC2133A",
     "position": "12",
     "part_number": "PLMXC2133A",
-    "description": "",
+    "description": "HANDLE MOD MOMTRY SWITCH",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20824,7 +20824,7 @@
     "catalog": "PLMXM2010C",
     "position": "13",
     "part_number": "PLMXM2010C",
-    "description": "",
+    "description": "TEE ORIFICE C/WEIGHT CYL DOWN",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20834,7 +20834,7 @@
     "catalog": "PLMXM2010C",
     "position": "1",
     "part_number": "C1523A",
-    "description": "",
+    "description": "ORIFICE 7/16\" UNC X 2.2MM HOLE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20854,7 +20854,7 @@
     "catalog": "C1523A",
     "position": "1",
     "part_number": "C1523A",
-    "description": "",
+    "description": "ORIFICE 7/16\" UNC X 2.2MM HOLE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20874,7 +20874,7 @@
     "catalog": "PLMXM2011C",
     "position": "14",
     "part_number": "PLMXM2011C",
-    "description": "",
+    "description": "TEE ORIFICE C/W CYL UP",
     "qty": "1",
     "type": "",
     "level": ""
@@ -20924,7 +20924,7 @@
     "catalog": "T138741A",
     "position": "11",
     "part_number": "T138741A",
-    "description": "",
+    "description": "ASSY STEERING COLUMN MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -21074,7 +21074,7 @@
     "catalog": "T138747",
     "position": "12",
     "part_number": "T138747",
-    "description": "",
+    "description": "ASSY HYDRAULIC BODY FITTINGS MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -21514,7 +21514,7 @@
     "catalog": "T172776",
     "position": "13",
     "part_number": "T172776",
-    "description": "",
+    "description": "ASSY HYDRAULIC BOOM FITTINGS MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -21584,7 +21584,7 @@
     "catalog": "T182619B",
     "position": "14",
     "part_number": "T182619B",
-    "description": "",
+    "description": "ASSY HOSE KIT MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -21904,7 +21904,7 @@
     "catalog": "T182753B",
     "position": "15",
     "part_number": "T182753B",
-    "description": "",
+    "description": "ASSY PILOT CONTROLS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -21954,7 +21954,7 @@
     "catalog": "T182753B",
     "position": "5",
     "part_number": "T182752A",
-    "description": "",
+    "description": "ASSY HOSE KIT PILOT LEVERS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -21974,7 +21974,7 @@
     "catalog": "T182752A",
     "position": "5",
     "part_number": "T182752A",
-    "description": "",
+    "description": "ASSY HOSE KIT PILOT LEVERS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22064,7 +22064,7 @@
     "catalog": "T182754B",
     "position": "16",
     "part_number": "T182754B",
-    "description": "",
+    "description": "ASSY HYD BANK INSTALLATION MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22104,7 +22104,7 @@
     "catalog": "T182754B",
     "position": "4",
     "part_number": "FMUS06C012L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 12 ZP",
     "qty": "6",
     "type": "1",
     "level": ""
@@ -22114,7 +22114,7 @@
     "catalog": "T182754B",
     "position": "5",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "6",
     "type": "1",
     "level": ""
@@ -22124,7 +22124,7 @@
     "catalog": "T182754B",
     "position": "6",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "6",
     "type": "1",
     "level": ""
@@ -22144,7 +22144,7 @@
     "catalog": "T182754B",
     "position": "8",
     "part_number": "T182582A",
-    "description": "",
+    "description": "ASSY VALVE BANK MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22154,7 +22154,7 @@
     "catalog": "T182754B",
     "position": "9",
     "part_number": "T183570B",
-    "description": "",
+    "description": "ASSY 6 BAR SWITCH RELOCATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22164,7 +22164,7 @@
     "catalog": "T182582A",
     "position": "8",
     "part_number": "T182582A",
-    "description": "",
+    "description": "ASSY VALVE BANK MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22264,7 +22264,7 @@
     "catalog": "T182582A",
     "position": "10",
     "part_number": "T182581A",
-    "description": "",
+    "description": "ASSY FITTINGS VALVE BANK MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22274,7 +22274,7 @@
     "catalog": "T182582A",
     "position": "11",
     "part_number": "T182624A",
-    "description": "",
+    "description": "ASSY MOTION LIMITER FULL POWER BOOM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22294,7 +22294,7 @@
     "catalog": "T182581A",
     "position": "10",
     "part_number": "T182581A",
-    "description": "",
+    "description": "ASSY FITTINGS VALVE BANK MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22454,7 +22454,7 @@
     "catalog": "T182624A",
     "position": "11",
     "part_number": "T182624A",
-    "description": "",
+    "description": "ASSY MOTION LIMITER FULL POWER BOOM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22564,7 +22564,7 @@
     "catalog": "T182624A",
     "position": "11",
     "part_number": "T182640A",
-    "description": "",
+    "description": "ASSY HOSE KIT PILOT M-CUT BLOCK",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22574,7 +22574,7 @@
     "catalog": "T182640A",
     "position": "11",
     "part_number": "T182640A",
-    "description": "",
+    "description": "ASSY HOSE KIT PILOT M-CUT BLOCK",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22664,7 +22664,7 @@
     "catalog": "T183570B",
     "position": "9",
     "part_number": "T183570B",
-    "description": "",
+    "description": "ASSY 6 BAR SWITCH RELOCATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22694,7 +22694,7 @@
     "catalog": "T183570B",
     "position": "3",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -22704,7 +22704,7 @@
     "catalog": "T183570B",
     "position": "4",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -22794,7 +22794,7 @@
     "catalog": "T183570B",
     "position": "13",
     "part_number": "T185751A",
-    "description": "",
+    "description": "ASSY HOSE AND FITTINGS 6 BAR SWITCH RELOCATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22804,7 +22804,7 @@
     "catalog": "T185751A",
     "position": "13",
     "part_number": "T185751A",
-    "description": "",
+    "description": "ASSY HOSE AND FITTINGS 6 BAR SWITCH RELOCATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22864,7 +22864,7 @@
     "catalog": "T177673",
     "position": "7",
     "part_number": "T156408B",
-    "description": "",
+    "description": "ASSY EXT ISOLATORS BATT & START MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22874,7 +22874,7 @@
     "catalog": "T177673",
     "position": "7",
     "part_number": "T177673",
-    "description": "",
+    "description": "ASSY ELECTRICAL MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22884,7 +22884,7 @@
     "catalog": "T177673",
     "position": "1",
     "part_number": "PLMXA7029E",
-    "description": "",
+    "description": "A/C PRODUCTION SUPPLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22894,7 +22894,7 @@
     "catalog": "T177673",
     "position": "2",
     "part_number": "PLMXA7033C",
-    "description": "",
+    "description": "HEATER KIT OM906 MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22904,7 +22904,7 @@
     "catalog": "T177673",
     "position": "3",
     "part_number": "PLMXA7034G",
-    "description": "",
+    "description": "A/C INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22914,7 +22914,7 @@
     "catalog": "T177673",
     "position": "4",
     "part_number": "PLMXA7059C",
-    "description": "",
+    "description": "BATTERY BOX ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22924,7 +22924,7 @@
     "catalog": "T177673",
     "position": "5",
     "part_number": "PLMXA7060B",
-    "description": "",
+    "description": "CONDUIT ELECTRICAL ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22934,7 +22934,7 @@
     "catalog": "T177673",
     "position": "6",
     "part_number": "PLMXA7062C",
-    "description": "",
+    "description": "LICENSE PLATE ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22944,7 +22944,7 @@
     "catalog": "T177673",
     "position": "8",
     "part_number": "PLMXA8184A",
-    "description": "",
+    "description": "ALARM REVERSE ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22954,7 +22954,7 @@
     "catalog": "T177673",
     "position": "9",
     "part_number": "T137351F",
-    "description": "",
+    "description": "ASSY LMI SUPPLY HARDWARE MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22964,7 +22964,7 @@
     "catalog": "T177673",
     "position": "10",
     "part_number": "T137352C",
-    "description": "",
+    "description": "ASSY DYNAMIC LMI SUPPLY SOFTWARE MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22974,7 +22974,7 @@
     "catalog": "T177673",
     "position": "11",
     "part_number": "T137353E",
-    "description": "",
+    "description": "ASSY LMI INSTALLATION ROBWAY MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22984,7 +22984,7 @@
     "catalog": "T177673",
     "position": "13",
     "part_number": "T138773I",
-    "description": "",
+    "description": "ASSY AUXILLARY DISPLAY DOUBLE DIN MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -22994,7 +22994,7 @@
     "catalog": "T177673",
     "position": "21",
     "part_number": "T139169A",
-    "description": "",
+    "description": "TAIL LIGHTS LED ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23004,7 +23004,7 @@
     "catalog": "T177673",
     "position": "14",
     "part_number": "T143124B",
-    "description": "",
+    "description": "ASSY FRIDGE 30L WAECO CD-30",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23014,7 +23014,7 @@
     "catalog": "T177673",
     "position": "15",
     "part_number": "T154711E",
-    "description": "",
+    "description": "ASSY ELECTRICAL INSTALL MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23024,7 +23024,7 @@
     "catalog": "T177673",
     "position": "17",
     "part_number": "T172759B",
-    "description": "",
+    "description": "ASSY PLUG PACK MATING SIDE KIT MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23034,7 +23034,7 @@
     "catalog": "T177673",
     "position": "18",
     "part_number": "T172822A",
-    "description": "",
+    "description": "ASSY WASHER AND WIPER REMOTE FILL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23044,7 +23044,7 @@
     "catalog": "T177673",
     "position": "22",
     "part_number": "T177823B",
-    "description": "",
+    "description": "ASSY FRONT LIGHTS LED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23054,7 +23054,7 @@
     "catalog": "T177673",
     "position": "23",
     "part_number": "T182570A",
-    "description": "",
+    "description": "ASSY HARNESS ELEC SUPPLY MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23064,7 +23064,7 @@
     "catalog": "T177673",
     "position": "24",
     "part_number": "T182587A",
-    "description": "",
+    "description": "ASSY SCHEMATIC ELECTRICAL MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23074,7 +23074,7 @@
     "catalog": "T177673",
     "position": "19",
     "part_number": "T191181A",
-    "description": "",
+    "description": "ASSY ANGLE SENSOR MAGNETIC",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23084,7 +23084,7 @@
     "catalog": "T177673",
     "position": "16",
     "part_number": "T191275A",
-    "description": "",
+    "description": "ASSY CABIN ELECTRICAL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23094,7 +23094,7 @@
     "catalog": "T177673",
     "position": "12",
     "part_number": "T191725A",
-    "description": "",
+    "description": "ASSY DASH MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23104,7 +23104,7 @@
     "catalog": "T177673",
     "position": "20",
     "part_number": "T191789A",
-    "description": "",
+    "description": "ASSY HARNESS ELEC SUPPLY ABS MAC 25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23114,7 +23114,7 @@
     "catalog": "T156408B",
     "position": "21",
     "part_number": "T156408B",
-    "description": "",
+    "description": "ASSY EXT ISOLATORS BATT & START MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23154,7 +23154,7 @@
     "catalog": "T156408B",
     "position": "4",
     "part_number": "T155027",
-    "description": "",
+    "description": "SWITCH ISOL + L/OUT 4 POLE C/HERSEE RED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23164,7 +23164,7 @@
     "catalog": "T156408B",
     "position": "5",
     "part_number": "T155028",
-    "description": "",
+    "description": "SWITCH ISOL + L/OUT 4 POLE C/HERSEE YLW",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23204,7 +23204,7 @@
     "catalog": "T155027",
     "position": "4",
     "part_number": "T155027",
-    "description": "",
+    "description": "SWITCH ISOL + L/OUT 4 POLE C/HERSEE RED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23234,7 +23234,7 @@
     "catalog": "T155028",
     "position": "5",
     "part_number": "T155028",
-    "description": "",
+    "description": "SWITCH ISOL + L/OUT 4 POLE C/HERSEE YLW",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23264,7 +23264,7 @@
     "catalog": "PLMXA7029E",
     "position": "1",
     "part_number": "PLMXA7029E",
-    "description": "",
+    "description": "A/C PRODUCTION SUPPLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23314,7 +23314,7 @@
     "catalog": "PLMXA7029E",
     "position": "5",
     "part_number": "PP2010200",
-    "description": "",
+    "description": "O RING KIT R134A",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23364,7 +23364,7 @@
     "catalog": "PP2010200",
     "position": "5",
     "part_number": "PP2010200",
-    "description": "",
+    "description": "O RING KIT R134A",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23404,7 +23404,7 @@
     "catalog": "PLMXA7033C",
     "position": "2",
     "part_number": "PLMXA7033C",
-    "description": "",
+    "description": "HEATER KIT OM906 MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23474,7 +23474,7 @@
     "catalog": "PLMXA7033C",
     "position": "7",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "12",
     "type": "1",
     "level": ""
@@ -23494,7 +23494,7 @@
     "catalog": "PLMXA7033C",
     "position": "9",
     "part_number": "PLMXH178A",
-    "description": "",
+    "description": "HOSE HEATER RETURN PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23504,7 +23504,7 @@
     "catalog": "PLMXA7033C",
     "position": "10",
     "part_number": "PLMXH179C",
-    "description": "",
+    "description": "HOSE HEATER SUPPLY PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23614,7 +23614,7 @@
     "catalog": "PLMXA7033C",
     "position": "21",
     "part_number": "T178899A",
-    "description": "",
+    "description": "ASSY CABIN HEATER 24V",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23624,7 +23624,7 @@
     "catalog": "PLMXH178A",
     "position": "9",
     "part_number": "PLMXH178A",
-    "description": "",
+    "description": "HOSE HEATER RETURN PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23654,7 +23654,7 @@
     "catalog": "PLMXH179C",
     "position": "10",
     "part_number": "PLMXH179C",
-    "description": "",
+    "description": "HOSE HEATER SUPPLY PROTECTED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23684,7 +23684,7 @@
     "catalog": "T178899A",
     "position": "21",
     "part_number": "T178899A",
-    "description": "",
+    "description": "ASSY CABIN HEATER 24V",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23714,7 +23714,7 @@
     "catalog": "PLMXA7034G",
     "position": "3",
     "part_number": "PLMXA7034G",
-    "description": "",
+    "description": "A/C INSTALLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23824,7 +23824,7 @@
     "catalog": "PLMXA7059C",
     "position": "4",
     "part_number": "PLMXA7059C",
-    "description": "",
+    "description": "BATTERY BOX ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23874,7 +23874,7 @@
     "catalog": "PLMXA7059C",
     "position": "5",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "3",
     "type": "1",
     "level": ""
@@ -23894,7 +23894,7 @@
     "catalog": "PLMXA7059C",
     "position": "7",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "3",
     "type": "1",
     "level": ""
@@ -23914,7 +23914,7 @@
     "catalog": "PLMXA7059C",
     "position": "9",
     "part_number": "PLMXC1340A",
-    "description": "",
+    "description": "CLAMP BATTERY PLATE AND STUD",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23934,7 +23934,7 @@
     "catalog": "PLMXC1340A",
     "position": "9",
     "part_number": "PLMXC1340A",
-    "description": "",
+    "description": "CLAMP BATTERY PLATE AND STUD",
     "qty": "1",
     "type": "",
     "level": ""
@@ -23954,7 +23954,7 @@
     "catalog": "PLMXA7060B",
     "position": "5",
     "part_number": "PLMXA7060B",
-    "description": "",
+    "description": "CONDUIT ELECTRICAL ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24004,7 +24004,7 @@
     "catalog": "PLMXA7062C",
     "position": "6",
     "part_number": "PLMXA7062C",
-    "description": "",
+    "description": "LICENSE PLATE ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24044,7 +24044,7 @@
     "catalog": "PLMXA8184A",
     "position": "7",
     "part_number": "PLMXA8184A",
-    "description": "",
+    "description": "ALARM REVERSE ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24064,7 +24064,7 @@
     "catalog": "PLMXA8184A",
     "position": "2",
     "part_number": "FMUS06C020L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 20 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -24074,7 +24074,7 @@
     "catalog": "PLMXA8184A",
     "position": "3",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "4",
     "type": "1",
     "level": ""
@@ -24104,7 +24104,7 @@
     "catalog": "T137351F",
     "position": "8",
     "part_number": "T137351F",
-    "description": "",
+    "description": "ASSY LMI SUPPLY HARDWARE MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24144,7 +24144,7 @@
     "catalog": "T137351F",
     "position": "4",
     "part_number": "T135941A",
-    "description": "",
+    "description": "LMI REELING DRUM CCW 13M ATB",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24154,7 +24154,7 @@
     "catalog": "T137351F",
     "position": "5",
     "part_number": "T135942",
-    "description": "",
+    "description": "LMI CABLE CLAMP KIT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24194,7 +24194,7 @@
     "catalog": "T135941A",
     "position": "4",
     "part_number": "T135941A",
-    "description": "",
+    "description": "LMI REELING DRUM CCW 13M ATB",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24264,7 +24264,7 @@
     "catalog": "T135942",
     "position": "5",
     "part_number": "T135942",
-    "description": "",
+    "description": "LMI CABLE CLAMP KIT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24314,7 +24314,7 @@
     "catalog": "T137352C",
     "position": "9",
     "part_number": "T137352C",
-    "description": "",
+    "description": "ASSY DYNAMIC LMI SUPPLY SOFTWARE MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24334,7 +24334,7 @@
     "catalog": "T137353E",
     "position": "10",
     "part_number": "T137353E",
-    "description": "",
+    "description": "ASSY LMI INSTALLATION ROBWAY MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24414,7 +24414,7 @@
     "catalog": "T137353E",
     "position": "8",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "3",
     "type": "1",
     "level": ""
@@ -24444,7 +24444,7 @@
     "catalog": "T137353E",
     "position": "11",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "3",
     "type": "1",
     "level": ""
@@ -24524,7 +24524,7 @@
     "catalog": "T138773I",
     "position": "11",
     "part_number": "T138773I",
-    "description": "",
+    "description": "ASSY AUXILLARY DISPLAY DOUBLE DIN MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24724,7 +24724,7 @@
     "catalog": "T139169A",
     "position": "12",
     "part_number": "T139169A",
-    "description": "",
+    "description": "TAIL LIGHTS LED ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24784,7 +24784,7 @@
     "catalog": "T143124B",
     "position": "13",
     "part_number": "T143124B",
-    "description": "",
+    "description": "ASSY FRIDGE 30L WAECO CD-30",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24804,7 +24804,7 @@
     "catalog": "T143124B",
     "position": "2",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "3",
     "type": "1",
     "level": ""
@@ -24854,7 +24854,7 @@
     "catalog": "T154711E",
     "position": "14",
     "part_number": "T154711E",
-    "description": "",
+    "description": "ASSY ELECTRICAL INSTALL MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -24884,7 +24884,7 @@
     "catalog": "T154711E",
     "position": "3",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -24904,7 +24904,7 @@
     "catalog": "T154711E",
     "position": "5",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -25004,7 +25004,7 @@
     "catalog": "T172759B",
     "position": "15",
     "part_number": "T172759B",
-    "description": "",
+    "description": "ASSY PLUG PACK MATING SIDE KIT MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25014,7 +25014,7 @@
     "catalog": "T172759B",
     "position": "1",
     "part_number": "T153895A",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK TAIL LIGHT HARNESS",
     "qty": "2",
     "type": "",
     "level": ""
@@ -25024,7 +25024,7 @@
     "catalog": "T172759B",
     "position": "2",
     "part_number": "T172739",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE CABIN MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25034,7 +25034,7 @@
     "catalog": "T172759B",
     "position": "3",
     "part_number": "T172741A",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE REAR BODY MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25044,7 +25044,7 @@
     "catalog": "T172759B",
     "position": "4",
     "part_number": "T172752",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE BOOM MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25054,7 +25054,7 @@
     "catalog": "T172759B",
     "position": "5",
     "part_number": "T172760A",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE HEADLIGHTS MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25064,7 +25064,7 @@
     "catalog": "T172759B",
     "position": "6",
     "part_number": "T172762",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE FRONT BODY MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25074,7 +25074,7 @@
     "catalog": "T153895A",
     "position": "1",
     "part_number": "T153895A",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK TAIL LIGHT HARNESS",
     "qty": "2",
     "type": "",
     "level": ""
@@ -25134,7 +25134,7 @@
     "catalog": "T172739",
     "position": "2",
     "part_number": "T172739",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE CABIN MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25204,7 +25204,7 @@
     "catalog": "T172741A",
     "position": "3",
     "part_number": "T172741A",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE REAR BODY MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25274,7 +25274,7 @@
     "catalog": "T172752",
     "position": "4",
     "part_number": "T172752",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE BOOM MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25314,7 +25314,7 @@
     "catalog": "T172760A",
     "position": "5",
     "part_number": "T172760A",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE HEADLIGHTS MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25374,7 +25374,7 @@
     "catalog": "T172762",
     "position": "6",
     "part_number": "T172762",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK MATING SIDE FRONT BODY MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25414,7 +25414,7 @@
     "catalog": "T172822A",
     "position": "18",
     "part_number": "T172822A",
-    "description": "",
+    "description": "ASSY WASHER AND WIPER REMOTE FILL",
     "qty": "1",
     "type": "",
     "level": "CATALOG_UOM"
@@ -25454,7 +25454,7 @@
     "catalog": "T172822A",
     "position": "4",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -25464,7 +25464,7 @@
     "catalog": "T172822A",
     "position": "5",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -25494,7 +25494,7 @@
     "catalog": "T172822A",
     "position": "8",
     "part_number": "PLMXC1356A",
-    "description": "",
+    "description": "WASHER BOTTLE 4LT MODIFIED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25574,7 +25574,7 @@
     "catalog": "T172822A",
     "position": "16",
     "part_number": "T172767",
-    "description": "",
+    "description": "ASSY WIPER MOTOR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25604,7 +25604,7 @@
     "catalog": "PLMXC1356A",
     "position": "8",
     "part_number": "PLMXC1356A",
-    "description": "",
+    "description": "WASHER BOTTLE 4LT MODIFIED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25624,7 +25624,7 @@
     "catalog": "T172767",
     "position": "16",
     "part_number": "T172767",
-    "description": "",
+    "description": "ASSY WIPER MOTOR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25664,7 +25664,7 @@
     "catalog": "T177823B",
     "position": "17",
     "part_number": "T177823B",
-    "description": "",
+    "description": "ASSY FRONT LIGHTS LED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -25714,7 +25714,7 @@
     "catalog": "T177823B",
     "position": "5",
     "part_number": "FMUS06C020L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 20 ZP",
     "qty": "11",
     "type": "1",
     "level": ""
@@ -25724,7 +25724,7 @@
     "catalog": "T177823B",
     "position": "6",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "8",
     "type": "1",
     "level": ""
@@ -25734,7 +25734,7 @@
     "catalog": "T177823B",
     "position": "7",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "8",
     "type": "1",
     "level": ""
@@ -25814,7 +25814,7 @@
     "catalog": "T177823B",
     "position": "15",
     "part_number": "T177822",
-    "description": "",
+    "description": "HOUSING HEADLIGHT TWIN 6x4 - P/COAT BLACK",
     "qty": "2",
     "type": "",
     "level": ""
@@ -25824,7 +25824,7 @@
     "catalog": "T177822",
     "position": "15",
     "part_number": "T177822",
-    "description": "",
+    "description": "HOUSING HEADLIGHT TWIN 6x4 - P/COAT BLACK",
     "qty": "2",
     "type": "",
     "level": ""
@@ -25984,7 +25984,7 @@
     "catalog": "T182570A",
     "position": "18",
     "part_number": "T182570A",
-    "description": "",
+    "description": "ASSY HARNESS ELEC SUPPLY MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26094,7 +26094,7 @@
     "catalog": "T182570A",
     "position": "11",
     "part_number": "PP2338400",
-    "description": "",
+    "description": "HARNESS HORN AND DIFF LOCK",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26114,7 +26114,7 @@
     "catalog": "T182570A",
     "position": "13",
     "part_number": "T133722A",
-    "description": "",
+    "description": "SWITCH ASSY PANEL LH SIDE DUAL CAM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26154,7 +26154,7 @@
     "catalog": "T182570A",
     "position": "17",
     "part_number": "T138740C",
-    "description": "",
+    "description": "SWITCH ASSY PANEL RH SIDE MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26164,7 +26164,7 @@
     "catalog": "T182570A",
     "position": "18",
     "part_number": "T150987E",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC AIR SWITCHES MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26174,7 +26174,7 @@
     "catalog": "T182570A",
     "position": "19",
     "part_number": "T150992D",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC BATT BOX CP MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26184,7 +26184,7 @@
     "catalog": "T182570A",
     "position": "20",
     "part_number": "T150993C",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC ALLISON TRANS CP MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26194,7 +26194,7 @@
     "catalog": "T182570A",
     "position": "21",
     "part_number": "T150994C",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC ENG & CHASSIS CP",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26204,7 +26204,7 @@
     "catalog": "T182570A",
     "position": "22",
     "part_number": "T150997F",
-    "description": "",
+    "description": "HARNESS BATTERY BOX MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26214,7 +26214,7 @@
     "catalog": "T182570A",
     "position": "23",
     "part_number": "T154728D",
-    "description": "",
+    "description": "CABLE ALTERNATOR BATT +VE MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26224,7 +26224,7 @@
     "catalog": "T182570A",
     "position": "24",
     "part_number": "T172724C",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC REAR BODY MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26254,7 +26254,7 @@
     "catalog": "T182570A",
     "position": "27",
     "part_number": "T177756B",
-    "description": "",
+    "description": "HARNESS AND SCHEMATICS CABIN MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26304,7 +26304,7 @@
     "catalog": "PP2338400",
     "position": "11",
     "part_number": "PP2338400",
-    "description": "",
+    "description": "HARNESS HORN AND DIFF LOCK",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26374,7 +26374,7 @@
     "catalog": "T133722A",
     "position": "13",
     "part_number": "T133722A",
-    "description": "",
+    "description": "SWITCH ASSY PANEL LH SIDE DUAL CAM",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26574,7 +26574,7 @@
     "catalog": "T138740C",
     "position": "17",
     "part_number": "T138740C",
-    "description": "",
+    "description": "SWITCH ASSY PANEL RH SIDE MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26724,7 +26724,7 @@
     "catalog": "T150987E",
     "position": "18",
     "part_number": "T150987E",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC AIR SWITCHES MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26834,7 +26834,7 @@
     "catalog": "T150992D",
     "position": "19",
     "part_number": "T150992D",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC BATT BOX CP MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26904,7 +26904,7 @@
     "catalog": "T150993C",
     "position": "20",
     "part_number": "T150993C",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC ALLISON TRANS CP MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -26974,7 +26974,7 @@
     "catalog": "T150994C",
     "position": "21",
     "part_number": "T150994C",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC ENG & CHASSIS CP",
     "qty": "1",
     "type": "",
     "level": ""
@@ -27044,7 +27044,7 @@
     "catalog": "T150997F",
     "position": "22",
     "part_number": "T150997F",
-    "description": "",
+    "description": "HARNESS BATTERY BOX MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -27174,7 +27174,7 @@
     "catalog": "T150997F",
     "position": "13",
     "part_number": "PP2272600",
-    "description": "",
+    "description": "SWITCH ISOLATION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -27274,7 +27274,7 @@
     "catalog": "PP2272600",
     "position": "",
     "part_number": "PP2272600",
-    "description": "",
+    "description": "SWITCH ISOLATION",
     "qty": "",
     "type": "",
     "level": ""
@@ -27294,7 +27294,7 @@
     "catalog": "T154728D",
     "position": "23",
     "part_number": "T154728D",
-    "description": "",
+    "description": "CABLE ALTERNATOR BATT +VE MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -27334,7 +27334,7 @@
     "catalog": "T172724C",
     "position": "24",
     "part_number": "T172724C",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC REAR BODY MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -27654,7 +27654,7 @@
     "catalog": "T172724C",
     "position": "32",
     "part_number": "T157850",
-    "description": "",
+    "description": "ASSY CONNECTOR SOCKET AMP MCP 4-WAY",
     "qty": "2",
     "type": "",
     "level": ""
@@ -27684,7 +27684,7 @@
     "catalog": "T172724C",
     "position": "35",
     "part_number": "T172742",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK ROUTING SIDE REAR BODY MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -27694,7 +27694,7 @@
     "catalog": "T157850",
     "position": "32",
     "part_number": "T157850",
-    "description": "",
+    "description": "ASSY CONNECTOR SOCKET AMP MCP 4-WAY",
     "qty": "2",
     "type": "",
     "level": ""
@@ -27754,7 +27754,7 @@
     "catalog": "T172742",
     "position": "35",
     "part_number": "T172742",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK ROUTING SIDE REAR BODY MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -27784,7 +27784,7 @@
     "catalog": "T177756B",
     "position": "27",
     "part_number": "T177756B",
-    "description": "",
+    "description": "HARNESS AND SCHEMATICS CABIN MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -27804,7 +27804,7 @@
     "catalog": "T177756B",
     "position": "2",
     "part_number": "C1506A",
-    "description": "",
+    "description": "PLUG KIT LUFF TRANSDUCER",
     "qty": "2",
     "type": "",
     "level": ""
@@ -28654,7 +28654,7 @@
     "catalog": "T177756B",
     "position": "87",
     "part_number": "T135392D",
-    "description": "",
+    "description": "FUSE TRAY ELECTRICAL BOX",
     "qty": "1",
     "type": "",
     "level": ""
@@ -28894,7 +28894,7 @@
     "catalog": "T177756B",
     "position": "111",
     "part_number": "T172740A",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK ROUTING SIDE CABIN MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -28954,7 +28954,7 @@
     "catalog": "C1506A",
     "position": "2",
     "part_number": "C1506A",
-    "description": "",
+    "description": "PLUG KIT LUFF TRANSDUCER",
     "qty": "2",
     "type": "",
     "level": ""
@@ -29004,7 +29004,7 @@
     "catalog": "T135392D",
     "position": "87",
     "part_number": "T135392D",
-    "description": "",
+    "description": "FUSE TRAY ELECTRICAL BOX",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29074,7 +29074,7 @@
     "catalog": "T172740A",
     "position": "111",
     "part_number": "T172740A",
-    "description": "",
+    "description": "PLUG & TERMINAL PACK ROUTING SIDE CABIN MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29104,7 +29104,7 @@
     "catalog": "T182587A",
     "position": "19",
     "part_number": "T182587A",
-    "description": "",
+    "description": "ASSY SCHEMATIC ELECTRICAL MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29114,7 +29114,7 @@
     "catalog": "T182587A",
     "position": "1",
     "part_number": "T150987E",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC AIR SWITCHES MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29124,7 +29124,7 @@
     "catalog": "T182587A",
     "position": "2",
     "part_number": "T150992D",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC BATT BOX CP MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29134,7 +29134,7 @@
     "catalog": "T182587A",
     "position": "3",
     "part_number": "T150993C",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC ALLISON TRANS CP MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29144,7 +29144,7 @@
     "catalog": "T182587A",
     "position": "4",
     "part_number": "T150994C",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC ENG & CHASSIS CP",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29154,7 +29154,7 @@
     "catalog": "T182587A",
     "position": "5",
     "part_number": "T150997F",
-    "description": "",
+    "description": "HARNESS BATTERY BOX MAC 25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29184,7 +29184,7 @@
     "catalog": "T182587A",
     "position": "8",
     "part_number": "T172724C",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC REAR BODY MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29214,7 +29214,7 @@
     "catalog": "T182587A",
     "position": "11",
     "part_number": "T177756B",
-    "description": "",
+    "description": "HARNESS AND SCHEMATICS CABIN MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29264,7 +29264,7 @@
     "catalog": "T191181A",
     "position": "20",
     "part_number": "T191181A",
-    "description": "",
+    "description": "ASSY ANGLE SENSOR MAGNETIC",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29314,7 +29314,7 @@
     "catalog": "T191181A",
     "position": "5",
     "part_number": "FMUS06C020L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 20 ZP",
     "qty": "4",
     "type": "1",
     "level": ""
@@ -29334,7 +29334,7 @@
     "catalog": "T191181A",
     "position": "7",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "2",
     "type": "1",
     "level": ""
@@ -29344,7 +29344,7 @@
     "catalog": "T191181A",
     "position": "8",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "4",
     "type": "1",
     "level": ""
@@ -29364,7 +29364,7 @@
     "catalog": "T191181A",
     "position": "10",
     "part_number": "T181975E",
-    "description": "",
+    "description": "BRACKET ANGLE SENSOR ENCODER ARTIC",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29414,7 +29414,7 @@
     "catalog": "T181975E",
     "position": "10",
     "part_number": "T181975E",
-    "description": "",
+    "description": "BRACKET ANGLE SENSOR ENCODER ARTIC",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29434,7 +29434,7 @@
     "catalog": "T191275A",
     "position": "21",
     "part_number": "T191275A",
-    "description": "",
+    "description": "ASSY CABIN ELECTRICAL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29494,7 +29494,7 @@
     "catalog": "T191275A",
     "position": "6",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "5",
     "type": "1",
     "level": ""
@@ -29514,7 +29514,7 @@
     "catalog": "T191275A",
     "position": "8",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "5",
     "type": "1",
     "level": ""
@@ -29614,7 +29614,7 @@
     "catalog": "T191725A",
     "position": "22",
     "part_number": "T191725A",
-    "description": "",
+    "description": "ASSY DASH MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29694,7 +29694,7 @@
     "catalog": "T191789A",
     "position": "23",
     "part_number": "T191789A",
-    "description": "",
+    "description": "ASSY HARNESS ELEC SUPPLY ABS MAC 25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29764,7 +29764,7 @@
     "catalog": "T167887",
     "position": "8",
     "part_number": "T167887",
-    "description": "",
+    "description": "ASSY OPTIONS MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29774,7 +29774,7 @@
     "catalog": "T167887",
     "position": "1",
     "part_number": "PLMXA8001E",
-    "description": "",
+    "description": "SPARE WHEEL C/W CARRIER ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29784,7 +29784,7 @@
     "catalog": "T167887",
     "position": "2",
     "part_number": "PLMXA8061I",
-    "description": "",
+    "description": "ASSY BUMPER MOUNT BRACKET S/BAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29794,7 +29794,7 @@
     "catalog": "T167887",
     "position": "3",
     "part_number": "PLMXA8091C",
-    "description": "",
+    "description": "WHEEL CHOCKS ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29804,7 +29804,7 @@
     "catalog": "T167887",
     "position": "4",
     "part_number": "PLMXA8095E",
-    "description": "",
+    "description": "JUMP START ANDERSON ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29814,7 +29814,7 @@
     "catalog": "T167887",
     "position": "5",
     "part_number": "PLMXA8111B",
-    "description": "",
+    "description": "GUARD FAN AND BELTS ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29824,7 +29824,7 @@
     "catalog": "T167887",
     "position": "6",
     "part_number": "PLMXA8115B",
-    "description": "",
+    "description": "HIGH VIS STRIPING REFLECTIVE TAPE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29834,7 +29834,7 @@
     "catalog": "T167887",
     "position": "7",
     "part_number": "PLMXA8148B",
-    "description": "",
+    "description": "STEP FLEXIBLE REAR BODY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29884,7 +29884,7 @@
     "catalog": "T167887",
     "position": "12",
     "part_number": "T131458B",
-    "description": "",
+    "description": "ASSY H/RAIL MAC25 BOLTED TYPE 2 REAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29904,7 +29904,7 @@
     "catalog": "T167887",
     "position": "14",
     "part_number": "T150914",
-    "description": "",
+    "description": "ASSY HANDRAIL MOD EXTENSTION 1st STEP",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29914,7 +29914,7 @@
     "catalog": "T167887",
     "position": "15",
     "part_number": "T154681H",
-    "description": "",
+    "description": "ASSY SUPER LIFT MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29924,7 +29924,7 @@
     "catalog": "T167887",
     "position": "16",
     "part_number": "T154682A",
-    "description": "",
+    "description": "ASSY SUPER LIFT NO STD C/W MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29934,7 +29934,7 @@
     "catalog": "T167887",
     "position": "17",
     "part_number": "T156408B",
-    "description": "",
+    "description": "ASSY EXT ISOLATORS BATT & START MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29944,7 +29944,7 @@
     "catalog": "T167887",
     "position": "18",
     "part_number": "T159265B",
-    "description": "",
+    "description": "ASSY PARK BRAKE DOOR ALARM MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29954,7 +29954,7 @@
     "catalog": "T167887",
     "position": "19",
     "part_number": "T161298C",
-    "description": "",
+    "description": "ASSY HOLD BRAKE WARNING AT15, AT22 & MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29964,7 +29964,7 @@
     "catalog": "T167887",
     "position": "20",
     "part_number": "T167078A",
-    "description": "",
+    "description": "HOOK 16t SWIVEL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -29994,7 +29994,7 @@
     "catalog": "T167887",
     "position": "23",
     "part_number": "T171607",
-    "description": "",
+    "description": "ASSY EMERGENCY STOP CABIN EXTERNAL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30004,7 +30004,7 @@
     "catalog": "T167887",
     "position": "24",
     "part_number": "T173373",
-    "description": "",
+    "description": "HOOK 26.5t SWIVEL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30014,7 +30014,7 @@
     "catalog": "T167887",
     "position": "25",
     "part_number": "T179221A",
-    "description": "",
+    "description": "ASSY MODIFIED LMI SIGNAL LIGHT RETROFIT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30024,7 +30024,7 @@
     "catalog": "T167887",
     "position": "26",
     "part_number": "T181694B",
-    "description": "",
+    "description": "ASSY 15T SPREADER BAR KIT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30034,7 +30034,7 @@
     "catalog": "T167887",
     "position": "27",
     "part_number": "T191206B",
-    "description": "",
+    "description": "ASSY AUTOGREASE ILC MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30044,7 +30044,7 @@
     "catalog": "PLMXA8001E",
     "position": "5",
     "part_number": "PLMXA8001E",
-    "description": "",
+    "description": "SPARE WHEEL C/W CARRIER ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30184,7 +30184,7 @@
     "catalog": "PLMXA8061I",
     "position": "6",
     "part_number": "PLMXA8061I",
-    "description": "",
+    "description": "ASSY BUMPER MOUNT BRACKET S/BAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30234,7 +30234,7 @@
     "catalog": "PLMXA8061I",
     "position": "5",
     "part_number": "PLMXC1351B",
-    "description": "",
+    "description": "SPREADER BAR HOOK RETAINING PIN",
     "qty": "2",
     "type": "",
     "level": ""
@@ -30244,7 +30244,7 @@
     "catalog": "PLMXA8061I",
     "position": "6",
     "part_number": "T166138",
-    "description": "",
+    "description": "ASSY LANYARD SPREADER BAR HOOK",
     "qty": "2",
     "type": "",
     "level": ""
@@ -30254,7 +30254,7 @@
     "catalog": "PLMXC1351B",
     "position": "5",
     "part_number": "PLMXC1351B",
-    "description": "",
+    "description": "SPREADER BAR HOOK RETAINING PIN",
     "qty": "2",
     "type": "",
     "level": ""
@@ -30304,7 +30304,7 @@
     "catalog": "T166138",
     "position": "6",
     "part_number": "T166138",
-    "description": "",
+    "description": "ASSY LANYARD SPREADER BAR HOOK",
     "qty": "2",
     "type": "",
     "level": ""
@@ -30334,7 +30334,7 @@
     "catalog": "PLMXA8091C",
     "position": "7",
     "part_number": "PLMXA8091C",
-    "description": "",
+    "description": "WHEEL CHOCKS ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30374,7 +30374,7 @@
     "catalog": "PLMXA8091C",
     "position": "4",
     "part_number": "PLMXF2039B",
-    "description": "",
+    "description": "FAB MOUNT WHEEL CHOCKS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30404,7 +30404,7 @@
     "catalog": "PLMXF2039B",
     "position": "4",
     "part_number": "PLMXF2039B",
-    "description": "",
+    "description": "FAB MOUNT WHEEL CHOCKS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30424,7 +30424,7 @@
     "catalog": "PLMXA8095E",
     "position": "8",
     "part_number": "PLMXA8095E",
-    "description": "",
+    "description": "JUMP START ANDERSON ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30514,7 +30514,7 @@
     "catalog": "PLMXA8111B",
     "position": "9",
     "part_number": "PLMXA8111B",
-    "description": "",
+    "description": "GUARD FAN AND BELTS ASSEMBLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30524,7 +30524,7 @@
     "catalog": "PLMXA8111B",
     "position": "1",
     "part_number": "FMUS06C020L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 20 ZP",
     "qty": "4",
     "type": "1",
     "level": ""
@@ -30534,7 +30534,7 @@
     "catalog": "PLMXA8111B",
     "position": "2",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "4",
     "type": "1",
     "level": ""
@@ -30544,7 +30544,7 @@
     "catalog": "PLMXA8111B",
     "position": "3",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "4",
     "type": "1",
     "level": ""
@@ -30564,7 +30564,7 @@
     "catalog": "PLMXA8115B",
     "position": "10",
     "part_number": "PLMXA8115B",
-    "description": "",
+    "description": "HIGH VIS STRIPING REFLECTIVE TAPE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30584,7 +30584,7 @@
     "catalog": "PLMXA8148B",
     "position": "11",
     "part_number": "PLMXA8148B",
-    "description": "",
+    "description": "STEP FLEXIBLE REAR BODY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30654,7 +30654,7 @@
     "catalog": "PLMXA8148B",
     "position": "7",
     "part_number": "PLMXF2056A",
-    "description": "",
+    "description": "FABRICATION STEP REAR FLEXIBLE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30664,7 +30664,7 @@
     "catalog": "PLMXF2056A",
     "position": "7",
     "part_number": "PLMXF2056A",
-    "description": "",
+    "description": "FABRICATION STEP REAR FLEXIBLE",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30694,7 +30694,7 @@
     "catalog": "T131458B",
     "position": "16",
     "part_number": "T131458B",
-    "description": "",
+    "description": "ASSY H/RAIL MAC25 BOLTED TYPE 2 REAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -30834,7 +30834,7 @@
     "catalog": "T131458B",
     "position": "14",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "6",
     "type": "1",
     "level": ""
@@ -30854,7 +30854,7 @@
     "catalog": "T131458B",
     "position": "16",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "6",
     "type": "1",
     "level": ""
@@ -30954,7 +30954,7 @@
     "catalog": "T150914",
     "position": "18",
     "part_number": "T150914",
-    "description": "",
+    "description": "ASSY HANDRAIL MOD EXTENSTION 1st STEP",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31034,7 +31034,7 @@
     "catalog": "T154681H",
     "position": "19",
     "part_number": "T154681H",
-    "description": "",
+    "description": "ASSY SUPER LIFT MAC25-4",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31044,7 +31044,7 @@
     "catalog": "T154681H",
     "position": "1",
     "part_number": "PLMXC1175A",
-    "description": "",
+    "description": "STOP RUBBER C/WEIGHT",
     "qty": "4",
     "type": "",
     "level": ""
@@ -31074,7 +31074,7 @@
     "catalog": "T154681H",
     "position": "4",
     "part_number": "T152974C",
-    "description": "",
+    "description": "ASSY PLUNGER SL CAST C/W DETECTION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31084,7 +31084,7 @@
     "catalog": "T154681H",
     "position": "5",
     "part_number": "T167698A",
-    "description": "",
+    "description": "COUNTER WEIGHT SL CAST 2153kg",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31104,7 +31104,7 @@
     "catalog": "T152974C",
     "position": "4",
     "part_number": "T152974C",
-    "description": "",
+    "description": "ASSY PLUNGER SL CAST C/W DETECTION",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31174,7 +31174,7 @@
     "catalog": "T167698A",
     "position": "5",
     "part_number": "T167698A",
-    "description": "",
+    "description": "COUNTER WEIGHT SL CAST 2153kg",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31204,7 +31204,7 @@
     "catalog": "T154682A",
     "position": "20",
     "part_number": "T154682A",
-    "description": "",
+    "description": "ASSY SUPER LIFT NO STD C/W MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31274,7 +31274,7 @@
     "catalog": "T159265B",
     "position": "22",
     "part_number": "T159265B",
-    "description": "",
+    "description": "ASSY PARK BRAKE DOOR ALARM MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31344,7 +31344,7 @@
     "catalog": "T161298C",
     "position": "23",
     "part_number": "T161298C",
-    "description": "",
+    "description": "ASSY HOLD BRAKE WARNING AT15, AT22 & MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31374,7 +31374,7 @@
     "catalog": "T161298C",
     "position": "3",
     "part_number": "T161297B",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC HOLD BRAKE WARNING",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31414,7 +31414,7 @@
     "catalog": "T161297B",
     "position": "3",
     "part_number": "T161297B",
-    "description": "",
+    "description": "HARNESS & SCHEMATIC HOLD BRAKE WARNING",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31534,7 +31534,7 @@
     "catalog": "T167078A",
     "position": "24",
     "part_number": "T167078A",
-    "description": "",
+    "description": "HOOK 16t SWIVEL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31554,7 +31554,7 @@
     "catalog": "T171607",
     "position": "27",
     "part_number": "T171607",
-    "description": "",
+    "description": "ASSY EMERGENCY STOP CABIN EXTERNAL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31604,7 +31604,7 @@
     "catalog": "T173373",
     "position": "28",
     "part_number": "T173373",
-    "description": "",
+    "description": "HOOK 26.5t SWIVEL",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31624,7 +31624,7 @@
     "catalog": "T179221A",
     "position": "29",
     "part_number": "T179221A",
-    "description": "",
+    "description": "ASSY MODIFIED LMI SIGNAL LIGHT RETROFIT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31664,7 +31664,7 @@
     "catalog": "T179221A",
     "position": "4",
     "part_number": "FMUS06C020L",
-    "description": "",
+    "description": "SCREW SOC CAP M6 X 1P X 20 ZP",
     "qty": "4",
     "type": "1",
     "level": ""
@@ -31674,7 +31674,7 @@
     "catalog": "T179221A",
     "position": "5",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "6",
     "type": "1",
     "level": ""
@@ -31684,7 +31684,7 @@
     "catalog": "T179221A",
     "position": "6",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "6",
     "type": "1",
     "level": ""
@@ -31734,7 +31734,7 @@
     "catalog": "T179221A",
     "position": "11",
     "part_number": "T179222B",
-    "description": "",
+    "description": "LIGHT LMI SIGNAL MODIFIED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31754,7 +31754,7 @@
     "catalog": "T179222B",
     "position": "11",
     "part_number": "T179222B",
-    "description": "",
+    "description": "LIGHT LMI SIGNAL MODIFIED",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31784,7 +31784,7 @@
     "catalog": "T181694B",
     "position": "30",
     "part_number": "T181694B",
-    "description": "",
+    "description": "ASSY 15T SPREADER BAR KIT",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31794,7 +31794,7 @@
     "catalog": "T181694B",
     "position": "1",
     "part_number": "T177770D",
-    "description": "",
+    "description": "ASSY SPREADER BAR 15T",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31804,7 +31804,7 @@
     "catalog": "T177770D",
     "position": "1",
     "part_number": "T177770D",
-    "description": "",
+    "description": "ASSY SPREADER BAR 15T",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31854,7 +31854,7 @@
     "catalog": "T177770D",
     "position": "5",
     "part_number": "FMWF06L",
-    "description": "",
+    "description": "WASHER FLAT M6 GR.8.8 ZP",
     "qty": "12",
     "type": "1",
     "level": ""
@@ -31864,7 +31864,7 @@
     "catalog": "T177770D",
     "position": "6",
     "part_number": "FMWS06",
-    "description": "",
+    "description": "WASHER SPRING M6 ZP",
     "qty": "12",
     "type": "1",
     "level": ""
@@ -31884,7 +31884,7 @@
     "catalog": "T177770D",
     "position": "8",
     "part_number": "T177771B",
-    "description": "",
+    "description": "FAB MID SECTION 15T SPREADER BAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31894,7 +31894,7 @@
     "catalog": "T177770D",
     "position": "9",
     "part_number": "T177772C",
-    "description": "",
+    "description": "FAB EXTENSION SECTION 15T SPREADER BAR",
     "qty": "2",
     "type": "",
     "level": ""
@@ -31924,7 +31924,7 @@
     "catalog": "T177771B",
     "position": "8",
     "part_number": "T177771B",
-    "description": "",
+    "description": "FAB MID SECTION 15T SPREADER BAR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -31954,7 +31954,7 @@
     "catalog": "T177772C",
     "position": "9",
     "part_number": "T177772C",
-    "description": "",
+    "description": "FAB EXTENSION SECTION 15T SPREADER BAR",
     "qty": "2",
     "type": "",
     "level": ""
@@ -31994,7 +31994,7 @@
     "catalog": "T191206B",
     "position": "31",
     "part_number": "T191206B",
-    "description": "",
+    "description": "ASSY AUTOGREASE ILC MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32034,7 +32034,7 @@
     "catalog": "T191206B",
     "position": "4",
     "part_number": "T191198A",
-    "description": "",
+    "description": "PUMP AUTOGREASE ILC RHS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32044,7 +32044,7 @@
     "catalog": "T191206B",
     "position": "5",
     "part_number": "T191207B",
-    "description": "",
+    "description": "GREASE HOSE PUMP TO DIVIDER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32064,7 +32064,7 @@
     "catalog": "T191198A",
     "position": "4",
     "part_number": "T191198A",
-    "description": "",
+    "description": "PUMP AUTOGREASE ILC RHS",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32084,7 +32084,7 @@
     "catalog": "T191207B",
     "position": "5",
     "part_number": "T191207B",
-    "description": "",
+    "description": "GREASE HOSE PUMP TO DIVIDER",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32134,7 +32134,7 @@
     "catalog": "PLMXA9001",
     "position": "9",
     "part_number": "PLMXA9001",
-    "description": "",
+    "description": "SERVICE KITS MAC25",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32144,7 +32144,7 @@
     "catalog": "PLMXA9001",
     "position": "1",
     "part_number": "PLMXS1022C",
-    "description": "",
+    "description": "SERVICE KIT OM906 100HR FILTERS ONLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32164,7 +32164,7 @@
     "catalog": "PLMXA9001",
     "position": "3",
     "part_number": "T150805B",
-    "description": "",
+    "description": "SERVICE KIT OM906 2000HR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32184,7 +32184,7 @@
     "catalog": "PLMXA9001",
     "position": "5",
     "part_number": "T150807B",
-    "description": "",
+    "description": "SERVICE KIT OM906 100HR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32214,7 +32214,7 @@
     "catalog": "PLMXS1022C",
     "position": "1",
     "part_number": "PLMXS1022C",
-    "description": "",
+    "description": "SERVICE KIT OM906 100HR FILTERS ONLY",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32304,7 +32304,7 @@
     "catalog": "T150805B",
     "position": "3",
     "part_number": "T150805B",
-    "description": "",
+    "description": "SERVICE KIT OM906 2000HR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32324,7 +32324,7 @@
     "catalog": "T150805B",
     "position": "2",
     "part_number": "PP2219900",
-    "description": "",
+    "description": "WATER DISTILLED 20L",
     "qty": "1",
     "type": "1",
     "level": ""
@@ -32584,7 +32584,7 @@
     "catalog": "T150807B",
     "position": "5",
     "part_number": "T150807B",
-    "description": "",
+    "description": "SERVICE KIT OM906 100HR",
     "qty": "1",
     "type": "",
     "level": ""
@@ -32594,7 +32594,7 @@
     "catalog": "T150807B",
     "position": "1",
     "part_number": "PLMXS1022C",
-    "description": "",
+    "description": "SERVICE KIT OM906 100HR FILTERS ONLY",
     "qty": "1",
     "type": "",
     "level": ""
