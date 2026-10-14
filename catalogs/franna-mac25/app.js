@@ -110,8 +110,6 @@ function fit(){
  // Retry a bounded number of frames rather than leaving the diagram at scale 1.
  if(width<120){let attempts=0;const retry=()=>{if(attempts++<12&&v.getBoundingClientRect().width<120){requestAnimationFrame(retry);return;}if(v.getBoundingClientRect().width>=120)fit();};requestAnimationFrame(retry);return;}
  const usableWidth=Math.max(80,width-16);
- const compact=window.matchMedia('(max-width:800px)').matches;
- const usableHeight=Math.max(100,v.clientHeight-16);
  const widthScale=usableWidth/cv.width;
  // Fit the complete diagram width on every screen. On mobile, constraining
  // both width and height made wide OEM sheets shrink to a narrow strip.
