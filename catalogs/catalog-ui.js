@@ -104,7 +104,7 @@
   actions.insertBefore(toggle, actions.querySelector("#themeBtn, #theme, #dark"));
 
   if (document.querySelector(".app .workspace .diagramCard")) page.classList.add("ui-ac40");
-  else if (document.getElementById("diagramStage")) page.classList.add("ui-ac250");
+  else if (document.getElementById("diagramStage") && document.querySelector(".layout")) page.classList.add("ui-ac250");
   else if (document.getElementById("partRows")) page.classList.add("ui-ac100");
   else if (document.getElementById("canvasWrap")) page.classList.add("ui-ac200");
   else if (document.getElementById("stage")) page.classList.add("ui-ac200");
