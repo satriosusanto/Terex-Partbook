@@ -52,9 +52,25 @@ for (const [id] of duplicates(partIdCounts)) errors.push('Duplicate part ID: ' +
 for (const [id] of duplicates(catalogIdCounts)) errors.push('Duplicate catalog ID: ' + id);
 for (const [id] of duplicates(imageKeyCounts)) errors.push('Duplicate catalog/image index key: ' + id);
 
+const catalogChildIdCounts = countBy(catalogChildRows, row => key(row.id));
+for (const [id] of duplicates(catalogChildIdCounts)) errors.push('Duplicate catalog child ID: ' + id);
+
+const parityFields = ['catalog', 'position', 'part_number', 'description', 'qty', 'type', 'level'];
 for (const row of catalogChildRows) {
-  if (!partById.has(key(row.id))) {
+  const part = partById.get(key(row.id));
+  if (!part) {
     errors.push('Catalog child has no matching part row: ' + key(row.id));
+    continue;
+  }
+  for (const field of parityFields) {
+    if (key(row[field]) !== key(part[field])) {
+      errors.push('Catalog child differs from parts.json for ' + key(row.id) + ' field ' + field);
+    }
+  }
+}
+for (const row of parts) {
+  if (!catalogChildIdCounts.has(key(row.id))) {
+    errors.push('Part row is missing from catalog hierarchy: ' + key(row.id));
   }
 }
 for (const row of parts) {
