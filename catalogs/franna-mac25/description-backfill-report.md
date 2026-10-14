@@ -3,8 +3,9 @@
 ## Changes made
 
 Descriptions were backfilled only when recoverable from existing repository data:
-- Exact catalog title matching the part number (assembly title).
-- A single unambiguous description already recorded for the exact same part number elsewhere in the extracted MAC25 data.
+- Verified assembly names already maintained in the MAC25 interface, taking precedence where they conflict with the extracted catalog title.
+- Exact catalog title matching the part number.
+- A single unambiguous description already recorded for the exact same part number elsewhere in the extracted dataset.
 
 No description was guessed from visual proximity or fabricated.
 
