@@ -86,6 +86,8 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
   const candidates=[...options.keys()].filter(id=>id!==child);
   if(candidates.length)parentById.set(child,candidates[0]);
  }
+ // Keep the overview catalog as the unique root after reconciling part rows.
+ if(curatedRoot)parentById.delete(curatedRoot);
  // Remove malformed cycles after repairing links from actual catalog part rows.
  for(const start of ids){
   const path=[],seenAt=new Map();let node=start;
