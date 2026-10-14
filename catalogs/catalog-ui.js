@@ -572,6 +572,10 @@
       if (candidates.length) parentById.set(childId, candidates[0]);
     }
 
+    // Keep the curated overview as the unique top-level catalog. Source part rows
+    // can otherwise reattach that same catalog under another parent, duplicating it.
+    if (curatedRootId) parentById.delete(curatedRootId);
+
     // Always resolve labels from the matching parent row. Previously these assignments
     // were skipped when parentById already contained a child, leaving misleading titles
     // such as "CENTRAL LUBE ARR." or raw part numbers in the visible tree.
