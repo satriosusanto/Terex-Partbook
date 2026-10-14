@@ -93,6 +93,14 @@ These entries need comparison with the original diagram/callout list before assi
 | T177772C.TIF | T177772C | 3 | 16P2527A | T177772C:00003 |
 | T177772C.TIF | T177772C | 2 | 16P0620A | T177772C:00002 |
 
+## Additional integrity checks — hotspot linkage
+
+- The recovered `parts.json` contains 24 repeated record IDs.
+- Three repeated IDs have conflicting row fields and need source-level cleanup: `PLMXS1022C:00000`, `T136472:00000`, and `PL16A3067A:00000`. The remaining repeated IDs were identical across the checked part fields.
+- The MAC25 root assembly has 9 immediate assembly references; all 9 resolve to existing catalog records.
+- Hotspot click handling now resolves by catalog + callout position + part number first, and only falls back to `part_id` when that lookup is unambiguous. Conflicting ambiguous rows are not selected arbitrarily.
+- This code change reduces the risk of a hotspot opening the wrong row, but does not replace the need to clean the 3 conflicting source IDs or validate unlinked callouts against the OEM diagram.
+
 ## Data integrity notes
 
 - Existing descriptions were not overwritten.
