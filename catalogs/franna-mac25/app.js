@@ -114,7 +114,9 @@ function fit(){
  // Fit the complete diagram width on every screen. On mobile, constraining
  // both width and height made wide OEM sheets shrink to a narrow strip.
  // Keep the viewer scrollable vertically for tall sheets; pinch zoom remains available.
- scale=Math.max(.01,Math.min(1,widthScale));
+ // Allow enlargement as well as reduction: some converted catalogue sheets have a smaller raster width than the phone viewport.
+ // Capping fit at 1 left those diagrams at half-width even when there was ample room.
+ scale=Math.max(.01,Math.min(3,widthScale));
  applyScale();
  v.scrollLeft=0;v.scrollTop=0;
 }
