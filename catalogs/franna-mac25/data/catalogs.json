@@ -1200,16 +1200,6 @@
     "title": "SERVICE KIT OM906 100HR FILTERS ONLY",
     "children": [
       {
-        "id": "PLMXS1022C:00000",
-        "catalog": "PLMXS1022C",
-        "position": "5",
-        "part_number": "PLMXS1022C",
-        "description": "SERVICE KIT OM906 100HR FILTERS ONLY",
-        "qty": "1",
-        "type": "",
-        "level": ""
-      },
-      {
         "id": "PLMXS1022C:00001",
         "catalog": "PLMXS1022C",
         "position": "1",
@@ -1267,56 +1257,6 @@
         "description": "SERVICE KIT OM906 100HR FILTERS ONLY",
         "qty": "1",
         "type": "",
-        "level": ""
-      },
-      {
-        "id": "PLMXS1022C:00001",
-        "catalog": "PLMXS1022C",
-        "position": "1",
-        "part_number": "PP2105000",
-        "description": "FILTER 10 MIC ELEMENT RETURN ABS",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "PLMXS1022C:00002",
-        "catalog": "PLMXS1022C",
-        "position": "2",
-        "part_number": "PP2280600",
-        "description": "FILTER ELEMENT OIL OM906",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "PLMXS1022C:00003",
-        "catalog": "PLMXS1022C",
-        "position": "3",
-        "part_number": "PP2280700",
-        "description": "FILTER ELEMENT FUEL PRE OM906",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "PLMXS1022C:00004",
-        "catalog": "PLMXS1022C",
-        "position": "4",
-        "part_number": "PP2280800",
-        "description": "FILTER ELEMENT FUEL MAIN OM906",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "PLMXS1022C:00005",
-        "catalog": "PLMXS1022C",
-        "position": "5",
-        "part_number": "PP2280900",
-        "description": "SEAL GASKET CYL HEAD COVER",
-        "qty": "1",
-        "type": "1",
         "level": ""
       }
     ]
@@ -11570,136 +11510,6 @@
         "qty": "1",
         "type": "1",
         "level": ""
-      },
-      {
-        "id": "T136472:00000",
-        "catalog": "T136472",
-        "position": "2",
-        "part_number": "T136472",
-        "description": "SEALS KIT FOR SW35/SW45 TF WINCH",
-        "qty": "1",
-        "type": "",
-        "level": ""
-      },
-      {
-        "id": "T136472:00001",
-        "catalog": "T136472",
-        "position": "1",
-        "part_number": "T143601",
-        "description": "SEAL RING 80X100X7/8 BABSL",
-        "qty": "2",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00002",
-        "catalog": "T136472",
-        "position": "2",
-        "part_number": "T143607",
-        "description": "SOFT COPPER WASHER 1/2\" 21X27X2",
-        "qty": "3",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00003",
-        "catalog": "T136472",
-        "position": "3",
-        "part_number": "T143614",
-        "description": "O-RING 2-270 NBR 70SH",
-        "qty": "2",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00004",
-        "catalog": "T136472",
-        "position": "4",
-        "part_number": "T143648",
-        "description": "O-RING 2-163 N 674-70 (PARKER)",
-        "qty": "3",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00005",
-        "catalog": "T136472",
-        "position": "5",
-        "part_number": "T143649",
-        "description": "O-RING 2-010",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00006",
-        "catalog": "T136472",
-        "position": "6",
-        "part_number": "T143651",
-        "description": "O-RING 2-158",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00007",
-        "catalog": "T136472",
-        "position": "7",
-        "part_number": "T143652",
-        "description": "ANTIEXTRUSION FLUORTEN T-2306/A",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00008",
-        "catalog": "T136472",
-        "position": "8",
-        "part_number": "T143662",
-        "description": "O-RING 2-159 N 674-70 (PARKER)",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00009",
-        "catalog": "T136472",
-        "position": "9",
-        "part_number": "T143663",
-        "description": "ANTIEXTRISION RING FLUORTEN T-2307/A",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00010",
-        "catalog": "T136472",
-        "position": "10",
-        "part_number": "T143665",
-        "description": "SEAL RING 45X58X7 BASL VITON",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00011",
-        "catalog": "T136472",
-        "position": "11",
-        "part_number": "T143678",
-        "description": "RUBBER WASHER 1/4\"G",
-        "qty": "3",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "T136472:00012",
-        "catalog": "T136472",
-        "position": "12",
-        "part_number": "T143679",
-        "description": "O-RING 2-214",
-        "qty": "1",
-        "type": "1",
-        "level": ""
       }
     ]
   },
@@ -12448,56 +12258,6 @@
         "part_number": "PL16A3067A",
         "description": "SHEAVE DIVERTER SUB ASSEMBLY",
         "qty": "",
-        "type": "",
-        "level": ""
-      },
-      {
-        "id": "PL16A3067A:00001",
-        "catalog": "PL16A3067A",
-        "position": "1",
-        "part_number": "16M2009E",
-        "description": "SHEAVE DIVERTER WINCH DRUM (USE PL16A3067)",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "PL16A3067A:00002",
-        "catalog": "PL16A3067A",
-        "position": "2",
-        "part_number": "M0616A",
-        "description": "BUSH BRONZE SHEAVE",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "PL16A3067A:00003",
-        "catalog": "PL16A3067A",
-        "position": "3",
-        "part_number": "PP0304000",
-        "description": "CIRCLIP 95MM BORE INTERNAL",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "PL16A3067A:00004",
-        "catalog": "PL16A3067A",
-        "position": "4",
-        "part_number": "PP0603300",
-        "description": "NIPPLE 1/8\" BSP GREASE STD",
-        "qty": "1",
-        "type": "1",
-        "level": ""
-      },
-      {
-        "id": "PL16A3067A:00000",
-        "catalog": "PL16A3067A",
-        "position": "60",
-        "part_number": "PL16A3067A",
-        "description": "SHEAVE DIVERTER SUB ASSEMBLY",
-        "qty": "1",
         "type": "",
         "level": ""
       },
