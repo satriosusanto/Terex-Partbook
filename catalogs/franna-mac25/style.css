@@ -110,3 +110,28 @@ body.catalog-ui.ui-mac25 #results .part-row:hover {
     flex: 0 1 auto;
   }
 }
+
+
+/* MAC25 mobile: fit diagram to screen width, not to the shorter viewport height. */
+@media (max-width: 700px) {
+  html, body.catalog-ui.ui-mac25 { width:100%; max-width:100%; overflow-x:hidden; }
+  body.catalog-ui.ui-mac25 > header { gap:6px; padding:7px 8px; min-height:48px; }
+  body.catalog-ui.ui-mac25 > header b { max-width:92px; overflow:hidden; text-overflow:ellipsis; font-size:11px; }
+  body.catalog-ui.ui-mac25 > header #search { min-width:0; width:100%; padding:8px 6px; font-size:12px; }
+  body.catalog-ui.ui-mac25 > main { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:minmax(0,1fr); width:100%; height:calc(100dvh - 48px); min-height:0; }
+  body.catalog-ui.ui-mac25 > main > aside.catalog-sidebar { display:none!important; }
+  body.catalog-ui.ui-mac25 > main > section { display:flex; flex-direction:column; width:100%; min-width:0; min-height:0; overflow:hidden; }
+  body.catalog-ui.ui-mac25 #crumb { flex:0 0 auto; padding:7px 9px; font-size:12px; }
+  body.catalog-ui.ui-mac25 .toolbar { flex:0 0 38px; height:38px; padding:4px 7px; }
+  body.catalog-ui.ui-mac25 #viewer { flex:0 0 36dvh; width:100%; height:36dvh!important; min-height:160px!important; max-height:300px!important; overflow:auto!important; overscroll-behavior:contain; }
+  body.catalog-ui.ui-mac25 #diagramStage { margin:0 auto; }
+  body.catalog-ui.ui-mac25 #diagramContent { transform-origin:top left; }
+  body.catalog-ui.ui-mac25 #canvas { max-width:none!important; max-height:none!important; }
+  body.catalog-ui.ui-mac25 #results { flex:1 1 auto!important; min-height:150px!important; max-height:none!important; width:100%; overflow:auto!important; -webkit-overflow-scrolling:touch; }
+  body.catalog-ui.ui-mac25 #results .row { grid-template-columns:38px minmax(80px,.9fr) minmax(90px,1.3fr) 28px; gap:4px; padding:7px 5px; font-size:10px; }
+  body.catalog-ui.ui-mac25 #results .table-head>div { font-size:10px; }
+}
+@media (max-width: 380px) {
+  body.catalog-ui.ui-mac25 #viewer { flex-basis:33dvh; height:33dvh!important; min-height:145px!important; }
+  body.catalog-ui.ui-mac25 #results .row { grid-template-columns:32px minmax(72px,.9fr) minmax(80px,1.2fr) 25px; gap:3px; padding:6px 4px; font-size:9px; }
+}
