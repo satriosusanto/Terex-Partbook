@@ -27,15 +27,15 @@
   body.catalog-ui.ui-mac25 #viewer {
     display: block !important;
     position: relative !important;
-    flex: 0 0 38dvh !important;
+    flex: 0 0 48dvh !important;
     width: 100% !important;
-    height: 38dvh !important;
-    min-height: 160px !important;
-    max-height: 320px !important;
+    height: 48dvh !important;
+    min-height: 220px !important;
+    max-height: 420px !important;
     padding: 0 !important;
     overflow: auto !important;
   }
-  body.catalog-ui.ui-mac25 #diagramStage { position: relative !important; display: block !important; flex: none !important; margin: 0 auto !important; }
+  body.catalog-ui.ui-mac25 #diagramStage { position: relative !important; display: block !important; flex: none !important; margin: 0 auto !important; max-width: none !important; }
   body.catalog-ui.ui-mac25 #diagramContent { position: absolute !important; left: 0 !important; top: 0 !important; transform-origin: top left !important; }
   body.catalog-ui.ui-mac25 #canvas { position: absolute !important; left: 0 !important; top: 0 !important; display: block !important; margin: 0 !important; max-width: none !important; max-height: none !important; }
   body.catalog-ui.ui-mac25 #hotspots { position: absolute !important; left: 0 !important; top: 0 !important; margin: 0 !important; }
@@ -57,6 +57,6 @@
   body.catalog-ui.ui-mac25 #results .table-head > div { font-size: 9px !important; }
 }
 @media (max-width: 380px) {
-  body.catalog-ui.ui-mac25 #viewer { flex-basis: 34dvh !important; height: 34dvh !important; }
+  body.catalog-ui.ui-mac25 #viewer { flex-basis: 42dvh !important; height: 42dvh !important; }
   body.catalog-ui.ui-mac25 #results .row { grid-template-columns: 30px minmax(62px,.9fr) minmax(72px,1.2fr) 22px !important; gap: 2px !important; font-size: 8.5px !important; }
 }
