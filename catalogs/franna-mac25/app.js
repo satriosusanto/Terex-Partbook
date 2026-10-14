@@ -26,7 +26,7 @@ function renderCats(){
 function catRow(c,level=1,label=''){const title=label||c.title||c.id;return `<div class="tree-row tree-node ${active===c.id?'active':''}" data-catalog="${esc(c.id)}" style="--tree-level:${level}"><span class="tree-spacer"></span><span class="tree-label">${esc(title)}</span></div>`}
 function partDescription(p){const description=String(p?.description??'').trim();if(description)return description;const partNumber=String(p?.part_number??'').trim();if(!partNumber)return '';const knownName=String(MAC25_ASSEMBLY_NAMES[partNumber]||'').trim();if(knownName)return knownName;const catalogTitle=String(byCatalogTitle.get(partNumber)??'').trim();if(catalogTitle&&catalogTitle!==partNumber)return catalogTitle;const samePart=parts.find(x=>String(x.part_number??'').trim()===partNumber&&String(x.description??'').trim()&&String(x.description??'').trim()!==partNumber);if(samePart)return String(samePart.description).trim();const sameHotspot=hotspots.find(x=>String(x.part_number??'').trim()===partNumber&&String(x.description??'').trim());if(sameHotspot)return String(sameHotspot.description).trim();return ''}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-async function openCat(id){const token=++loadToken;active=id;if(location.hash!=='#'+encodeURIComponent(id))history.replaceState(null,'','#'+encodeURIComponent(id));renderCats();let im=byImg[id];$('#crumb').textContent=(id+' — '+(catalogs.find(c=>c.id===id)?.title||''));let cv=$('#canvas'),ctx=cv.getContext('2d');$('#empty').style.display='none';$('#hotspots').innerHTML='';if(!im){cv.width=800;cv.height=500;scale=1;$('#diagramStage').style.width='800px';$('#diagramStage').style.height='500px';$('#diagramContent').style.width='800px';$('#diagramContent').style.height='500px';$('#diagramContent').style.transform='none';cv.style.width='800px';cv.style.height='500px';ctx.clearRect(0,0,800,500);ctx.fillStyle='#888';ctx.fillText('No diagram for this assembly',30,40);renderResults(byCat[id]||[]);return}try{let resp=await fetch('images-web/'+encodeURIComponent(im.webImage));if(token!==loadToken)return;if(!resp.ok)throw Error(`Diagram ${im.webImage} ${resp.status}`);let image=new Image();image.src=URL.createObjectURL(await resp.blob());try{await image.decode();if(token!==loadToken)return;const sourceWidth=image.naturalWidth||Number(im.width)||800;const sourceHeight=image.naturalHeight||Number(im.height)||500;const maxCanvasDimension=6000;const renderScale=Math.min(1,maxCanvasDimension/Math.max(sourceWidth,sourceHeight));cv.width=Math.max(1,Math.round(sourceWidth*renderScale));cv.height=Math.max(1,Math.round(sourceHeight*renderScale));$('#diagramStage').style.width=cv.width+'px';$('#diagramStage').style.height=cv.height+'px';cv.style.width=cv.width+'px';cv.style.height=cv.height+'px';ctx.drawImage(image,0,0,cv.width,cv.height);$('#hotspots').style.width=cv.width+'px';$('#hotspots').style.height=cv.height+'px';scale=1;fit();scheduleFit();setTimeout(()=>{if(token===loadToken)fit()},320);drawHotspots(id,im.image,Number(im.width)||sourceWidth,Number(im.height)||sourceHeight)}finally{URL.revokeObjectURL(image.src)}}catch(e){if(token!==loadToken)return;console.error(e);cv.width=800;cv.height=500;scale=1;$('#diagramStage').style.width='800px';$('#diagramStage').style.height='500px';$('#diagramContent').style.width='800px';$('#diagramContent').style.height='500px';$('#diagramContent').style.transform='none';cv.style.width='800px';cv.style.height='500px';ctx.clearRect(0,0,800,500);ctx.fillStyle='#f66';ctx.fillText('Diagram could not be loaded: '+e,20,30)}renderResults(byCat[id]||[])}
+async function openCat(id){const token=++loadToken;active=id;if(location.hash!=='#'+encodeURIComponent(id))history.replaceState(null,'','#'+encodeURIComponent(id));renderCats();let im=byImg[id];$('#crumb').textContent=(id+' — '+(catalogs.find(c=>c.id===id)?.title||''));let cv=$('#canvas'),ctx=cv.getContext('2d');$('#empty').style.display='none';$('#hotspots').innerHTML='';if(!im){cv.width=800;cv.height=500;scale=1;$('#diagramStage').style.width='800px';$('#diagramStage').style.height='500px';$('#diagramContent').style.width='800px';$('#diagramContent').style.height='500px';$('#diagramContent').style.transform='none';cv.style.width='800px';cv.style.height='500px';ctx.clearRect(0,0,800,500);ctx.fillStyle='#888';ctx.fillText('No diagram for this assembly',30,40);renderResults(byCat[id]||[]);return}try{let resp=await fetch('images-web/'+encodeURIComponent(im.webImage));if(token!==loadToken)return;if(!resp.ok)throw Error(`Diagram ${im.webImage} ${resp.status}`);let image=new Image();image.src=URL.createObjectURL(await resp.blob());try{await image.decode();if(token!==loadToken)return;const sourceWidth=image.naturalWidth||Number(im.width)||800;const sourceHeight=image.naturalHeight||Number(im.height)||500;const maxCanvasDimension=6000;const renderScale=Math.min(1,maxCanvasDimension/Math.max(sourceWidth,sourceHeight));cv.width=Math.max(1,Math.round(sourceWidth*renderScale));cv.height=Math.max(1,Math.round(sourceHeight*renderScale));$('#diagramStage').style.width=cv.width+'px';$('#diagramStage').style.height=cv.height+'px';cv.style.width=cv.width+'px';cv.style.height=cv.height+'px';ctx.drawImage(image,0,0,cv.width,cv.height);$('#hotspots').style.width=cv.width+'px';$('#hotspots').style.height=cv.height+'px';scale=1;fit();scheduleFit();[180,420,800].forEach(delay=>setTimeout(()=>{if(token===loadToken)fit()},delay));drawHotspots(id,im.image,Number(im.width)||sourceWidth,Number(im.height)||sourceHeight)}finally{URL.revokeObjectURL(image.src)}}catch(e){if(token!==loadToken)return;console.error(e);cv.width=800;cv.height=500;scale=1;$('#diagramStage').style.width='800px';$('#diagramStage').style.height='500px';$('#diagramContent').style.width='800px';$('#diagramContent').style.height='500px';$('#diagramContent').style.transform='none';cv.style.width='800px';cv.style.height='500px';ctx.clearRect(0,0,800,500);ctx.fillStyle='#f66';ctx.fillText('Diagram could not be loaded: '+e,20,30)}renderResults(byCat[id]||[])}
 function findHotspotPart(x){
  const catalog=String(x.catalog??'');
  const partNumber=String(x.part_number??'').trim();
@@ -121,25 +121,36 @@ function fit(){
  applyScale();
  v.scrollLeft=0;v.scrollTop=0;
 }
-let fitFrame=0,fitTimer=0;
+let fitFrame=0,fitTimer=0,fitLateTimer=0;
 function scheduleFit(){
  cancelAnimationFrame(fitFrame);
  fitFrame=requestAnimationFrame(()=>requestAnimationFrame(()=>fit()));
- // Android can settle flex/grid dimensions after the first animation frame.
+ // Mobile browsers may update the drawer and flex layout after image decode.
  clearTimeout(fitTimer);
- fitTimer=setTimeout(()=>fit(),220);
+ clearTimeout(fitLateTimer);
+ fitTimer=setTimeout(()=>fit(),260);
+ fitLateTimer=setTimeout(()=>fit(),750);
 }
 if('ResizeObserver'in window){
- const viewer=$('#viewer');
- if(viewer)new ResizeObserver(scheduleFit).observe(viewer);
- const section=document.querySelector('main > section');
- if(section)new ResizeObserver(scheduleFit).observe(section);
+ const fitObserver=new ResizeObserver(scheduleFit);
+ ['#viewer','main','main > section','main > aside','.catalog-sidebar'].forEach(selector=>{
+  const element=document.querySelector(selector);
+  if(element)fitObserver.observe(element);
+ });
 }
-window.addEventListener('orientationchange',()=>setTimeout(scheduleFit,180));
+window.addEventListener('orientationchange',()=>setTimeout(scheduleFit,220));
 window.addEventListener('pageshow',scheduleFit);
+window.addEventListener('resize',scheduleFit,{passive:true});
 if(window.visualViewport)window.visualViewport.addEventListener('resize',scheduleFit);
-// The shared mobile catalog drawer changes body classes and can affect layout timing.
-if('MutationObserver'in window)new MutationObserver(scheduleFit).observe(document.body,{attributes:true,attributeFilter:['class']});
+// Observe the drawer and layout containers, not only body classes: shared UI code
+// can change inline styles or class names on the sidebar without changing body.
+if('MutationObserver'in window){
+ const layoutObserver=new MutationObserver(scheduleFit);
+ ['body','main','main > aside','main > section'].forEach(selector=>{
+  const element=document.querySelector(selector);
+  if(element)layoutObserver.observe(element,{attributes:true,attributeFilter:['class','style','hidden']});
+ });
+}
 
 function installPinchZoom(){const viewport=$('#viewer');if(!viewport)return;let startDistance=0,startScale=1,worldX=0,worldY=0,midX=0,midY=0;const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);const mid=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});viewport.addEventListener('touchstart',e=>{if(e.touches.length!==2)return;e.preventDefault();const r=viewport.getBoundingClientRect(),p=mid(e.touches);startDistance=dist(e.touches);startScale=scale;midX=p.x-r.left;midY=p.y-r.top;worldX=(viewport.scrollLeft+midX)/scale;worldY=(viewport.scrollTop+midY)/scale},{passive:false});viewport.addEventListener('touchmove',e=>{if(e.touches.length!==2||!startDistance)return;e.preventDefault();const next=Math.max(.05,Math.min(3,startScale*dist(e.touches)/startDistance));const r=viewport.getBoundingClientRect(),p=mid(e.touches);midX=p.x-r.left;midY=p.y-r.top;scale=next;applyScale();viewport.scrollLeft=Math.max(0,worldX*scale-midX);viewport.scrollTop=Math.max(0,worldY*scale-midY)},{passive:false});const end=()=>{startDistance=0};viewport.addEventListener('touchend',end,{passive:true});viewport.addEventListener('touchcancel',end,{passive:true});}
 $('#catfilter').oninput=renderCats;$('#search').oninput=()=>{const token=++searchToken;let q=$('#search').value.trim().toLowerCase();let list=q?parts.filter(p=>(p.part_number+' '+p.description+' '+p.position+' '+p.catalog).toLowerCase().includes(q)).slice(0,500):[];if(!list.length){renderResults([]);return}const target=list[0].catalog;if(target!==active){openCat(target).then(()=>{if(token===searchToken)renderResults(list)})}else renderResults(list)};$('#fit').onclick=fit;window.addEventListener('resize',()=>{if(active&&$('#canvas')?.width&&$('#canvas')?.height)fit()});$('#zin').onclick=()=>zoom(1.2);$('#zout').onclick=()=>zoom(.8);function zoom(f){scale=Math.max(.05,Math.min(3,scale*f));applyScale()}$('#theme').onclick=()=>document.body.classList.toggle('dark');
