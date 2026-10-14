@@ -60,3 +60,53 @@ body.dark .tree-root{background:#202b39;border-color:var(--line);color:#d9e8fb}
  #results .row{grid-template-columns:46px minmax(90px,.85fr) minmax(115px,1.4fr) 38px;gap:6px;padding:8px 7px;font-size:12px}
  #results .table-head{font-size:11px;padding-top:10px;padding-bottom:10px}
 }
+
+
+/* MAC25 parts list visibility recovery: keep BOM rows readable above global catalog styles. */
+body.catalog-ui.ui-mac25 #results {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: var(--text, #17202a) !important;
+  background: var(--panel, #fff) !important;
+  min-height: 150px;
+  flex: 0 1 210px;
+  overflow: auto !important;
+  font-size: 12px;
+  line-height: 1.4;
+}
+body.catalog-ui.ui-mac25 #results .row {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: var(--text, #17202a) !important;
+  background: var(--panel, #fff);
+  min-height: 32px;
+  align-items: start;
+}
+body.catalog-ui.ui-mac25 #results .row > div {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: inherit !important;
+  min-width: 0;
+}
+body.catalog-ui.ui-mac25 #results .table-head {
+  color: var(--muted, #687382) !important;
+  background: var(--panel, #fff) !important;
+  font-weight: 700;
+}
+body.catalog-ui.ui-mac25 #results .part-row {
+  border-bottom: 1px solid var(--line, #e1e6eb);
+  cursor: pointer;
+}
+body.catalog-ui.ui-mac25 #results .part-row:hover {
+  background: #f0f5ff !important;
+}
+@media (max-width: 800px) {
+  body.catalog-ui.ui-mac25 #results {
+    min-height: 140px;
+    max-height: 38dvh;
+    flex: 0 1 auto;
+  }
+}
