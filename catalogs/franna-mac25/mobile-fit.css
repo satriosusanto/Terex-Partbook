@@ -1,0 +1,21 @@
+/* Loaded after catalog-ui.css so MAC25-specific mobile rules win the cascade. */
+@media (max-width: 700px) {
+  body.catalog-ui.ui-mac25 { overflow-x:hidden!important; }
+  body.catalog-ui.ui-mac25 > main { display:block!important; height:calc(100dvh - 48px)!important; min-height:0!important; }
+  body.catalog-ui.ui-mac25 > main > aside.catalog-sidebar { display:none!important; }
+  body.catalog-ui.ui-mac25 > main > section { display:flex!important; flex-direction:column!important; height:100%!important; min-height:0!important; padding:4px!important; overflow:hidden!important; }
+  body.catalog-ui.ui-mac25 #crumb { flex:0 0 auto!important; min-height:32px!important; padding:6px 8px!important; font-size:11px!important; }
+  body.catalog-ui.ui-mac25 .toolbar { flex:0 0 38px!important; height:38px!important; min-height:38px!important; padding:3px 6px!important; }
+  body.catalog-ui.ui-mac25 #viewer { display:block!important; position:relative!important; flex:0 0 36dvh!important; width:100%!important; height:36dvh!important; min-height:150px!important; max-height:300px!important; padding:0!important; overflow:auto!important; }
+  body.catalog-ui.ui-mac25 #diagramStage { position:relative!important; display:block!important; flex:none!important; margin:0 auto!important; overflow:visible!important; }
+  body.catalog-ui.ui-mac25 #diagramContent { position:absolute!important; left:0!important; top:0!important; margin:0!important; transform-origin:top left!important; }
+  body.catalog-ui.ui-mac25 #canvas { position:absolute!important; left:0!important; top:0!important; display:block!important; margin:0!important; max-width:none!important; max-height:none!important; }
+  body.catalog-ui.ui-mac25 #hotspots { position:absolute!important; left:0!important; top:0!important; margin:0!important; }
+  body.catalog-ui.ui-mac25 #results { flex:1 1 0!important; min-height:130px!important; max-height:none!important; width:100%!important; overflow:auto!important; -webkit-overflow-scrolling:touch; }
+  body.catalog-ui.ui-mac25 #results .row { grid-template-columns:34px minmax(68px,.9fr) minmax(78px,1.2fr) 24px!important; gap:3px!important; padding:6px 4px!important; font-size:9px!important; }
+  body.catalog-ui.ui-mac25 #results .table-head>div { font-size:9px!important; }
+}
+@media (max-width: 380px) {
+  body.catalog-ui.ui-mac25 #viewer { flex-basis:34dvh!important; height:34dvh!important; }
+  body.catalog-ui.ui-mac25 #results .row { grid-template-columns:30px minmax(62px,.9fr) minmax(72px,1.2fr) 22px!important; gap:2px!important; font-size:8.5px!important; }
+}
