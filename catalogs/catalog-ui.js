@@ -901,12 +901,14 @@
         page.classList.contains("ui-model-terex-ac80-2") ||
         page.classList.contains("ui-at15")) return;
 
-    const viewport = document.querySelector(
-      "#diagramStage, #stage, #canvasWrap, #viewer"
-    );
-    if (!viewport) return;
-
     const diagramSelector = "#diagram, #diagramCanvas, #canvas";
+    // Choose the actual scroll viewport deliberately instead of relying on
+    // document order (which can select an inner canvas wrapper on Android).
+    const viewport = ["#viewer", "#stage", "#diagramStage", "#canvasWrap"]
+      .map(selector => document.querySelector(selector))
+      .find(element => element && (element.matches("#viewer, #stage, #diagramStage, #canvasWrap")))
+      || document.querySelector("#diagramStage, #stage, #canvasWrap, #viewer");
+    if (!viewport) return;
     const hasDiagram = () => {
       const diagram = viewport.querySelector(diagramSelector) || document.querySelector(diagramSelector);
       if (!diagram) return false;
@@ -940,6 +942,9 @@
         lastY: event.clientY,
         moved: false
       };
+      // Capture the finger immediately so dragging remains continuous when
+      // the pointer crosses the canvas/hotspot child elements.
+      try { viewport.setPointerCapture(event.pointerId); } catch (_) {}
     });
 
     viewport.addEventListener("pointermove", event => {
