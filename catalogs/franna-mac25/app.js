@@ -74,8 +74,24 @@ function renderResults(list){
  }));
 }
 function applyScale(){let cv=$('#canvas'),stage=$('#diagramStage'),content=$('#diagramContent'),layer=$('#hotspots');if(!cv||!stage||!content||!layer||!cv.width||!cv.height)return;stage.style.width=`${cv.width*scale}px`;stage.style.height=`${cv.height*scale}px`;content.style.width=`${cv.width}px`;content.style.height=`${cv.height}px`;content.style.transform=`scale(${scale})`;content.style.transformOrigin='top left';cv.style.width=`${cv.width}px`;cv.style.height=`${cv.height}px`;layer.style.width=`${cv.width}px`;layer.style.height=`${cv.height}px`;layer.style.transform='none';}
-function fit(){let v=$('#viewer'),cv=$('#canvas');if(!v||!cv.width||!cv.height)return;const width=v.clientWidth;if(width<120){requestAnimationFrame(()=>fit());return;}const usableWidth=Math.max(80,width-16);const sx=usableWidth/cv.width;scale=Math.max(.03,Math.min(sx,1));applyScale();v.scrollLeft=0;v.scrollTop=0;}
-if('ResizeObserver'in window){const viewer=$('#viewer');if(viewer){let fitFrame=0;new ResizeObserver(()=>{cancelAnimationFrame(fitFrame);fitFrame=requestAnimationFrame(()=>fit())}).observe(viewer);}}
+function fit(){
+ const v=$('#viewer'),cv=$('#canvas');
+ if(!v||!cv||!cv.width||!cv.height)return;
+ const width=v.getBoundingClientRect().width;
+ // A hidden/transitioning viewer can briefly report zero width on mobile.
+ // Retry a bounded number of frames rather than leaving the diagram at scale 1.
+ if(width<120){let attempts=0;const retry=()=>{if(attempts++<12&&v.getBoundingClientRect().width<120){requestAnimationFrame(retry);return;}if(v.getBoundingClientRect().width>=120)fit();};requestAnimationFrame(retry);return;}
+ const usableWidth=Math.max(80,width-16);
+ scale=Math.max(.01,Math.min(1,usableWidth/cv.width));
+ applyScale();
+ v.scrollLeft=0;v.scrollTop=0;
+}
+let fitFrame=0;
+function scheduleFit(){cancelAnimationFrame(fitFrame);fitFrame=requestAnimationFrame(()=>fit());}
+if('ResizeObserver'in window){const viewer=$('#viewer');if(viewer)new ResizeObserver(scheduleFit).observe(viewer);}
+window.addEventListener('orientationchange',()=>setTimeout(scheduleFit,120));
+window.addEventListener('pageshow',scheduleFit);
+if(window.visualViewport)window.visualViewport.addEventListener('resize',scheduleFit);
 
 function installPinchZoom(){const viewport=$('#viewer');if(!viewport)return;let startDistance=0,startScale=1,worldX=0,worldY=0,midX=0,midY=0;const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);const mid=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});viewport.addEventListener('touchstart',e=>{if(e.touches.length!==2)return;e.preventDefault();const r=viewport.getBoundingClientRect(),p=mid(e.touches);startDistance=dist(e.touches);startScale=scale;midX=p.x-r.left;midY=p.y-r.top;worldX=(viewport.scrollLeft+midX)/scale;worldY=(viewport.scrollTop+midY)/scale},{passive:false});viewport.addEventListener('touchmove',e=>{if(e.touches.length!==2||!startDistance)return;e.preventDefault();const next=Math.max(.05,Math.min(3,startScale*dist(e.touches)/startDistance));const r=viewport.getBoundingClientRect(),p=mid(e.touches);midX=p.x-r.left;midY=p.y-r.top;scale=next;applyScale();viewport.scrollLeft=Math.max(0,worldX*scale-midX);viewport.scrollTop=Math.max(0,worldY*scale-midY)},{passive:false});const end=()=>{startDistance=0};viewport.addEventListener('touchend',end,{passive:true});viewport.addEventListener('touchcancel',end,{passive:true});}
 $('#catfilter').oninput=renderCats;$('#search').oninput=()=>{const token=++searchToken;let q=$('#search').value.trim().toLowerCase();let list=q?parts.filter(p=>(p.part_number+' '+p.description+' '+p.position+' '+p.catalog).toLowerCase().includes(q)).slice(0,500):[];if(!list.length){renderResults([]);return}const target=list[0].catalog;if(target!==active){openCat(target).then(()=>{if(token===searchToken)renderResults(list)})}else renderResults(list)};$('#fit').onclick=fit;window.addEventListener('resize',()=>{if(active&&$('#canvas')?.width&&$('#canvas')?.height)fit()});$('#zin').onclick=()=>zoom(1.2);$('#zout').onclick=()=>zoom(.8);function zoom(f){scale=Math.max(.05,Math.min(3,scale*f));applyScale()}$('#theme').onclick=()=>document.body.classList.toggle('dark');
