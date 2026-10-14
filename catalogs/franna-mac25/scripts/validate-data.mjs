@@ -115,9 +115,23 @@ const blankPartNumbers = new Set(blankPartRows.map(row => key(row.part_number)).
 
 if (blankPartRows.length) {
   warnings.push(blankPartRows.length + ' part rows have blank descriptions (' + blankPartNumbers.size + ' unique nonblank part numbers; includes placeholder rows if present).');
+  const unresolvedNumbers = [...blankPartNumbers].filter(number => number !== '0').sort();
+  if (unresolvedNumbers.length) warnings.push('Part numbers needing source verification: ' + unresolvedNumbers.join(', '));
 }
 if (blankHotspots.length) warnings.push(blankHotspots.length + ' hotspot rows have blank descriptions.');
-if (unlinkedHotspots.length) warnings.push(unlinkedHotspots.length + ' hotspots have neither part ID nor part number; validate against the OEM callout diagram.');
+if (unlinkedHotspots.length) {
+  warnings.push(unlinkedHotspots.length + ' hotspots have neither part ID nor part number; validate against the OEM callout diagram.');
+  const byDiagram = new Map();
+  for (const row of unlinkedHotspots) {
+    const diagram = key(row.image) + ' [' + key(row.catalog) + ']';
+    if (!byDiagram.has(diagram)) byDiagram.set(diagram, new Set());
+    byDiagram.get(diagram).add(key(row.position));
+  }
+  warnings.push('Unlinked callouts by diagram: ' + [...byDiagram.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([diagram, positions]) => diagram + ': ' + [...positions].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).join('/'))
+    .join('; '));
+}
 
 console.log('Franna MAC25 data validation');
 console.log('Parts:', parts.length);
