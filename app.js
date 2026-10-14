@@ -4,7 +4,38 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&
 const norm=s=>String(s??'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'');
 const debounce=(fn,ms)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}};
 const catalogGroups=[{name:'BOOM',suffix:'_F'},{name:'UPPERSTRUCTURE',suffix:'_T'},{name:'CARRIER',suffix:'_P'},{name:'OPTIONS',suffix:'_O'}];
-const catalogFamilyLabels={'01F':'JIB & BOOM COMPONENTS'};
+const catalogFamilyLabels={
+ '01F':'JIB & BOOM COMPONENTS',
+ '10F':'BOOM EXTENSIONS & MOUNTING',
+ '80F':'ADHESIVES',
+ '01T':'UPPERSTRUCTURE EQUIPMENT',
+ '05T':'CABIN & CONTROLS',
+ '07T':'HEATING & AIR CONDITIONING',
+ '15T':'WINCH SYSTEM',
+ '20T':'SLEWING MECHANISM',
+ '45T':'STEERING SYSTEM',
+ '58T':'HYDRAULIC CIRCUITS & PIPING',
+ '80T':'ADHESIVES',
+ '01P':'CHASSIS EQUIPMENT',
+ '05P':'CABIN',
+ '07P':'HEATING & AIR CONDITIONING',
+ '10P':'ENGINE & ENGINE ACCESSORIES',
+ '15P':'GEARBOX & TRANSMISSION',
+ '30P':'AXLES',
+ '32P':'ELECTRODYNAMIC BRAKE',
+ '35P':'WHEELS',
+ '40P':'UNIVERSAL JOINT & TRANSMISSION SHAFT',
+ '45P':'STEERING SYSTEM',
+ '50P':'OUTRIGGERS & STABILIZERS',
+ '55P':'SUSPENSION',
+ '60P':'OIL RESERVOIR',
+ '63P':'REVOLVING EQUIPMENT',
+ '65P':'COOLING SYSTEM',
+ '70P':'BRAKING SYSTEM',
+ '80P':'ADHESIVES',
+ '81P':'TOOL KIT',
+ '90P':'OPTIONS'
+};
 const catalogSubgroupLabels={'01F|0000':'JIB + PULLEY BLOCK','01F|0030':'ELECTRICAL EQUIPMENT','01F|0200':'JIB SECTIONS','01F|0220':'ROOSTER SHEAVE OPTION','01F|0300':'LUFFING CYLINDER','01F|0400':'TELESCOPIC CYLINDERS & ACCESSORIES','01F|0500':'CABLE WINDER & ROLLERS','01F|0800':'PULLEY BLOCK'};
 function catalogGroup(c,rootId){
  const variant=catalogGroups.find(g=>rootId&&c.id===rootId+g.suffix);
