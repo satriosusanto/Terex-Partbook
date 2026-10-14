@@ -268,13 +268,13 @@ function renderHotspots(){
    layer.appendChild(d);
  });
 }
-function renderParts(list){
+function partDescription(p){const own=String(p?.description??'').trim();if(own)return own;const no=String(p?.partNumber??'').trim();if(!no)return '';const title=getCatalogTitle(catalogs.find(c=>String(c.id)===no));if(title&&title!==no)return title;const match=parts.find(x=>String(x.partNumber??'').trim()===no&&String(x.description??'').trim()&&String(x.description).trim()!==no);return String(match?.description??'').trim()}function renderParts(list){
  const body=$("parts"); body.innerHTML="";
  $("resultTitle").textContent=current?current.title:"Parts";
  $("resultCount").textContent=list.length+" records";
  list.forEach(p=>{
    const tr=document.createElement("tr");
-   tr.innerHTML=`<td>${esc(p.position)}</td><td><b>${esc(p.partNumber)}</b></td><td>${esc(p.description)}</td><td>${esc(p.qty)}</td><td>${esc(p.catalog)}</td>`;
+   tr.innerHTML=`<td>${esc(p.position)}</td><td><b>${esc(p.partNumber)}</b></td><td>${esc(partDescription(p))}</td><td>${esc(p.qty)}</td><td>${esc(p.catalog)}</td>`;
    tr.onclick=()=>showPart(p.catalog,p.position);
    body.appendChild(tr);
  });
@@ -285,7 +285,7 @@ function showPart(cat,pos,hot){
  if(hot){document.querySelectorAll(".hot").forEach(x=>x.classList.remove("sel"));hot.classList.add("sel")}
  $("mTitle").textContent=p.partNumber;
  $("mBody").innerHTML=[
- ["Description",p.description],["Position",p.position],["Quantity",p.qty],["Quantity Type",p.qtyType],
+ ["Description",partDescription(p)],["Position",p.position],["Quantity",p.qty],["Quantity Type",p.qtyType],
  ["Part Version",p.partVersion],["Catalog",p.catalog],["Catalog Version",p.catalogVersion],["Material Text No.",p.textNumber]
  ].map(x=>`<div class="kv"><b>${esc(x[0])}</b><span>${esc(x[1]||"—")}</span></div>`).join("");
  $("modal").classList.remove("hidden");
@@ -366,7 +366,7 @@ $("search").oninput=e=>{
  const res=parts.filter(p=>[p.partNumber,p.description,p.position,p.catalog].some(v=>(v||"").toLowerCase().includes(q))).slice(0,500);
  $("resultTitle").textContent="Search results"; $("resultCount").textContent=res.length+" records";
  const body=$("parts");body.innerHTML="";
- res.forEach(p=>{const tr=document.createElement("tr");tr.innerHTML=`<td>${esc(p.position)}</td><td><b>${esc(p.partNumber)}</b></td><td>${esc(p.description)}</td><td>${esc(p.qty)}</td><td>${esc(p.catalog)}</td>`;tr.onclick=()=>{selectCatalog(p.catalog);setTimeout(()=>showPart(p.catalog,p.position),50)};body.appendChild(tr)});
+ res.forEach(p=>{const tr=document.createElement("tr");tr.innerHTML=`<td>${esc(p.position)}</td><td><b>${esc(p.partNumber)}</b></td><td>${esc(partDescription(p))}</td><td>${esc(p.qty)}</td><td>${esc(p.catalog)}</td>`;tr.onclick=()=>{selectCatalog(p.catalog);setTimeout(()=>showPart(p.catalog,p.position),50)};body.appendChild(tr)});
 };
 $("themeBtn").onclick=()=>{dark=!dark;document.body.classList.toggle("dark",dark);$("themeBtn").textContent=dark?"☀":"☾"};
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
