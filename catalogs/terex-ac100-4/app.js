@@ -86,6 +86,10 @@ const $=id=>document.getElementById(id);let D={},cur=null,zoom=1,q="",imageReque
   const candidates=[...options.keys()].filter(id=>id!==child);
   if(candidates.length)parentById.set(child,candidates[0]);
  }
+ // The curated model overview is the single visible tree root. Part rows in
+ // other catalogs may reference it as a part number; never reattach it below
+ // another catalog, or it appears once at the root and again as a child.
+ if(curatedRoot)parentById.delete(curatedRoot);
  // Remove malformed cycles after repairing links from actual catalog part rows.
  for(const start of ids){
   const path=[],seenAt=new Map();let node=start;
