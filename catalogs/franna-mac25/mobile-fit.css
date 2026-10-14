@@ -60,3 +60,16 @@
   body.catalog-ui.ui-mac25 #viewer { flex-basis: 42dvh !important; height: 42dvh !important; }
   body.catalog-ui.ui-mac25 #results .row { grid-template-columns: 30px minmax(62px,.9fr) minmax(72px,1.2fr) 22px !important; gap: 2px !important; font-size: 8.5px !important; }
 }
+
+/* Fit the complete OEM sheet inside the mobile viewer; pinch zoom remains available. */
+@media (max-width: 800px) {
+  body.catalog-ui.ui-mac25 #viewer {
+    overflow: auto !important;
+    overscroll-behavior: contain;
+    scroll-behavior: auto;
+  }
+  body.catalog-ui.ui-mac25 #diagramStage {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
