@@ -27,6 +27,34 @@ function catRow(c,level=1,label=''){const title=label||c.title||c.id;return `<di
 function partDescription(p){const description=String(p?.description??'').trim();if(description)return description;const partNumber=String(p?.part_number??'').trim();if(!partNumber)return '';const knownName=String(MAC25_ASSEMBLY_NAMES[partNumber]||'').trim();if(knownName)return knownName;const catalogTitle=String(byCatalogTitle.get(partNumber)??'').trim();if(catalogTitle&&catalogTitle!==partNumber)return catalogTitle;const samePart=parts.find(x=>String(x.part_number??'').trim()===partNumber&&String(x.description??'').trim()&&String(x.description??'').trim()!==partNumber);if(samePart)return String(samePart.description).trim();const sameHotspot=hotspots.find(x=>String(x.part_number??'').trim()===partNumber&&String(x.description??'').trim());if(sameHotspot)return String(sameHotspot.description).trim();return ''}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 async function openCat(id){const token=++loadToken;active=id;if(location.hash!=='#'+encodeURIComponent(id))history.replaceState(null,'','#'+encodeURIComponent(id));renderCats();let im=byImg[id];$('#crumb').textContent=(id+' — '+(catalogs.find(c=>c.id===id)?.title||''));let cv=$('#canvas'),ctx=cv.getContext('2d');$('#empty').style.display='none';$('#hotspots').innerHTML='';if(!im){cv.width=800;cv.height=500;scale=1;$('#diagramStage').style.width='800px';$('#diagramStage').style.height='500px';$('#diagramContent').style.width='800px';$('#diagramContent').style.height='500px';$('#diagramContent').style.transform='none';cv.style.width='800px';cv.style.height='500px';ctx.clearRect(0,0,800,500);ctx.fillStyle='#888';ctx.fillText('No diagram for this assembly',30,40);renderResults(byCat[id]||[]);return}try{let resp=await fetch('images-web/'+encodeURIComponent(im.webImage));if(token!==loadToken)return;if(!resp.ok)throw Error(`Diagram ${im.webImage} ${resp.status}`);let image=new Image();image.src=URL.createObjectURL(await resp.blob());try{await image.decode();if(token!==loadToken)return;const sourceWidth=image.naturalWidth||Number(im.width)||800;const sourceHeight=image.naturalHeight||Number(im.height)||500;const maxCanvasDimension=6000;const renderScale=Math.min(1,maxCanvasDimension/Math.max(sourceWidth,sourceHeight));cv.width=Math.max(1,Math.round(sourceWidth*renderScale));cv.height=Math.max(1,Math.round(sourceHeight*renderScale));$('#diagramStage').style.width=cv.width+'px';$('#diagramStage').style.height=cv.height+'px';cv.style.width=cv.width+'px';cv.style.height=cv.height+'px';ctx.drawImage(image,0,0,cv.width,cv.height);$('#hotspots').style.width=cv.width+'px';$('#hotspots').style.height=cv.height+'px';scale=1;fit();drawHotspots(id,im.image,Number(im.width)||sourceWidth,Number(im.height)||sourceHeight)}finally{URL.revokeObjectURL(image.src)}}catch(e){if(token!==loadToken)return;console.error(e);cv.width=800;cv.height=500;scale=1;$('#diagramStage').style.width='800px';$('#diagramStage').style.height='500px';$('#diagramContent').style.width='800px';$('#diagramContent').style.height='500px';$('#diagramContent').style.transform='none';cv.style.width='800px';cv.style.height='500px';ctx.clearRect(0,0,800,500);ctx.fillStyle='#f66';ctx.fillText('Diagram could not be loaded: '+e,20,30)}renderResults(byCat[id]||[])}
+function findHotspotPart(x){
+ const catalog=String(x.catalog??'');
+ const partNumber=String(x.part_number??'').trim();
+ const position=String(x.position??'').split('.')[0];
+ const sameRow=(rows)=>{
+  if(rows.length===1)return rows[0];
+  if(rows.length>1){
+   const signatures=new Set(rows.map(y=>JSON.stringify([y.part_number,y.description,y.qty,y.type,y.level])));
+   if(signatures.size===1)return rows[0];
+  }
+  return null;
+ };
+ // Prefer the BOM row identified by catalog + callout position + part number.
+ // IDs in the recovered export are not globally unique for a few legacy rows.
+ const exact=parts.filter(y=>String(y.catalog??'')===catalog
+  &&String(y.position??'').split('.')[0]===position
+  &&(!partNumber||String(y.part_number??'').trim()===partNumber));
+ const resolved=sameRow(exact);
+ if(resolved)return resolved;
+ // Use the ID only as a fallback when it resolves unambiguously.
+ if(x.part_id){
+  const byId=parts.filter(y=>String(y.id)===String(x.part_id)
+   &&String(y.catalog??'')===catalog
+   &&(!partNumber||String(y.part_number??'').trim()===partNumber));
+  return sameRow(byId);
+ }
+ return null;
+}
 function drawHotspots(catalogId,img,w,h){
  const hs=hotspots.filter(x=>String(x.catalog)===String(catalogId)&&x.image===img);
  const layer=$('#hotspots');
@@ -36,7 +64,7 @@ function drawHotspots(catalogId,img,w,h){
   d.style.left=(x.left/w*100)+'%';d.style.top=(x.top/h*100)+'%';d.style.width=((x.right-x.left)/w*100)+'%';d.style.height=((x.bottom-x.top)/h*100)+'%';
   d.title=`Pos ${x.position}${x.part_number?' · '+x.part_number:''}`;
   const activate=()=>{
-   const p=x.part_id?parts.find(y=>String(y.id)===String(x.part_id)&&String(y.catalog)===String(x.catalog)):null;
+   const p=findHotspotPart(x);
    if(p){
     const description=partDescription(p)||String(x.description||'').trim()||'Description not available in source data';
     alert('Position: '+(x.position||'—')+'\\nPart Number: '+(p.part_number||x.part_number||'—')+'\\nDescription: '+description+'\\nQty: '+(p.qty??'—'));
