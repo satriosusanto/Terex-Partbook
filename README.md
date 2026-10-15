@@ -66,4 +66,4 @@ Run from the repository root with Node.js installed:
 node scripts/validate-partbook-data.js
 ```
 
-The report is printed as JSON. Some checks are schema-dependent; review warnings against the original OEM catalogue before changing any part mapping.
+The report is printed as JSON. In addition to identifier/link checks, it reports blank catalogue labels and blank part number, description, position, and quantity fields for manual review. Blank position/quantity values may be valid on assembly/header rows and are warnings, not automatic corrections. Some checks are schema-dependent; review warnings against the original OEM catalogue before changing any part mapping.
