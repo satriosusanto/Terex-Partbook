@@ -321,17 +321,54 @@ function installTouchZoom(){
  const viewport=$("canvasWrap");if(!viewport)return;
  viewport.style.touchAction="none";
  let startDistance=0,startZoom=1,anchorX=0,anchorY=0,pan=null,suppressTap=false,suppressTimer=null;
+ // Use Pointer Events for one-finger dragging: Android dispatches these reliably
+ // even when the diagram image/hotspot is the original event target.
+ const activePointers=new Map();let activePanPointer=null;
+ viewport.addEventListener("pointerdown",e=>{
+  if(e.pointerType!=="touch"||!hasDiagram())return;
+  activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(activePointers.size===1){
+   activePanPointer=e.pointerId;
+   pan={x:e.clientX,y:e.clientY,lastX:e.clientX,lastY:e.clientY,moved:false};
+   try{viewport.setPointerCapture(e.pointerId)}catch(_){}
+  }else{
+   activePanPointer=null;pan=null;
+  }
+ },{passive:true});
+ viewport.addEventListener("pointermove",e=>{
+  if(e.pointerType!=="touch"||!activePointers.has(e.pointerId))return;
+  activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(activePointers.size!==1||activePanPointer!==e.pointerId||!pan||startDistance)return;
+  e.preventDefault();
+  const dx=e.clientX-pan.lastX,dy=e.clientY-pan.lastY;
+  if(!pan.moved&&Math.hypot(e.clientX-pan.x,e.clientY-pan.y)>4)pan.moved=true;
+  if(pan.moved){
+   viewport.scrollLeft-=dx;viewport.scrollTop-=dy;
+   suppressTap=true;clearTimeout(suppressTimer);
+   suppressTimer=setTimeout(()=>{suppressTap=false},500);
+  }
+  pan.lastX=e.clientX;pan.lastY=e.clientY;
+ },{passive:false});
+ const finishPointer=e=>{
+  if(e.pointerType!=="touch"||!activePointers.has(e.pointerId))return;
+  activePointers.delete(e.pointerId);
+  if(activePointers.size===1){
+   const [id,p]=activePointers.entries().next().value;
+   activePanPointer=id;pan={x:p.x,y:p.y,lastX:p.x,lastY:p.y,moved:false};
+  }else{activePanPointer=null;pan=null}
+  if(activePointers.size===0&&suppressTap){
+   clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>{suppressTap=false},500);
+  }
+ };
+ viewport.addEventListener("pointerup",finishPointer,{passive:true});
+ viewport.addEventListener("pointercancel",finishPointer,{passive:true});
  const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
  const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
  const localPoint=(p,rect)=>({x:p.x-rect.left-viewport.clientLeft,y:p.y-rect.top-viewport.clientTop});
  const hasDiagram=()=>$("canvas")&&$("diagram")?.naturalWidth;
  viewport.addEventListener("touchstart",e=>{
   if(!hasDiagram())return;
-  if(e.touches.length===1){
-   startDistance=0;
-   const t=e.touches[0];pan={x:t.clientX,y:t.clientY,lastX:t.clientX,lastY:t.clientY,moved:false};
-   return;
-  }
+  if(e.touches.length===1){startDistance=0;return;}
   if(e.touches.length!==2)return;
   e.preventDefault();pan=null;
   const rect=viewport.getBoundingClientRect(),mid=localPoint(midpoint(e.touches),rect);
@@ -342,18 +379,7 @@ function installTouchZoom(){
  },{passive:false});
  viewport.addEventListener("touchmove",e=>{
   if(!hasDiagram())return;
-  if(e.touches.length===1&&pan&&!startDistance){
-   e.preventDefault();
-   const t=e.touches[0],dx=t.clientX-pan.lastX,dy=t.clientY-pan.lastY;
-   if(!pan.moved&&Math.hypot(t.clientX-pan.x,t.clientY-pan.y)>5)pan.moved=true;
-   if(pan.moved){
-    viewport.scrollLeft-=dx;viewport.scrollTop-=dy;
-    suppressTap=true;clearTimeout(suppressTimer);
-    suppressTimer=setTimeout(()=>{suppressTap=false},500);
-   }
-   pan.lastX=t.clientX;pan.lastY=t.clientY;
-   return;
-  }
+  if(e.touches.length===1&&!startDistance)return; // single-finger pan is handled by Pointer Events
   if(e.touches.length!==2||!startDistance)return;
   e.preventDefault();pan=null;
   const rect=viewport.getBoundingClientRect(),mid=localPoint(midpoint(e.touches),rect);
@@ -364,12 +390,7 @@ function installTouchZoom(){
   viewport.scrollTop=Math.max(0,anchorY*zoom-mid.y+padY);
  },{passive:false});
  viewport.addEventListener("touchend",e=>{
-  if(e.touches.length===1&&hasDiagram()){
-   const t=e.touches[0];pan={x:t.clientX,y:t.clientY,lastX:t.clientX,lastY:t.clientY,moved:false};
-  }else if(e.touches.length===0){
-   if(pan?.moved){suppressTap=true;clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>{suppressTap=false},500)}
-   pan=null;
-  }
+  if(e.touches.length===0&&activePointers.size===0)pan=null;
   if(e.touches.length<2)startDistance=0;
  },{passive:true});
  viewport.addEventListener("touchcancel",()=>{startDistance=0;pan=null},{passive:true});
