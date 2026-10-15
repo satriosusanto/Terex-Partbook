@@ -897,6 +897,9 @@
   function installDiagramGestures() {
     // AC80-2 already owns a complete pointer gesture controller.
     // AT15 uses transformed coordinates and is handled by its own app.js.
+    // AC200-1 handles both one-finger panning and two-finger pinch in app.js.
+    // Skip the shared pointer controller: it selects .viewer rather than #canvasWrap.
+    if (modelCode === "AC200-1") return;
     if (page.classList.contains("ui-ac40") ||
         page.classList.contains("ui-model-terex-ac80-2") ||
         page.classList.contains("ui-at15")) return;
