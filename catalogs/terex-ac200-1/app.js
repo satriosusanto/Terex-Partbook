@@ -290,9 +290,19 @@ function showPart(cat,pos,hot){
  ].map(x=>`<div class="kv"><b>${esc(x[0])}</b><span>${esc(x[1]||"—")}</span></div>`).join("");
  $("modal").classList.remove("hidden");
 }
+function getDiagramViewport(){
+ const wrap=$("canvasWrap");if(!wrap)return null;
+ const css=getComputedStyle(wrap);
+ const px=n=>Number.parseFloat(n)||0;
+ const left=px(css.paddingLeft),right=px(css.paddingRight),top=px(css.paddingTop),bottom=px(css.paddingBottom);
+ return {wrap,left,top,width:Math.max(1,wrap.clientWidth-left-right),height:Math.max(1,wrap.clientHeight-top-bottom)};
+}
 function fitDiagram(){
- const img=$("diagram"),wrap=$("canvasWrap");if(!img?.naturalWidth||!wrap)return;
- const availableW=Math.max(120,wrap.clientWidth-16),availableH=Math.max(120,wrap.clientHeight-62);
+ const img=$("diagram"),view=getDiagramViewport();if(!img?.naturalWidth||!view)return;
+ // Fit to the usable content box, not clientWidth/clientHeight (which include
+ // padding). On mobile the 48px toolbar clearance was otherwise counted twice,
+ // shifting the image's origin and clipping its lower edge.
+ const availableW=Math.max(120,view.width-8),availableH=Math.max(120,view.height-8);
  zoom=Math.max(.05,Math.min(availableW/img.naturalWidth,availableH/img.naturalHeight,1));
  panX=0;panY=0;applyZoom();
 }
@@ -304,10 +314,11 @@ function applyZoom(){
  const displayW=Math.max(1,Math.round(naturalW*zoom)),displayH=Math.max(1,Math.round(naturalH*zoom));
  // Keep at least the viewport covered by the image when it is larger than the
  // viewport. This prevents dragging the image away and exposing blank space.
+ const view=getDiagramViewport();if(!view)return;
  const clampAxis=(position,contentSize,viewportSize)=>contentSize<=viewportSize
   ?(viewportSize-contentSize)/2:Math.max(viewportSize-contentSize,Math.min(0,position));
- panX=clampAxis(panX,displayW,wrap.clientWidth);
- panY=clampAxis(panY,displayH,wrap.clientHeight);
+ panX=clampAxis(panX,displayW,view.width);
+ panY=clampAxis(panY,displayH,view.height);
  wrap.style.overflow="hidden";
  wrap.scrollLeft=0;wrap.scrollTop=0;
  surface.style.position="relative";surface.style.width=wrap.clientWidth+"px";surface.style.height=wrap.clientHeight+"px";
@@ -347,8 +358,9 @@ function installTouchZoom(){
    const [a,b]=pointers.values(),distance=Math.max(1,Math.hypot(a.x-b.x,b.y-a.y));
    const midX=(a.x+b.x)/2,midY=(a.y+b.y)/2,rect=viewport.getBoundingClientRect();
    zoom=Math.max(.05,Math.min(3,pinch.zoom*distance/pinch.distance));
-   panX=midX-rect.left-viewport.clientLeft-pinch.anchorX*zoom;
-   panY=midY-rect.top-viewport.clientTop-pinch.anchorY*zoom;
+   const view=getDiagramViewport();
+   panX=midX-rect.left-viewport.clientLeft-view.left-pinch.anchorX*zoom;
+   panY=midY-rect.top-viewport.clientTop-view.top-pinch.anchorY*zoom;
    applyZoom();
   }else if(pointers.size===1&&panPoint){
    e.preventDefault();
