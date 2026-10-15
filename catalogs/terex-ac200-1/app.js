@@ -1,5 +1,5 @@
 const $=id=>document.getElementById(id);
-let catalogs=[],parts=[],hotspots=[],imageMeta=[],catalogHierarchy=null,current=null,zoom=1,dark=false,diagramRequest=0;
+let catalogs=[],parts=[],hotspots=[],imageMeta=[],catalogHierarchy=null,current=null,zoom=1,panX=0,panY=0,dark=false,diagramRequest=0;
 const imgByName=new Map(), metaByName=new Map();
 const ac200ExpandedCatalogs=new Set(["33340.1"]);
 async function getJson(path){
@@ -291,43 +291,31 @@ function showPart(cat,pos,hot){
  $("modal").classList.remove("hidden");
 }
 function fitDiagram(){
- const img=$("diagram"),wrap=$("canvasWrap"); if(!img?.naturalWidth||!wrap)return;
- const availableW=Math.max(120,wrap.clientWidth-16), availableH=Math.max(120,wrap.clientHeight-62);
+ const img=$("diagram"),wrap=$("canvasWrap");if(!img?.naturalWidth||!wrap)return;
+ const availableW=Math.max(120,wrap.clientWidth-16),availableH=Math.max(120,wrap.clientHeight-62);
  zoom=Math.max(.05,Math.min(availableW/img.naturalWidth,availableH/img.naturalHeight,1));
- applyZoom();
- // Start at the diagram's actual top-left edge. The scroll surface is
- // exactly the rendered image size, so users never pan into blank overscan.
- wrap.scrollLeft=0;wrap.scrollTop=0;
+ panX=0;panY=0;applyZoom();
 }
 function applyZoom(){
  const canvas=$("canvas"),img=$("diagram"),wrap=$("canvasWrap"),surface=$("panSurface");
  if(!canvas||!img||!wrap||!surface)return;
- const naturalW=img.naturalWidth||img.width;
- const naturalH=img.naturalHeight||img.height;
+ const naturalW=img.naturalWidth||img.width,naturalH=img.naturalHeight||img.height;
  if(!naturalW||!naturalH)return;
- const displayW=Math.max(1,Math.round(naturalW*zoom));
- const displayH=Math.max(1,Math.round(naturalH*zoom));
- // Size the image and its hotspot layer together instead of CSS-transforming
- // an intrinsic-size canvas. Transforms leave the original layout box behind,
- // which can make the diagram appear clipped or stranded in a corner on mobile.
- canvas.style.width=displayW+"px";
- canvas.style.height=displayH+"px";
- canvas.style.transform="none";
- // Keep the scrollable surface exactly the size of the rendered diagram.
- // Overscan gutters let the viewport scroll into empty space and visually
- // "cut off" the image on Android, especially after pinch-zooming downward.
- surface.style.position="relative";
- surface.style.width=displayW+"px";
- surface.style.height=displayH+"px";
- surface.style.minWidth=displayW+"px";
- surface.style.minHeight=displayH+"px";
- canvas.style.position="relative";
- canvas.style.display="block";
- canvas.style.left="0";
- canvas.style.top="0";
- canvas.style.margin="0";
- img.style.width=displayW+"px";
- img.style.height=displayH+"px";
+ const displayW=Math.max(1,Math.round(naturalW*zoom)),displayH=Math.max(1,Math.round(naturalH*zoom));
+ // Keep at least the viewport covered by the image when it is larger than the
+ // viewport. This prevents dragging the image away and exposing blank space.
+ const clampAxis=(position,contentSize,viewportSize)=>contentSize<=viewportSize
+  ?(viewportSize-contentSize)/2:Math.max(viewportSize-contentSize,Math.min(0,position));
+ panX=clampAxis(panX,displayW,wrap.clientWidth);
+ panY=clampAxis(panY,displayH,wrap.clientHeight);
+ wrap.style.overflow="hidden";
+ wrap.scrollLeft=0;wrap.scrollTop=0;
+ surface.style.position="relative";surface.style.width=wrap.clientWidth+"px";surface.style.height=wrap.clientHeight+"px";
+ surface.style.minWidth="0";surface.style.minHeight="0";surface.style.overflow="visible";
+ canvas.style.position="absolute";canvas.style.display="block";canvas.style.left="0";canvas.style.top="0";
+ canvas.style.margin="0";canvas.style.width=displayW+"px";canvas.style.height=displayH+"px";
+ canvas.style.transformOrigin="top left";canvas.style.transform="translate("+panX+"px,"+panY+"px)";
+ img.style.width=displayW+"px";img.style.height=displayH+"px";img.style.maxWidth="none";
  $("zoomLabel").textContent=Math.round(zoom*100)+"%";
 }
 $("zoomIn").onclick=()=>{zoom=Math.min(3,zoom*1.2);applyZoom()};
@@ -335,8 +323,6 @@ $("zoomOut").onclick=()=>{zoom=Math.max(.05,zoom/1.2);applyZoom()};
 $("fitBtn").onclick=fitDiagram;const diagramWrap=$("canvasWrap");if("ResizeObserver" in window&&diagramWrap)new ResizeObserver(()=>{if(current?.image&&$("diagram")?.naturalWidth)fitDiagram()}).observe(diagramWrap);window.addEventListener("resize",()=>{if(current?.image)fitDiagram()});
 function installTouchZoom(){
  const viewport=$("canvasWrap");if(!viewport)return;
- // Match the proven AC40 gesture model: one Pointer Events controller handles
- // both one-finger pan and two-finger pinch, on the actual scrollable viewport.
  viewport.style.touchAction="none";
  const pointers=new Map();let pinch=null,panPoint=null,suppressTap=false,suppressTimer=null;
  const hasDiagram=()=>Boolean($("diagram")?.naturalWidth&&$("canvas"));
@@ -345,45 +331,31 @@ function installTouchZoom(){
   pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
   try{viewport.setPointerCapture(e.pointerId)}catch(_){}
   if(pointers.size===2){
-   const [a,b]=pointers.values(),image=$("diagram");
-   if(!image)return;
-   const imageRect=image.getBoundingClientRect(),viewRect=viewport.getBoundingClientRect();
+   const [a,b]=pointers.values(),canvas=$("canvas"),rect=canvas.getBoundingClientRect();
    const midX=(a.x+b.x)/2,midY=(a.y+b.y)/2;
-   pinch={
-    distance:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),
-    zoom,
-    anchorX:(midX-imageRect.left)/zoom,
-    anchorY:(midY-imageRect.top)/zoom,
-    originX:imageRect.left-viewRect.left-viewport.clientLeft+viewport.scrollLeft,
-    originY:imageRect.top-viewRect.top-viewport.clientTop+viewport.scrollTop
-   };
+   pinch={distance:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),zoom,panX,panY,
+    anchorX:(midX-rect.left)/zoom,anchorY:(midY-rect.top)/zoom};
    panPoint=null;
-  }else if(pointers.size===1){
-   panPoint={x:e.clientX,y:e.clientY};
-  }else{
-   panPoint=null;pinch=null;
-  }
+  }else if(pointers.size===1)panPoint={x:e.clientX,y:e.clientY};
+  else{panPoint=null;pinch=null}
  });
  viewport.addEventListener("pointermove",e=>{
   if(!pointers.has(e.pointerId)||!hasDiagram())return;
   pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
   if(pointers.size>=2&&pinch){
    e.preventDefault();
-   const [a,b]=pointers.values();
-   const distance=Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));
-   const midX=(a.x+b.x)/2,midY=(a.y+b.y)/2;
+   const [a,b]=pointers.values(),distance=Math.max(1,Math.hypot(a.x-b.x,b.y-a.y));
+   const midX=(a.x+b.x)/2,midY=(a.y+b.y)/2,rect=viewport.getBoundingClientRect();
    zoom=Math.max(.05,Math.min(3,pinch.zoom*distance/pinch.distance));
+   panX=midX-rect.left-viewport.clientLeft-pinch.anchorX*zoom;
+   panY=midY-rect.top-viewport.clientTop-pinch.anchorY*zoom;
    applyZoom();
-   const viewRect=viewport.getBoundingClientRect();
-   viewport.scrollLeft=Math.max(0,pinch.originX+pinch.anchorX*zoom-(midX-viewRect.left-viewport.clientLeft));
-   viewport.scrollTop=Math.max(0,pinch.originY+pinch.anchorY*zoom-(midY-viewRect.top-viewport.clientTop));
   }else if(pointers.size===1&&panPoint){
    e.preventDefault();
    const dx=e.clientX-panPoint.x,dy=e.clientY-panPoint.y;
    if(Math.hypot(dx,dy)>2){
-    viewport.scrollLeft-=dx;viewport.scrollTop-=dy;
-    suppressTap=true;clearTimeout(suppressTimer);
-    suppressTimer=setTimeout(()=>{suppressTap=false},500);
+    panX+=dx;panY+=dy;applyZoom();
+    suppressTap=true;clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>{suppressTap=false},500);
    }
    panPoint={x:e.clientX,y:e.clientY};
   }
@@ -392,20 +364,12 @@ function installTouchZoom(){
   if(!pointers.has(e.pointerId))return;
   pointers.delete(e.pointerId);
   if(pointers.size<2)pinch=null;
-  if(pointers.size===1){
-   const remaining=pointers.values().next().value;
-   panPoint={x:remaining.x,y:remaining.y};
-  }else panPoint=null;
-  if(pointers.size===0&&suppressTap){
-   clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>{suppressTap=false},500);
-  }
+  if(pointers.size===1){const p=pointers.values().next().value;panPoint={x:p.x,y:p.y}}
+  else panPoint=null;
+  if(pointers.size===0&&suppressTap){clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>{suppressTap=false},500)}
  }
- viewport.addEventListener("pointerup",finishPointer);
- viewport.addEventListener("pointercancel",finishPointer);
- viewport.addEventListener("click",e=>{
-  if(!suppressTap)return;
-  e.preventDefault();e.stopImmediatePropagation();suppressTap=false;clearTimeout(suppressTimer);
- },true);
+ viewport.addEventListener("pointerup",finishPointer);viewport.addEventListener("pointercancel",finishPointer);
+ viewport.addEventListener("click",e=>{if(!suppressTap)return;e.preventDefault();e.stopImmediatePropagation();suppressTap=false;clearTimeout(suppressTimer)},true);
 }
 installTouchZoom();
 $("close").onclick=()=>$("modal").classList.add("hidden");
