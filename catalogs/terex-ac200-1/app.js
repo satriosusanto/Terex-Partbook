@@ -295,10 +295,9 @@ function fitDiagram(){
  const availableW=Math.max(120,wrap.clientWidth-16), availableH=Math.max(120,wrap.clientHeight-62);
  zoom=Math.max(.05,Math.min(availableW/img.naturalWidth,availableH/img.naturalHeight,1));
  applyZoom();
- // Keep the diagram at its normal top-left viewing position while retaining
- // one viewport of extra pan room on every side.
- const gutterX=Math.max(0,wrap.clientWidth),gutterY=Math.max(0,wrap.clientHeight);
- wrap.scrollLeft=gutterX;wrap.scrollTop=gutterY;
+ // Start at the diagram's actual top-left edge. The scroll surface is
+ // exactly the rendered image size, so users never pan into blank overscan.
+ wrap.scrollLeft=0;wrap.scrollTop=0;
 }
 function applyZoom(){
  const canvas=$("canvas"),img=$("diagram"),wrap=$("canvasWrap"),surface=$("panSurface");
@@ -314,17 +313,18 @@ function applyZoom(){
  canvas.style.width=displayW+"px";
  canvas.style.height=displayH+"px";
  canvas.style.transform="none";
- // Use an explicit scroll surface instead of margins: some Android browsers
- // do not consistently include child margins in the scrollable range.
- // The diagram remains a viewport-sized gutter away from every surface edge.
- const gutterX=Math.max(0,wrap.clientWidth),gutterY=Math.max(0,wrap.clientHeight);
+ // Keep the scrollable surface exactly the size of the rendered diagram.
+ // Overscan gutters let the viewport scroll into empty space and visually
+ // "cut off" the image on Android, especially after pinch-zooming downward.
  surface.style.position="relative";
- surface.style.width=(displayW+gutterX*2)+"px";
- surface.style.height=(displayH+gutterY*2)+"px";
- canvas.style.position="absolute";
+ surface.style.width=displayW+"px";
+ surface.style.height=displayH+"px";
+ surface.style.minWidth=displayW+"px";
+ surface.style.minHeight=displayH+"px";
+ canvas.style.position="relative";
  canvas.style.display="block";
- canvas.style.left=gutterX+"px";
- canvas.style.top=gutterY+"px";
+ canvas.style.left="0";
+ canvas.style.top="0";
  canvas.style.margin="0";
  img.style.width=displayW+"px";
  img.style.height=displayH+"px";
