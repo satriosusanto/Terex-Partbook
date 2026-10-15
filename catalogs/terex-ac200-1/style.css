@@ -71,19 +71,34 @@ body.dark{background:#12171c;color:#e8edf1}body.dark aside,body.dark .crumb,body
     overflow: hidden;
   }
   body.catalog-ui .workspace > .viewer > #canvasWrap {
-    display: flex;
+    /* Use a block scrollport on Android: flex overflow can report vertical
+       scroll range while clipping the diagram's horizontal layout overflow. */
+    display: block;
+    position: relative;
+    box-sizing: border-box;
     width: 100%;
+    min-width: 0;
+    max-width: 100%;
     height: 100%;
     min-height: 0;
     padding: 48px 8px 8px;
-    overflow: auto;
-    justify-content: flex-start;
-    align-items: flex-start;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: none;
   }
   body.catalog-ui .workspace > .viewer > #canvasWrap > #canvas {
+    display: block;
+    position: relative;
     flex: none;
-    align-self: flex-start;
+    width: max-content;
+    max-width: none;
     margin: 0;
+  }
+  body.catalog-ui .workspace > .viewer > #canvasWrap #diagram {
+    display: block;
+    max-width: none;
   }
   body.catalog-ui .workspace > .results {
     display: flex;
