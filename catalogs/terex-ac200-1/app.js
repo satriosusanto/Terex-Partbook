@@ -302,8 +302,12 @@ function applyZoom(){
  const naturalW=img.naturalWidth||img.width,naturalH=img.naturalHeight||img.height;
  if(!naturalW||!naturalH)return;
  const displayW=Math.max(1,Math.round(naturalW*zoom)),displayH=Math.max(1,Math.round(naturalH*zoom));
- // Keep the scrollport fixed to the viewer and move the rendered canvas itself.
- // This avoids Android scroll-range/padding mismatches that expose blank space.
+ // Keep at least the viewport covered by the image when it is larger than the
+ // viewport. This prevents dragging the image away and exposing blank space.
+ const clampAxis=(position,contentSize,viewportSize)=>contentSize<=viewportSize
+  ?(viewportSize-contentSize)/2:Math.max(viewportSize-contentSize,Math.min(0,position));
+ panX=clampAxis(panX,displayW,wrap.clientWidth);
+ panY=clampAxis(panY,displayH,wrap.clientHeight);
  wrap.style.overflow="hidden";
  wrap.scrollLeft=0;wrap.scrollTop=0;
  surface.style.position="relative";surface.style.width=wrap.clientWidth+"px";surface.style.height=wrap.clientHeight+"px";
