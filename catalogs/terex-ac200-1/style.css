@@ -88,13 +88,30 @@ body.dark{background:#12171c;color:#e8edf1}body.dark aside,body.dark .crumb,body
     -webkit-overflow-scrolling: touch;
     touch-action: none;
   }
-  body.catalog-ui .workspace > .viewer > #canvasWrap > #canvas {
+  /* panSurface is the actual scroll-content box; keep it as a non-shrinking
+     block and let its explicit JS dimensions define the scroll range. */
+  body.catalog-ui .workspace > .viewer > #canvasWrap > #panSurface {
     display: block;
     position: relative;
     flex: none;
     width: max-content;
+    height: max-content;
+    min-width: max-content;
+    min-height: max-content;
     max-width: none;
     margin: 0;
+    overflow: visible;
+  }
+  body.catalog-ui .workspace > .viewer > #canvasWrap > #panSurface > #canvas {
+    display: block;
+    position: relative;
+    flex: none;
+    width: max-content;
+    height: max-content;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
   }
   body.catalog-ui .workspace > .viewer > #canvasWrap #diagram {
     display: block;
