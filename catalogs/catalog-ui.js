@@ -897,6 +897,9 @@
   function installDiagramGestures() {
     // AC80-2 already owns a complete pointer gesture controller.
     // AT15 uses transformed coordinates and is handled by its own app.js.
+    // AC200-1 owns combined touch pan + pinch zoom in its app.js.
+    // Avoid competing pointer handlers on Android for this one viewer.
+    if (modelCode === "AC200-1") return;
     if (page.classList.contains("ui-ac40") ||
         page.classList.contains("ui-model-terex-ac80-2") ||
         page.classList.contains("ui-at15")) return;
