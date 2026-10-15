@@ -228,7 +228,7 @@ function renderDiagram(){
    return;
  }
  // Rebuild the viewer after a catalog without an image so the canvas exists.
- if(!$("canvas")) wrap.innerHTML='<div id="canvas"><img id="diagram" alt="Exploded parts diagram"><div id="hotspots"></div></div>';
+ if(!$("canvas")) wrap.innerHTML='<div id="panSurface"><div id="canvas"><img id="diagram" alt="Exploded parts diagram"><div id="hotspots"></div></div></div>';
  const image=$("diagram");
  wrap.setAttribute("aria-busy","true");
  image.alt="Diagram for "+current.title;
@@ -297,13 +297,12 @@ function fitDiagram(){
  applyZoom();
  // Keep the diagram at its normal top-left viewing position while retaining
  // one viewport of extra pan room on every side.
- const canvas=$("canvas");
  const gutterX=Math.max(0,wrap.clientWidth),gutterY=Math.max(0,wrap.clientHeight);
  wrap.scrollLeft=gutterX;wrap.scrollTop=gutterY;
 }
 function applyZoom(){
- const canvas=$("canvas"),img=$("diagram"),wrap=$("canvasWrap");
- if(!canvas||!img)return;
+ const canvas=$("canvas"),img=$("diagram"),wrap=$("canvasWrap"),surface=$("panSurface");
+ if(!canvas||!img||!wrap||!surface)return;
  const naturalW=img.naturalWidth||img.width;
  const naturalH=img.naturalHeight||img.height;
  if(!naturalW||!naturalH)return;
@@ -315,15 +314,18 @@ function applyZoom(){
  canvas.style.width=displayW+"px";
  canvas.style.height=displayH+"px";
  canvas.style.transform="none";
- // Add scrollable overscan around the canvas. Without it, scrollTop/scrollLeft
- // clamp at the diagram's edges, making touch panning feel locked to a narrow
- // range when the image is zoomed or shorter than the viewport.
- if(wrap){
-  canvas.style.marginTop=Math.max(0,wrap.clientHeight)+"px";
-  canvas.style.marginRight=Math.max(0,wrap.clientWidth)+"px";
-  canvas.style.marginBottom=Math.max(0,wrap.clientHeight)+"px";
-  canvas.style.marginLeft=Math.max(0,wrap.clientWidth)+"px";
- }
+ // Use an explicit scroll surface instead of margins: some Android browsers
+ // do not consistently include child margins in the scrollable range.
+ // The diagram remains a viewport-sized gutter away from every surface edge.
+ const gutterX=Math.max(0,wrap.clientWidth),gutterY=Math.max(0,wrap.clientHeight);
+ surface.style.position="relative";
+ surface.style.width=(displayW+gutterX*2)+"px";
+ surface.style.height=(displayH+gutterY*2)+"px";
+ canvas.style.position="absolute";
+ canvas.style.display="block";
+ canvas.style.left=gutterX+"px";
+ canvas.style.top=gutterY+"px";
+ canvas.style.margin="0";
  img.style.width=displayW+"px";
  img.style.height=displayH+"px";
  $("zoomLabel").textContent=Math.round(zoom*100)+"%";
