@@ -82,7 +82,8 @@ body.dark{background:#12171c;color:#e8edf1}body.dark aside,body.dark .crumb,body
   }
   body.catalog-ui .workspace > .viewer > #canvasWrap > #canvas {
     flex: none;
-    margin: 0 auto;
+    align-self: flex-start;
+    margin: 0;
   }
   body.catalog-ui .workspace > .results {
     display: flex;
