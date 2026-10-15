@@ -295,9 +295,14 @@ function fitDiagram(){
  const availableW=Math.max(120,wrap.clientWidth-16), availableH=Math.max(120,wrap.clientHeight-62);
  zoom=Math.max(.05,Math.min(availableW/img.naturalWidth,availableH/img.naturalHeight,1));
  applyZoom();
+ // Keep the diagram at its normal top-left viewing position while retaining
+ // one viewport of extra pan room on every side.
+ const canvas=$("canvas");
+ const gutterX=Math.max(0,wrap.clientWidth),gutterY=Math.max(0,wrap.clientHeight);
+ wrap.scrollLeft=gutterX;wrap.scrollTop=gutterY;
 }
 function applyZoom(){
- const canvas=$("canvas"),img=$("diagram");
+ const canvas=$("canvas"),img=$("diagram"),wrap=$("canvasWrap");
  if(!canvas||!img)return;
  const naturalW=img.naturalWidth||img.width;
  const naturalH=img.naturalHeight||img.height;
@@ -310,6 +315,15 @@ function applyZoom(){
  canvas.style.width=displayW+"px";
  canvas.style.height=displayH+"px";
  canvas.style.transform="none";
+ // Add scrollable overscan around the canvas. Without it, scrollTop/scrollLeft
+ // clamp at the diagram's edges, making touch panning feel locked to a narrow
+ // range when the image is zoomed or shorter than the viewport.
+ if(wrap){
+  canvas.style.marginTop=Math.max(0,wrap.clientHeight)+"px";
+  canvas.style.marginRight=Math.max(0,wrap.clientWidth)+"px";
+  canvas.style.marginBottom=Math.max(0,wrap.clientHeight)+"px";
+  canvas.style.marginLeft=Math.max(0,wrap.clientWidth)+"px";
+ }
  img.style.width=displayW+"px";
  img.style.height=displayH+"px";
  $("zoomLabel").textContent=Math.round(zoom*100)+"%";
