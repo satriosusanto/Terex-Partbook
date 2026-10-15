@@ -320,13 +320,20 @@ $("fitBtn").onclick=fitDiagram;const diagramWrap=$("canvasWrap");if("ResizeObser
 function installTouchZoom(){
  const viewport=$("canvasWrap");if(!viewport)return;
  viewport.style.touchAction="none";
- let startDistance=0,startZoom=1,anchorX=0,anchorY=0;
+ let startDistance=0,startZoom=1,anchorX=0,anchorY=0,pan=null,suppressTap=false,suppressTimer=null;
  const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
  const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
  const localPoint=(p,rect)=>({x:p.x-rect.left-viewport.clientLeft,y:p.y-rect.top-viewport.clientTop});
+ const hasDiagram=()=>$("canvas")&&$("diagram")?.naturalWidth;
  viewport.addEventListener("touchstart",e=>{
-  if(e.touches.length!==2||!$("canvas")||!$("diagram")?.naturalWidth)return;
-  e.preventDefault();
+  if(!hasDiagram())return;
+  if(e.touches.length===1){
+   startDistance=0;
+   pan={x:e.touches[0].clientX,y:e.touches[0].clientY,lastX:e.touches[0].clientX,lastY:e.touches[0].clientY,moved:false};
+   return;
+  }
+  if(e.touches.length!==2)return;
+  pan=null;e.preventDefault();
   const rect=viewport.getBoundingClientRect(),mid=localPoint(midpoint(e.touches),rect);
   const style=getComputedStyle(viewport),padX=parseFloat(style.paddingLeft)||0,padY=parseFloat(style.paddingTop)||0;
   startDistance=Math.max(1,distance(e.touches));startZoom=zoom;
@@ -335,8 +342,20 @@ function installTouchZoom(){
   anchorY=(viewport.scrollTop+mid.y-padY)/startZoom;
  },{passive:false});
  viewport.addEventListener("touchmove",e=>{
-  if(e.touches.length!==2||!startDistance||!$("canvas")||!$("diagram")?.naturalWidth)return;
-  e.preventDefault();
+  if(!hasDiagram())return;
+  if(e.touches.length===1&&pan&&!startDistance){
+   e.preventDefault();
+   const touch=e.touches[0],dx=touch.clientX-pan.lastX,dy=touch.clientY-pan.lastY;
+   if(!pan.moved&&Math.hypot(touch.clientX-pan.x,touch.clientY-pan.y)>5)pan.moved=true;
+   if(pan.moved){
+    viewport.scrollLeft-=dx;viewport.scrollTop-=dy;suppressTap=true;
+    clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>{suppressTap=false},500);
+   }
+   pan.lastX=touch.clientX;pan.lastY=touch.clientY;
+   return;
+  }
+  if(e.touches.length!==2||!startDistance)return;
+  e.preventDefault();pan=null;
   const rect=viewport.getBoundingClientRect(),mid=localPoint(midpoint(e.touches),rect);
   const style=getComputedStyle(viewport),padX=parseFloat(style.paddingLeft)||0,padY=parseFloat(style.paddingTop)||0;
   zoom=Math.max(.05,Math.min(3,startZoom*distance(e.touches)/startDistance));
@@ -345,8 +364,18 @@ function installTouchZoom(){
   viewport.scrollLeft=Math.max(0,anchorX*zoom-mid.x+padX);
   viewport.scrollTop=Math.max(0,anchorY*zoom-mid.y+padY);
  },{passive:false});
- viewport.addEventListener("touchend",e=>{if(e.touches.length<2)startDistance=0},{passive:true});
- viewport.addEventListener("touchcancel",()=>{startDistance=0},{passive:true});
+ viewport.addEventListener("touchend",e=>{
+  if(pan?.moved&&e.touches.length===0){suppressTap=true;clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>{suppressTap=false},500)}
+  if(e.touches.length===1&&hasDiagram()){
+   const t=e.touches[0];pan={x:t.clientX,y:t.clientY,lastX:t.clientX,lastY:t.clientY,moved:false};
+  }else if(e.touches.length===0)pan=null;
+  if(e.touches.length<2)startDistance=0;
+ },{passive:true});
+ viewport.addEventListener("touchcancel",()=>{startDistance=0;pan=null},{passive:true});
+ viewport.addEventListener("click",e=>{
+  if(!suppressTap)return;
+  e.preventDefault();e.stopImmediatePropagation();suppressTap=false;clearTimeout(suppressTimer);
+ },true);
 }
 installTouchZoom();
 $("close").onclick=()=>$("modal").classList.add("hidden");
