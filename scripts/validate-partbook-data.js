@@ -112,13 +112,17 @@ for (const dir of candidateDirs) {
   }
 
   let hotspotsWithInvalidBounds = 0;
+  let hotspotsWithMissingOrNonNumericBounds = 0;
   let hotspotsWithUnknownCatalog = 0;
   let hotspotsWithMissingImage = 0;
   let hotspotsWithUnlinkedPart = 0;
   for (const hotspot of hotspots) {
     const left = Number(hotspot.left), top = Number(hotspot.top);
     const right = Number(hotspot.right), bottom = Number(hotspot.bottom);
-    if ([left, top, right, bottom].every(Number.isFinite) && (right <= left || bottom <= top)) hotspotsWithInvalidBounds++;
+    // Missing/non-numeric coordinates must be reported separately. Previously these
+    // rows silently passed because the degenerate-bounds check only ran for finite values.
+    if (![left, top, right, bottom].every(Number.isFinite)) hotspotsWithMissingOrNonNumericBounds++;
+    else if (right <= left || bottom <= top) hotspotsWithInvalidBounds++;
 
     const catRef = getCatalogRef(hotspot);
     if (catRef !== null && catalogIds.size && !catalogIds.has(String(catRef))) hotspotsWithUnknownCatalog++;
@@ -152,7 +156,8 @@ for (const dir of candidateDirs) {
   if (partsWithoutQuantity) warnings.push(`Part rows without a quantity (review; may include valid parent/header rows): ${partsWithoutQuantity}`);
   if (partsWithUnknownCatalog) warnings.push(`Parts referencing unknown catalogs: ${partsWithUnknownCatalog}`);
   if (hotspotsWithUnknownCatalog) warnings.push(`Hotspots referencing unknown catalogs: ${hotspotsWithUnknownCatalog}`);
-  if (hotspotsWithInvalidBounds) warnings.push(`Hotspots with invalid bounds: ${hotspotsWithInvalidBounds}`);
+  if (hotspotsWithInvalidBounds) warnings.push(`Hotspots with invalid bounds (right <= left or bottom <= top): ${hotspotsWithInvalidBounds}`);
+  if (hotspotsWithMissingOrNonNumericBounds) warnings.push(`Hotspots with missing or non-numeric coordinate bounds: ${hotspotsWithMissingOrNonNumericBounds}`);
   if (hotspotsWithMissingImage) warnings.push(`Hotspots referencing image names not found in explicit image metadata: ${hotspotsWithMissingImage}`);
   if (hotspotsWithUnlinkedPart) warnings.push(`Hotspots with a part link/number that cannot be resolved: ${hotspotsWithUnlinkedPart}`);
 
@@ -173,6 +178,7 @@ for (const dir of candidateDirs) {
     partsWithUnknownCatalog,
     hotspotsWithUnknownCatalog,
     hotspotsWithInvalidBounds,
+    hotspotsWithMissingOrNonNumericBounds,
     hotspotsWithMissingImage,
     hotspotsWithUnlinkedPart,
     errors,
