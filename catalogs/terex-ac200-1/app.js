@@ -319,81 +319,73 @@ $("zoomOut").onclick=()=>{zoom=Math.max(.05,zoom/1.2);applyZoom()};
 $("fitBtn").onclick=fitDiagram;const diagramWrap=$("canvasWrap");if("ResizeObserver" in window&&diagramWrap)new ResizeObserver(()=>{if(current?.image&&$("diagram")?.naturalWidth)fitDiagram()}).observe(diagramWrap);window.addEventListener("resize",()=>{if(current?.image)fitDiagram()});
 function installTouchZoom(){
  const viewport=$("canvasWrap");if(!viewport)return;
+ // Match the proven AC40 gesture model: one Pointer Events controller handles
+ // both one-finger pan and two-finger pinch, on the actual scrollable viewport.
  viewport.style.touchAction="none";
- let startDistance=0,startZoom=1,anchorX=0,anchorY=0,pan=null,suppressTap=false,suppressTimer=null;
- // Use Pointer Events for one-finger dragging: Android dispatches these reliably
- // even when the diagram image/hotspot is the original event target.
- const activePointers=new Map();let activePanPointer=null;
+ const pointers=new Map();let pinch=null,panPoint=null,suppressTap=false,suppressTimer=null;
+ const hasDiagram=()=>Boolean($("diagram")?.naturalWidth&&$("canvas"));
  viewport.addEventListener("pointerdown",e=>{
   if(e.pointerType!=="touch"||!hasDiagram())return;
-  activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-  if(activePointers.size===1){
-   activePanPointer=e.pointerId;
-   pan={x:e.clientX,y:e.clientY,lastX:e.clientX,lastY:e.clientY,moved:false};
-   try{viewport.setPointerCapture(e.pointerId)}catch(_){}
+  pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  try{viewport.setPointerCapture(e.pointerId)}catch(_){}
+  if(pointers.size===2){
+   const [a,b]=pointers.values(),image=$("diagram");
+   if(!image)return;
+   const imageRect=image.getBoundingClientRect(),viewRect=viewport.getBoundingClientRect();
+   const midX=(a.x+b.x)/2,midY=(a.y+b.y)/2;
+   pinch={
+    distance:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),
+    zoom,
+    anchorX:(midX-imageRect.left)/zoom,
+    anchorY:(midY-imageRect.top)/zoom,
+    originX:imageRect.left-viewRect.left-viewport.clientLeft+viewport.scrollLeft,
+    originY:imageRect.top-viewRect.top-viewport.clientTop+viewport.scrollTop
+   };
+   panPoint=null;
+  }else if(pointers.size===1){
+   panPoint={x:e.clientX,y:e.clientY};
   }else{
-   activePanPointer=null;pan=null;
+   panPoint=null;pinch=null;
   }
- },{passive:true});
+ });
  viewport.addEventListener("pointermove",e=>{
-  if(e.pointerType!=="touch"||!activePointers.has(e.pointerId))return;
-  activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-  if(activePointers.size!==1||activePanPointer!==e.pointerId||!pan||startDistance)return;
-  e.preventDefault();
-  const dx=e.clientX-pan.lastX,dy=e.clientY-pan.lastY;
-  if(!pan.moved&&Math.hypot(e.clientX-pan.x,e.clientY-pan.y)>4)pan.moved=true;
-  if(pan.moved){
-   viewport.scrollLeft-=dx;viewport.scrollTop-=dy;
-   suppressTap=true;clearTimeout(suppressTimer);
-   suppressTimer=setTimeout(()=>{suppressTap=false},500);
+  if(!pointers.has(e.pointerId)||!hasDiagram())return;
+  pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(pointers.size>=2&&pinch){
+   e.preventDefault();
+   const [a,b]=pointers.values();
+   const distance=Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));
+   const midX=(a.x+b.x)/2,midY=(a.y+b.y)/2;
+   zoom=Math.max(.05,Math.min(3,pinch.zoom*distance/pinch.distance));
+   applyZoom();
+   const viewRect=viewport.getBoundingClientRect();
+   viewport.scrollLeft=Math.max(0,pinch.originX+pinch.anchorX*zoom-(midX-viewRect.left-viewport.clientLeft));
+   viewport.scrollTop=Math.max(0,pinch.originY+pinch.anchorY*zoom-(midY-viewRect.top-viewport.clientTop));
+  }else if(pointers.size===1&&panPoint){
+   e.preventDefault();
+   const dx=e.clientX-panPoint.x,dy=e.clientY-panPoint.y;
+   if(Math.hypot(dx,dy)>2){
+    viewport.scrollLeft-=dx;viewport.scrollTop-=dy;
+    suppressTap=true;clearTimeout(suppressTimer);
+    suppressTimer=setTimeout(()=>{suppressTap=false},500);
+   }
+   panPoint={x:e.clientX,y:e.clientY};
   }
-  pan.lastX=e.clientX;pan.lastY=e.clientY;
- },{passive:false});
- const finishPointer=e=>{
-  if(e.pointerType!=="touch"||!activePointers.has(e.pointerId))return;
-  activePointers.delete(e.pointerId);
-  if(activePointers.size===1){
-   const [id,p]=activePointers.entries().next().value;
-   activePanPointer=id;pan={x:p.x,y:p.y,lastX:p.x,lastY:p.y,moved:false};
-  }else{activePanPointer=null;pan=null}
-  if(activePointers.size===0&&suppressTap){
+ });
+ function finishPointer(e){
+  if(!pointers.has(e.pointerId))return;
+  pointers.delete(e.pointerId);
+  if(pointers.size<2)pinch=null;
+  if(pointers.size===1){
+   const remaining=pointers.values().next().value;
+   panPoint={x:remaining.x,y:remaining.y};
+  }else panPoint=null;
+  if(pointers.size===0&&suppressTap){
    clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>{suppressTap=false},500);
   }
- };
- viewport.addEventListener("pointerup",finishPointer,{passive:true});
- viewport.addEventListener("pointercancel",finishPointer,{passive:true});
- const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
- const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
- const localPoint=(p,rect)=>({x:p.x-rect.left-viewport.clientLeft,y:p.y-rect.top-viewport.clientTop});
- const hasDiagram=()=>$("canvas")&&$("diagram")?.naturalWidth;
- viewport.addEventListener("touchstart",e=>{
-  if(!hasDiagram())return;
-  if(e.touches.length===1){startDistance=0;return;}
-  if(e.touches.length!==2)return;
-  e.preventDefault();pan=null;
-  const rect=viewport.getBoundingClientRect(),mid=localPoint(midpoint(e.touches),rect);
-  const style=getComputedStyle(viewport),padX=parseFloat(style.paddingLeft)||0,padY=parseFloat(style.paddingTop)||0;
-  startDistance=Math.max(1,distance(e.touches));startZoom=zoom;
-  anchorX=(viewport.scrollLeft+mid.x-padX)/startZoom;
-  anchorY=(viewport.scrollTop+mid.y-padY)/startZoom;
- },{passive:false});
- viewport.addEventListener("touchmove",e=>{
-  if(!hasDiagram())return;
-  if(e.touches.length===1&&!startDistance)return; // single-finger pan is handled by Pointer Events
-  if(e.touches.length!==2||!startDistance)return;
-  e.preventDefault();pan=null;
-  const rect=viewport.getBoundingClientRect(),mid=localPoint(midpoint(e.touches),rect);
-  const style=getComputedStyle(viewport),padX=parseFloat(style.paddingLeft)||0,padY=parseFloat(style.paddingTop)||0;
-  zoom=Math.max(.05,Math.min(3,startZoom*distance(e.touches)/startDistance));
-  applyZoom();
-  viewport.scrollLeft=Math.max(0,anchorX*zoom-mid.x+padX);
-  viewport.scrollTop=Math.max(0,anchorY*zoom-mid.y+padY);
- },{passive:false});
- viewport.addEventListener("touchend",e=>{
-  if(e.touches.length===0&&activePointers.size===0)pan=null;
-  if(e.touches.length<2)startDistance=0;
- },{passive:true});
- viewport.addEventListener("touchcancel",()=>{startDistance=0;pan=null},{passive:true});
+ }
+ viewport.addEventListener("pointerup",finishPointer);
+ viewport.addEventListener("pointercancel",finishPointer);
  viewport.addEventListener("click",e=>{
   if(!suppressTap)return;
   e.preventDefault();e.stopImmediatePropagation();suppressTap=false;clearTimeout(suppressTimer);
